@@ -11,3 +11,7 @@
 
 /* COMPONENTS - jumbotron, buttons, pricings... */
 @import '../components/Button/_buttons.scss';
+
+/* HOME PAGE */
+@import '../components/Body/Home/Hero/_hero.scss';
+@import '../components/Body/Home/Desc/_desc.scss';

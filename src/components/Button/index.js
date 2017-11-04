@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class Button extends Component {
   render() {
     return (
-      <div className={this.props.buttonType}>
+      <a className={this.props.buttonType} href={this.props.link}>
         {this.props.text}
-      </div>
+      </a>
     );
   }
 }
