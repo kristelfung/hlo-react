@@ -1,6 +1,8 @@
 import React from 'react';
-
 import Routes from './routes';
+import 'bootstrap/dist/css/bootstrap.css';
+import './css/main.css';
+import './css/normalize.css';
 
 export default () => <Routes />;
 
@@ -9,7 +11,6 @@ export default () => <Routes />;
 // import Header from './components/Header';
 // import Body from './components/Body';
 // import Footer from './components/Footer';
-// import 'bootstrap/dist/css/bootstrap.css';
 // // import logo from './logo.svg';
 // // <img src={logo} className="App-logo" alt="logo" />
 
