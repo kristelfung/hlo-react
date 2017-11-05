@@ -14,7 +14,7 @@ class Hero extends Component {
                         <h4>Everyone deserves care.</h4>
                         <p>Find the right Caregiver for your Loved Ones, or become a Caregiver yourself.</p>
                         <Button text="Find a Caregiver" link="searchcaregivers" buttonType="btn btn-primary" />
-                        <a class="btn btn-default-clear" href="#" role="button">Become a Caregiver</a>
+                        <Button text="Become a Caregiver" link="searchcaregivers" buttonType="btn btn-default-clear" />
                     </div>
                 </div>
 

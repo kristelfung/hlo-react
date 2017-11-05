@@ -178,7 +178,7 @@ h1, h2, h3, h4, h5, h6, p {
 /* HOME PAGE */
 /* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
 .jumbotron {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/home-background.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/home/home-background.jpg");
   background-size: cover;
   background-position: center center;
   min-height: 500px;
@@ -213,6 +213,23 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+/* line 31, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
+.green-bar {
+  background-color: #174c1b;
+  padding: 10px 0px;
+  color: #ffffff;
+}
+
+/* line 36, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
+.green-bar .col-sm-8 {
+  text-align: right;
+}
+
+/* line 40, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
+.green-bar a {
+  color: #ffffff;
+}
+
 /* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Desc/_desc.scss */
 .home-about-media {
   width: 70%;
@@ -231,6 +248,107 @@ h1, h2, h3, h4, h5, h6, p {
 .home-about {
   text-align: center;
   padding: 60px 10px;
+}
+
+/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/_pricing.scss */
+.pricings {
+  background: linear-gradient(#388E3C, #174c1b);
+  /* Standard syntax */
+  color: #ffffff;
+  text-align: center;
+  padding: 50px 0px;
+}
+
+/* line 8, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/_pricing.scss */
+.insurance {
+  padding-top: 20px;
+}
+
+@media (min-width: 767px) {
+  /* line 13, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/_pricing.scss */
+  .insurance {
+    padding: 40px 120px 10px 120px;
+    /* top right bottom left */
+    opacity: 0.75;
+  }
+}
+
+/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.price-box {
+  /* contains HK$ 0/mo */
+  display: inline-block;
+  text-align: left;
+  color: #B71C1C;
+  position: relative;
+}
+
+/* line 8, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.dollar {
+  /* the HK$ */
+  position: absolute;
+  /* makes it float */
+  margin-top: 20px;
+  left: -15px;
+}
+
+/* line 14, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.per-month {
+  /* /mo */
+  position: absolute;
+  /* float */
+  margin-top: 51px;
+  right: -15px;
+}
+
+/* line 20, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.pricing-table {
+  margin: 0 auto;
+  margin-top: 40px;
+  color: #000000;
+  padding: 30px 0px;
+  width: 80%;
+}
+
+/* line 27, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.pricing-table .plan-box, .pricing-table .entrepreneur-box {
+  background-color: #FEFEFE;
+  border: 1px solid #efefef;
+  padding: 40px;
+  /* padding of a plan */
+}
+
+/* line 33, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.pricing-table .entrepreneur-box {
+  /* shift entrepreneur plan up */
+  margin-top: -25px;
+}
+
+@media (max-width: 768px) {
+  /* line 20, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+  .pricing-table {
+    /* when the plans collaspe */
+  }
+  /* line 38, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+  .pricing-table .free-plan, .pricing-table .partner-plan, .pricing-table .entrepreneur-box {
+    margin: 30px 0px;
+  }
+}
+
+/* line 43, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.pricing-table .price-label {
+  font-size: 60px;
+  margin: 10px 10px 0px 10px;
+}
+
+/* line 48, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.pricing-table .commissions {
+  color: #B71C1C;
+}
+
+/* line 52, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
+.pricing-table .plan-features {
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 /*# sourceMappingURL=../css/main.map */
