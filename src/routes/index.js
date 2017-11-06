@@ -11,6 +11,7 @@ export default () => (
     <BrowserRouter>
         <div>
             <Route exact path="/" component={Home} />
+            <Route path="/home" component={Home}/>
             <Route path="/about" component={About} />
         </div>
     </BrowserRouter>
