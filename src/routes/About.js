@@ -11,7 +11,7 @@ const header = {
 export default () => (
     <div>
         <Navbar/>
-        <Infopage header={{header}}/>
+        <Infopage header={header}/>
         <Footer/>
     </div>
 );
