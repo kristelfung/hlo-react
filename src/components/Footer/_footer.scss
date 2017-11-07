@@ -15,6 +15,10 @@
         opacity: 0.87;
     }
 
+    li:hover {
+        opacity: 1;
+    }
+
     .logo-container {
         text-align: right;
         padding-top: 180px;
@@ -24,6 +28,11 @@
         height: 40px;
         display: inline-block;
         padding: 0px 12px;
+    }
+
+    a {
+        color: $purewhite;
+        text-decoration: none;
     }
 }
 

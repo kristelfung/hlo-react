@@ -211,19 +211,30 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 /* line 18, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
+.footer-top li:hover {
+  opacity: 1;
+}
+
+/* line 22, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
 .footer-top .logo-container {
   text-align: right;
   padding-top: 180px;
 }
 
-/* line 23, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
+/* line 27, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
 .footer-top .footer-logo {
   height: 40px;
   display: inline-block;
   padding: 0px 12px;
 }
 
-/* line 30, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
+/* line 33, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
+.footer-top a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* line 39, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
 .footer-bottom {
   background-color: #1B1B1B;
   color: #ffffff;

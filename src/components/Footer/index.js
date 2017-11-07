@@ -15,17 +15,16 @@ class Footer extends Component {
                     <div class="col-sm-3">
                         <h3>Quick Links</h3>
                         <ul class="list-unstyled">
-                            <li>How it works</li>
                             <li>Terms of Use</li>
                             <li>Privacy Policy</li>
                             <li>Insurance Policy</li>
-                            <li>Community Guidelines</li>
+                            <li><a href="guidelines">Community Guidelines</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-3">
                         <h3>Company</h3>
                         <ul class="list-unstyled">
-                            <li>About Us/Dream Team</li>
+                            <li><a href="about">About Us/Dream Team</a></li>
                             <li>Contact Us</li>
                             <li>Q&amp;A with CEO</li>
                             <li>Careers/Be a True Believer</li>
