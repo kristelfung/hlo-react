@@ -12,420 +12,274 @@
 /* hovered buttons */
 @font-face {
   font-family: 'NotoSans';
-  src: local("NotoSans"), url(../fonts/NotoSans/NotoSans-Regular.ttf) format("ttf");
-}
+  src: local("NotoSans"), url(../fonts/NotoSans/NotoSans-Regular.ttf) format("ttf"); }
 
-/* line 6, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 html, body {
   font-family: NotoSans, Helvetica;
   color: #000000;
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-}
+  overflow-x: hidden; }
 
-/* line 15, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 h3 {
-  font-size: 26px;
-}
+  font-size: 26px; }
 
-/* line 19, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 h4 {
-  font-size: 22px;
-}
+  font-size: 22px; }
 
-/* line 23, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 h5 {
-  font-size: 16px;
-}
+  font-size: 16px; }
 
-/* line 27, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 h6 {
-  font-size: 12px;
-}
+  font-size: 12px; }
 
-/* line 31, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 p {
-  font-size: 14px;
-}
+  font-size: 14px; }
 
-/* line 35, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 hr {
   border-top: 1px solid #919191;
-  opacity: 0.4;
-}
+  opacity: 0.4; }
 
 /* TODO: ADD LI???? */
-/* line 41, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 h1, h2, h3, h4, h5, h6, p {
-  opacity: 0.87;
-}
+  opacity: 0.87; }
 
-/* line 45, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 .text-center {
-  text-align: center;
-}
+  text-align: center; }
 
-/* line 49, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 .container-small {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
-  margin-left: auto;
-}
+  margin-left: auto; }
 
 @media (min-width: 768px) {
-  /* line 57, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
   .container-small {
-    width: 700px;
-  }
-}
+    width: 700px; } }
 
 @media (min-width: 992px) {
-  /* line 63, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
   .container-small {
-    width: 700px;
-  }
-}
+    width: 700px; } }
 
 @media (min-width: 1200px) {
-  /* line 68, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
   .container-small {
-    width: 700px;
-  }
-}
+    width: 700px; } }
 
 /* misc */
-/* line 74, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 .fa-star {
-  color: #FFC107;
-}
+  color: #FFC107; }
 
-/* line 78, /Users/s180024/Documents/hlo-react/src/scss/base/_base.scss */
 .label-success {
   background-color: #174c1b;
-  margin-right: 5px;
-}
+  margin-right: 5px; }
 
 /* COMPONENTS - jumbotron, buttons, pricings... */
 /* button */
-/* line 2, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .btn {
   border-radius: 5px;
-  padding: 8px 15px;
-}
+  padding: 8px 15px; }
 
 /* primary CTA */
-/* line 8, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .btn-primary {
   background-color: #F06292;
-  border-color: #F06292;
-}
+  border-color: #F06292; }
 
 /* hover of primary CTA */
-/* line 13, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:active:hover {
   background-color: #f06fa0;
-  border-color: #f06fa0;
-}
+  border-color: #f06fa0; }
 
 /* secondary CTA */
-/* line 19, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .btn-default {
   background-color: #efefef;
-  border-color: #efefef;
-}
+  border-color: #efefef; }
 
 /* hover of secondary CTA */
-/* line 24, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .btn-default:hover, .btn-default:active, .btn-default:focus, .btn-default:active:hover {
   background-color: #E6E6E6;
-  border-color: #E6E6E6;
-}
+  border-color: #E6E6E6; }
 
 /* secondary CTA, clear version */
-/* line 30, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .btn-default-clear {
   background-color: transparent;
   border-color: #FEFEFE;
   color: #ffffff;
-  transition: background 0.2s linear;
-}
+  transition: background 0.2s linear; }
 
-/* line 37, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .btn-default-clear:hover, .btn-default-clear:active, .btn-default-clear:focus, .btn-default-clear:active:hover {
   background-color: #FEFEFE;
-  color: #000000;
-}
+  color: #000000; }
 
 /* button customizations for certain pages */
-/* line 43, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .home-buttons {
-  /* larger home buttons */
-}
+  /* larger home buttons */ }
+  .home-buttons .btn {
+    margin-right: 15px;
+    padding: 12px 30px;
+    border-radius: 8px; }
 
-/* line 45, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
-.home-buttons .btn {
-  margin-right: 15px;
-  padding: 12px 30px;
-  border-radius: 8px;
-}
-
-/* line 53, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .pricing-table .btn {
   width: 80%;
   padding: 15px 0px;
-  border-radius: 8px;
-}
+  border-radius: 8px; }
 
-/* line 61, /Users/s180024/Documents/hlo-react/src/components/Button/_buttons.scss */
 .login-buttons .btn {
   padding: 20px 0px;
   border-radius: 15px;
   margin: 15px;
-  display: block;
-}
+  display: block; }
 
 /* LAYOUTS - footer, header, navbar */
-/* line 1, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
 .footer-top {
   background-color: #424242;
-  color: #ffffff;
-}
+  color: #ffffff; }
+  .footer-top .row {
+    padding: 50px 0px; }
+  .footer-top h3 {
+    font-weight: bold; }
+  .footer-top li {
+    line-height: 1.6;
+    opacity: 0.87; }
+  .footer-top li:hover {
+    opacity: 1; }
+  .footer-top .logo-container {
+    text-align: right;
+    padding-top: 180px; }
+  .footer-top .footer-logo {
+    height: 40px;
+    display: inline-block;
+    padding: 0px 12px; }
+  .footer-top a {
+    color: #ffffff;
+    text-decoration: none; }
 
-/* line 5, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
-.footer-top .row {
-  padding: 50px 0px;
-}
-
-/* line 9, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
-.footer-top h3 {
-  font-weight: bold;
-}
-
-/* line 13, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
-.footer-top li {
-  line-height: 1.6;
-  opacity: 0.87;
-}
-
-/* line 18, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
-.footer-top li:hover {
-  opacity: 1;
-}
-
-/* line 22, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
-.footer-top .logo-container {
-  text-align: right;
-  padding-top: 180px;
-}
-
-/* line 27, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
-.footer-top .footer-logo {
-  height: 40px;
-  display: inline-block;
-  padding: 0px 12px;
-}
-
-/* line 33, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
-.footer-top a {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-/* line 39, /Users/s180024/Documents/hlo-react/src/components/Footer/_footer.scss */
 .footer-bottom {
   background-color: #1B1B1B;
   color: #ffffff;
-  padding: 20px 0px 10px 0px;
-}
+  padding: 20px 0px 10px 0px; }
 
 /* HOME PAGE */
-/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
 .jumbotron {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/home/home-background.jpg");
   background-size: cover;
   background-position: center center;
   min-height: 500px;
   color: #ffffff;
-  margin-bottom: 0px;
-}
+  margin-bottom: 0px; }
 
-/* line 10, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
 .jumbotron h1 {
-  font-size: 42px;
-}
+  font-size: 42px; }
 
-/* line 14, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
 .jumbotron p {
-  font-size: 16px;
-}
+  font-size: 16px; }
 
-/* line 18, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
 .hlo-desc {
   padding: 15px 5px 60px 5px;
   /* top right bottom left */
-  text-align: center;
-}
+  text-align: center; }
 
-/* line 23, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
 .home-buttons {
   /* transparent black container */
   text-align: left;
   width: 550px;
   padding: 40px 60px 50px 40px;
   margin-right: 0px;
-  background-color: rgba(0, 0, 0, 0.7);
-}
+  background-color: rgba(0, 0, 0, 0.7); }
 
-/* line 31, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
 .green-bar {
   background-color: #174c1b;
   padding: 10px 0px;
-  color: #ffffff;
-}
+  color: #ffffff; }
+  .green-bar .col-sm-8 {
+    text-align: right; }
+  .green-bar a {
+    color: #ffffff; }
 
-/* line 36, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
-.green-bar .col-sm-8 {
-  text-align: right;
-}
-
-/* line 40, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Hero/_hero.scss */
-.green-bar a {
-  color: #ffffff;
-}
-
-/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Desc/_desc.scss */
 .home-about-media {
   width: 70%;
-  padding: 50px 0px;
-}
+  padding: 50px 0px; }
 
 @media (max-width: 768px) {
   /* mobile for graphic and vid */
-  /* line 7, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Desc/_desc.scss */
   .home-about-media {
-    width: 100%;
-  }
-}
+    width: 100%; } }
 
-/* line 12, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Desc/_desc.scss */
 .home-about {
   text-align: center;
-  padding: 60px 10px;
-}
+  padding: 60px 10px; }
 
-/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/_pricing.scss */
 .pricings {
   background: linear-gradient(#388E3C, #174c1b);
   /* Standard syntax */
   color: #ffffff;
   text-align: center;
-  padding: 50px 0px;
-}
+  padding: 50px 0px; }
 
-/* line 8, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/_pricing.scss */
 .insurance {
-  padding-top: 20px;
-}
+  padding-top: 20px; }
 
 @media (min-width: 767px) {
-  /* line 13, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/_pricing.scss */
   .insurance {
     padding: 40px 120px 10px 120px;
     /* top right bottom left */
-    opacity: 0.75;
-  }
-}
+    opacity: 0.75; } }
 
-/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
 .price-box {
   /* contains HK$ 0/mo */
   display: inline-block;
   text-align: left;
   color: #B71C1C;
-  position: relative;
-}
+  position: relative; }
 
-/* line 8, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
 .dollar {
   /* the HK$ */
   position: absolute;
   /* makes it float */
   margin-top: 20px;
-  left: -15px;
-}
+  left: -15px; }
 
-/* line 14, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
 .per-month {
   /* /mo */
   position: absolute;
   /* float */
   margin-top: 51px;
-  right: -15px;
-}
+  right: -15px; }
 
-/* line 20, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
 .pricing-table {
   margin: 0 auto;
   margin-top: 40px;
   color: #000000;
   padding: 30px 0px;
-  width: 80%;
-}
-
-/* line 27, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
-.pricing-table .plan-box, .pricing-table .entrepreneur-box {
-  background-color: #FEFEFE;
-  border: 1px solid #efefef;
-  padding: 40px;
-  /* padding of a plan */
-}
-
-/* line 33, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
-.pricing-table .entrepreneur-box {
-  /* shift entrepreneur plan up */
-  margin-top: -25px;
-}
-
-@media (max-width: 768px) {
-  /* line 20, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
-  .pricing-table {
-    /* when the plans collaspe */
-  }
-  /* line 38, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
-  .pricing-table .free-plan, .pricing-table .partner-plan, .pricing-table .entrepreneur-box {
-    margin: 30px 0px;
-  }
-}
-
-/* line 43, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
-.pricing-table .price-label {
-  font-size: 60px;
-  margin: 10px 10px 0px 10px;
-}
-
-/* line 48, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
-.pricing-table .commissions {
-  color: #B71C1C;
-}
-
-/* line 52, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Pricing/Plan/_plan.scss */
-.pricing-table .plan-features {
-  padding-top: 20px;
-  padding-bottom: 30px;
-}
+  width: 80%; }
+  .pricing-table .plan-box, .pricing-table .entrepreneur-box {
+    background-color: #FEFEFE;
+    border: 1px solid #efefef;
+    padding: 40px;
+    /* padding of a plan */ }
+  .pricing-table .entrepreneur-box {
+    /* shift entrepreneur plan up */
+    margin-top: -25px; }
+  @media (max-width: 768px) {
+    .pricing-table {
+      /* when the plans collaspe */ }
+      .pricing-table .free-plan, .pricing-table .partner-plan, .pricing-table .entrepreneur-box {
+        margin: 30px 0px; } }
+  .pricing-table .price-label {
+    font-size: 60px;
+    margin: 10px 10px 0px 10px; }
+  .pricing-table .commissions {
+    color: #B71C1C; }
+  .pricing-table .plan-features {
+    padding-top: 20px;
+    padding-bottom: 30px; }
 
 /* add in the caregiver types carousel here */
-/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Home/Featured/_featured.scss */
 .featured {
   background-color: #efefef;
-  padding: 40px 0px;
-}
+  padding: 40px 0px; }
 
 /* SEARCH PAGE */
-/* line 1, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
 .search-card {
   /* a search profile */
   background-color: #FEFEFE;
@@ -433,53 +287,30 @@ h1, h2, h3, h4, h5, h6, p {
   /* top right bottom left */
   cursor: pointer;
   position: relative;
-  /* so the link spanner spans to the card */
-}
+  /* so the link spanner spans to the card */ }
+  .search-card .card-dp {
+    width: 100%; }
+  .search-card .card-desc {
+    /* div for container below image */
+    padding: 12px 20px; }
+    .search-card .card-desc .card-about {
+      margin-top: 15px; }
+    .search-card .card-desc h4, .search-card .card-desc p {
+      /* for the name and other desc. */
+      margin-bottom: 3px; }
+    .search-card .card-desc a {
+      color: #000000; }
 
-/* line 7, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
-.search-card .card-dp {
-  width: 100%;
-}
-
-/* line 11, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
-.search-card .card-desc {
-  /* div for container below image */
-  padding: 12px 20px;
-}
-
-/* line 14, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
-.search-card .card-desc .card-about {
-  margin-top: 15px;
-}
-
-/* line 18, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
-.search-card .card-desc h4, .search-card .card-desc p {
-  /* for the name and other desc. */
-  margin-bottom: 3px;
-}
-
-/* line 22, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
-.search-card .card-desc a {
-  color: #000000;
-}
-
-/* line 28, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
 .link-spanner {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 1;
-}
+  z-index: 1; }
 
 @media (min-width: 768px) {
-  /* line 38, /Users/s180024/Documents/hlo-react/src/components/Body/Search/Card/_card.scss */
   .row.equal {
     /* make both cols equally long */
     display: flex;
-    flex-wrap: wrap;
-  }
-}
-
-/*# sourceMappingURL=../css/main.map */
+    flex-wrap: wrap; } }
