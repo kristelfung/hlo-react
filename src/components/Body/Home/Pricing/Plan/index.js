@@ -23,5 +23,6 @@ class Plan extends Component {
         );
     }
 }
+// small problem: we get an empty <p> if there is no featureTwo
 
 export default Plan;
