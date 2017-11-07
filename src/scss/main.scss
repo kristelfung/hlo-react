@@ -15,6 +15,7 @@
 
 /* LAYOUTS - footer, header, navbar */
 @import '../components/Footer/_footer.scss';
+@import '../components/Header/_header.scss';
 
 /* HOME PAGE */
 @import '../components/Body/Home/Hero/_hero.scss';
@@ -24,5 +25,4 @@
 /* add in the caregiver types carousel here */
 @import '../components/Body/Home/Featured/_featured.scss';
 
-/* SEARCH PAGE */
-// @import '../components/Body/Search/Card/_card.scss';
+/* INFO PAGE */

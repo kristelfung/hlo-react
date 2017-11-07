@@ -188,6 +188,15 @@ h1, h2, h3, h4, h5, h6, p {
   color: #ffffff;
   padding: 20px 0px 10px 0px; }
 
+.header {
+  background-color: #E53935;
+  color: #ffffff;
+  padding: 20px 0px 30px 0px; }
+  .header .header-image-col {
+    text-align: right; }
+  .header .header-image {
+    width: 50%; }
+
 /* HOME PAGE */
 .jumbotron {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/home/home-background.jpg");
@@ -308,4 +317,4 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: #efefef;
   padding: 40px 0px; }
 
-/* SEARCH PAGE */
+/* INFO PAGE */
