@@ -6,6 +6,7 @@ import {
 
 import Home from './Home'
 import Infopage from "./Infopage";
+import Profile from "./Profile"
 
 const infoPageHeader = {
     title: "About",
@@ -18,6 +19,7 @@ export default () => (
             <Route exact path="/" component={Home} />
             <Route path="/home" component={Home}/>
             <Route path="/about"  render={() => <Infopage header={{infoPageHeader}}/>} />
+            <Route path="/profile/:id" component={Profile} />
         </div>
     </BrowserRouter>
 );

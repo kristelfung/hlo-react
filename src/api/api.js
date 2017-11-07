@@ -18,3 +18,11 @@ export function getRandomJobs(){
     };
     return rp(options);
 }
+
+export function getProfile(id){
+    var options = {
+        uri: baseUrl + '/caregiver/' + id,
+        json: true
+    };
+    return rp(options);
+}
