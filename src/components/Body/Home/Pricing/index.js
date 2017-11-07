@@ -29,15 +29,15 @@ const partnerPlan = {
 class Pricing extends Component {
     render(){
         return (
-            <div class="container-fluid pricings">
+            <div className="container-fluid pricings">
                 <h3>Caregiver Plans</h3>
                 <p>Become a social hero today and join the pink collar workforce.</p>
-                <div class="row pricing-table">
+                <div className="row pricing-table">
                     <Plan features={freePlan}/>
                     <Plan features={entrepreneurPlan}/>
                     <Plan features={partnerPlan}/>
                 </div>
-                <p class="insurance">Insurance Policy: Provided by the QBE Hong Kong and Shanghai Insurance Limited. Total amount is $10 million HKD. Includes both Medical Malpractice for healthcare professional and Public Liability for private citizens. Insurance includes bodily injury, property damage, and theft. Insurance begins on January 01, 2018.</p>
+                <p className="insurance">Insurance Policy: Provided by the QBE Hong Kong and Shanghai Insurance Limited. Total amount is $10 million HKD. Includes both Medical Malpractice for healthcare professional and Public Liability for private citizens. Insurance includes bodily injury, property damage, and theft. Insurance begins on January 01, 2018.</p>
             </div>
         );
     }
