@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Card from '../../Search/Card';
+import Card from '../../../CaregiverCard';
 
 class Featured extends Component {
     render() {

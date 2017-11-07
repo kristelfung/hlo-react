@@ -9,8 +9,9 @@
 @import 'base/_mixins.scss';
 @import 'base/_base.scss';
 
-/* COMPONENTS - jumbotron, buttons, pricings... */
+/* COMPONENTS - buttons, cards... */
 @import '../components/Button/_buttons.scss';
+@import '../components/CaregiverCard/_caregiverCard.scss';
 
 /* LAYOUTS - footer, header, navbar */
 @import '../components/Footer/_footer.scss';
@@ -24,4 +25,4 @@
 @import '../components/Body/Home/Featured/_featured.scss';
 
 /* SEARCH PAGE */
-@import '../components/Body/Search/Card/_card.scss';
+// @import '../components/Body/Search/Card/_card.scss';
