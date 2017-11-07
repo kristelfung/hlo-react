@@ -5,7 +5,7 @@ class CaregiverCard extends Component {
   render() {
     return (
       <div className="caregiver-card">
-        <a href="profile.html/">
+        <a href="profile/">
             <span className="link-spanner"></span>
         </a>
         <img src={placeholder} className="card-dp"/>

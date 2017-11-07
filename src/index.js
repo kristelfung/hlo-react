@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import './css/main.css';
+import './css/normalize.css';
+
+import Navbar from './components/Navbar';
+import Body from './components/Body'
+import Footer from './components/Footer';
 
 ReactDOM.render(
-    <App />,
+    <div>
+        <Navbar />
+        <Body />
+        <Footer />
+    </div>,
     document.getElementById('root')
 );
