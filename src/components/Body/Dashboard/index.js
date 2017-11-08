@@ -12,7 +12,7 @@ class Dashboard extends Component {
 			tab:"jobs"
 		}
 
-	    getUser("59e3c1b3564ae448425cd88e").then(json => {
+	    getUser("5a02fdf9b108b228357e5542").then(json => {
 	        console.log(json);
 	        this.setState({
 	            loading: false,
@@ -92,7 +92,7 @@ class Dashboard extends Component {
 	         </div>
     	}
     	else if(this.state.tab == "profile"){
-    		body = <Profile userType={this.state.data.type}/>;
+			body = <Profile {...this.state.data}/>;
     		title = 
     		<div>
     			<div className="col-xs-3 ">
