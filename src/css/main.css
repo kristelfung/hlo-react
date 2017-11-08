@@ -261,7 +261,7 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 10px 5px 10px 5px;
   margin-left: 5px; }
 
-/* navbar divider the | */
+/* navbar divider the ||| */
 .navbar-divider {
   line-height: 70px; }
 
@@ -471,7 +471,7 @@ h1, h2, h3, h4, h5, h6, p {
     margin-top: 0px; } }
 
 .profile-pic {
-  background-image: url("../images/placeholders/dp.jpg");
+  background-image: url("../images/profile/dp.png");
   background-size: cover;
   background-position: center center;
   border-radius: 50%;
@@ -538,8 +538,45 @@ h1, h2, h3, h4, h5, h6, p {
 .pass-check {
   color: #388E3C; }
 
-/* DASHBOARD */
-/* MESSAGES */
-table {
-  border: 1px solid black;
-  width: 100%; }
+/* dashboard */
+.dashbar {
+  padding-top: 20px;
+  padding-bottom: 10px; }
+  .dashbar .col-xs-3 {
+    opacity: 0.4; }
+  .dashbar .active {
+    opacity: 1; }
+
+.dashboard-logo {
+  height: 40px;
+  padding: 5px; }
+
+.dashbody {
+  border-top: 1px solid #efefef;
+  /* border between dashboard tabs */
+  padding-top: 20px;
+  padding-bottom: 40px; }
+
+.button-col {
+  text-align: right;
+  /* new job button */ }
+  .button-col a {
+    margin-top: 20px; }
+
+.job {
+  background-color: #FCE4EC;
+  border-radius: 10px;
+  border: 1px solid #F48FB1;
+  padding: 15px 30px;
+  margin-top: 20px; }
+  .job .job-left {
+    text-align: right; }
+
+.job-status {
+  height: 60px;
+  margin-top: -15px; }
+
+.expand-job {
+  font-size: 40px;
+  margin-left: 10px;
+  color: #1B1B1B; }

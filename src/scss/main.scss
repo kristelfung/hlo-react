@@ -11,7 +11,7 @@
 
 /* COMPONENTS - buttons, cards... */
 @import '../components/Button/_buttons.scss';
-@import '../components/CaregiverCard/_caregivercard.scss';
+@import '../components/CaregiverCard/_caregiverCard.scss';
 
 /* LAYOUTS - footer, header, navbar */
 @import '../components/Footer/_footer.scss';
@@ -35,7 +35,7 @@
 @import '../components/Body/Profile/_profilepic.scss';
 @import '../components/Body/Profile/_profilesidebar.scss';
 
-/* DASHBOARD */
-/* MESSAGES */
-@import '../components/Body/Infopage/Dashboard/Messages/Inbox/_inbox.scss';
-@import '../components/Body/Infopage/Dashboard/Messages/Inbox/MessageRow/_messagerow.scss';
+/* dashboard */
+@import '../components/Body/Dashboard/_dashbar.scss';
+@import '../components/Body/Dashboard/_dashbody.scss';
+@import '../components/Body/Dashboard/_job.scss';
