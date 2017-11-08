@@ -25,7 +25,7 @@ class Hero extends Component {
                                 <h5>HLO is Homecare.</h5>
                             </div>
                             <div className="col-sm-8">
-                                <h5><a href="#">Care News: All jobs now come with $18 million...</a></h5>
+                                <h5><a href="#">Senior Growth Quiz <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></h5>
                             </div>
                         </div>
                     </div>
