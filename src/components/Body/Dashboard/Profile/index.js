@@ -26,7 +26,7 @@ class Profile extends Component {
             loading: true
         }
 
-        getProfile("5a029e58dc5c6d379bcb9108").then(json => {
+        getProfile("59e20105895a3eac24e267ba").then(json => {
             console.log(json);
             this.setState({
                 loading: false,
@@ -44,19 +44,19 @@ class Profile extends Component {
     }
     render(){
         return (
-        	<div class="dashbody">
-		        <div class="container-small">
+        	<div className="dashbody">
+		        <div className="container-small">
 		            <form>
-		                <div class="row">
-		                    <h3 class="form-title">Basic Information</h3>
-		                    <div class="col-md-6 form-column">
-		                        <div class="form-group">
+		                <div className="row">
+		                    <h3 className="form-title">Basic Information</h3>
+		                    <div className="col-md-6 form-column">
+		                        <div className="form-group">
 		                          <label for="firstname">First name</label>
-		                          <input type="text" class="form-control" id="firstname" value = {this.state.data.firstName} />
+		                          <input type="text" className="form-control" id="firstname" value = {this.state.data.firstName} />
 		                        </div>
-		                        <div class="form-group">
+		                        <div className="form-group">
 		                          <label for="lastName">Last name</label>
-		                          <input type="text" class="form-control" id="lastName" value = {this.state.data.lastName} />
+		                          <input type="text" className="form-control" id="lastName" value = {this.state.data.lastName} />
 		                        </div>
 		                        {!(this.props.userType=="customer") ?
 		                        	<div class="form-group">
@@ -67,7 +67,7 @@ class Profile extends Component {
 		                    		:
 		                    		<div></div>
 		                    	}
-		                        
+
 		                    </div>
 		                    {!(this.props.userType=="customer") ?
 		                    	<div class="col-md-6 form-column">
@@ -113,6 +113,7 @@ class Profile extends Component {
 			            	<div></div>
 			            }
 		                <button type="submit" class="btn btn-primary form-btn">Save</button>
+
 		            </form>
 		        </div>
 		    </div>

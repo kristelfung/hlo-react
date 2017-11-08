@@ -8,25 +8,12 @@ class Jobs extends Component {
         super(props);
         this.state = {
             data: {
-                firstName: "",
-                lastName: "",
-                about: "",
-                availability: {},
-                backgroundCheck: false,
-                car: false,
-                education: "",
-                experience: "",
-                hourlyRate: 60,
-                location: [],
-                otherNotes: "",
-                reviews: [],
-                stars: 0,
-                languages: []
+                jobsApplied: [],
             },
             loading: true
         }
 
-        getProfile("5a029e58dc5c6d379bcb9108").then(json => {
+        getProfile("59e20105895a3eac24e267ba").then(json => {
             console.log(json);
             this.setState({
                 loading: false,
@@ -42,38 +29,21 @@ class Jobs extends Component {
     }
     render(){
         return (
-        	<div class="dashbody">
-		        <div class="container">
-		            <div class="row">
-		                <div class="col-xs-6">
+        	<div className="dashbody">
+		        <div className="container">
+		            <div className="row">
+		                <div className="col-xs-6">
 		                    <h2>Listed Jobs</h2>
 		                </div>
-		                <div class="col-xs-6 button-col">
-		                    <a class="btn btn-primary" href="#" role="button">Add Job</a>
+		                <div className="col-xs-6 button-col">
+		                    <a className="btn btn-primary" href="#" role="button">Add Job</a>
 		                </div>
 		            </div>
-		            <div class="container-fluid">
-		                <div class="row job">
-		                    <div class="col-xs-6">
-		                        <h4>John Smith</h4>
-		                        <h6>Posted on June 6, 2017</h6>
-		                    </div>
-		                    <div class="col-xs-6 job-left">
-		                        <img src="images/dashboard/confirmedjob.png" class="job-status" />
-		                        <span class="expand-job"><i class="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
-		                    </div>
-		                </div>
 
-		                <div class="row job">
-		                    <div class="col-xs-6">
-		                        <h4>Jane Doe</h4>
-		                        <h6>Posted on June 6, 2017</h6>
-		                    </div>
-		                    <div class="col-xs-6 job-left">
-		                        <img src="images/dashboard/pendingjob.png" class="job-status" />
-		                        <span class="expand-job"><i class="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
-		                    </div>
-		                </div>
+		            <div className="container-fluid">
+		                {
+                        	this.state.data.jobsApplied.map(jobsApplied => <Job {...jobsApplied}/>)
+                        }
 		            </div>
 		        </div>
 		    </div>
@@ -82,16 +52,17 @@ class Jobs extends Component {
 }
 
 class Job extends Component{
-	
 	render(){
 		return (
+
 			<div class="row job">
                 <div class="col-xs-6">
                     <h4>{this.props.jobsApplied.name}</h4> 
+
                 </div>
-                <div class="col-xs-6 job-left">
-                    <img src="images/dashboard/confirmedjob.png" class="job-status" />
-                    <span class="expand-job"><i class="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+                <div className="col-xs-6 job-left">
+                    <img src="images/dashboard/confirmedjob.png" className="job-status" />
+                    <span className="expand-job"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
                 </div>
             </div>
 		);
