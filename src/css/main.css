@@ -580,3 +580,68 @@ h1, h2, h3, h4, h5, h6, p {
   font-size: 40px;
   margin-left: 10px;
   color: #1B1B1B; }
+
+/* messages */
+/* get rid of grey borders */
+.modal-header {
+  border-bottom: none; }
+
+.modal-footer {
+  border-top: none; }
+
+.submit-buttons {
+  text-align: right; }
+
+.message-body {
+  border-top: #efefef;
+  border-bottom: #efefef; }
+
+.inbox {
+  /* the entire table */
+  width: 100%;
+  margin-top: 20px; }
+
+/* inbox */
+.inbox-message {
+  /* the message row */
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef; }
+  .inbox-message td {
+    padding: 8px; }
+  @media (min-width: 768px) {
+    .inbox-message td {
+      padding: 15px;
+      /* padding for a message */ } }
+
+.tab-content {
+  /* entire tab */
+  padding-top: 20px; }
+
+.message-pic {
+  /* profile pic of message sender */
+  height: 70px;
+  border-radius: 50%; }
+
+.image-td {
+  /* width of td for profile pic */
+  width: 70px; }
+
+.message-time {
+  /* timestamp */
+  color: #424242;
+  font-size: 12px; }
+
+.message-title {
+  font-weight: bold; }
+
+.message-author, .message-title {
+  font-size: 18px; }
+
+.message-author, .message-time, .message-title, .message-preview {
+  margin: 5px 0px; }
+
+.fa-circle {
+  color: #388E3C; }
+
+.read {
+  background-color: #f9f9f9; }

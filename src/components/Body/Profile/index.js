@@ -8,26 +8,36 @@ class Profile extends Component {
         super(props);
         this.state = {
             data: {
-                firstName: "",
-                lastName: "",
-                about: "",
-                availability: {},
-                backgroundCheck: false,
-                car: false,
-                education: "",
-                experience: "",
-                hourlyRate: 60,
-                location: [],
-                otherNotes: "",
-                reviews: [],
-                stars: 0,
-                languages: []
-            },
+				"firstName": "",
+				"lastName": "",
+				"location": [],
+				caregiver: [{
+					"hourlyRate": 0,
+					"car": false,
+					"backgroundCheck": true,
+					"education": "",
+					"experience": "",
+					"languages": [],
+					"about": "",
+                    "otherNotes": "",
+                    reviews: [],
+                    availability: {}
+				}],
+				email: "",
+				hkidPassport: "",
+				phoneNumber: "",
+				creditCard: "",
+				cif: "",
+				bankName: "",
+				accountNumber: "",
+				paypal: ""
+			},
             loading: true
         }
 
         getProfile(props.match.params.id).then(json => {
-            console.log(json);
+            if(json.reviews === undefined)
+                json.caregiver[0].reviews = [];
             this.setState({
                 loading: false,
                 data: json
@@ -41,9 +51,11 @@ class Profile extends Component {
         });
     }
     render() {
+        let caregiverInfo = this.state.data.caregiver[0];
+        console.log("ci", caregiverInfo)
         let availArray = [];
-        for (var key in this.state.data.availability) {
-            var item = this.state.data.availability[key];
+        for (var key in caregiverInfo.availability) {
+            var item = caregiverInfo.availability[key];
             availArray.push({
                 day: key,
                 time: item
@@ -51,13 +63,13 @@ class Profile extends Component {
         };
 
         let stars = [];
-        for (var i=0; i < Math.floor(this.state.data.stars); i++) {
+        for (var i=0; i < Math.floor(caregiverInfo.stars); i++) {
             stars.push(<i className="fa fa-star" aria-hidden="true" ></i>);
         }
-        if(this.state.data.stars - i > 0){
+        if(caregiverInfo.stars - i > 0){
             stars.push(<i className="fa fa-star-half-o" aria-hidden="true" ></i>);
         }
-        for (var i=0; i < 5-Math.ceil(this.state.data.stars); i++) {
+        for (var i=0; i < 5-Math.ceil(caregiverInfo.stars); i++) {
             stars.push(<i className="fa fa-star-o" aria-hidden="true" ></i>);
         }
 
@@ -75,9 +87,9 @@ class Profile extends Component {
                     <div className="col-sm-6 name">
                         <h1>{this.state.data.firstName} {this.state.data.lastName}</h1>
                         <div className="rating">
-                            {stars} <a href="#reviews">({this.state.data.reviews.length})</a>
+                            {stars} <a href="#reviews">({caregiverInfo.reviews.length})</a>
                         </div>
-                        <h4><span className="label label-success">${this.state.data.hourlyRate} HKD per hour</span></h4>
+                        <h4><span className="label label-success">${caregiverInfo.hourlyRate} HKD per hour</span></h4>
                     </div>
                     <div className="col-sm-3 profile-buttons">
                         <a className="btn btn-primary" href="#" role="button">Hire</a>
@@ -89,7 +101,7 @@ class Profile extends Component {
                     <div className="col-sm-9 profile-body">
                         <div className="profile-section">
                             <h2>About</h2>
-                            <p>{this.state.data.about}</p>
+                            <p>{caregiverInfo.about}</p>
                         </div>
                         <div className="profile-section">
                             <h2>Availibility</h2>
@@ -114,10 +126,10 @@ class Profile extends Component {
                         <div className="profile-section" id="reviews">
                             <h2>Reviews</h2>
                             <h5 className="average-rating">
-                                {stars} ({this.state.data.reviews.length} total)
+                                {stars} ({caregiverInfo.reviews.length} total)
                             </h5>
                             {
-                                this.state.data.reviews.map(review => <Review {...review}/>)
+                                caregiverInfo.reviews.map(review => <Review key={review.id} {...review}/>)
                             }
                         </div>
                     </div>
@@ -126,18 +138,18 @@ class Profile extends Component {
                             <p><i className="fa fa-map-marker" aria-hidden="true"></i> {this.state.data.location.join(', ')}</p>
                         </div>
                         <div className="sidebar-section checks">
-                            <h5 className={this.state.data.car ? "pass-check" : "fail-check"}><i className={this.state.data.car ? "fa fa-check-square" : "fa fa-minus-square"} aria-hidden="true"></i> Car</h5>
-                            <h5 className={this.state.data.backgroundCheck ? "pass-check" : "fail-check"}><i className={this.state.data.backgroundCheck ? "fa fa-check-square" : "fa fa-minus-square"} aria-hidden="true"></i> Background Check</h5>
+                            <h5 className={caregiverInfo.car ? "pass-check" : "fail-check"}><i className={caregiverInfo.car ? "fa fa-check-square" : "fa fa-minus-square"} aria-hidden="true"></i> Car</h5>
+                            <h5 className={caregiverInfo.backgroundCheck ? "pass-check" : "fail-check"}><i className={caregiverInfo.backgroundCheck ? "fa fa-check-square" : "fa fa-minus-square"} aria-hidden="true"></i> Background Check</h5>
                         </div>
                         <div className="sidebar-section">
                             <h5>Education</h5>
-                            <p>{this.state.data.education}</p>
+                            <p>{caregiverInfo.education}</p>
                             <h5>Experience</h5>
-                            <p>{this.state.data.experience}</p>
+                            <p>{caregiverInfo.experience}</p>
                             <h5>Languages</h5>
-                            <p>{this.state.data.languages.join(', ')}</p>
+                            <p>{caregiverInfo.languages.join(', ')}</p>
                             <h5>Other Notes</h5>
-                            <p>{this.state.data.otherNotes === "" ? "N/A" : this.state.data.otherNotes}</p>
+                            <p>{caregiverInfo.otherNotes === "" ? "N/A" : caregiverInfo.otherNotes}</p>
                         </div>
                     </div>
                 </div>

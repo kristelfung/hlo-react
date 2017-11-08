@@ -21,7 +21,7 @@ export function getRandomJobs(){
 
 export function getProfile(id){
     var options = {
-        uri: baseUrl + '/caregiver/' + id,
+        uri: baseUrl + '/user/' + id,
         json: true
     };
     return rp(options);
@@ -40,6 +40,14 @@ export function getSettings(id){
 export function getUser(id){
     var options = {
         uri: baseUrl + '/user/' + id,
+        json: true
+    };
+    return rp(options);
+}
+
+export function getInbox(id){
+    var options = {
+        uri: baseUrl + '/message/inbox/' + id,
         json: true
     };
     return rp(options);
