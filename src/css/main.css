@@ -537,3 +537,9 @@ h1, h2, h3, h4, h5, h6, p {
 
 .pass-check {
   color: #388E3C; }
+
+/* DASHBOARD */
+/* MESSAGES */
+table {
+  border: 1px solid black;
+  width: 100%; }
