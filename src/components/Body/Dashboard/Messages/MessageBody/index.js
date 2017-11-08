@@ -42,7 +42,7 @@ class MessageBody extends Component {
         
                     <div className="all-messages">
                         {
-                            this.props.replies.map(reply => <Reply {...reply} />)
+                            this.props.replies.map((reply, idx) => <Reply key={idx} {...reply} />)
                         }
                     </div>
         

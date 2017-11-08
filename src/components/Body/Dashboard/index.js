@@ -7,6 +7,11 @@ import Settings from './Settings';
 
 import {getUser, replyMessage, getThread} from '../../../api/api'
 
+import suitcase from '../../../images/dashboard/suitcase.png'
+import messages from '../../../images/dashboard/messages.png'
+import profile from '../../../images/dashboard/profile.png'
+import settings from '../../../images/dashboard/settings.png'
+
 class Dashboard extends Component {
 	constructor(props){
 		super(props);
@@ -98,25 +103,25 @@ class Dashboard extends Component {
     		<div>
     			<div className="col-xs-3 active">
 		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src="/images/dashboard/suitcase.png" className="dashboard-logo" />
+		                <img src={suitcase} className="dashboard-logo" />
 		                <p>Jobs</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3">
 		            <span onClick={() => {this.setState({ tab: "messages" })}}>
-		                <img src="images/dashboard/messages.png" className="dashboard-logo" />
+		                <img src={messages} className="dashboard-logo" />
 		                <p>Messages</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3">
 	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src="images/dashboard/profile.png" className="dashboard-logo" />
+	                	<img src={profile} className="dashboard-logo" />
 	                	<p>Profile</p>
 	                </span>
 	            </div>
 	            <div className="col-xs-3">
 	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src="images/dashboard/settings.png" className="dashboard-logo" />
+		                <img src={settings} className="dashboard-logo" />
 		                <p>Settings</p>
 	               	</span>
 	            </div>
@@ -133,25 +138,25 @@ class Dashboard extends Component {
     		<div>
     			<div className="col-xs-3 ">
 		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src="/images/dashboard/suitcase.png" className="dashboard-logo" />
+		                <img src={suitcase} className="dashboard-logo" />
 		                <p>Jobs</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3 active">
 		            <span onClick={this.resetMessageTab}>
-		                <img src="images/dashboard/messages.png" className="dashboard-logo" />
+		                <img src={messages} className="dashboard-logo" />
 		                <p>Messages</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3">
 	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src="images/dashboard/profile.png" className="dashboard-logo" />
+	                	<img src={profile} className="dashboard-logo" />
 	                	<p>Profile</p>
 	                </span>
 	            </div>
 	            <div className="col-xs-3">
 	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src="images/dashboard/settings.png" className="dashboard-logo" />
+		                <img src={settings} className="dashboard-logo" />
 		                <p>Settings</p>
 	               	</span>
 	            </div>
@@ -163,25 +168,25 @@ class Dashboard extends Component {
     		<div>
     			<div className="col-xs-3 ">
 		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src="/images/dashboard/suitcase.png" className="dashboard-logo" />
+		                <img src={suitcase} className="dashboard-logo" />
 		                <p>Jobs</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3">
 		            <span onClick={() => {this.setState({ tab: "messages" })}}>
-		                <img src="images/dashboard/messages.png" className="dashboard-logo" />
+		                <img src={messages} className="dashboard-logo" />
 		                <p>Messages</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3 active">
 	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src="images/dashboard/profile.png" className="dashboard-logo" />
+	                	<img src={profile} className="dashboard-logo" />
 	                	<p>Profile</p>
 	                </span>
 	            </div>
 	            <div className="col-xs-3">
 	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src="images/dashboard/settings.png" className="dashboard-logo" />
+		                <img src={settings} className="dashboard-logo" />
 		                <p>Settings</p>
 	               	</span>
 	            </div>
@@ -193,25 +198,25 @@ class Dashboard extends Component {
     		<div>
     			<div className="col-xs-3 ">
 		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src="/images/dashboard/suitcase.png" className="dashboard-logo" />
+		                <img src={suitcase} className="dashboard-logo" />
 		                <p>Jobs</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3">
 		            <span onClick={() => {this.setState({ tab: "messages" })}}>
-		                <img src="images/dashboard/messages.png" className="dashboard-logo" />
+		                <img src={messages} className="dashboard-logo" />
 		                <p>Messages</p>
 		            </span>
 	            </div>
 	            <div className="col-xs-3">
 	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src="images/dashboard/profile.png" className="dashboard-logo" />
+	                	<img src={profile} className="dashboard-logo" />
 	                	<p>Profile</p>
 	                </span>
 	            </div>
 	            <div className="col-xs-3 active">
 	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src="images/dashboard/settings.png" className="dashboard-logo" />
+		                <img src={settings} className="dashboard-logo" />
 		                <p>Settings</p>
 	               	</span>
 	            </div>

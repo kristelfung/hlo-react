@@ -42,7 +42,7 @@ class Jobs extends Component {
 
 		            <div className="container-fluid">
 		                {
-                        	this.state.data.jobsApplied.map(jobsApplied => <Job {...jobsApplied}/>)
+                        	this.state.data.jobsApplied.map(job => <Job key={job.id} {...job}/>)
                         }
 		            </div>
 		        </div>
