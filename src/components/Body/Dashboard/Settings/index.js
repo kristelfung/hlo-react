@@ -25,7 +25,7 @@ class Settings extends Component {
             loading: true
         }
 
-        getProfile("5a029e58dc5c6d379bcb9108").then(json => {
+        getProfile("59e20105895a3eac24e267ba").then(json => {
             console.log(json);
             this.setState({
                 loading: false,
