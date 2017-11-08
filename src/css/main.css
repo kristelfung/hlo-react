@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6, p {
     width: 700px; } }
 
 /* misc */
-.fa-star {
+.fa-star, .fa-star-half-o, .fa-star-half-o {
   color: #FFC107; }
 
 .label-success {
@@ -318,3 +318,153 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 40px 0px; }
 
 /* INFO PAGE */
+/* PROFILE PAGE */
+.profile-body {
+  padding: 70px 60px 30px 60px;
+  /* top right bototm left */
+  border-right: 1px solid #919191; }
+
+@media (min-width: 768px) {
+  .profile-body {
+    margin-top: -70px; } }
+
+.profile-section {
+  padding: 10px 0px; }
+
+.table > tbody > tr > td {
+  line-height: 2.2; }
+
+.reviewer-info {
+  margin-top: 30px; }
+
+.review-pic {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 15px; }
+
+.review-desc {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.review-date {
+  text-align: right;
+  color: #000000; }
+
+.profile-cover {
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background-size: cover;
+  background-position: center center;
+  height: 300px; }
+
+.profile-head {
+  margin-top: -150px; }
+
+@media (max-width: 767px) {
+  .profile-head {
+    /* center name when mobile */
+    text-align: center; } }
+
+.label-success {
+  background-color: #174c1b; }
+
+.name {
+  padding-top: 50px; }
+  .name h1 {
+    color: #ffffff;
+    font-weight: bold; }
+
+.rating {
+  font-size: 20px; }
+
+.rating a {
+  color: #ffffff; }
+
+@media (max-width: 767px) {
+  /* name container mobile */
+  .name {
+    padding-top: 0px; }
+    .name h1 {
+      color: #000000; }
+  .rating a {
+    color: #000000; } }
+
+.profile-buttons {
+  text-align: center; }
+  .profile-buttons .btn {
+    margin-right: 2px;
+    margin-left: 2px;
+    margin-top: 100px; }
+
+@media (max-width: 767px) {
+  .profile-buttons .btn {
+    margin-top: 0px; } }
+
+.profile-pic {
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+  width: 220px;
+  height: 220px;
+  border: 8px solid #efefef;
+  display: inline-block;
+  /* make prof pic div not larger than contents */
+  position: relative;
+  /* allows absolute positioning of favorite button */ }
+
+@media (min-width: 768px) {
+  .profile-pic {
+    /* profile pic float right when not mobile */
+    float: right; } }
+
+/* TODO: fixlater */
+.favorite {
+  background-color: #FEFEFE;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute;
+  right: 5px;
+  top: 5px; }
+  .favorite .fa-plus {
+    /* make icon centered */
+    color: #919191;
+    position: absolute;
+    font-size: 24px;
+    right: 10px;
+    top: 9px; }
+  .favorite .fa-heart {
+    /* make icon centered */
+    color: #E53935;
+    position: absolute;
+    font-size: 22px;
+    right: 9px;
+    top: 11px; }
+
+@media (min-width: 768px) {
+  .profile-sidebar {
+    margin-top: -70px; } }
+
+/* black bar */
+.location-bar {
+  color: #ffffff;
+  background-color: #1B1B1B;
+  padding: 15px 25px 5px 25px;
+  /* top right bottom left */
+  margin-left: -15px;
+  /* fix until collaspe */ }
+
+.sidebar-section {
+  padding: 10px 10px 0px 10px; }
+  .sidebar-section h5 {
+    font-weight: bold; }
+  .sidebar-section p {
+    padding-bottom: 20px; }
+
+.fail-check {
+  color: #E53935; }
+
+.pass-check {
+  color: #388E3C; }
