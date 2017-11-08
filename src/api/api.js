@@ -36,3 +36,11 @@ export function getSettings(id){
     };
     return rp(options);
 }
+
+export function getUser(id){
+    var options = {
+        uri: baseUrl + '/user/' + id,
+        json: true
+    };
+    return rp(options);
+}

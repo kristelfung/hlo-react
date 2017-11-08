@@ -53,9 +53,27 @@ class Jobs extends Component {
 		                </div>
 		            </div>
 		            <div class="container-fluid">
-		                {
-                        	this.state.data.jobsApplied.map(jobsApplied => <Job {...jobsApplied}/>)
-                        }
+		                <div class="row job">
+		                    <div class="col-xs-6">
+		                        <h4>John Smith</h4>
+		                        <h6>Posted on June 6, 2017</h6>
+		                    </div>
+		                    <div class="col-xs-6 job-left">
+		                        <img src="images/dashboard/confirmedjob.png" class="job-status" />
+		                        <span class="expand-job"><i class="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+		                    </div>
+		                </div>
+
+		                <div class="row job">
+		                    <div class="col-xs-6">
+		                        <h4>Jane Doe</h4>
+		                        <h6>Posted on June 6, 2017</h6>
+		                    </div>
+		                    <div class="col-xs-6 job-left">
+		                        <img src="images/dashboard/pendingjob.png" class="job-status" />
+		                        <span class="expand-job"><i class="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+		                    </div>
+		                </div>
 		            </div>
 		        </div>
 		    </div>
@@ -69,7 +87,7 @@ class Job extends Component{
 		return (
 			<div class="row job">
                 <div class="col-xs-6">
-                    <h4>{this.props.jobsApplied.name}</h4>
+                    <h4>{this.props.jobsApplied.name}</h4> 
                 </div>
                 <div class="col-xs-6 job-left">
                     <img src="images/dashboard/confirmedjob.png" class="job-status" />

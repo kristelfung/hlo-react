@@ -3,13 +3,30 @@ import Jobs from './Jobs'
 import Messages from './Messages';
 import Profile from './Profile';
 import Settings from './Settings';
+import {getUser} from '../../../api/api'
+
 class Dashboard extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			tab:"jobs"
 		}
-	}
+
+	    getUser("59e3c1b3564ae448425cd88e").then(json => {
+	        console.log(json);
+	        this.setState({
+	            loading: false,
+	            data: json
+	        });
+	    }).catch(err => {
+	        console.log(err);
+	        this.setState({
+	            loading: false,
+	            error: err
+	        });
+	    });
+    }
+
     render(){
     	var body; 
     	var title;
@@ -75,7 +92,7 @@ class Dashboard extends Component {
 	         </div>
     	}
     	else if(this.state.tab == "profile"){
-    		body = <Profile />;
+    		body = <Profile userType={this.state.data.type}/>;
     		title = 
     		<div>
     			<div className="col-xs-3 ">
@@ -134,7 +151,7 @@ class Dashboard extends Component {
 	            </div>
 	         </div>
     	}
-    	console.log(this.state.tab);
+    	
         return (
             <div>
                <div className="header">
