@@ -22,7 +22,6 @@ class Profile extends Component {
                 reviews: [],
                 stars: 0,
                 languages: []
-
             },
             loading: true
         }
@@ -41,7 +40,6 @@ class Profile extends Component {
             });
         });
     }
-
     render() {
         let availArray = [];
         for (var key in this.state.data.availability) {

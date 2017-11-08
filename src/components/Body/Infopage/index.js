@@ -6,7 +6,7 @@ class Infopage extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header header={this.props.header}/>
                 <Infobody/>
             </div>
         );
