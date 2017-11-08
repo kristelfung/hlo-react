@@ -592,10 +592,6 @@ h1, h2, h3, h4, h5, h6, p {
 .submit-buttons {
   text-align: right; }
 
-.message-body {
-  border-top: #efefef;
-  border-bottom: #efefef; }
-
 .inbox {
   /* the entire table */
   width: 100%;
@@ -645,3 +641,20 @@ h1, h2, h3, h4, h5, h6, p {
 
 .read {
   background-color: #f9f9f9; }
+
+.all-messages {
+  margin: 20px 0px; }
+
+.message-body {
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  padding: 20px 0px; }
+  .message-body img {
+    /* profile pic of sender */
+    border-radius: 50%;
+    float: left;
+    width: 70px;
+    margin-right: 20px;
+    clear: both; }
+  .message-body p {
+    margin-top: 30px; }

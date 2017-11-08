@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Jobs from './Jobs'
 import Messages from './Messages';
+import MessageBody from './Messages/MessageBody'
 import Profile from './Profile';
 import Settings from './Settings';
-import {getUser} from '../../../api/api'
+
+import {getUser, replyMessage, getThread} from '../../../api/api'
 
 class Dashboard extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			tab:"jobs",
+			tab: "messages",
 			data: {
 				"firstName": "",
 				"lastName": "",
@@ -33,10 +35,14 @@ class Dashboard extends Component {
 				bankName: "",
 				accountNumber: "",
 				paypal: ""
-			}
+			},
+			loadMessageBody: false,
+			messageBody: {}
 		}
 
-	    getUser("5a02fdf9b108b228357e5542").then(json => {
+		this.userID = "5a02fdf9b108b228357e5542";
+
+	    getUser(this.userID).then(json => {
 	        console.log(json);
 	        this.setState({
 	            loading: false,
@@ -48,8 +54,40 @@ class Dashboard extends Component {
 	            loading: false,
 	            error: err
 	        });
-	    });
+		});
+		
+		this.reply = this.reply.bind(this);		
+		this.loadMessage = this.loadMessage.bind(this);
+		this.resetMessageTab = this.resetMessageTab.bind(this);
     }
+
+	loadMessage(message){
+		this.setState({
+			loadMessageBody: true,
+			messageBody: message
+		});
+	}
+
+	resetMessageTab(){
+		this.setState({
+			loadMessageBody: false,
+			messageBody: {},
+			tab: "messages"
+		});
+	}
+
+	reply(message){
+		replyMessage(message).then(json => {
+			getThread(message.thread).then(json => {
+				this.setState({
+					messageBody: json,
+				});
+			}).catch(err => {
+			});
+	    }).catch(err => {
+	        console.log(err);
+		});
+	}
 
     render(){
     	var body; 
@@ -86,7 +124,11 @@ class Dashboard extends Component {
     		
     	}
     	else if(this.state.tab == "messages"){
-    		body = <Messages />;
+			if(this.state.loadMessageBody){
+				body = <MessageBody reply={this.reply} userID={this.userID} {...this.state.messageBody} />;
+			}else{
+				body = <Messages loadMessage={this.loadMessage}/>;
+			}
     		title = 
     		<div>
     			<div className="col-xs-3 ">
@@ -96,7 +138,7 @@ class Dashboard extends Component {
 		            </span>
 	            </div>
 	            <div className="col-xs-3 active">
-		            <span onClick={() => {this.setState({ tab: "messages" })}}>
+		            <span onClick={this.resetMessageTab}>
 		                <img src="images/dashboard/messages.png" className="dashboard-logo" />
 		                <p>Messages</p>
 		            </span>
