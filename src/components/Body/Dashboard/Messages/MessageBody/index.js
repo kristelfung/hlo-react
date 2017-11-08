@@ -28,10 +28,11 @@ class MessageBody extends Component {
 
     render(){
         this.props.replies.forEach(function(reply) {
-            if(reply.from !== this.props.from)
-                reply.fullName =  this.props.from.firstName + " " +this.props.from.lastName;
+            
+            if(reply.from !== this.props.from.id)
+                reply.fullName =  this.props.to.firstName + " " +this.props.to.lastName;
             else
-                reply.fullName =  this.props.to.firstName + " " +this.props.to.lastName; 
+                reply.fullName =  this.props.from.firstName + " " +this.props.from.lastName; 
         }, this);
 
         return(

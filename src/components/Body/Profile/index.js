@@ -52,7 +52,6 @@ class Profile extends Component {
     }
     render() {
         let caregiverInfo = this.state.data.caregiver[0];
-        console.log("ci", caregiverInfo)
         let availArray = [];
         for (var key in caregiverInfo.availability) {
             var item = caregiverInfo.availability[key];

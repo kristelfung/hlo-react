@@ -16,7 +16,7 @@ class Dashboard extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			tab: "messages",
+			tab: "jobs",
 			data: {
 				"firstName": "",
 				"lastName": "",
@@ -45,7 +45,7 @@ class Dashboard extends Component {
 			messageBody: {}
 		}
 
-		this.userID = "5a02fdf9b108b228357e5542";
+		this.userID = "5a02e6ad1b6645cc36d31df0";
 
 	    getUser(this.userID).then(json => {
 	        console.log(json);
@@ -88,6 +88,7 @@ class Dashboard extends Component {
 					messageBody: json,
 				});
 			}).catch(err => {
+				console.log(err);
 			});
 	    }).catch(err => {
 	        console.log(err);
