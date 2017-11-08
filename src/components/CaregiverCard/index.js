@@ -12,11 +12,11 @@ class CaregiverCard extends Component {
         <div className="card-desc">
             <h4>Jane Doe</h4>
             <p>
-                <i className="fa fa-star" aria-hidden="true" style={{color: "#FFC107"}}></i>
-                <i className="fa fa-star" aria-hidden="true" style={{color: "#FFC107"}}></i>
-                <i className="fa fa-star" aria-hidden="true" style={{color: "#FFC107"}}></i>
-                <i className="fa fa-star" aria-hidden="true" style={{color: "#FFC107"}}></i>
-                <i className="fa fa-star-half-o" aria-hidden="true" style={{color: "#FFC107"}}></i>
+                <i className="fa fa-star" aria-hidden="true" ></i>
+                <i className="fa fa-star" aria-hidden="true" ></i>
+                <i className="fa fa-star" aria-hidden="true" ></i>
+                <i className="fa fa-star" aria-hidden="true" ></i>
+                <i className="fa fa-star-half-o" aria-hidden="true" ></i>
                 (10)
             </p>
             <p>
