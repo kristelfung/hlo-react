@@ -9,7 +9,31 @@ class Dashboard extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			tab:"jobs"
+			tab:"jobs",
+			data: {
+				"firstName": "",
+				"lastName": "",
+				"location": [],
+				caregiver: [{
+					"hourlyRate": 0,
+					"car": false,
+					"backgroundCheck": true,
+					"education": "",
+					"experience": "",
+					"languages": [],
+					"about": "",
+					"availability": {},
+					"otherNotes": ""
+				}],
+				email: "",
+				hkidPassport: "",
+				phoneNumber: "",
+				creditCard: "",
+				cif: "",
+				bankName: "",
+				accountNumber: "",
+				paypal: ""
+			}
 		}
 
 	    getUser("5a02fdf9b108b228357e5542").then(json => {
@@ -122,7 +146,7 @@ class Dashboard extends Component {
 	         </div>
     	}
     	else if (this.state.tab == "settings") {
-    		body = <Settings />;
+    		body = <Settings {...this.state.data}/>;
     		title = 
     		<div>
     			<div className="col-xs-3 ">

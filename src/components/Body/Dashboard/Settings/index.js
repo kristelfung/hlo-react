@@ -3,42 +3,6 @@ import React, { Component } from 'react';
 import {getProfile} from '../../../../api/api'
 
 class Settings extends Component {
-	constructor(props){
-        super(props);
-        this.state = {
-            data: {
-                firstName: "",
-                lastName: "",
-                about: "",
-                availability: {},
-                backgroundCheck: false,
-                car: false,
-                education: "",
-                experience: "",
-                hourlyRate: 60,
-                location: [],
-                otherNotes: "",
-                reviews: [],
-                stars: 0,
-                languages: []
-            },
-            loading: true
-        }
-
-        getProfile("59e20105895a3eac24e267ba").then(json => {
-            console.log(json);
-            this.setState({
-                loading: false,
-                data: json
-            });
-        }).catch(err => {
-            console.log(err);
-            this.setState({
-                loading: false,
-                error: err
-            });
-        });
-    }
     render(){
         return (
         	<div className="dashbody">
@@ -48,9 +12,8 @@ class Settings extends Component {
 		                    <div className="col-sm-6 form-column">
 		                        <h3 className="form-title">Account</h3>
 		                        <div className="form-group">
-		                        {this.state.data.lastName}
 		                          <label for="email">Email</label>
-		                          <input type="email" className="form-control" id="email" placeholder="current-address@gmail.com" />
+		                          <input type="email" className="form-control" id="email" placeholder="current-address@gmail.com" value={this.props.email}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label for="pwd">Password</label>
@@ -62,11 +25,11 @@ class Settings extends Component {
 		                        </div>
 		                        <div className="form-group">
 		                          <label for="phone">Phone</label>
-		                          <input type="text" className="form-control" id="phone" placeholder="+852 0000 0000" />
+		                          <input type="text" className="form-control" id="phone" placeholder="+852 0000 0000" value={this.props.phoneNumber}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label for="hkid">HKID</label>
-		                          <input type="text" className="form-control" id="hkid" placeholder="XXXXXXX(X)" />
+		                          <input type="text" className="form-control" id="hkid" placeholder="XXXXXXX(X)" value={this.props.hkidPassport}/>
 		                        </div>
 
 		                    </div>
@@ -74,23 +37,23 @@ class Settings extends Component {
 		                        <h3 className="form-title">Payment</h3>
 		                        <div className="form-group">
 		                          <label for="creditcard">Credit card</label>
-		                          <input type="text" className="form-control" id="creditcard" placeholder="xxxx-xxxx-xxxx-xxxx"/>
+		                          <input type="text" className="form-control" id="creditcard" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.props.creditCard}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label for="cif">CIF</label>
-		                          <input type="text" className="form-control" id="cif" placeholder="xxx"/>
+		                          <input type="text" className="form-control" id="cif" placeholder="xxx" value={this.props.cif}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label for="bankname">Bank name</label>
-		                          <input type="text" className="form-control" id="bankname" placeholder="HSBC"/>
+		                          <input type="text" className="form-control" id="bankname" placeholder="HSBC"  value={this.props.bankName}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label for="accnum">Account number</label>
-		                          <input type="text" className="form-control" id="accnum" placeholder="xxxx-xxxx-xxxx-xxxx"/>
+		                          <input type="text" className="form-control" id="accnum" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.props.accountNumber}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label for="paypal">PayPal</label>
-		                          <input type="text" className="form-control" id="paypal" placeholder="PayPal account"/>
+		                          <input type="text" className="form-control" id="paypal" placeholder="PayPal account" value={this.props.paypal}/>
 		                        </div>
 		                    </div>
 		                </div>
