@@ -27,7 +27,14 @@ export function getProfile(id){
     return rp(options);
 } 
 export function getListedJobs(id){
-
+    var options = {
+        uri: baseUrl + '/job/customer/' + id ,
+        body : {
+            id : id
+        },
+        json: true
+    };
+    return rp(options);
 }
 export function getSettings(id){
     var options = {
@@ -88,6 +95,33 @@ export function searchUser(search){
     var options = {
         uri: baseUrl + '/user/search?user='+search,
         body: {search: search},
+        json: true
+    };
+    return rp(options);
+}
+export function updateCustomerProfile(information){
+        var options = {
+        uri: baseUrl + '/user/updateCustomer',
+        body: information,
+        method:'POST',
+        json: true
+    };
+    return rp(options);
+}
+export function updateCaregiverProfile(information){
+    var options = {
+        uri: baseUrl + '/user/updateCaregiver',
+        body: information,
+        method:'POST',
+        json: true
+    };
+    return rp(options);
+}
+export function updateSettings(information) {
+    var options = {
+        uri: baseUrl + '/user/updateSettings',
+        body: information,
+        method:'POST',
         json: true
     };
     return rp(options);

@@ -45,8 +45,9 @@ class Dashboard extends Component {
 			messageBody: {}
 		}
 
-		this.userID = "5a02e6ad1b6645cc36d31df0";
-
+		//this.userID = "5a02e6ad1b6645cc36d31df0"; //kanak
+		this.userID = "59e3c1b3564ae448425cd88e"; //customer rachit
+		//this.userID = "59e3c34a564ae448425cd890"; //caregiver rachit
 	    getUser(this.userID).then(json => {
 	        console.log(json);
 	        this.setState({
@@ -99,7 +100,7 @@ class Dashboard extends Component {
     	var body; 
     	var title;
     	if(this.state.tab == "jobs"){
-    		body = <Jobs />;
+    		body = <Jobs {...this.state.data}/>;
     		title = 
     		<div>
     			<div className="col-xs-3 active">
