@@ -45,14 +45,9 @@ class Dashboard extends Component {
 			messageBody: {}
 		}
 
-<<<<<<< HEAD
-		this.userID = "5a03674aa72b45c41e227f11";
-
-=======
 		//this.userID = "5a02e6ad1b6645cc36d31df0"; //kanak
 		this.userID = "59e3c1b3564ae448425cd88e"; //customer rachit
 		//this.userID = "59e3c34a564ae448425cd890"; //caregiver rachit
->>>>>>> 2c1fe31b57222ce1f74f16143815bae9a773cefa
 	    getUser(this.userID).then(json => {
 	        console.log(json);
 	        this.setState({
