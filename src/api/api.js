@@ -1,6 +1,28 @@
 import rp from 'request-promise'
+import axios from 'axios';
 
 const baseUrl = "http://localhost:1337"
+
+export function login(creds){
+    // var options = {
+    //     uri: baseUrl + '/user/login',
+    //     method: 'POST',
+    //     body: creds,
+    //     json: true
+    // };
+    // return rp(options);
+    return axios.post(baseUrl + '/user/login', creds);
+}
+
+export function signup(creds){
+    var options = {
+        uri: baseUrl + '/user/signup',
+        method: 'POST',
+        body: creds,
+        json: true
+    };
+    return rp(options);
+}
 
 //TODO put URL of actual randomizers
 export function getRandomCaregivers(){
@@ -55,11 +77,12 @@ export function getUser(id){
 
 /* message funcs */
 export function getInbox(id){
-    var options = {
-        uri: baseUrl + '/message/inbox/' + id,
-        json: true
-    };
-    return rp(options);
+    // var options = {
+    //     uri: baseUrl + '/message/inbox/',
+    //     json: true
+    // };
+    // return rp(options);
+    return axios.get(baseUrl + '/message/inbox/', {withCredentials: true});
 }
 
 export function sendMessage(message){
