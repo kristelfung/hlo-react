@@ -126,3 +126,21 @@ export function updateSettings(information) {
     };
     return rp(options);
 }
+export function saveJob(information) {
+    var options = {
+        uri: baseUrl + '/job/',
+        body: information,
+        method:'POST',
+        json: true
+    };
+    return rp(options);
+}
+export function savePhotos(information) {
+    var options = {
+        uri: baseUrl + '/job/',
+        body: information,
+        method:'POST',
+        json: true
+    };
+    return rp(options);
+}
