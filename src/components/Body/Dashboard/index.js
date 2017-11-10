@@ -45,7 +45,7 @@ class Dashboard extends Component {
 			messageBody: {}
 		}
 
-		this.userID = "5a02e6ad1b6645cc36d31df0";
+		this.userID = "5a03674aa72b45c41e227f11";
 
 	    getUser(this.userID).then(json => {
 	        console.log(json);

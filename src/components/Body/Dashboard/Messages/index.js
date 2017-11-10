@@ -15,7 +15,7 @@ class Messages extends Component {
             loading: true,
             open: false,
             data: [],
-            from: "5a02fdf9b108b228357e5542",
+            from: "5a03674aa72b45c41e227f11",
             to: "",
             message: "",
             subject: "",
@@ -118,7 +118,7 @@ class Messages extends Component {
                     <table className="inbox">
                         <tbody>
                             {
-                                this.state.data.map(message => <Message loadMessage={this.props.loadMessage} key={message.id} message={message} />)
+                                this.state.data.map(message => <Message picURL={"localhost:1337/user/profilePic/"+this.state.from} loadMessage={this.props.loadMessage} key={message.id} message={message} />)
                             }
                         </tbody>
                     </table>
@@ -131,10 +131,11 @@ class Messages extends Component {
 class Message extends Component{
     render(){
         //TODO image of sender
+        //TODO read unread???
         return(
             <tr className="inbox-message read" onClick={() => this.props.loadMessage(this.props.message)}>
                 <td className="image-td">
-                    <img src="images/msg.png" className="message-pic"/>
+                    <img src={this.props.picURL} className="message-pic"/>
                 </td>
                 <td>
                     <p className="message-author">{this.props.message.from.firstName} {this.props.message.from.lastName}</p>
