@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {getProfile} from '../../../../api/api'
+import {getProfile, updateSettings} from '../../../../api/api'
 
 class Settings extends Component {
 	constructor(props){

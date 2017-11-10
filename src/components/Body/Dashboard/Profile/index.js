@@ -8,35 +8,33 @@ import {updateCaregiverProfile} from '../../../../api/api'
 
 class Profile extends Component {
 	constructor(props){
-        super(props);
-
-    	this.state = {
-    		firstName :"",
-    		lastName:"",
-    		hourlyRate:"",
-    		location:"",
-    		education:"",
-    		experience:"",
-    		languages:"",
-    		otherNotes:"",
-    		about:"",
-    		
-    	}
-    	this.save = this.save.bind(this);
-
-    }
+		super(props);
+		this.state = {
+			firstName :"",
+			lastName:"",
+			hourlyRate:"",
+			location:"",
+			education:"",
+			experience:"",
+			languages:"",
+			otherNotes:"",
+			about:"",
+		}
+		this.save = this.save.bind(this);
+	}
+		
 	save(e){
 	    e.preventDefault();
 	    let information = {
     		firstName : this.state.firstName,
     		lastName: this.state.lastName,
     		location : this.state.location,
-    		id:this.props.id
+    		id:this.props.userID
 	    }
     	updateCustomerProfile(information);
 	    if(this.props.type=="caregiver"){
 	    	let caregiverInfo = {
-	    		id:this.props.id,
+	    		id:this.props.userID,
 	    		education:this.state.education,
 	    		experience:this.state.experience,
 	    		languages:this.state.languages,
@@ -66,7 +64,7 @@ class Profile extends Component {
 		                        {!(this.props.type==="customer") ?
 		                        	<div className="form-group">
 			                          <label for="hourlyRate">Hourly rate</label>
-			                          <input type="text" className="form-control" id="hourlyRate" value = {this.props.caregiver[0].hourlyRate}onChange={(e) => this.setState({hourlyRate: e.target.value})}/>
+			                          <input type="text" className="form-control" id="hourlyRate" value = {this.props.caregiver.hourlyRate}onChange={(e) => this.setState({hourlyRate: e.target.value})}/>
 			                        </div>
 		                    		:
 		                    		<div></div>
@@ -82,19 +80,19 @@ class Profile extends Component {
 			                        
 			                        <div className="form-group">
 			                          <label for="education">Education</label>
-			                          <input type="text" className="form-control" id="education" value = {this.props.caregiver[0].education} onChange={(e) => this.setState({education: e.target.value})}/>
+			                          <input type="text" className="form-control" id="education" value = {this.props.caregiver.education} onChange={(e) => this.setState({education: e.target.value})}/>
 			                        </div>
 			                        <div className="form-group">
 			                          <label for="experience">Experience</label>
-			                          <input type="text" className="form-control" id="experience" value = {this.props.caregiver[0].experience} onChange={(e) => this.setState({experience: e.target.value})}/>
+			                          <input type="text" className="form-control" id="experience" value = {this.props.caregiver.experience} onChange={(e) => this.setState({experience: e.target.value})}/>
 			                        </div>
 			                        <div className="form-group">
 			                          <label for="languages">Languages</label>
-			                          <input type="text" className="form-control" id="languages" value = {this.props.caregiver[0].languages} onChange={(e) => this.setState({languages: e.target.value})}/>
+			                          <input type="text" className="form-control" id="languages" value = {this.props.caregiver.languages} onChange={(e) => this.setState({languages: e.target.value})}/>
 			                        </div>
 			                        <div className="form-group">
 			                          <label for="othernotes">Other notes</label>
-			                          <input type="text" className="form-control" id="othernotes" value = {this.props.caregiver[0].otherNotes}onChange={(e) => this.setState({otherNotes: e.target.value})}/>
+			                          <input type="text" className="form-control" id="othernotes" value = {this.props.caregiver.otherNotes}onChange={(e) => this.setState({otherNotes: e.target.value})}/>
 			                        </div>
 				                </div>
 			                    :
@@ -111,7 +109,7 @@ class Profile extends Component {
 		                {!(this.props.type=="customer") ?
 			                <div className="form-group">
 			                  <label for="comment">About</label>
-			                  <textarea className="form-control" rows="5" id="comment" value={this.props.caregiver[0].about}onChange={(e) => this.setState({about: e.target.value})}></textarea>
+			                  <textarea className="form-control" rows="5" id="comment" value={this.props.caregiver.about}onChange={(e) => this.setState({about: e.target.value})}></textarea>
 			                </div>
 			            :
 			            	<div></div>

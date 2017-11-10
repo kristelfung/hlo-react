@@ -17,10 +17,12 @@ class Dashboard extends Component {
 		super(props);
 		this.state = {
 			tab: "jobs",
+			userID: "",
 			data: {
 				"firstName": "",
 				"lastName": "",
 				"location": [],
+				type: "",
 				caregiver: [{
 					"hourlyRate": 0,
 					"car": false,
@@ -30,7 +32,9 @@ class Dashboard extends Component {
 					"languages": [],
 					"about": "",
 					"availability": {},
-					"otherNotes": ""
+					"otherNotes": "",
+					jobsApplied: [],
+					jobsReceived: [],
 				}],
 				email: "",
 				hkidPassport: "",
@@ -39,20 +43,19 @@ class Dashboard extends Component {
 				cif: "",
 				bankName: "",
 				accountNumber: "",
-				paypal: ""
+				paypal: "",
+				jobsCreated: []
 			},
 			loadMessageBody: false,
 			messageBody: {}
 		}
 
-		//this.userID = "5a02e6ad1b6645cc36d31df0"; //kanak
-		this.userID = "59e3c1b3564ae448425cd88e"; //customer rachit
-		//this.userID = "59e3c34a564ae448425cd890"; //caregiver rachit
-	    getUser(this.userID).then(json => {
+	    getUser().then(json => {
 	        console.log(json);
 	        this.setState({
 	            loading: false,
-	            data: json
+				data: json.data,
+				userID: json.data.id
 	        });
 	    }).catch(err => {
 	        console.log(err);
@@ -132,9 +135,9 @@ class Dashboard extends Component {
     	}
     	else if(this.state.tab == "messages"){
 			if(this.state.loadMessageBody){
-				body = <MessageBody reply={this.reply} userID={this.userID} {...this.state.messageBody} />;
+				body = <MessageBody reply={this.reply} userID={this.state.userID} {...this.state.messageBody} />;
 			}else{
-				body = <Messages loadMessage={this.loadMessage}/>;
+				body = <Messages userID={this.state.userID} loadMessage={this.loadMessage}/>;
 			}
     		title = 
     		<div>

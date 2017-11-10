@@ -15,7 +15,7 @@ class Messages extends Component {
             loading: true,
             open: false,
             data: [],
-            from: "5a03674aa72b45c41e227f11",
+            from: props.userID,
             to: "",
             message: "",
             subject: "",
@@ -27,12 +27,18 @@ class Messages extends Component {
         this.fetchInbox();
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            from: nextProps.userID
+        });
+    }
+
     fetchInbox(){
-        getInbox(this.state.from).then(json => {
+        getInbox().then(json => {
             console.log(json);
             this.setState({
                 loading: false,
-                data: json
+                data: json.data
             });
         }).catch(err => {
             console.log(err);
@@ -118,7 +124,7 @@ class Messages extends Component {
                     <table className="inbox">
                         <tbody>
                             {
-                                this.state.data.map(message => <Message picURL={"localhost:1337/user/profilePic/"+this.state.from} loadMessage={this.props.loadMessage} key={message.id} message={message} />)
+                                this.state.data.map(message => <Message me={this.state.from} picURL={"localhost:1337"+message.from.profilePicUrl} loadMessage={this.props.loadMessage} key={message.id} message={message} />)
                             }
                         </tbody>
                     </table>
@@ -130,26 +136,35 @@ class Messages extends Component {
 
 class Message extends Component{
     render(){
-        //TODO image of sender
-        //TODO read unread???
+        let fullName = "";
+        if(this.props.message.from.id === this.props.me){
+            fullName = this.props.message.to.firstName + " " + this.props.message.to.lastName;
+        }else{
+            fullName = this.props.message.from.firstName + " " + this.props.message.from.lastName;
+        }
+
+        let messageBody = this.props.message.replies[this.props.message.replies.length - 1].messageBody;
+        if(messageBody.length > 30) messageBody = messageBody.substring(0, 30) + "....";
+
         return(
             <tr className="inbox-message read" onClick={() => this.props.loadMessage(this.props.message)}>
                 <td className="image-td">
                     <img src={this.props.picURL} className="message-pic"/>
                 </td>
                 <td>
-                    <p className="message-author">{this.props.message.from.firstName} {this.props.message.from.lastName}</p>
+                    <p className="message-author">{fullName}</p>
                     <p className="message-time">{moment(this.props.message.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
                 </td>
                 <td className="message-contents">
                     <p className="message-title">{this.props.message.threadSubject}</p>
-                    <p className="message-preview">{this.props.message.replies[this.props.message.replies.length - 1].messageBody.substring(0, 30)}</p>
+                    <p className="message-preview">{messageBody}</p>
                 </td>
             </tr>
         );  
-    //     <td>
-    //     <i className="fa fa-circle" aria-hidden="true"></i> 
-    // </td>      
+        //TODO read unread???
+        //     <td>
+        //     <i className="fa fa-circle" aria-hidden="true"></i> 
+        // </td>      
     }
 }
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import {getProfile} from '../../../../api/api';
-import {getListedJobs} from '../../../../api/api';
+import {getUser, getListedJobs} from '../../../../api/api';
 
 class Jobs extends Component {
 	constructor(props){
         super(props);
         this.state = {
+            type: props.type,
             data: {
                 jobsApplied: [],
                 jobsReceived: [],
@@ -14,23 +14,28 @@ class Jobs extends Component {
             },
             loading: true
         }
-
-        getProfile("59e20105895a3eac24e267ba").then(json => {
-            console.log(json);
-            this.setState({
-                loading: false,
-                data: json
-            });
-        }).catch(err => {
-            console.log(err);
-            this.setState({
-                loading: false,
-                error: err
-            });
-        });
     }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.type === "caregiver"){
+            this.setState({
+                type: nextProps.type,
+                data: {
+                    jobsApplied: nextProps.caregiver.jobsApplied,
+                    jobsReceived: nextProps.caregiver.jobsReceived,
+                }
+            })
+        }else{
+            this.setState({
+                type: nextProps.type,
+                data: {
+                    jobsCreated: nextProps.jobsCreated
+                }
+            })
+        }
+    }
+
     render(){
-        console.log(this.props);
         return (
         	<div className="dashbody">
 		        <div className="container">
@@ -38,7 +43,7 @@ class Jobs extends Component {
 		                <div className="col-xs-6">
 		                    <h2>Listed Jobs</h2>
 		                </div>
-                        {(this.props.type === "customer") ?
+                        {(this.state.type === "customer") ?
                             <div className="col-xs-6 button-col">
                                 <a className="btn btn-primary" href="#" role="button">Add Job</a>
                             </div>
@@ -47,7 +52,7 @@ class Jobs extends Component {
                         }
 		                
 		            </div>
-                    {(this.props.type === "caregiver") ?
+                    {(this.state.type === "caregiver") ?
     		            <div className="container-fluid">
     		                {
                             	this.state.data.jobsApplied.map(job => <Job key={job.id} {...job}/>)
