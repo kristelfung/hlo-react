@@ -21,7 +21,7 @@ class Login extends Component{
             email: this.state.email,
             password: this.state.password 
         }).then(json => {
-            console.log(json);
+            sessionStorage.setItem("loggedIn", true);
             window.location.href = "dashboard";
 	    }).catch(err => {
 	        this.setState({

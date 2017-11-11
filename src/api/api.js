@@ -8,6 +8,10 @@ export function login(creds){
     return axios.post(baseUrl + '/user/login', creds);
 }
 
+export function logout(){
+    return axios.post(baseUrl + '/user/logout');
+}
+
 export function signup(creds){
     var options = {
         uri: baseUrl + '/user/signup',
