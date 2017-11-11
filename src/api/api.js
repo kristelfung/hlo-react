@@ -72,22 +72,15 @@ export function sendMessage(message){
 }
 
 export function replyMessage(message){
-    var options = {
-        uri: baseUrl + '/message/reply',
-        method: 'POST',
-        body: message,
-        json: true
-    };
-    return rp(options);
+    return axios.post(baseUrl + '/message/reply', message);
 }
 
 export function getThread(threadID){
-    var options = {
-        uri: baseUrl + '/message/'+threadID,
-        method: 'GET',
-        json: true
-    };
-    return rp(options);
+    return axios.get( baseUrl + '/message/'+threadID);
+}
+
+export function markRead(threadID){
+    return axios.post(baseUrl + '/message/markRead/'+threadID);
 }
 
 export function searchUser(search){

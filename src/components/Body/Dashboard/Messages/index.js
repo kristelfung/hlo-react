@@ -137,17 +137,21 @@ class Messages extends Component {
 class Message extends Component{
     render(){
         let fullName = "";
+        let myLastReadTime = "";
+        let lastUpdateTime = moment(this.props.message.updatedAt);
         if(this.props.message.from.id === this.props.me){
             fullName = this.props.message.to.firstName + " " + this.props.message.to.lastName;
+            myLastReadTime = moment(this.props.message.lastReadFrom);
         }else{
             fullName = this.props.message.from.firstName + " " + this.props.message.from.lastName;
+            myLastReadTime = moment(this.props.message.lastReadTo);
         }
 
         let messageBody = this.props.message.replies[this.props.message.replies.length - 1].messageBody;
         if(messageBody.length > 30) messageBody = messageBody.substring(0, 30) + "....";
 
         return(
-            <tr className="inbox-message read" onClick={() => this.props.loadMessage(this.props.message)}>
+            <tr className={myLastReadTime.isBefore(lastUpdateTime) ? "inbox-message" : "inbox-message read"}  onClick={() => this.props.loadMessage(this.props.message)}>
                 <td className="image-td">
                     <img src={this.props.picURL} className="message-pic"/>
                 </td>
@@ -159,12 +163,14 @@ class Message extends Component{
                     <p className="message-title">{this.props.message.threadSubject}</p>
                     <p className="message-preview">{messageBody}</p>
                 </td>
+                    <td>
+                        {
+                            myLastReadTime.isBefore(lastUpdateTime) &&
+                            <i className="fa fa-circle" aria-hidden="true"></i> 
+                        }
+                    </td> 
             </tr>
         );  
-        //TODO read unread???
-        //     <td>
-        //     <i className="fa fa-circle" aria-hidden="true"></i> 
-        // </td>      
     }
 }
 

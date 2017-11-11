@@ -13,14 +13,16 @@ class MessageBody extends Component {
 
     reply(e){
         e.preventDefault();
-
-        this.props.reply({
+        let msg = {
             messageBody: this.state.message,
             thread: this.props.id,
             from: this.props.userID,
             to: this.props.userID === this.props.from.id ? this.props.to.id : this.props.from.id
-        })
+        };
+        if(this.props.userID === this.props.from.id) msg.lastReadFrom = moment().add(5, 'seconds').format();
+        else msg.lastReadTo = moment().add(5, 'seconds').format();
 
+        this.props.reply(msg);
         this.setState({
             message: "",
         });

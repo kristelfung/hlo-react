@@ -5,7 +5,7 @@ import MessageBody from './Messages/MessageBody'
 import Profile from './Profile';
 import Settings from './Settings';
 
-import {getUser, replyMessage, getThread} from '../../../api/api'
+import {getUser, replyMessage, getThread, markRead} from '../../../api/api'
 
 import suitcase from '../../../images/dashboard/suitcase.png'
 import messages from '../../../images/dashboard/messages.png'
@@ -71,6 +71,7 @@ class Dashboard extends Component {
     }
 
 	loadMessage(message){
+		markRead(message.id).then(json => {}).catch(err=>{});
 		this.setState({
 			loadMessageBody: true,
 			messageBody: message
@@ -89,7 +90,7 @@ class Dashboard extends Component {
 		replyMessage(message).then(json => {
 			getThread(message.thread).then(json => {
 				this.setState({
-					messageBody: json,
+					messageBody: json.data,
 				});
 			}).catch(err => {
 				console.log(err);
