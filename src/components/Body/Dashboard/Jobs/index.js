@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
+import {getUser, getListedJobs, saveJob, savePhotos} from '../../../../api/api';
 
-import {getProfile} from '../../../../api/api';
-import {getListedJobs} from '../../../../api/api';
-import {saveJob} from '../../../../api/api';
-import {savePhotos} from '../../../../api/api';
 class Jobs extends Component {
 	constructor(props){
         super(props);
         this.state = {
+            type: props.type,
             data: {
                 jobsApplied: [],
                 jobsReceived: [],
@@ -41,16 +39,21 @@ class Jobs extends Component {
             
             tab:"detail"
         }
+		this.save = this.save.bind(this);
+    }
 
-        getProfile("59e20105895a3eac24e267ba").then(json => {
-            console.log(json);
+    componentWillReceiveProps(nextProps){
+        if(nextProps.type === "caregiver"){
             this.setState({
-                loading: false,
-                data: json
-            });
-        }).catch(err => {
-            console.log(err);
+                type: nextProps.type,
+                data: {
+                    jobsApplied: nextProps.caregiver.jobsApplied,
+                    jobsReceived: nextProps.caregiver.jobsReceived,
+                }
+            })
+        }else{
             this.setState({
+
                 loading: false,
                 error: err
             });
@@ -65,6 +68,14 @@ class Jobs extends Component {
             endTime:this.state.endTime
         }
         this.setState({requiredTimes: this.state.requiredTimes.concat([reqTime]), day:"",startTime:"",endTime:""});
+
+                type: nextProps.type,
+                data: {
+                    jobsCreated: nextProps.jobsCreated
+                }
+            })
+        }        
+
     }
     save(){
         let info = {
@@ -89,6 +100,7 @@ class Jobs extends Component {
         saveJob(info);
         savePhotos();
     }
+
     render(){
         var body;
         var title;
@@ -245,18 +257,19 @@ class Jobs extends Component {
         else if (this.state.tab=="photos"){
             body = <div id="photos" className="tab-pane fade in active">
                         <h4>Profile Picture</h4>
-                        <div className="form-group">
-                            <input type="file" name="file" id="file" className="inputfile" onChange={(e) => this.setState({profile: e.target.value})}/>
-                            <label for="file" className="btn btn-default">Upload Profile Picture</label>
+
+                        <div class="form-group">
+                            <input type="file" name="profile" id="profile" class="inputfile" onChange={(e) => this.setState({profile: e.target.value})}/>
+                            <label for="profile" class="btn btn-default">Upload Profile Picture</label>
                         </div>
                         <br/>
                         <h4>Cover Photo</h4>
-                        <div className="form-group">
-                            <input type="file" name="file" id="file" className="inputfile" onChange={(e) => this.setState({cover: e.target.value})}/>
-                            <label for="file" className="btn btn-default">Upload Cover Photo</label>
+                        <div class="form-group">
+                            <input type="file" name="cover" id="cover" class="inputfile" onChange={(e) => this.setState({cover: e.target.value})}/>
+                            <label for="cover" class="btn btn-default">Upload Cover Photo</label>
                         </div>
-                        <span className="btn btn-default back" onClick={(e) => this.setState({tab: "photos"})}>Back</span>
-                        <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
+                        <span class="btn btn-default back" onClick={(e) => this.setState({tab: "requirements"})}>Back</span>
+                        <span class="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
                     </div>
 
             title = <ul className="nav nav-pills nav-justified postjob-steps"> 
@@ -321,8 +334,9 @@ class Jobs extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <a className="btn btn-default back" onClick={(e) => {e.preventDefault();this.setState({tab: "requirements"})}}>Back</a>
-                <a className="btn btn-primary next" onClick={this.save}>Submit</a>
+
+                <a class="btn btn-default back" onClick={(e) => {e.preventDefault();this.setState({tab: "photos"})}}>Back</a>
+                <a class="btn btn-primary next" onClick={this.save}>Submit</a>
             </div>
             title = <ul className="nav nav-pills nav-justified postjob-steps"> 
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
@@ -340,7 +354,7 @@ class Jobs extends Component {
                             <div className="col-xs-6">
                                 <h2>Listed Jobs</h2>
                             </div>
-                            {(this.props.type === "customer") ?
+                            {(this.state.type === "customer") ?
                                 <div className="col-xs-6 button-col">
                                     <a className="btn btn-primary" href="#" role="button" onClick={() => {this.setState({ isJobAdd: true })}}>Add Job</a>
                                 </div>
@@ -349,7 +363,7 @@ class Jobs extends Component {
                             }
                             
                         </div>
-                        {(this.props.type === "caregiver") ?
+                        {(this.state.type === "caregiver") ?
                             <div className="container-fluid">
                                 {
                                     this.state.data.jobsApplied.map(job => <Job key={job.id} {...job}/>)

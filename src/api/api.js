@@ -1,17 +1,15 @@
 import rp from 'request-promise'
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 const baseUrl = "http://localhost:1337"
 
 export function login(creds){
-    // var options = {
-    //     uri: baseUrl + '/user/login',
-    //     method: 'POST',
-    //     body: creds,
-    //     json: true
-    // };
-    // return rp(options);
     return axios.post(baseUrl + '/user/login', creds);
+}
+
+export function logout(){
+    return axios.post(baseUrl + '/user/logout');
 }
 
 export function signup(creds){
@@ -41,13 +39,6 @@ export function getRandomJobs(){
     return rp(options);
 }
 
-export function getProfile(id){
-    var options = {
-        uri: baseUrl + '/user/' + id,
-        json: true
-    };
-    return rp(options);
-} 
 export function getListedJobs(id){
     var options = {
         uri: baseUrl + '/job/customer/' + id ,
@@ -67,56 +58,34 @@ export function getSettings(id){
 }
 
 export function getUser(id){
-    var options = {
-        uri: baseUrl + '/user/' + id,
-        json: true
-    };
-    return rp(options);
+    if(id===undefined) id="";
+    return axios.get(baseUrl + '/user/' + id);
 }
-
 
 /* message funcs */
 export function getInbox(id){
-    // var options = {
-    //     uri: baseUrl + '/message/inbox/',
-    //     json: true
-    // };
-    // return rp(options);
-    return axios.get(baseUrl + '/message/inbox/', {withCredentials: true});
+    return axios.get(baseUrl + '/message/inbox/');
 }
 
 export function sendMessage(message){
-    var options = {
-        uri: baseUrl + '/message/',
-        method: 'POST',
-        body: message,
-        json: true
-    };
-    return rp(options);
+    return axios.post(baseUrl + '/message/', message);
 }
 
 export function replyMessage(message){
-    var options = {
-        uri: baseUrl + '/message/reply',
-        method: 'POST',
-        body: message,
-        json: true
-    };
-    return rp(options);
+    return axios.post(baseUrl + '/message/reply', message);
 }
 
 export function getThread(threadID){
-    var options = {
-        uri: baseUrl + '/message/'+threadID,
-        method: 'GET',
-        json: true
-    };
-    return rp(options);
+    return axios.get( baseUrl + '/message/'+threadID);
+}
+
+export function markRead(threadID){
+    return axios.post(baseUrl + '/message/markRead/'+threadID);
 }
 
 export function searchUser(search){
     var options = {
-        uri: baseUrl + '/user/search?user='+search,
+        uri: baseUrl + '/user/searchName?user='+search,
         body: {search: search},
         json: true
     };

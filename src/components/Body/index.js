@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     BrowserRouter,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom';
 
 import Home from './Home'
@@ -20,12 +21,18 @@ export default () => (
     <BrowserRouter>
         <div>
             <Route exact path="/" component={Home} />
+            <Route path="/home" render={() => (<Redirect to="/"/> )}/>            
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route path="/home" component={Home}/>
             <Route path="/about"  render={() => <Infopage header={{infoPageHeader}}/>} />
             <Route path="/profile/:id" component={Profile} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route exact path="/dashboard" render={() => (
+                sessionStorage.getItem('loggedIn') === null ? (
+                    <Redirect to="/login"/>
+                ) : (
+                    <Dashboard/>
+                )
+            )}/>
         </div>
     </BrowserRouter>
 );

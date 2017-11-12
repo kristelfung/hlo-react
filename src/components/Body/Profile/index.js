@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import {getProfile} from '../../../api/api'
+import {getUser} from '../../../api/api'
 
 class Profile extends Component {
     constructor(props){
@@ -35,7 +35,7 @@ class Profile extends Component {
             loading: true
         }
 
-        getProfile(props.match.params.id).then(json => {
+        getUser(props.match.params.id).then(json => {
             if(json.reviews === undefined)
                 json.caregiver[0].reviews = [];
             this.setState({
