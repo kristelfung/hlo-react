@@ -236,6 +236,7 @@ class Dashboard extends Component {
 			                </div>
 			                <div className="col-xs-6 header-image-col">
 			                    <img src="images/infopage/pluses.png" className="header-image" />
+			                    
 			                </div>
 			            </div>
 			        </div>

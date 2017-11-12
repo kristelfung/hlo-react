@@ -28,7 +28,14 @@ class Jobs extends Component {
             languages:[],
             hobbies:"",
             description:"",
-            requiredTimes : {},
+            day:"",
+            startTime:"",
+            endTime:"",
+            requiredTimes : [{
+                day:"",
+            startTime:"",
+            endTime:"",
+            }],
             profile:"",
             cover:"",
             
@@ -49,6 +56,15 @@ class Jobs extends Component {
             });
         });
         this.save = this.save.bind(this);
+        this.add = this.add.bind(this);
+    }
+    add(){
+        let reqTime = {
+            day:this.state.day,
+            startTime:this.state.startTime,
+            endTime:this.state.endTime
+        }
+        this.setState({requiredTimes: this.state.requiredTimes.concat([reqTime]), day:"",startTime:"",endTime:""});
     }
     save(){
         let info = {
@@ -77,51 +93,51 @@ class Jobs extends Component {
         var body;
         var title;
         if(this.state.tab=="detail"){
-            body = <div id="details" class="tab-pane fade in active">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
+            body = <div id="details" className="tab-pane fade in active">
+                        <div className="row">
+                            <div className="col-sm-6">
+                                <div className="form-group">
                                     <label for="location">Name</label>
-                                    <input type="text" class="form-control" id="location" placeholder="This is also the title of your job!" value = {this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
+                                    <input type="text" className="form-control" id="location" placeholder="This is also the title of your job!" value = {this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="gender">Gender</label>
-                                    <select class="form-control" id="gender"  value = {this.state.gender}onChange={(e) => this.setState({gender: e.target.value})}>
+                                    <select className="form-control" id="gender"  value = {this.state.gender}onChange={(e) => this.setState({gender: e.target.value})}>
                                         <option>Male</option>
                                         <option>Female</option>
                                     </select>
                                 </div>
                             
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="bday">Date of Birth</label>
-                                    <input type="date" class="form-control" id="bday" placeholder="DD/MM/YYY" value = {this.state.dateOfBirth} onChange={(e) => this.setState({dateOfBirth: e.target.value})}/>
+                                    <input type="date" className="form-control" id="bday" placeholder="DD/MM/YYY" value = {this.state.dateOfBirth} onChange={(e) => this.setState({dateOfBirth: e.target.value})}/>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="hkidpp">HKID/Passport</label>
-                                    <input type="text" class="form-control" id="hkidpp" value = {this.state.hkidPassport} onChange={(e) => this.setState({hkidPassport: e.target.value})}/>
+                                    <input type="text" className="form-control" id="hkidpp" value = {this.state.hkidPassport} onChange={(e) => this.setState({hkidPassport: e.target.value})}/>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="phoneNumber">Phone Number</label>
-                                    <input type="text" class="form-control" id="phoneNumber" value = {this.state.phoneNumber} onChange={(e) => this.setState({phoneNumber: e.target.value})}/>
+                                    <input type="text" className="form-control" id="phoneNumber" value = {this.state.phoneNumber} onChange={(e) => this.setState({phoneNumber: e.target.value})}/>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email"  value = {this.state.email} onChange={(e) => this.setState({email: e.target.value})}/>
+                                    <input type="email" className="form-control" id="email"  value = {this.state.email} onChange={(e) => this.setState({email: e.target.value})}/>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
+                            <div className="col-sm-6">
+                                <div className="form-group">
                                     <label for="address">Address</label>
-                                    <textarea class="form-control" rows="4" id="address"  value = {this.state.address} placeholder="14A Evergreen Villa..." onChange={(e) => this.setState({address: e.target.value})}></textarea>
+                                    <textarea className="form-control" rows="4" id="address"  value = {this.state.address} placeholder="14A Evergreen Villa..." onChange={(e) => this.setState({address: e.target.value})}></textarea>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="district">District</label>
-                                    <select class="form-control" id="district"  value = {this.state.district} onChange={(e) => this.setState({district: e.target.value})}>
+                                    <select className="form-control" id="district"  value = {this.state.district} onChange={(e) => this.setState({district: e.target.value})}>
                                         <option>Central</option>
                                         <option>Sai Wan Ho</option>
                                         <option>Aberdeen</option>
@@ -138,9 +154,9 @@ class Jobs extends Component {
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="country">Country</label>
-                                    <select class="form-control" id="country"  value = {this.state.country} onChange={(e) => this.setState({country: e.target.value})}>
+                                    <select className="form-control" id="country"  value = {this.state.country} onChange={(e) => this.setState({country: e.target.value})}>
                                         <option>Hong Kong</option>
                                         <option>China</option>
                                         <option>Singapore</option>
@@ -150,96 +166,111 @@ class Jobs extends Component {
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="languages">Languages</label>
-                                    <input type="text" class="form-control" id="languages" placeholder="Comma seperated" value = {this.state.languages.join(',')} onChange={(e) => this.setState({languages: e.target.value.split(',')})}/>
+                                    <input type="text" className="form-control" id="languages" placeholder="Comma seperated" value = {this.state.languages.join(',')} onChange={(e) => this.setState({languages: e.target.value.split(',')})}/>
                                 </div>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="address">Hobbies</label>
-                                    <textarea class="form-control" rows="2" id="hobbies" placeholder="Biking, running..." value = {this.state.hobbies} onChange={(e) => this.setState({hobbies: e.target.value})}></textarea>
+                                    <textarea className="form-control" rows="2" id="hobbies" placeholder="Biking, running..." value = {this.state.hobbies} onChange={(e) => this.setState({hobbies: e.target.value})}></textarea>
                                  </div>
 
                             </div>
                         </div>
-                        <span class="btn btn-primary next" onClick={(e) => this.setState({tab: "requirements"})}>Next</span>
+                        <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "requirements"})}>Next</span>
                     </div>
 
-            title = <ul class="nav nav-pills nav-justified postjob-steps"> 
-                        <li class="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
+            title = <ul className="nav nav-pills nav-justified postjob-steps"> 
+                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
         else if (this.state.tab=="requirements"){
-            body =  <div id="requirements" class="tab-pane fade in active">
-                        <div class="form-group">
+            body =  <div id="requirements" className="tab-pane fade in active">
+                        <div className="form-group">
                             <label for="address">Job Description</label>
-                            <textarea class="form-control" rows="4" id="address" placeholder="My mother is in need of..." value = {this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
+                            <textarea className="form-control" rows="4" id="address" placeholder="My mother is in need of..." value = {this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
                         </div>
 
                         
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Day of Week</label>
-                                <label class="col-xs-3 control-label">Time Start</label>
-                                <label class="col-xs-3 control-label">Time End</label>
-                                <label class="col-xs-1 control-label"></label>
-                                <div class="col-xs-5">
-                                    <input type="text" class="form-control" value = {this.state.name} onChange={(e) => this.setState({day: e.target.value})}/>
+                        <div className="form-group">
+                            <div className="row">
+                                <label className="col-xs-5 control-label">Day of Week</label>
+                                <label className="col-xs-3 control-label">Time Start</label>
+                                <label className="col-xs-3 control-label">Time End</label>
+                                <label className="col-xs-1 control-label"></label>
+                                {this.state.requiredTimes.map((time, idx) => 
+                                    <div>
+                                        <div className="col-xs-5">
+                                            {this.state.requiredTimes[idx].day}
+                                        </div>
+                                        <div className="col-xs-3">
+                                            {this.state.requiredTimes[idx].startTime}
+                                        </div>
+                                        <div className="col-xs-3">
+                                            {this.state.requiredTimes[idx].endTime}
+                                        </div>
+                                    </div>
+                                )}
+                                <div>
+                                    <div className="col-xs-5">
+                                        <input type="text" className="form-control" value = {this.state.day} onChange={(e) => this.setState({day: e.target.value})}/>
+                                    </div>
+                                    <div className="col-xs-3">
+                                        <input type="time" className="form-control"  value = {this.state.startTime}onChange={(e) => this.setState({startTime: e.target.value})}/>
+                                    </div>
+                                    <div className="col-xs-3">
+                                        <input type="time" className="form-control" value = {this.state.endTime}onChange={(e) => this.setState({endTime: e.target.value})}/>
+                                    </div>
                                 </div>
-                                <div class="col-xs-3">
-                                    <input type="time" class="form-control"  value = {this.state.name}onChange={(e) => this.setState({startTime: e.target.value})}/>
-                                </div>
-                                <div class="col-xs-3">
-                                    <input type="time" class="form-control" value = {this.state.name}onChange={(e) => this.setState({endTime: e.target.value})}/>
-                                </div>
-                                <div class="col-xs-1">
-                                    <span class="add-time"><i class="fa fa-plus"></i></span>
+                                <div className="col-xs-1">
+                                    <span className="add-time" onClick={this.add}><i className="fa fa-plus"></i></span>
                                 </div>
                             </div>
                         </div>
                         
-                        <span class="btn btn-default back" onClick={(e) => this.setState({tab: "detail"})}>Back</span>
-                        <span class="btn btn-primary next" onClick={(e) => this.setState({tab: "photos"})}>Next</span>
+                        <span className="btn btn-default back" onClick={(e) => this.setState({tab: "detail"})}>Back</span>
+                        <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "photos"})}>Next</span>
                     </div>
-            title=  <ul class="nav nav-pills nav-justified postjob-steps"> 
+            title=  <ul className="nav nav-pills nav-justified postjob-steps"> 
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
-                        <li class="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
+                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
         else if (this.state.tab=="photos"){
-            body = <div id="photos" class="tab-pane fade in active">
+            body = <div id="photos" className="tab-pane fade in active">
                         <h4>Profile Picture</h4>
-                        <div class="form-group">
-                            <input type="file" name="file" id="file" class="inputfile" onChange={(e) => this.setState({profile: e.target.value})}/>
-                            <label for="file" class="btn btn-default">Upload Profile Picture</label>
+                        <div className="form-group">
+                            <input type="file" name="file" id="file" className="inputfile" onChange={(e) => this.setState({profile: e.target.value})}/>
+                            <label for="file" className="btn btn-default">Upload Profile Picture</label>
                         </div>
                         <br/>
                         <h4>Cover Photo</h4>
-                        <div class="form-group">
-                            <input type="file" name="file" id="file" class="inputfile" onChange={(e) => this.setState({cover: e.target.value})}/>
-                            <label for="file" class="btn btn-default">Upload Cover Photo</label>
+                        <div className="form-group">
+                            <input type="file" name="file" id="file" className="inputfile" onChange={(e) => this.setState({cover: e.target.value})}/>
+                            <label for="file" className="btn btn-default">Upload Cover Photo</label>
                         </div>
-                        <span class="btn btn-default back" onClick={(e) => this.setState({tab: "photos"})}>Back</span>
-                        <span class="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
+                        <span className="btn btn-default back" onClick={(e) => this.setState({tab: "photos"})}>Back</span>
+                        <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
                     </div>
 
-            title = <ul class="nav nav-pills nav-justified postjob-steps"> 
+            title = <ul className="nav nav-pills nav-justified postjob-steps"> 
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
-                        <li class="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
+                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
         else if (this.state.tab=="review"){
             body = 
-            <div id="review" class="tab-pane fade in active">
-                <div class="row">
-                    <div class="col-sm-6">
+            <div id="review" className="tab-pane fade in active">
+                <div className="row">
+                    <div className="col-sm-6">
                         <h5>Name</h5>
                         <p>{this.state.name}</p>
                         <br/>
@@ -252,7 +283,7 @@ class Jobs extends Component {
                         <h5>Languages</h5>
                         <p>{this.state.languages.join(', ')}</p>
                     </div>
-                    <div class="col-sm-6">
+                    <div className="col-sm-6">
                         <h5>Address</h5>
                         <p>{this.state.address}</p>
                         <br />
@@ -268,7 +299,7 @@ class Jobs extends Component {
                 <p>{this.state.description}</p>
                 <br/>
                 <h5>Work Times</h5>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>Day of Week</th>
@@ -290,17 +321,17 @@ class Jobs extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <a class="btn btn-default back" onClick={(e) => {e.preventDefault();this.setState({tab: "requirements"})}}>Back</a>
-                <a class="btn btn-primary next" onClick={this.save}>Submit</a>
+                <a className="btn btn-default back" onClick={(e) => {e.preventDefault();this.setState({tab: "requirements"})}}>Back</a>
+                <a className="btn btn-primary next" onClick={this.save}>Submit</a>
             </div>
-            title = <ul class="nav nav-pills nav-justified postjob-steps"> 
+            title = <ul className="nav nav-pills nav-justified postjob-steps"> 
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
                         <li ><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
-                        <li class="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
+                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
-
+        console.log(this.props.type);
         if(!this.state.isJobAdd ){
             return (
                 <div className="dashbody">
@@ -337,11 +368,11 @@ class Jobs extends Component {
         }
         else{
             return (
-                <div class="dashbody">
-                    <div class="container-small">
+                <div className="dashbody">
+                    <div className="container-small">
                         <h3>Post a Job</h3>
                          {title}   
-                        <div class="tab-content">
+                        <div className="tab-content">
                             <form>
                                 {body}
                             </form>
@@ -358,8 +389,8 @@ class Job extends Component{
 	render(){
 		return (
 
-			<div class="row job">
-                <div class="col-xs-6">
+			<div className="row job">
+                <div className="col-xs-6">
                     <h4>{this.props.jobsApplied.name}</h4> 
 
                 </div>
@@ -375,8 +406,8 @@ class CustomerJob extends Component{
     render(){
         return (
 
-            <div class="row job">
-                <div class="col-xs-6">
+            <div className="row job">
+                <div className="col-xs-6">
                     <h4>{this.props.jobsCreated.name}</h4> 
 
                 </div>
