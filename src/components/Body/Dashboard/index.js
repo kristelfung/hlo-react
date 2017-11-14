@@ -50,7 +50,16 @@ class Dashboard extends Component {
 			messageBody: {}
 		}
 
-	    getUser().then(json => {
+	    
+		this.updateUser = this.updateUser.bind(this);
+		this.reply = this.reply.bind(this);		
+		this.loadMessage = this.loadMessage.bind(this);
+		this.resetMessageTab = this.resetMessageTab.bind(this);
+
+		this.updateUser();
+    }
+    updateUser(){
+		getUser().then(json => {
 	        console.log(json);
 	        this.setState({
 	            loading: false,
@@ -63,13 +72,8 @@ class Dashboard extends Component {
 	            loading: false,
 	            error: err
 	        });
-		});
-		
-		this.reply = this.reply.bind(this);		
-		this.loadMessage = this.loadMessage.bind(this);
-		this.resetMessageTab = this.resetMessageTab.bind(this);
-    }
-
+		});		
+	}  
 	loadMessage(message){
 		markRead(message.id).then(json => {}).catch(err=>{});
 		this.setState({
@@ -104,7 +108,7 @@ class Dashboard extends Component {
     	var body; 
     	var title;
     	if(this.state.tab == "jobs"){
-    		body = <Jobs {...this.state.data}/>;
+    		body = <Jobs updateUser={this.updateUser} {...this.state.data} userID={this.state.userID}/>;
     		title = 
     		<div>
     			<div className="col-xs-3 active">

@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import {getUser, getListedJobs, saveJob, savePhotos} from '../../../../api/api';
-
+import {getUser, getListedJobs, saveJob, saveProfilePic, saveCoverPic} from '../../../../api/api';
+import update from 'react-addons-update';
+import Select from 'react-select';
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 class Jobs extends Component {
 	constructor(props){
         super(props);
-        this.state = {
-            type: props.type,
-            data: {
-                jobsApplied: [],
-                jobsReceived: [],
-                jobsCreated: []
-            },
-            loading: true,
-            isJobAdd:false,
+        // var options = [
+        //   { value: 'one', label: 'One' },
+        //   { value: 'two', label: 'Two' }
+        // ];
+        this.emptyJob = {
             
             name:"",
-            gender:"",
+            gender:"Male",
             dateOfBirth:"",
             hkidPassport:"",
             phoneNumber:"",
@@ -31,15 +29,42 @@ class Jobs extends Component {
             endTime:"",
             requiredTimes : [{
                 day:"",
-            startTime:"",
-            endTime:"",
+                startTime:"",
+                endTime:"",
             }],
             profile:"",
             cover:"",
-            
-            tab:"detail"
+            lovedOnesDescription: "",
+            duration: "Long Term",
+            specialMedical: "",
+            tab:"detail",
+            typeOfCaregiver: [],
+            professionalServices: [],
+            personalServices: [],
+            createdBy:"", 
+            completed: ""
+        }
+        this.state = {
+            type: props.type,
+            data: {
+                jobsApplied: [],
+                jobsReceived: [],
+                jobsCreated: []
+            },
+            loading: true,
+            isJobAdd:false,
+            ...this.emptyJob
+            // options : [
+            //     { value: 'one', label: 'One' },
+            //     { value: 'two', label: 'Two' }
+            // ],
         }
 		this.save = this.save.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.logChange = this.logChange.bind(this);
+        this.logProfessionalServices = this.logProfessionalServices.bind(this);
+        this.logPersonalServices = this.logPersonalServices.bind(this);
+
     }
 
     componentWillReceiveProps(nextProps){
@@ -48,16 +73,19 @@ class Jobs extends Component {
                 type: nextProps.type,
                 data: {
                     jobsApplied: nextProps.caregiver.jobsApplied,
-                    jobsReceived: nextProps.caregiver.jobsReceived,
+                    jobsReceived: nextProps.caregiver.jobsReceived
                 }
-            })
-        }else{
-            this.setState({
-
-                loading: false,
-                error: err
             });
-        });
+        }
+        else{
+            console.log("jobsCreated are : " + nextProps.jobsCreated);
+            this.setState({
+                type: nextProps.type,
+                data: {
+                    jobsCreated: nextProps.jobsCreated
+                }
+            });
+        }
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
     }
@@ -68,19 +96,12 @@ class Jobs extends Component {
             endTime:this.state.endTime
         }
         this.setState({requiredTimes: this.state.requiredTimes.concat([reqTime]), day:"",startTime:"",endTime:""});
-
-                type: nextProps.type,
-                data: {
-                    jobsCreated: nextProps.jobsCreated
-                }
-            })
-        }        
-
-    }
+    }        
     save(){
+        console.log(this.state.typeOfCaregiver);
         let info = {
-            name:this.state.name,
-            gender:this.state.gender,
+            "name":this.state.name,
+            "gender":this.state.gender,
             dateOfBirth:this.state.dateOfBirth,
             hkidPassport:this.state.hkidPassport,
             phoneNumber:this.state.phoneNumber,
@@ -95,11 +116,49 @@ class Jobs extends Component {
             startTime:this.state.startTime,
             endTime:this.state.endTime,
             profile:this.state.profile,
-            cover:this.state.cover
+            cover:this.state.cover,
+            lovedOnesDescription: this.state.lovedOnesDescription,
+            duration: this.state.duration ,
+            specialMedical:this.state.specialMedical,
+            typeOfCaregiver: this.state.typeOfCaregiver,
+            professionalServices:this.state.professionalServices,
+            personalServices: this.state.personalServices,
+            createdBy: this.props.userID
+
         }
+        let coverPic = this.state.coverPic;
+        let profilePic = this.state.profilePic;
         saveJob(info);
-        savePhotos();
+        saveCoverPic(coverPic);
+        saveProfilePic(profilePic);
+        this.setState({data: { jobsApplied: [], jobsReceived: [], jobsCreated: [] },loading: true, isJobAdd:false, ...this.emptyJob, tab:"detail"});
+        setTimeout(() => this.props.updateUser(), 1000);
+        //document.location.replace("/dashboard"); //TO DO redirect to dashboard
     }
+    handleChange(id){
+        var index = this.state.typeOfCaregiver.indexOf(id);
+        if(index==-1){
+            this.setState({ typeOfCaregiver: this.state.typeOfCaregiver.concat(["vc"])});
+        }
+        else{
+
+            this.setState({typeOfCaregiver: update(this.state.typeOfCaregiver, {$splice: [[index, 1]]})});
+        }
+    }
+    logChange(val) { //type of caregivers
+
+        this.setState({ typeOfCaregiver: val});
+        console.log('Selected: ', val);
+    }
+    logProfessionalServices(val){
+        this.setState({ professionalServices: val});
+        console.log('Selected: ', val);
+    }
+    logPersonalServices(val){
+        this.setState({ personalServices: val});
+        console.log('Selected: ', val);
+    }
+
 
     render(){
         var body;
@@ -108,6 +167,13 @@ class Jobs extends Component {
             body = <div id="details" className="tab-pane fade in active">
                         <div className="row">
                             <div className="col-sm-6">
+                                <div class="form-group">
+                                    <label for="length">Duration</label>
+                                    <select class="form-control" id="length" value = {this.state.duration}onChange={(e) => this.setState({duration: e.target.value})}>
+                                        <option>Long term</option>
+                                        <option>Short term</option>
+                                    </select>
+                                </div>
                                 <div className="form-group">
                                     <label for="location">Name</label>
                                     <input type="text" className="form-control" id="location" placeholder="This is also the title of your job!" value = {this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
@@ -202,11 +268,165 @@ class Jobs extends Component {
         }
         else if (this.state.tab=="requirements"){
             body =  <div id="requirements" className="tab-pane fade in active">
-                        <div className="form-group">
-                            <label for="address">Job Description</label>
-                            <textarea className="form-control" rows="4" id="address" placeholder="My mother is in need of..." value = {this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
-                        </div>
+                        
+                        <h4>Type of Caregiver</h4>
+                        <CheckboxGroup name="typeCaregivers" value = {this.state.typeOfCaregiver} onChange={this.logChange} >
+                            <div class="row checkbox-collection">
+                                <div class="col-sm-6">
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Volunteer Caregivers"/>Volunteer Caregivers</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Nursing Students"/>Nursing Students</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Home Nurse"/>Home Nurse</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Eldercare"/>Eldercare</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Weekend Caregivers"/>Weekend Caregivers</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Special Needs"/> Special Needs</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Specialist Caregivers"/> Specialist Caregivers</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Expert Caregivers"/> Expert Caregivers</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="TLC Caregivers"/> TLC Caregivers</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Licensed Nurse"/> Licensed Nurse</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </CheckboxGroup>
+                        
 
+                        <h4>Professional Services</h4>
+                        <CheckboxGroup name="typeCaregivers" value = {this.state.professionalServices} onChange={this.logProfessionalServices} >
+                            <div class="row checkbox-collection">
+                                <div class="col-sm-6">
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Addiction Counselor"/>Addiction Counselor</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Beautician"/>Beautician</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Chinese Medicine Expert"/>Chinese Medicine Expert</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Chiropractor"/>Chiropractor</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Eldercare"/>Eldercare</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Hair Stylist"/>Hair Stylist</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Licensed Nurse"/>Licensed Nurse</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Occupational Therapist"/>Occupational Therapist</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Massage Therapist"/>Massage Therapist</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="other">Other</label>
+                                        <input type="text" class="form-control" id="other"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Personal Trainer"/>Personal Trainer</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Yoga Instructor"/>Yoga Instructor</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Physiotherapist"/>Physiotherapist</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Midwife"/>Midwife</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Reflexologist"/>Reflexologist</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Special Needs Therapist"/>Special Needs Therapist</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Speech Therapist"/>Speech Therapist</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Spiritual/Body/Mind Expert"/>Spiritual/Body/Mind Expert</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><Checkbox value="Sports Therapist"/>Sports Therapist</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </CheckboxGroup>
+                        <h4>Personal Services</h4>
+                        <CheckboxGroup name="personalServices" value = {this.state.personalServices} onChange={this.logPersonalServices} >
+                            <div class="row checkbox-collection">
+                            <div class="col-sm-6">
+                                <div class="checkbox">
+                                    <label><Checkbox value="Bathing"/>Bathing</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Companionship"/>Companionship</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Exercise"/>Exercise</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Groceries and Shopping"/>Groceries and Shopping</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Grooming"/>Grooming</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Housekeeping"/>Housekeeping</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="checkbox">
+                                    <label><Checkbox value="Managing Medications"/>Managing Medications</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Meal Prep"/>Meal Prep</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Transferring and Mobility"/>Transferring and Mobility</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Toileting"/>Toileting</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Transportation"/>Transportation</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><Checkbox value="Travel Companion"/>Travel Companion</label>
+                                </div>
+                            </div>
+                            </div>
+                        </CheckboxGroup>
+                        
+                        <div class="form-group">
+                            <label for="address">Special Medical Conditions</label>
+                            <textarea class="form-control" rows="4" id="address" placeholder="ALS, diabetes, stroke..." value = {this.state.specialMedical} onChange={(e) => this.setState({specialMedical: e.target.value})}></textarea>
+                        </div>
                         
                         <div className="form-group">
                             <div className="row">
@@ -243,7 +463,15 @@ class Jobs extends Component {
                                 </div>
                             </div>
                         </div>
-                        
+                        <div className="form-group">
+                            <label for="address">Job Description</label>
+                            <textarea className="form-control" rows="4" id="address" placeholder="My mother is in need of..." value = {this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="lovedones">Describe your Loved Ones (Optional)</label>
+                            <textarea class="form-control" rows="4" id="lovedones" placeholder="My mother is 88 years old..." value = {this.state.lovedOnesDescription} onChange={(e) => this.setState({lovedOnesDescription: e.target.value})}></textarea>
+                        </div>
+
                         <span className="btn btn-default back" onClick={(e) => this.setState({tab: "detail"})}>Back</span>
                         <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "photos"})}>Next</span>
                     </div>
@@ -311,6 +539,12 @@ class Jobs extends Component {
                 <h5>Job Description</h5>
                 <p>{this.state.description}</p>
                 <br/>
+                <h5>Special Medical Conditions</h5>
+                <p>{this.state.specialMedical}</p>
+                <br/>
+                <h5>Describe your Loved Ones</h5>
+                <p>{this.state.lovedOnesDescription}</p>
+                <br/>
                 <h5>Work Times</h5>
                 <table className="table">
                     <thead>
@@ -320,18 +554,14 @@ class Jobs extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Sunday</td>
-                            <td>10:00 AM - 3:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Monday</td>
-                             <td>10:00 AM - 3:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Wednesday</td>
-                            <td>10:00 AM - 3:00 PM</td>
-                        </tr>
+                        
+                            {this.state.requiredTimes.map((time, idx)=> 
+                                <tr>
+                                    <td>{this.state.requiredTimes[idx].day}</td>
+                                    <td>{this.state.requiredTimes[idx].startTime} - {this.state.requiredTimes[idx].endTime}</td>
+                                 </tr>
+                            )}
+                       
                     </tbody>
                 </table>
 
@@ -406,7 +636,6 @@ class Job extends Component{
 			<div className="row job">
                 <div className="col-xs-6">
                     <h4>{this.props.jobsApplied.name}</h4> 
-
                 </div>
                 <div className="col-xs-6 job-left">
                     <img src="images/dashboard/confirmedjob.png" className="job-status" />
@@ -422,7 +651,7 @@ class CustomerJob extends Component{
 
             <div className="row job">
                 <div className="col-xs-6">
-                    <h4>{this.props.jobsCreated.name}</h4> 
+                    <h4>{this.props.name}</h4> 
 
                 </div>
                 <div className="col-xs-6 job-left">

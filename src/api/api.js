@@ -120,16 +120,25 @@ export function updateSettings(information) {
 }
 export function saveJob(information) {
     var options = {
-        uri: baseUrl + '/job/',
+        uri: baseUrl + '/job',
         body: information,
         method:'POST',
         json: true
     };
     return rp(options);
 }
-export function savePhotos(information) {
+export function saveCoverPic(information) {
     var options = {
-        uri: baseUrl + '/job/',
+        uri: baseUrl + '/job/uploadCoverPic',
+        body: information,
+        method:'POST',
+        json: true
+    };
+    return rp(options);
+}
+export function saveProfilePic(information) {
+    var options = {
+        uri: baseUrl + '/job/uploadProfilePic',
         body: information,
         method:'POST',
         json: true

@@ -45,6 +45,7 @@ class Featured extends Component {
     }
 
     render() {
+        console.log(this.state.caregivers);
         return(
             <div className="featured">
                 <div className="container">
@@ -53,30 +54,18 @@ class Featured extends Component {
                             <h3 className="text-center">Professional Caregivers</h3>
                             <div className="row feature-row">
                                 <div className="col-sm-6">
-                                    <Card 
-                                        data={this.state.loadingC ? {} : this.state.caregivers[0]}
-                                        error={this.state.errorMsgC}
-                                    />
+                                    <Card {...this.state.caregivers[0]} />
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card 
-                                        data={this.state.loadingC ? {} : this.state.caregivers[1]}
-                                        error={this.state.errorMsgC}
-                                    />
+                                    <Card {...this.state.caregivers[1]} />
                                 </div>
                             </div>
                             <div className="row feature-row">
                                 <div className="col-sm-6">
-                                    <Card 
-                                        data={this.state.loadingC ? {} : this.state.caregivers[2]}
-                                        error={this.state.errorMsgC}
-                                    />
+                                    <Card {...this.state.caregivers[2]} />
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card 
-                                        data={this.state.loadingC ? {} : this.state.caregivers[3]}
-                                        error={this.state.errorMsgC}
-                                    />
+                                    <Card {...this.state.caregivers[3]} />
                                 </div>
                             </div>
                         </div>
@@ -84,30 +73,18 @@ class Featured extends Component {
                             <h3 className="text-center">Featured Jobs</h3>
                             <div className="row feature-row">
                                 <div className="col-md-6">
-                                    <Card 
-                                        data={this.state.loadingJ ? {} : this.state.jobs[0]}
-                                        error={this.state.errorMsgJ}
-                                    />
+                                    <Card {...this.state.jobs[0]} />
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card 
-                                        data={this.state.loadingJ ? {} : this.state.jobs[1]}
-                                        error={this.state.errorMsgJ}
-                                    />
+                                    <Card {...this.state.jobs[1]} />
                                 </div>
                             </div>
                             <div className="row feature-row">
                                 <div className="col-md-6">
-                                    <Card 
-                                        data={this.state.loadingJ ? {} : this.state.jobs[2]}
-                                        error={this.state.errorMsgJ}
-                                    />
+                                    <Card {...this.state.jobs[2]} />
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card 
-                                        data={this.state.loadingJ ? {} : this.state.jobs[3]}
-                                        error={this.state.errorMsgJ}
-                                    />
+                                    <Card {...this.state.jobs[3]} />
                                 </div>
                             </div>
                         </div>
