@@ -11,7 +11,6 @@ class Jobs extends Component {
         //   { value: 'two', label: 'Two' }
         // ];
         this.emptyJob = {
-            
             name:"",
             gender:"Male",
             dateOfBirth:"",
@@ -64,7 +63,6 @@ class Jobs extends Component {
         this.logChange = this.logChange.bind(this);
         this.logProfessionalServices = this.logProfessionalServices.bind(this);
         this.logPersonalServices = this.logPersonalServices.bind(this);
-
     }
 
     componentWillReceiveProps(nextProps){
@@ -89,6 +87,7 @@ class Jobs extends Component {
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
     }
+
     add(){
         let reqTime = {
             day:this.state.day,
@@ -97,8 +96,8 @@ class Jobs extends Component {
         }
         this.setState({requiredTimes: this.state.requiredTimes.concat([reqTime]), day:"",startTime:"",endTime:""});
     }        
+
     save(){
-        console.log(this.state.typeOfCaregiver);
         let info = {
             "name":this.state.name,
             "gender":this.state.gender,
@@ -115,8 +114,6 @@ class Jobs extends Component {
             day:this.state.day,
             startTime:this.state.startTime,
             endTime:this.state.endTime,
-            profile:this.state.profile,
-            cover:this.state.cover,
             lovedOnesDescription: this.state.lovedOnesDescription,
             duration: this.state.duration ,
             specialMedical:this.state.specialMedical,
@@ -124,16 +121,12 @@ class Jobs extends Component {
             professionalServices:this.state.professionalServices,
             personalServices: this.state.personalServices,
             createdBy: this.props.userID
-
         }
-        let coverPic = this.state.coverPic;
-        let profilePic = this.state.profilePic;
-        saveJob(info);
-        saveCoverPic(coverPic);
-        saveProfilePic(profilePic);
+        let coverPic = this.state.cover;
+        let profilePic = this.state.profile;
+        saveJob(info, coverPic, profilePic);
         this.setState({data: { jobsApplied: [], jobsReceived: [], jobsCreated: [] },loading: true, isJobAdd:false, ...this.emptyJob, tab:"detail"});
         setTimeout(() => this.props.updateUser(), 1000);
-        //document.location.replace("/dashboard"); //TO DO redirect to dashboard
     }
     handleChange(id){
         var index = this.state.typeOfCaregiver.indexOf(id);
@@ -146,19 +139,19 @@ class Jobs extends Component {
         }
     }
     logChange(val) { //type of caregivers
-
         this.setState({ typeOfCaregiver: val});
         console.log('Selected: ', val);
     }
+
     logProfessionalServices(val){
         this.setState({ professionalServices: val});
         console.log('Selected: ', val);
     }
+
     logPersonalServices(val){
         this.setState({ personalServices: val});
         console.log('Selected: ', val);
     }
-
 
     render(){
         var body;
@@ -167,20 +160,20 @@ class Jobs extends Component {
             body = <div id="details" className="tab-pane fade in active">
                         <div className="row">
                             <div className="col-sm-6">
-                                <div class="form-group">
-                                    <label for="length">Duration</label>
-                                    <select class="form-control" id="length" value = {this.state.duration}onChange={(e) => this.setState({duration: e.target.value})}>
+                                <div className="form-group">
+                                    <label htmlFor="length">Duration</label>
+                                    <select className="form-control" id="length" value = {this.state.duration}onChange={(e) => this.setState({duration: e.target.value})}>
                                         <option>Long term</option>
                                         <option>Short term</option>
                                     </select>
                                 </div>
                                 <div className="form-group">
-                                    <label for="location">Name</label>
+                                    <label htmlFor="location">Name</label>
                                     <input type="text" className="form-control" id="location" placeholder="This is also the title of your job!" value = {this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="gender">Gender</label>
+                                    <label htmlFor="gender">Gender</label>
                                     <select className="form-control" id="gender"  value = {this.state.gender}onChange={(e) => this.setState({gender: e.target.value})}>
                                         <option>Male</option>
                                         <option>Female</option>
@@ -188,33 +181,33 @@ class Jobs extends Component {
                                 </div>
                             
                                 <div className="form-group">
-                                    <label for="bday">Date of Birth</label>
+                                    <label htmlFor="bday">Date of Birth</label>
                                     <input type="date" className="form-control" id="bday" placeholder="DD/MM/YYY" value = {this.state.dateOfBirth} onChange={(e) => this.setState({dateOfBirth: e.target.value})}/>
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="hkidpp">HKID/Passport</label>
+                                    <label htmlFor="hkidpp">HKID/Passport</label>
                                     <input type="text" className="form-control" id="hkidpp" value = {this.state.hkidPassport} onChange={(e) => this.setState({hkidPassport: e.target.value})}/>
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="phoneNumber">Phone Number</label>
+                                    <label htmlFor="phoneNumber">Phone Number</label>
                                     <input type="text" className="form-control" id="phoneNumber" value = {this.state.phoneNumber} onChange={(e) => this.setState({phoneNumber: e.target.value})}/>
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="email">Email</label>
+                                    <label htmlFor="email">Email</label>
                                     <input type="email" className="form-control" id="email"  value = {this.state.email} onChange={(e) => this.setState({email: e.target.value})}/>
                                 </div>
                             </div>
                             <div className="col-sm-6">
                                 <div className="form-group">
-                                    <label for="address">Address</label>
+                                    <label htmlFor="address">Address</label>
                                     <textarea className="form-control" rows="4" id="address"  value = {this.state.address} placeholder="14A Evergreen Villa..." onChange={(e) => this.setState({address: e.target.value})}></textarea>
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="district">District</label>
+                                    <label htmlFor="district">District</label>
                                     <select className="form-control" id="district"  value = {this.state.district} onChange={(e) => this.setState({district: e.target.value})}>
                                         <option>Central</option>
                                         <option>Sai Wan Ho</option>
@@ -233,7 +226,7 @@ class Jobs extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="country">Country</label>
+                                    <label htmlFor="country">Country</label>
                                     <select className="form-control" id="country"  value = {this.state.country} onChange={(e) => this.setState({country: e.target.value})}>
                                         <option>Hong Kong</option>
                                         <option>China</option>
@@ -245,12 +238,12 @@ class Jobs extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="languages">Languages</label>
+                                    <label htmlFor="languages">Languages</label>
                                     <input type="text" className="form-control" id="languages" placeholder="Comma seperated" value = {this.state.languages.join(',')} onChange={(e) => this.setState({languages: e.target.value.split(',')})}/>
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="address">Hobbies</label>
+                                    <label htmlFor="address">Hobbies</label>
                                     <textarea className="form-control" rows="2" id="hobbies" placeholder="Biking, running..." value = {this.state.hobbies} onChange={(e) => this.setState({hobbies: e.target.value})}></textarea>
                                  </div>
 
@@ -271,38 +264,38 @@ class Jobs extends Component {
                         
                         <h4>Type of Caregiver</h4>
                         <CheckboxGroup name="typeCaregivers" value = {this.state.typeOfCaregiver} onChange={this.logChange} >
-                            <div class="row checkbox-collection">
-                                <div class="col-sm-6">
-                                    <div class="checkbox">
+                            <div className="row checkbox-collection">
+                                <div className="col-sm-6">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Volunteer Caregivers"/>Volunteer Caregivers</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Nursing Students"/>Nursing Students</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Home Nurse"/>Home Nurse</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Eldercare"/>Eldercare</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Weekend Caregivers"/>Weekend Caregivers</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="checkbox">
+                                <div className="col-sm-6">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Special Needs"/> Special Needs</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Specialist Caregivers"/> Specialist Caregivers</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Expert Caregivers"/> Expert Caregivers</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="TLC Caregivers"/> TLC Caregivers</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Licensed Nurse"/> Licensed Nurse</label>
                                     </div>
                                 </div>
@@ -312,66 +305,66 @@ class Jobs extends Component {
 
                         <h4>Professional Services</h4>
                         <CheckboxGroup name="typeCaregivers" value = {this.state.professionalServices} onChange={this.logProfessionalServices} >
-                            <div class="row checkbox-collection">
-                                <div class="col-sm-6">
-                                    <div class="checkbox">
+                            <div className="row checkbox-collection">
+                                <div className="col-sm-6">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Addiction Counselor"/>Addiction Counselor</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Beautician"/>Beautician</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Chinese Medicine Expert"/>Chinese Medicine Expert</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Chiropractor"/>Chiropractor</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Eldercare"/>Eldercare</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Hair Stylist"/>Hair Stylist</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Licensed Nurse"/>Licensed Nurse</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Occupational Therapist"/>Occupational Therapist</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Massage Therapist"/>Massage Therapist</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="other">Other</label>
-                                        <input type="text" class="form-control" id="other"/>
+                                    <div className="form-group">
+                                        <label htmlFor="other">Other</label>
+                                        <input type="text" className="form-control" id="other"/>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="checkbox">
+                                <div className="col-sm-6">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Personal Trainer"/>Personal Trainer</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Yoga Instructor"/>Yoga Instructor</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Physiotherapist"/>Physiotherapist</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Midwife"/>Midwife</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Reflexologist"/>Reflexologist</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Special Needs Therapist"/>Special Needs Therapist</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Speech Therapist"/>Speech Therapist</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Spiritual/Body/Mind Expert"/>Spiritual/Body/Mind Expert</label>
                                     </div>
-                                    <div class="checkbox">
+                                    <div className="checkbox">
                                         <label><Checkbox value="Sports Therapist"/>Sports Therapist</label>
                                     </div>
                                 </div>
@@ -379,53 +372,53 @@ class Jobs extends Component {
                         </CheckboxGroup>
                         <h4>Personal Services</h4>
                         <CheckboxGroup name="personalServices" value = {this.state.personalServices} onChange={this.logPersonalServices} >
-                            <div class="row checkbox-collection">
-                            <div class="col-sm-6">
-                                <div class="checkbox">
+                            <div className="row checkbox-collection">
+                            <div className="col-sm-6">
+                                <div className="checkbox">
                                     <label><Checkbox value="Bathing"/>Bathing</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Companionship"/>Companionship</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Exercise"/>Exercise</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Groceries and Shopping"/>Groceries and Shopping</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Grooming"/>Grooming</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Housekeeping"/>Housekeeping</label>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="checkbox">
+                            <div className="col-sm-6">
+                                <div className="checkbox">
                                     <label><Checkbox value="Managing Medications"/>Managing Medications</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Meal Prep"/>Meal Prep</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Transferring and Mobility"/>Transferring and Mobility</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Toileting"/>Toileting</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Transportation"/>Transportation</label>
                                 </div>
-                                <div class="checkbox">
+                                <div className="checkbox">
                                     <label><Checkbox value="Travel Companion"/>Travel Companion</label>
                                 </div>
                             </div>
                             </div>
                         </CheckboxGroup>
                         
-                        <div class="form-group">
-                            <label for="address">Special Medical Conditions</label>
-                            <textarea class="form-control" rows="4" id="address" placeholder="ALS, diabetes, stroke..." value = {this.state.specialMedical} onChange={(e) => this.setState({specialMedical: e.target.value})}></textarea>
+                        <div className="form-group">
+                            <label htmlFor="address">Special Medical Conditions</label>
+                            <textarea className="form-control" rows="4" id="address" placeholder="ALS, diabetes, stroke..." value = {this.state.specialMedical} onChange={(e) => this.setState({specialMedical: e.target.value})}></textarea>
                         </div>
                         
                         <div className="form-group">
@@ -464,12 +457,12 @@ class Jobs extends Component {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label for="address">Job Description</label>
+                            <label htmlFor="address">Job Description</label>
                             <textarea className="form-control" rows="4" id="address" placeholder="My mother is in need of..." value = {this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="lovedones">Describe your Loved Ones (Optional)</label>
-                            <textarea class="form-control" rows="4" id="lovedones" placeholder="My mother is 88 years old..." value = {this.state.lovedOnesDescription} onChange={(e) => this.setState({lovedOnesDescription: e.target.value})}></textarea>
+                        <div className="form-group">
+                            <label htmlFor="lovedones">Describe your Loved Ones (Optional)</label>
+                            <textarea className="form-control" rows="4" id="lovedones" placeholder="My mother is 88 years old..." value = {this.state.lovedOnesDescription} onChange={(e) => this.setState({lovedOnesDescription: e.target.value})}></textarea>
                         </div>
 
                         <span className="btn btn-default back" onClick={(e) => this.setState({tab: "detail"})}>Back</span>
@@ -486,18 +479,18 @@ class Jobs extends Component {
             body = <div id="photos" className="tab-pane fade in active">
                         <h4>Profile Picture</h4>
 
-                        <div class="form-group">
-                            <input type="file" name="profile" id="profile" class="inputfile" onChange={(e) => this.setState({profile: e.target.value})}/>
-                            <label for="profile" class="btn btn-default">Upload Profile Picture</label>
+                        <div className="form-group">
+                            <input type="file" name="profile" id="profile" className="inputfile" onChange={(e) => this.setState({profile: e.target.files[0]})}/>
+                            <label htmlFor="profile" className="btn btn-default">Upload Profile Picture</label>
                         </div>
                         <br/>
                         <h4>Cover Photo</h4>
-                        <div class="form-group">
-                            <input type="file" name="cover" id="cover" class="inputfile" onChange={(e) => this.setState({cover: e.target.value})}/>
-                            <label for="cover" class="btn btn-default">Upload Cover Photo</label>
+                        <div className="form-group">
+                            <input type="file" name="cover" id="cover" className="inputfile" onChange={(e) => this.setState({cover: e.target.files[0]})}/>
+                            <label htmlFor="cover" className="btn btn-default">Upload Cover Photo</label>
                         </div>
-                        <span class="btn btn-default back" onClick={(e) => this.setState({tab: "requirements"})}>Back</span>
-                        <span class="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
+                        <span className="btn btn-default back" onClick={(e) => this.setState({tab: "requirements"})}>Back</span>
+                        <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
                     </div>
 
             title = <ul className="nav nav-pills nav-justified postjob-steps"> 
@@ -565,8 +558,8 @@ class Jobs extends Component {
                     </tbody>
                 </table>
 
-                <a class="btn btn-default back" onClick={(e) => {e.preventDefault();this.setState({tab: "photos"})}}>Back</a>
-                <a class="btn btn-primary next" onClick={this.save}>Submit</a>
+                <a className="btn btn-default back" onClick={(e) => {e.preventDefault();this.setState({tab: "photos"})}}>Back</a>
+                <a className="btn btn-primary next" onClick={this.save}>Submit</a>
             </div>
             title = <ul className="nav nav-pills nav-justified postjob-steps"> 
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
@@ -575,7 +568,6 @@ class Jobs extends Component {
                         <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
-        console.log(this.props.type);
         if(!this.state.isJobAdd ){
             return (
                 <div className="dashbody">

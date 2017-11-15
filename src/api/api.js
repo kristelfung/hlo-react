@@ -118,15 +118,28 @@ export function updateSettings(information) {
     };
     return rp(options);
 }
-export function saveJob(information) {
-    var options = {
-        uri: baseUrl + '/job',
-        body: information,
-        method:'POST',
-        json: true
-    };
-    return rp(options);
+export function saveJob(information, coverPic, profilePic) {
+    axios.post(baseUrl + '/job', information).then(json => {   
+        const data = new FormData();
+        data.append('profilePic', profilePic);
+        axios.post(baseUrl + '/job/uploadProfilePic/'+json.data.id, data).then(json => {
+            console.log("Profile pic posted!");
+        }).catch (err => {
+            console.log("Profile pic err!", err);
+        });
+
+        const data2 = new FormData();    
+        data2.append('coverPic', coverPic);
+        axios.post(baseUrl + '/job/uploadCoverPic/'+json.data.id, data2).then(json => {
+            console.log("coverPic posted!");            
+        }).catch(err => {
+            console.log("coverPic err!", err);            
+        });
+    }).catch(err => {
+        console.log("Job err!", err);   
+    });
 }
+
 export function saveCoverPic(information) {
     var options = {
         uri: baseUrl + '/job/uploadCoverPic',
