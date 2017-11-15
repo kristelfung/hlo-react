@@ -84,7 +84,7 @@ class Profile extends Component {
 			                        </div>
 			                        <div className="form-group">
 			                          <label for="experience">Experience</label>
-			                          <input type="text" className="form-control" id="experience" value = {this.props.caregiver.experience} onChange={(e) => this.setState({experience: e.target.value})}/>
+			                          <input type="number" className="form-control" id="experience" value = {this.props.caregiver.experience} onChange={(e) => this.setState({experience: e.target.value})}/>
 			                        </div>
 			                        <div className="form-group">
 			                          <label for="languages">Languages</label>
