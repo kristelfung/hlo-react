@@ -17,6 +17,7 @@ export function logout(){
 }
 
 export function signup(creds){
+    creds.location = JSON.stringify(creds.location);
     const data = new FormData();
     for(var key in creds)
         data.append(key, creds[key]);
@@ -43,6 +44,8 @@ export function getInbox(id){
 }
 
 export function sendMessage(message){
+    console.log(message);
+    message.replies = JSON.stringify(message.replies);
     const data = new FormData();
     for(var key in message)
         data.append(key, message[key]);
@@ -50,6 +53,7 @@ export function sendMessage(message){
 }
 
 export function replyMessage(message){
+    console.log(message);
     const data = new FormData();
     for(var key in message)
         data.append(key, message[key]);

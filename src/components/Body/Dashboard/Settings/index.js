@@ -47,23 +47,23 @@ class Settings extends Component {
 		                    <div className="col-sm-6 form-column">
 		                        <h3 className="form-title">Account</h3>
 		                        <div className="form-group">
-		                          <label for="email">Email</label>
+		                          <label htmlFor="email">Email</label>
 		                          <input type="email" className="form-control" id="email" placeholder="current-address@gmail.com" value={this.props.email}onChange={(e) => this.setState({email: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="pwd">Password</label>
+		                          <label htmlFor="pwd">Password</label>
 		                          <input type="password" className="form-control" id="pwd" onChange={(e) => this.setState({password: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="pwdconfirm">Confirm password</label>
+		                          <label htmlFor="pwdconfirm">Confirm password</label>
 		                          <input type="password" className="form-control" id="pwdconfirm" onChange={(e) => this.setState({cPassword: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="phone">Phone</label>
+		                          <label htmlFor="phone">Phone</label>
 		                          <input type="text" className="form-control" id="phone" placeholder="+852 0000 0000" value={this.props.phoneNumber}onChange={(e) => this.setState({phone: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="hkid">HKID</label>
+		                          <label htmlFor="hkid">HKID</label>
 		                          <input type="text" className="form-control" id="hkid" placeholder="XXXXXXX(X)" value={this.props.hkidPassport}onChange={(e) => this.setState({hkid: e.target.value})}/>
 		                        </div>
 
@@ -71,23 +71,23 @@ class Settings extends Component {
 		                    <div className="col-sm-6 form-column">
 		                        <h3 className="form-title">Payment</h3>
 		                        <div className="form-group">
-		                          <label for="creditcard">Credit card</label>
+		                          <label htmlFor="creditcard">Credit card</label>
 		                          <input type="text" className="form-control" id="creditcard" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.props.creditCard}onChange={(e) => this.setState({cc: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="cif">CIF</label>
+		                          <label htmlFor="cif">CIF</label>
 		                          <input type="text" className="form-control" id="cif" placeholder="xxx" value={this.props.cif}onChange={(e) => this.setState({cif: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="bankname">Bank name</label>
+		                          <label htmlFor="bankname">Bank name</label>
 		                          <input type="text" className="form-control" id="bankname" placeholder="HSBC"  value={this.props.bankName}onChange={(e) => this.setState({bank: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="accnum">Account number</label>
+		                          <label htmlFor="accnum">Account number</label>
 		                          <input type="text" className="form-control" id="accnum" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.props.accountNumber}onChange={(e) => this.setState({account: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
-		                          <label for="paypal">PayPal</label>
+		                          <label htmlFor="paypal">PayPal</label>
 		                          <input type="text" className="form-control" id="paypal" placeholder="PayPal account" value={this.props.paypal}onChange={(e) => this.setState({paypal: e.target.value})}/>
 		                        </div>
 		                    </div>
