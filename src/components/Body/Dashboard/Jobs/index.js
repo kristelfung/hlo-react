@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getUser, getListedJobs, saveJob, saveProfilePic, saveCoverPic} from '../../../../api/api';
+import {getUser, getListedJobs, saveJob, saveProfilePic, saveCoverPic, getJobData} from '../../../../api/api';
 import update from 'react-addons-update';
 import Select from 'react-select';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
@@ -565,6 +565,14 @@ class Jobs extends Component {
                         <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
+        if(this.props.jobsCreated.hiredCaregiver){
+            console.log(' caregiver hired');
+            this.setState({isCaregiverHired:true});
+        }
+        else{
+            console.log(" no caregiver hired");
+
+        }
         if(!this.state.isJobAdd ){
             return (
                 <div className="dashbody">
@@ -617,14 +625,104 @@ class Jobs extends Component {
         
     }
 }
+class CaregiverHired extends Component{
 
+    render(){
+        console.log("caregiver hired:");
+        return (
+            <div>
+                <div className="job-right">
+                <img src="images/dashboard/confirmedjob.png" className="job-status" />
+                <a className="expand-job" data-toggle="collapse" data-target="#job2"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></a>
+                </div>
+
+                <div id="job2" className="collapse job-desc">
+                <div className="hired-caregiver">
+                    <h4>Hired Caregiver</h4>
+                    <img src="images/msg.png" className="hired-picture" />
+                    <h4>{this.props.caregiverHired.firstName}{this.props.lastName}</h4>
+                    <h5>{this.props.caregiverHired.hourlyRate}</h5>
+                    <button className="btn btn-primary">Message</button>
+                    <button type="button" className="btn btn-default" data-toggle="modal" data-target="#myModal">Review</button>
+                    
+                   
+                    <div id="myModal" className="modal fade review-modal" role="dialog">
+                      <div className="modal-dialog">
+                    
+                   
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h4 className="modal-title">Review Caregiver</h4>
+                          </div>
+                          <div className="modal-body">
+                            <form>
+                                <div className="form-group rating-stars">
+                                    <label>Star Rating</label>
+                                    <br />
+                                    <i className="fa fa-star-o" aria-hidden="true"></i>
+                                    <i className="fa fa-star-o" aria-hidden="true"></i>
+                                    <i className="fa fa-star-o" aria-hidden="true"></i>
+                                    <i className="fa fa-star-o" aria-hidden="true"></i>
+                                    <i className="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="comment">Comments</label>
+                                    <textarea className="form-control" rows="5" id="comment" placeholder="Describe your experience!"></textarea>
+                                </div>
+                                <div className="submit-buttons">
+                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" className="btn btn-primary" data-dismiss="modal">Submit</button>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                    
+                      </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        );
+    }
+}
+class CaregiverNotHired extends Component{
+    render(){
+        console.log(this.props);
+        return (
+            <div>
+                <div id="job1" className="collapse job-desc">
+                    <h4>Caregiver Applicants</h4>
+                    <table className="table table-hover applicants">
+                        <tbody>
+                        {this.props.caregiversApplied.map(jobApplication=>(
+                            <tr>
+                                <td>
+                                    <a href="profile.html" className="applicant-link">
+                                        <h5 className="applicant-name">{jobApplication.caregiver.firstName}</h5>
+                                        <p className="applicant-date">jobApplication.createdAt</p>
+                                    </a>
+                                </td>
+                                <td className="applicant-buttons">
+                                    <a href="#" className="btn btn-default">Hire</a>
+                                    <button href="#" className="btn btn-default">Message</button>
+                                </td>
+                            </tr>
+                            ))
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+}
 class Job extends Component{
 	render(){
 		return (
 
 			<div className="row job">
                 <div className="col-xs-6">
-                    <h4>{this.props.jobsApplied.name}</h4> 
+                    <h4>{this.props.jobName}</h4> 
                 </div>
                 <div className="col-xs-6 job-left">
                     <img src="images/dashboard/confirmedjob.png" className="job-status" />
@@ -635,18 +733,57 @@ class Job extends Component{
 	}
 }
 class CustomerJob extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            isOpen: false,
+            job: {}
+        }
+        this.fetchJob = this.fetchJob.bind(this);
+    }
+    
+    fetchJob(){
+        this.setState({ isOpen:!this.state.isOpen}, () => console.log(this.state.isOpen));
+
+        getJobData(this.props.id).then(json => {
+            this.setState({ job: json.data});    
+        }).catch(err => {console.log(err)})
+    }
+
     render(){
+        var jobBody;
+        if(this.state.isOpen){
+            if(this.state.job.hiredCaregiver ){
+                jobBody = <CaregiverHired caregiverHired = {this.state.job.hiredCaregiver} />
+            }
+            else{
+                if((this.state.job.caregiversApplied && this.state.job.caregiversApplied.length > 0) ||  
+                    (this.state.job.caregiversOffered && this.state.job.caregiversOffered.length > 0)
+                    ){
+                    jobBody = <CaregiverNotHired caregiversApplied = {this.state.job.caregiversApplied} caregiversOffered = {this.state.job.caregiversOffered} />    
+                }
+                else{
+                    jobBody = <div> No One applied for this shitty job. </div>
+                }
+            }
+        }
+        else{
+            jobBody = <div> </div>
+        }
         return (
-
-            <div className="row job">
-                <div className="col-xs-6">
-                    <h4>{this.props.name}</h4> 
-
+            <div>
+                <div className="row job" onClick={this.fetchJob}>
+                    <div className="col-xs-6">
+                        <h4>{this.props.name}</h4> 
+                    </div>
+                    <div className="col-xs-6 job-left">
+                        <img src="images/dashboard/confirmedjob.png" className="job-status" />
+                        <span className="expand-job"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+                    </div>
                 </div>
-                <div className="col-xs-6 job-left">
-                    <img src="images/dashboard/confirmedjob.png" className="job-status" />
-                    <span className="expand-job"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
-                </div>
+               
+                    {jobBody}
+               
             </div>
         );
     }

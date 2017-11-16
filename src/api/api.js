@@ -34,6 +34,11 @@ export function getRandomJobs(){
     
 }
 
+export function getJobData(id){
+    return axios.get(baseUrl + '/job/'+id);
+    
+}
+
 export function getUser(id){
     if(id===undefined) id="";
     return axios.get(baseUrl + '/user/' + id);

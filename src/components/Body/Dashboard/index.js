@@ -60,7 +60,6 @@ class Dashboard extends Component {
     }
     updateUser(){
 		getUser().then(json => {
-	        console.log(json);
 	        this.setState({
 	            loading: false,
 				data: json.data,
