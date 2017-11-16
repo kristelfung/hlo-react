@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './'
+import Card from '../CaregiverCard';
 
 // need this in the API
 import { getCaregiver, getJob } from '../../../api/api';
@@ -9,36 +9,20 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            caregiver: [],
-            job: [],
-            loadingC: true,
-            loadingJ: true
+            data: [],
+            loading: true
         }
 
         getCaregiver().then(json => {
             console.log(json);
             this.setState({
-                loadingC: false,
+                loading: false,
                 data: json.data
             });
         }).catch(err => {
             console.log(err);
             this.setState({
-                loadingC: false,
-                error: err
-            });
-        });
-
-        getJob().then(json => {
-            console.log(json);
-            this.setState({
-                loadingJ: false,
-                data: json.data
-            });
-        }).catch(err => {
-            console.log(err);
-            this.setState({
-                loadingJ: false,
+                loading: false,
                 error: err
             });
         });
@@ -93,21 +77,11 @@ class Search extends Component {
                 <div className="col-sm-9 search-body">
                     <div className="row">
                         <div className="col-md-4 col-sm-6">
-                            <div className="search-card">
-                                <a href={this.state.caregiver.link}>
-                                    <span className="link-spanner"></span>
-                                </a>
-                                <img src="images/search/dp.jpg" className="card-dp"/>
-                                <div className="card-desc">
-                                    <h4>{this.state.caregiver.name}</h4>
-                                    {this.state.caregiver.stars}
-                                    <p>
-                                        <span className="label label-success">{this.state.caregiver.location[0]}</span>
-                                        <span className="label label-success">{this.state.caregiver.location[1]}</span>
-                                    </p>
-                                    <p className="card-about">{this.state.caregiver.about}</p>
-                                </div>
-                            </div>
+                        {
+                            this.state.data.length > 0 ?
+                            this.state.data.map(caregiver => <Card {...this.state.caregivers[i]} />) : 
+                            <div>No results. Try another search query.</div>
+                        }
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-<<<<<<< HEAD
 import {getInbox, sendMessage, searchUser} from '../../../../api/api';
-=======
-import MessageCompose from './MessageCompose'
-import {getInbox, sendMessage, searchUser} from '../../../../api/api'
->>>>>>> origin/master
 
 class Messages extends Component {
     constructor(props){
