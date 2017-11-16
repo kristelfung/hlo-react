@@ -41,11 +41,18 @@ class Search extends Component {
                       <h5 data-toggle="collapse" data-target="#location">Location <span className="caret"></span></h5>
                       <div id="location" className="collapse in">
                         <ul>
-                            <li>Causeway Bay</li>
-                            <li>Wan Chai</li>
-                            <li>Mid Levels</li>
                             <li>Central</li>
-                            <li>Repulse Bay</li>
+                            <li>Sai Wan Ho</li>
+                            <li>Aberdeen</li>
+                            <li>Wan Chai</li>
+                            <li>Kwun Tong</li>
+                            <li>Sham Shui Po</li>
+                            <li>San Ko Pong</li>
+                            <li>Mongkok</li>
+                            <li>Sha Tin</li>
+                            <li>Tsuen Wan</li>
+                            <li>Yuen Long</li>
+                            <li>Kowloon</li>
                         </ul>
                       </div>
                     </div>
@@ -53,11 +60,24 @@ class Search extends Component {
                       <h5 data-toggle="collapse" data-target="#tech">Technical Skills <span className="caret"></span></h5>
                       <div id="tech" className="collapse in">
                         <ul>
-                            <li>Eldercare</li>
-                            <li>Addiction Counsellor</li>
-                            <li>Physiotherapist</li>
+                            <li>Addiction Counselor</li>
+                            <li>Beautician</li>
+                            <li>Chinese Medicine Expert</li>
                             <li>Chiropractor</li>
-                            <li>Masseur</li>
+                            <li>Eldercare</li>
+                            <li>Hair Stylist</li>
+                            <li>Licensed Nurse</li>
+                            <li>Occupational Therapist</li>
+                            <li>Massage Therapist</li>
+                            <li>Personal Trainer</li>
+                            <li>Yoga Instructor</li>
+                            <li>Physiotherapist</li>
+                            <li>Midwife</li>
+                            <li>Reflexologist</li>
+                            <li>Special Needs Therapist</li>
+                            <li>Speech Therapist</li>
+                            <li>Spiritual/Body/Mind Expert</li>
+                            <li>Sports Therapist</li>
                         </ul>
                       </div>
                     </div>
@@ -65,10 +85,27 @@ class Search extends Component {
                       <h5 data-toggle="collapse" data-target="#language">Language <span className="caret"></span></h5>
                       <div id="language" className="collapse in">
                         <ul>
+                            <li>Arabic</li>
+                            <li>Armenian</li>
+                            <li>ASL</li>
+							<li>Cantonese</li>
                             <li>English</li>
-                            <li>Cantonese</li>
-                            <li>Manderin</li>
-                            <li>Taiwanese</li>
+							<li>French</li>
+							<li>German</li>
+                            <li>Greek</li>
+                            <li>Hebrew</li>
+                            <li>Hindi</li>
+                            <li>Italian</li>
+                            <li>Korean</li>								
+							<li>Mandarin</li>
+                            <li>Persian</li>
+                            <li>Polish</li>
+                            <li>Portuguese</li>
+                            <li>Russian</li>
+                            <li>Shanghainese</li>
+							<li>Spanish</li>
+                            <li>Tagalog</li>
+                            <li>Urdu</li>
                         </ul>
                       </div>
                     </div>
