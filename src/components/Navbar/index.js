@@ -28,8 +28,8 @@ class NavBar extends Component {
               <Nav pullRight>
                 <NavItem eventKey={1} href="/home">Home</NavItem>
                 <NavDropdown eventKey={2} title="Search" id="basic-nav-dropdown">
-                  <MenuItem eventKey={2.1}>Caregivers</MenuItem>
-                  <MenuItem eventKey={2.2}>Customers</MenuItem>
+                  <MenuItem eventKey={2.1} href="/searchcaregivers">Caregivers</MenuItem>
+                  <MenuItem eventKey={2.2} href="/searchcustomers">Customers</MenuItem>
                 </NavDropdown>
                 <NavItem eventKey={3} href="/forum">Forum</NavItem>
                 {
@@ -40,7 +40,7 @@ class NavBar extends Component {
                 <NavDropdown eventKey={4} title={<span><i className="fa fa-globe" aria-hidden="true"></i> English</span>} id="basic-nav-dropdown">
                   <MenuItem eventKey={4.1}>English</MenuItem>
                   <MenuItem eventKey={4.2}>中文</MenuItem>
-                </NavDropdown>           
+                </NavDropdown>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
