@@ -108,6 +108,7 @@ class Dashboard extends Component {
     	var body; 
     	var title;
     	if(this.state.tab == "jobs"){
+    		console.log(this.state.data);
     		body = <Jobs updateUser={this.updateUser} {...this.state.data} userID={this.state.userID}/>;
     		title = 
     		<div>

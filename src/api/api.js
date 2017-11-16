@@ -2,7 +2,8 @@ import rp from 'request-promise'
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-const baseUrl = "http://13.228.121.24:1337"
+//const baseUrl = "http://13.228.121.24:1337"
+const baseUrl = "http://localhost:1337"
 
 export function login(creds){
     const data = new FormData();
@@ -24,19 +25,12 @@ export function signup(creds){
 
 //TODO put URL of actual randomizers
 export function getRandomCaregivers(){
-    var options = {
-        uri: baseUrl + '/caregiver',
-        json: true
-    };
-    return rp(options);
+    return axios.get(baseUrl + '/caregiver');
 }
 
 export function getRandomJobs(){
-    var options = {
-        uri: baseUrl + '/job',
-        json: true
-    };
-    return rp(options);
+    return axios.get(baseUrl + '/job');
+    
 }
 
 export function getUser(id){

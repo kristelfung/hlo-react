@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {signup} from '../../../api/api'
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import logo2 from '../../../images/logo2.png';
 
@@ -12,10 +14,28 @@ class Signup extends Component{
             rptPassword: "",
             type: "customer",
             alert: false,
-            alertText: ""
+            alertText: "",
+            firstName:"",
+            lastName:"",
+            location:[]
         }
-
+        this.options = [
+            { value: 'Wan Chai', label: 'Wan Chai'},
+            { value: 'Central', label: 'Central'},
+            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
+            {value: 'Aberdeen', label: 'Aberdeen'},
+            {value: 'Wan Chai', label: 'Wan Chai'},
+            {value: 'Kwun Tong', label: 'Kwun Tong'},
+            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
+            {value: 'San Ko Pong',label: 'San Ko Pong'},
+            {value: 'Mongkok', label: 'Mongkok'},
+            {value: 'Sha Tin', label: 'Sha Tin'},
+            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
+            {value: 'Yuen Long', label: 'Yuen Long'},
+            {value: 'Kowloon', label: 'Kowloon'}
+        ];
         this.formSubmit = this.formSubmit.bind(this);
+
     }
 
     formSubmit(e){
@@ -29,10 +49,14 @@ class Signup extends Component{
             return;
         }
 
+        const locations = this.state.location.map(location => location.value)
         signup({
             email: this.state.email,
             password: this.state.password,
             type: this.state.type,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            location: locations
         }).then(json => {
             console.log(json);
             window.location.href = "login";
@@ -46,6 +70,7 @@ class Signup extends Component{
                 alertText: "Email already registered!"                
             });
             setInterval(() => this.setState({alert: false}), 2000);
+            //onChange={(e)=>this.setState({location: e})} />
 		});
     }
     render(){
@@ -57,9 +82,26 @@ class Signup extends Component{
                     <h4 className="text-center">Sign up for HLO</h4>
                     <form className="login">
                         <div className="form-group">
+                            <label htmlFor="firstName">First Name</label>
+                            <input type="firstName" className="form-control" id="firstName" value={this.state.firstName} onChange={e => this.setState({firstName: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="lastName">Last Name</label>
+                            <input type="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={e => this.setState({lastName: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="location">Location</label>
+                            <Select options={this.options}
+                                multi
+                                onChange={(e)=> this.setState({location: e})}
+                                value={this.state.location}/>
+                                
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input type="email" className="form-control" id="email" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
                         </div>
+                        
                         <div className="form-group">
                             <label htmlFor="pwd">Password</label>
                             <input type="password" className="form-control" id="pwd" value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
@@ -78,7 +120,7 @@ class Signup extends Component{
                         </div>
                     </form>
                     <div className="login-links">
-                        <a href="#">Already have an account? Sign in.</a>
+                        <a href="login">Already have an account? Sign in.</a>
                     </div>
                 </div>
                 <div className="col-sm-5 why-hlo">

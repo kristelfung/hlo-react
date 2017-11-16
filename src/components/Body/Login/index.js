@@ -57,7 +57,7 @@ class Login extends Component{
                     </div>
                 </form>
                 <div className="login-links">
-                    <a href="#">Don't have an account? Sign up.</a>
+                    <a href="signup">Don't have an account? Sign up.</a>
                     <br/>
                     <a href="#">Forgot your password?</a>
                     <br/>

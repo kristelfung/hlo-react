@@ -46,9 +46,9 @@ class Jobs extends Component {
         this.state = {
             type: props.type,
             data: {
-                jobsApplied: [],
-                jobsReceived: [],
-                jobsCreated: []
+                jobsApplied: props.jobsApplied === undefined ? [] : props.jobsApplied,
+                jobsReceived: props.jobsReceived === undefined ? [] : props.jobsReceived,
+                jobsCreated: props.jobsCreated === undefined ? [] : props.jobsCreated
             },
             loading: true,
             isJobAdd:false,
@@ -66,6 +66,7 @@ class Jobs extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+
         if(nextProps.type === "caregiver"){
             this.setState({
                 type: nextProps.type,
