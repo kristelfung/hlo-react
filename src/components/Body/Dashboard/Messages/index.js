@@ -6,7 +6,7 @@ import debounce from 'debounce';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import {getInbox, sendMessage, searchUser} from '../../../../api/api'
+import {getInbox, sendMessage, searchUser} from '../../../../api/api';
 
 class Messages extends Component {
     constructor(props){

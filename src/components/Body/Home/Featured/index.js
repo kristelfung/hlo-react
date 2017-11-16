@@ -12,7 +12,7 @@ class Featured extends Component {
             loadingC: true,
             loadingJ: true,
             errorMsgC: "",
-            errorMsgJ: "",
+            errorMsgJ: ""
         }
 
         getRandomCaregivers().then(json => {
