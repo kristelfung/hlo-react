@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MessageCompose from './MessageCompose';
 import moment from 'moment';
 
 import {getInbox, sendMessage, searchUser} from '../../../../api/api';
