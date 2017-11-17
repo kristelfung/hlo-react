@@ -22,7 +22,13 @@ export function signup(creds){
         data.append(key, creds[key]);
     return axios.post(baseUrl + '/user/signup', data);    
 }
+export function getFeaturedCaregivers(){
+    return axios.get(baseUrl + '/caregiver/featured');
+}
 
+export function getFeaturedJobs(){
+    return axios.get(baseUrl + '/job/featured');
+}
 //TODO put URL of actual randomizers
 export function getRandomCaregivers(){
     return axios.get(baseUrl + '/caregiver');
@@ -34,8 +40,7 @@ export function getRandomJobs(){
 }
 
 export function getJobData(id){
-    return axios.get(baseUrl + '/job/'+id);
-    
+    return axios.get(baseUrl + '/job/'+id);    
 }
 
 export function getUser(id){

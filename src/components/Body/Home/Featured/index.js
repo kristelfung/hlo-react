@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {getRandomCaregivers, getRandomJobs} from '../../../../api/api'
+import {getFeaturedCaregivers,getFeaturedJobs} from '../../../../api/api'
 import Card from '../../../CaregiverCard';
 
 class Featured extends Component {
@@ -14,38 +14,35 @@ class Featured extends Component {
             errorMsgC: "",
             errorMsgJ: "",
         }
-
-        getRandomCaregivers().then(json => {
-            console.log(json);
+        getFeaturedCaregivers().then(json => {
             this.setState({
                 loadingC: false,
-                caregivers: json
+                caregivers: json.data
             });
         }).catch(err => {
-            console.log(err);
+            console.log("err"+err);
             this.setState({
                 loadingC: false,
                 errorMsgC: err
             });
         });
-
-        getRandomJobs().then(json => {
-            console.log(json);
+        getFeaturedJobs().then(json => {
+            console.log(json.data);
             this.setState({
-                loadingJ: false,
-                jobs: json
+                loadingC: false,
+                jobs: json.data
             });
         }).catch(err => {
-            console.log(err);
+            console.log("err"+err);
             this.setState({
-                loadingJ: false,
-                errorMsgJ: err
+                loadingC: false,
+                errorMsgC: err
             });
         });
+        
     }
-
+    
     render() {
-        console.log(this.state.caregivers);
         return(
             <div className="featured">
                 <div className="container">
@@ -54,18 +51,18 @@ class Featured extends Component {
                             <h3 className="text-center">Professional Caregivers</h3>
                             <div className="row feature-row">
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[0]} />
+                                    <Card {...this.state.caregivers[0]} type = "caregiver"/>
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[1]} />
+                                    <Card {...this.state.caregivers[1]} type = "caregiver"/>
                                 </div>
                             </div>
                             <div className="row feature-row">
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[2]} />
+                                    <Card {...this.state.caregivers[2]} type = "caregiver"/>
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[3]} />
+                                    <Card {...this.state.caregivers[3]} type = "caregiver"/>
                                 </div>
                             </div>
                         </div>
@@ -73,18 +70,18 @@ class Featured extends Component {
                             <h3 className="text-center">Featured Jobs</h3>
                             <div className="row feature-row">
                                 <div className="col-md-6">
-                                    <Card {...this.state.jobs[0]} />
+                                    <Card {...this.state.jobs[0]} type = "job"/>
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card {...this.state.jobs[1]} />
+                                    <Card {...this.state.jobs[1]} type = "job"/>
                                 </div>
                             </div>
                             <div className="row feature-row">
                                 <div className="col-md-6">
-                                    <Card {...this.state.jobs[2]} />
+                                    <Card {...this.state.jobs[2]} type = "job"/>
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card {...this.state.jobs[3]} />
+                                    <Card {...this.state.jobs[3]} type = "job"/>
                                 </div>
                             </div>
                         </div>

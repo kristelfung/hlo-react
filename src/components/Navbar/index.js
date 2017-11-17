@@ -35,7 +35,7 @@ class NavBar extends Component {
                 {
                     sessionStorage.getItem("loggedIn") && <NavItem eventKey={5} href="/dashboard">Dashboard</NavItem>
                 }
-                <NavItem eventKey={4} href={sessionStorage.getItem("loggedIn") ? "#" : "/login"} onClick={e => sessionStorage.getItem("loggedIn") && this.logout(e)}>{sessionStorage.getItem("loggedIn") ? "Log Out" : "Sign Up/Login"}</NavItem>
+                <NavItem eventKey={4} href={sessionStorage.getItem("loggedIn") ? "/" : "/login"} onClick={e => sessionStorage.getItem("loggedIn") && this.logout(e)}>{sessionStorage.getItem("loggedIn") ? "Log Out" : "Sign Up/Login"}</NavItem>
                 <li><span className="navbar-divider">|</span></li>     
                 <NavDropdown eventKey={4} title={<span><i className="fa fa-globe" aria-hidden="true"></i> English</span>} id="basic-nav-dropdown">
                   <MenuItem eventKey={4.1}>English</MenuItem>
