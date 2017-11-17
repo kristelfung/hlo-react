@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from '../CaregiverCard';
+import Card from '../../CaregiverCard';
 
 // need this in the API
 import { getPerson } from '../../../api/api';
@@ -30,10 +30,27 @@ class Search extends Component {
                 error: err
             });
         });
+
+        this.logSearchText = this.logSearchText.bind(this);
+        this.logLocations = this.logLocations.bind(this);
+        this.logSkills = this.logSkills.bind(this);
+        this.logLanguages = this.logLanguages.bind(this);
     }
 
-    addFilter(val){
-        this.setState({filters: update(this.state.filters, {$splice: [[index, 1]]})});
+    logSearchText(val) { //searchtext
+        this.setState({searchtext: val});
+    }
+
+    logLocations(val){
+        this.setState({locations: val});
+    }
+
+    logSkills(val){
+        this.setState({skills: val});
+    }
+
+    logLanguages(val){
+        this.setState({languages: val});
     }
 
     render(){
@@ -48,72 +65,72 @@ class Search extends Component {
                     <div className="location-filter">
                       <h5 data-toggle="collapse" data-target="#location">Location <span className="caret"></span></h5>
                       <div id="location" className="collapse in">
-                        <ul>
-                            <li>Central</li>
-                            <li>Sai Wan Ho</li>
-                            <li>Aberdeen</li>
-                            <li>Wan Chai</li>
-                            <li>Kwun Tong</li>
-                            <li>Sham Shui Po</li>
-                            <li>San Ko Pong</li>
-                            <li>Mongkok</li>
-                            <li>Sha Tin</li>
-                            <li>Tsuen Wan</li>
-                            <li>Yuen Long</li>
-                            <li>Kowloon</li>
+                        <ul value={this.state.logLocations} onClick={this.logLocations}>
+                            <li value="Central">Central</li>
+                            <li value="Sai Wan Ho">Sai Wan Ho</li>
+                            <li value="Aberdeen">Aberdeen</li>
+                            <li value="Wan Chai">Wan Chai</li>
+                            <li value="Kwun Tong">Kwun Tong</li>
+                            <li value="Sham Shui Po">Sham Shui Po</li>
+                            <li value="San Ko Pong">San Ko Pong</li>
+                            <li value="Mongkok">Mongkok</li>
+                            <li value="Sha Tin">Sha Tin</li>
+                            <li value="Tseun Wan">Tsuen Wan</li>
+                            <li value="Yuen Long">Yuen Long</li>
+                            <li value="Kowloon">Kowloon</li>
                         </ul>
                       </div>
                     </div>
                     <div className="technical-filter">
                       <h5 data-toggle="collapse" data-target="#tech">Technical Skills <span className="caret"></span></h5>
                       <div id="tech" className="collapse in">
-                        <ul>
-                            <li>Addiction Counselor</li>
-                            <li>Beautician</li>
-                            <li>Chinese Medicine Expert</li>
-                            <li>Chiropractor</li>
-                            <li>Eldercare</li>
-                            <li>Hair Stylist</li>
-                            <li>Licensed Nurse</li>
-                            <li>Occupational Therapist</li>
-                            <li>Massage Therapist</li>
-                            <li>Personal Trainer</li>
-                            <li>Yoga Instructor</li>
-                            <li>Physiotherapist</li>
-                            <li>Midwife</li>
-                            <li>Reflexologist</li>
-                            <li>Special Needs Therapist</li>
-                            <li>Speech Therapist</li>
-                            <li>Spiritual/Body/Mind Expert</li>
-                            <li>Sports Therapist</li>
+                        <ul value={this.state.logSkills} onClick={this.logSkills}>
+                            <li value="Addiction Counselor">Addiction Counselor</li>
+                            <li value="Beautician">Beautician</li>
+                            <li value="Chinese Medicine Expert">Chinese Medicine Expert</li>
+                            <li value="Chiropractor">Chiropractor</li>
+                            <li value="Eldercare">Eldercare</li>
+                            <li value="Hair Stylist">Hair Stylist</li>
+                            <li value="Licensed Nurse">Licensed Nurse</li>
+                            <li value="Occupational Therapist">Occupational Therapist</li>
+                            <li value="Massage Therapist">Massage Therapist</li>
+                            <li value="Personal Trainer">Personal Trainer</li>
+                            <li value="Yoga Instructor">Yoga Instructor</li>
+                            <li value="Physiotherapist">Physiotherapist</li>
+                            <li value="Midwife">Midwife</li>
+                            <li value="Reflexologist">Reflexologist</li>
+                            <li value="Special Needs Therapist">Special Needs Therapist</li>
+                            <li value="Speech Therapist">Speech Therapist</li>
+                            <li value="Spiritual/Body/Mind Expert">Spiritual/Body/Mind Expert</li>
+                            <li value="Sports Therapist">Sports Therapist</li>
                         </ul>
                       </div>
                     </div>
                     <div className="languages-filter">
                       <h5 data-toggle="collapse" data-target="#language">Language <span className="caret"></span></h5>
                       <div id="language" className="collapse in">
-                        <ul>
-                            <li>Arabic</li>
-                            <li>Armenian</li>
-                            <li>ASL</li>
-							<li>Cantonese</li>
-                            <li>English</li>
-							<li>French</li>
-							<li>German</li>
-                            <li>Greek</li>
-                            <li>Hebrew</li>
-                            <li>Hindi</li>
-                            <li>Italian</li>
-                            <li>Korean</li>								
-							<li>Mandarin</li>
-                            <li>Persian</li>
-                            <li>Polish</li>
-                            <li>Portuguese</li>
-                            <li>Russian</li>
-                            <li>Shanghainese</li>
-							<li>Spanish</li>
-                            <li>Tagalog</li>
-                            <li>Urdu</li>
+                        <ul value={this.state.logLanguages} onClick={this.logLanguages}>
+                            <li value="Arabic">Arabic</li>
+                            <li value="Armenian">Armenian</li>
+                            <li value="ASL">ASL</li>
+							<li value="Cantonese">Cantonese</li>
+                            <li value="English">English</li>
+							<li value="French">French</li>
+							<li value="German">German</li>
+                            <li value="Greek">Greek</li>
+                            <li value="Hebrew">Hebrew</li>
+                            <li value="Hindi">Hindi</li>
+                            <li value="Italian">Italian</li>
+                            <li value="Korean">Korean</li>								
+							<li value="Mandarin">Mandarin</li>
+                            <li value="Persian">Persian</li>
+                            <li value="Polish">Polish</li>
+                            <li value="Portuguese">Portuguese</li>
+                            <li value="Russian">Russian</li>
+                            <li value="Shanghainese">Shanghainese</li>
+							<li value="Spanish">Spanish</li>
+                            <li value="Tagalog">Tagalog</li>
+                            <li value="Urdu">Urdu</li>
                         </ul>
                       </div>
                     </div>
@@ -124,7 +141,7 @@ class Search extends Component {
                         <div className="col-md-4 col-sm-6">
                         {
                             this.state.data.length > 0 ?
-                            this.state.data.map(caregiver => <Card {...this.state.caregivers[i]} />) : 
+                            this.state.data.map(person => <Card {...this.state.person} />) : 
                             <div>No results. Try another search query.</div>
                         }
                         </div>
