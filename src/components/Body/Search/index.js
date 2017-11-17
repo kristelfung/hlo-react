@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from '../../CaregiverCard';
+import Card from '../CaregiverCard';
 
 // need this in the API
 import { getPerson } from '../../../api/api';
@@ -9,8 +9,10 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchtext: "",
-            filters: [],
+            searchtext: [],
+            locations: [],
+            skills: [],
+            languages: [],
             data: [],
             loading: true
         }
@@ -28,12 +30,10 @@ class Search extends Component {
                 error: err
             });
         });
-
-        this.addFilter = this.state.addFilter;
     }
 
     addFilter(val){
-        this.setState({filters: this.state.filters.concat([val])});
+        this.setState({filters: update(this.state.filters, {$splice: [[index, 1]]})});
     }
 
     render(){
@@ -49,18 +49,18 @@ class Search extends Component {
                       <h5 data-toggle="collapse" data-target="#location">Location <span className="caret"></span></h5>
                       <div id="location" className="collapse in">
                         <ul>
-                            <li onClick={this.addFilter("Central")}>Central</li>
-                            <li onClick={this.addFilter("Sai Wan Ho")}>Sai Wan Ho</li>
-                            <li onClick={this.addFilter("Aberdeen")}>Aberdeen</li>
-                            <li onClick={this.addFilter("Wan Chai")}>Wan Chai</li>
-                            <li onClick={this.addFilter("Kwun Tong")}>Kwun Tong</li>
-                            <li onClick={this.addFilter("Sham Shui Po")}>Sham Shui Po</li>
-                            <li onClick={this.addFilter("San Ko Pong")}>San Ko Pong</li>
-                            <li onClick={this.addFilter("Mongkok")}>Mongkok</li>
-                            <li onClick={this.addFilter("Sha Tin")}>Sha Tin</li>
-                            <li onClick={this.addFilter("Tseun Wan")}>Tsuen Wan</li>
-                            <li onClick={this.addFilter("Yuen Long")}>Yuen Long</li>
-                            <li onClick={this.addFilter("Kowloon")}>Kowloon</li>
+                            <li>Central</li>
+                            <li>Sai Wan Ho</li>
+                            <li>Aberdeen</li>
+                            <li>Wan Chai</li>
+                            <li>Kwun Tong</li>
+                            <li>Sham Shui Po</li>
+                            <li>San Ko Pong</li>
+                            <li>Mongkok</li>
+                            <li>Sha Tin</li>
+                            <li>Tsuen Wan</li>
+                            <li>Yuen Long</li>
+                            <li>Kowloon</li>
                         </ul>
                       </div>
                     </div>
@@ -68,24 +68,24 @@ class Search extends Component {
                       <h5 data-toggle="collapse" data-target="#tech">Technical Skills <span className="caret"></span></h5>
                       <div id="tech" className="collapse in">
                         <ul>
-                            <li onClick={this.addFilter("Addiction Counselor")}>Addiction Counselor</li>
-                            <li onClick={this.addFilter("Beautician")}>Beautician</li>
-                            <li onClick={this.addFilter("Chinese Medicine Expert")}>Chinese Medicine Expert</li>
-                            <li onClick={this.addFilter("Chiropractor")}>Chiropractor</li>
-                            <li onClick={this.addFilter("Eldercare")}>Eldercare</li>
-                            <li onClick={this.addFilter("Hair Stylist")}>Hair Stylist</li>
-                            <li onClick={this.addFilter("Licensed Nurse")}>Licensed Nurse</li>
-                            <li onClick={this.addFilter("Occupational Therapist")}>Occupational Therapist</li>
-                            <li onClick={this.addFilter("Massage Therapist")}>Massage Therapist</li>
-                            <li onClick={this.addFilter("Personal Trainer")}>Personal Trainer</li>
-                            <li onClick={this.addFilter("Yoga Instructor")}>Yoga Instructor</li>
-                            <li onClick={this.addFilter("Physiotherapist")}>Physiotherapist</li>
-                            <li onClick={this.addFilter("Midwife")}>Midwife</li>
-                            <li onClick={this.addFilter("Reflexologist")}>Reflexologist</li>
-                            <li onClick={this.addFilter("Special Needs Therapist")}>Special Needs Therapist</li>
-                            <li onClick={this.addFilter("Speech Therapist")}>Speech Therapist</li>
-                            <li onClick={this.addFilter("Spiritual/Body/Mind Expert")}>Spiritual/Body/Mind Expert</li>
-                            <li onClick={this.addFilter("Sports Therapist")}>Sports Therapist</li>
+                            <li>Addiction Counselor</li>
+                            <li>Beautician</li>
+                            <li>Chinese Medicine Expert</li>
+                            <li>Chiropractor</li>
+                            <li>Eldercare</li>
+                            <li>Hair Stylist</li>
+                            <li>Licensed Nurse</li>
+                            <li>Occupational Therapist</li>
+                            <li>Massage Therapist</li>
+                            <li>Personal Trainer</li>
+                            <li>Yoga Instructor</li>
+                            <li>Physiotherapist</li>
+                            <li>Midwife</li>
+                            <li>Reflexologist</li>
+                            <li>Special Needs Therapist</li>
+                            <li>Speech Therapist</li>
+                            <li>Spiritual/Body/Mind Expert</li>
+                            <li>Sports Therapist</li>
                         </ul>
                       </div>
                     </div>
@@ -93,27 +93,27 @@ class Search extends Component {
                       <h5 data-toggle="collapse" data-target="#language">Language <span className="caret"></span></h5>
                       <div id="language" className="collapse in">
                         <ul>
-                            <li onClick={this.addFilter("Arabic")}>Arabic</li>
-                            <li onClick={this.addFilter("Armenian")}>Armenian</li>
-                            <li onClick={this.addFilter("ASL")}>ASL</li>
-							<li onClick={this.addFilter("Cantonese")}>Cantonese</li>
-                            <li onClick={this.addFilter("English")}>English</li>
-							<li onClick={this.addFilter("French")}>French</li>
-							<li onClick={this.addFilter("German")}>German</li>
-                            <li onClick={this.addFilter("Greek")}>Greek</li>
-                            <li onClick={this.addFilter("Hebrew")}>Hebrew</li>
-                            <li onClick={this.addFilter("Hindi")}>Hindi</li>
-                            <li onClick={this.addFilter("Italian")}>Italian</li>
-                            <li onClick={this.addFilter("Korean")}>Korean</li>								
-							<li onClick={this.addFilter("Manderin")}>Mandarin</li>
-                            <li onClick={this.addFilter("Persian")}>Persian</li>
-                            <li onClick={this.addFilter("Polish")}>Polish</li>
-                            <li onClick={this.addFilter("Portuguese")}>Portuguese</li>
-                            <li onClick={this.addFilter("Russian")}>Russian</li>
-                            <li onClick={this.addFilter("Shanghainese")}>Shanghainese</li>
-							<li onClick={this.addFilter("Spanish")}>Spanish</li>
-                            <li onClick={this.addFilter("Tagalog")}>Tagalog</li>
-                            <li onClick={this.addFilter("Urdu")}>Urdu</li>
+                            <li>Arabic</li>
+                            <li>Armenian</li>
+                            <li>ASL</li>
+							<li>Cantonese</li>
+                            <li>English</li>
+							<li>French</li>
+							<li>German</li>
+                            <li>Greek</li>
+                            <li>Hebrew</li>
+                            <li>Hindi</li>
+                            <li>Italian</li>
+                            <li>Korean</li>								
+							<li>Mandarin</li>
+                            <li>Persian</li>
+                            <li>Polish</li>
+                            <li>Portuguese</li>
+                            <li>Russian</li>
+                            <li>Shanghainese</li>
+							<li>Spanish</li>
+                            <li>Tagalog</li>
+                            <li>Urdu</li>
                         </ul>
                       </div>
                     </div>
@@ -124,7 +124,7 @@ class Search extends Component {
                         <div className="col-md-4 col-sm-6">
                         {
                             this.state.data.length > 0 ?
-                            this.state.data.map(caregiver => <Card {...this.state.caregivers} />) : 
+                            this.state.data.map(caregiver => <Card {...this.state.caregivers[i]} />) : 
                             <div>No results. Try another search query.</div>
                         }
                         </div>
