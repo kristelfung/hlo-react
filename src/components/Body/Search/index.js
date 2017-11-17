@@ -60,7 +60,7 @@ class Search extends Component {
                 <div className="col-sm-3 search-filters">
                     <div className="form-group search-bar">
                         <span className="fa fa-search"></span>
-                        <input type="text" className="form-control" placeholder="Search"/>
+                        <input type="text" className="form-control" placeholder="Search" value = {this.state.searchtext} onChange={(e) => this.setState({searchtext: e.target.value})}/>
                     </div>
                     <div className="location-filter">
                       <h5 data-toggle="collapse" data-target="#location">Location <span className="caret"></span></h5>
