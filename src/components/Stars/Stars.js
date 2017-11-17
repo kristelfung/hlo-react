@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import placeholder from '../../images/placeholders/dp.jpg'; 
 
 class Stars extends Component {
     render() {
@@ -9,24 +8,39 @@ class Stars extends Component {
             num=        
             <p>
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if (this.props.stars == 0.5){
             num=        
             <p>
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if(this.props.stars == 1){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>            }
         else if(this.props.stars == 1.5){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if(this.props.stars == 2){
@@ -34,7 +48,9 @@ class Stars extends Component {
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star" aria-hidden="true" ></i>
-                
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if(this.props.stars == 2.5){
@@ -43,6 +59,8 @@ class Stars extends Component {
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if(this.props.stars == 3){
@@ -51,7 +69,8 @@ class Stars extends Component {
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star" aria-hidden="true" ></i>
-                
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if(this.props.stars == 3.5){
@@ -61,6 +80,7 @@ class Stars extends Component {
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if(this.props.stars == 4){
@@ -70,7 +90,7 @@ class Stars extends Component {
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star" aria-hidden="true" ></i>
                 <i className="fa fa-star" aria-hidden="true" ></i>
-                
+                <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
         else if(this.props.stars == 4.5){

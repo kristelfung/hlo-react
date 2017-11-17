@@ -22,7 +22,7 @@ class CaregiverCard extends Component {
                 <h4>{this.props.firstName} {this.props.lastName}</h4>
                 <Stars stars={this.props.stars} />
                 <p>
-                    <span className="label label-success">Wan Cahi</span>
+                    <span className="label label-success">Wan Chai</span>
                     <span className="label label-success">Central</span>
                 </p>
                 <p className="card-about">{this.props.about}</p>
@@ -51,6 +51,7 @@ class CaregiverCard extends Component {
             </div>
         );
     }
+
   }
 }
 

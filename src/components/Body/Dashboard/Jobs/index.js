@@ -77,7 +77,6 @@ class Jobs extends Component {
             });
         }
         else{
-            console.log("jobsCreated are : " + nextProps.jobsCreated);
             this.setState({
                 type: nextProps.type,
                 data: {
@@ -141,17 +140,14 @@ class Jobs extends Component {
     }
     logChange(val) { //type of caregivers
         this.setState({ typeOfCaregiver: val});
-        console.log('Selected: ', val);
     }
 
     logProfessionalServices(val){
         this.setState({ professionalServices: val});
-        console.log('Selected: ', val);
     }
 
     logPersonalServices(val){
         this.setState({ personalServices: val});
-        console.log('Selected: ', val);
     }
 
     render(){
