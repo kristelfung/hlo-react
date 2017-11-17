@@ -9,7 +9,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchtext: [],
+            searchtext: "",
             filters: [],
             data: [],
             loading: true
