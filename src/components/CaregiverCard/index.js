@@ -8,21 +8,21 @@ import {
 } from 'react-router-dom';
 class CaregiverCard extends Component {
   render() {
-    let caregiverInfo = this.props.caregiver[0];
     let stars = [];
-    for (var i=0; i < Math.floor(caregiverInfo.stars); i++) {
+    for (var i=0; i < Math.floor(this.props.stars); i++) {
         stars.push(<i className="fa fa-star" aria-hidden="true" ></i>);
     }
-    if(caregiverInfo.stars - i > 0){
+    if(this.props.stars - i > 0){
         stars.push(<i className="fa fa-star-half-o" aria-hidden="true" ></i>);
     }
-    for (var i=0; i < 5-Math.ceil(caregiverInfo.stars); i++) {
+    for (var i=0; i < 5-Math.ceil(this.props.stars); i++) {
         stars.push(<i className="fa fa-star-o" aria-hidden="true" ></i>);
     }
 
     var id = this.props.id;
     if(this.props.type ==="caregiver"){
         return (
+            !this.props.loading ? 
           <div className="caregiver-card">
             <a href={"/profile/"+id}>
                 <span className="link-spanner"></span>
@@ -36,9 +36,9 @@ class CaregiverCard extends Component {
                         this.props.location.map(l => <span className="label label-success">{l}</span>)
                     }
                 </p>
-                <p className="card-about">{caregiverInfo.about}</p>
+                <p className="card-about">{this.props.about}</p>
             </div>
-          </div>
+          </div> : <div className="caregiver-card"></div>
         );
     }
     else if(this.props.type==="job"){

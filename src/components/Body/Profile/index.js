@@ -11,10 +11,10 @@ class Profile extends Component {
 				"firstName": "",
 				"lastName": "",
 				"location": [],
-				caregiver: [{
+				caregiver: {
 					"hourlyRate": 0,
 					"car": false,
-					"backgroundCheck": true,
+					"backgroundCheck": false,
 					"education": "",
 					"experience": "",
 					"languages": [],
@@ -22,7 +22,7 @@ class Profile extends Component {
                     "otherNotes": "",
                     reviews: [],
                     availability: {}
-				}],
+				},
 				email: "",
 				hkidPassport: "",
 				phoneNumber: "",
@@ -36,11 +36,12 @@ class Profile extends Component {
         }
 
         getUser(props.match.params.id).then(json => {
-            if(json.reviews === undefined)
-                json.caregiver[0].reviews = [];
+            console.log(json.data)
+            if(json.data.caregiver.reviews === undefined)
+                json.data.caregiver.reviews = [];
             this.setState({
                 loading: false,
-                data: json
+                data: json.data
             });
         }).catch(err => {
             console.log(err);
@@ -51,7 +52,7 @@ class Profile extends Component {
         });
     }
     render() {
-        let caregiverInfo = this.state.data.caregiver[0];
+        let caregiverInfo = this.state.data.caregiver;
         let availArray = [];
         for (var key in caregiverInfo.availability) {
             var item = caregiverInfo.availability[key];

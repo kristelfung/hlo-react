@@ -13,7 +13,7 @@ class NavBar extends Component {
             window.location.href = "home";            
 	    }).catch(err => {
             console.log(err);
-		});;
+		  });
     }
     render(){
         return (

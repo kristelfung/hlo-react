@@ -6,8 +6,17 @@ import Card from '../../../CaregiverCard';
 class Featured extends Component {
     constructor(props){
         super(props);
+        let dummyCG = {
+            about: "",
+            stars: 0,
+            user: {
+                firstName: "",
+                lastName: "",
+                location: []
+            }
+        };
         this.state = {
-            caregivers: [],
+            caregivers: [dummyCG, dummyCG, dummyCG, dummyCG],
             jobs: [],
             loadingC: true,
             loadingJ: true,
@@ -39,10 +48,10 @@ class Featured extends Component {
                 errorMsgC: err
             });
         });
-        
     }
     
     render() {
+        console.log(this.state.caregivers)
         return(
             <div className="featured">
                 <div className="container">
@@ -51,18 +60,50 @@ class Featured extends Component {
                             <h3 className="text-center">Professional Caregivers</h3>
                             <div className="row feature-row">
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[0]} type = "caregiver"/>
+                                    <Card 
+                                        id={this.state.caregivers[0].user.id}
+                                        about={this.state.caregivers[0].about} 
+                                        stars={this.state.caregivers[0].stars}
+                                        firstName={this.state.caregivers[0].user.firstName}
+                                        lastName={this.state.caregivers[0].user.lastName}
+                                        location={this.state.caregivers[0].user.location}
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[1]} type = "caregiver"/>
+                                    <Card 
+                                        id={this.state.caregivers[1].user.id}
+                                        about={this.state.caregivers[1].about} 
+                                        stars={this.state.caregivers[1].stars}
+                                        firstName={this.state.caregivers[1].user.firstName}
+                                        lastName={this.state.caregivers[1].user.lastName}
+                                        location={this.state.caregivers[1].user.location}
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
                                 </div>
                             </div>
                             <div className="row feature-row">
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[2]} type = "caregiver"/>
+                                    <Card 
+                                        id={this.state.caregivers[2].user.id}
+                                        about={this.state.caregivers[2].about} 
+                                        stars={this.state.caregivers[2].stars}
+                                        firstName={this.state.caregivers[2].user.firstName}
+                                        lastName={this.state.caregivers[2].user.lastName}
+                                        location={this.state.caregivers[2].user.location}
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
                                 </div>
                                 <div className="col-sm-6">
-                                    <Card {...this.state.caregivers[3]} type = "caregiver"/>
+                                    <Card 
+                                        id={this.state.caregivers[3].user.id}
+                                        about={this.state.caregivers[3].about} 
+                                        stars={this.state.caregivers[3].stars}
+                                        firstName={this.state.caregivers[3].user.firstName}
+                                        lastName={this.state.caregivers[3].user.lastName}
+                                        location={this.state.caregivers[3].user.location}
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
                                 </div>
                             </div>
                         </div>

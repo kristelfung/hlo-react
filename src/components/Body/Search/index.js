@@ -134,7 +134,8 @@ class Search extends Component {
                         <div className="col-md-4 col-sm-6">
                         {
                             this.state.data.length > 0 ?
-                            this.state.data.map(person => <Card type={this.props.type} {...person} />) : 
+                            this.state.data.map(person => <Card type={this.props.type} about={person.caregiver[0].about} stars={person.caregiver[0].stars}
+                                firstName={person.firstName} lastName={person.lastName} location={person.location}/>) : 
                             <div>No results. Try another search query.</div>
                         }
                         </div>
