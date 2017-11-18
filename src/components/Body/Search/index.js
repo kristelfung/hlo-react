@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Card from '../../CaregiverCard';
 
 // need this in the API
-import { getPerson } from '../../../api/api';
-
+// import { getPerson } from '../../../api/api';
 
 class Search extends Component {
     constructor(props) {
@@ -17,19 +16,19 @@ class Search extends Component {
             loading: true
         }
 
-        getPerson().then(json => {
-            console.log(json);
-            this.setState({
-                loading: false,
-                data: json.data
-            });
-        }).catch(err => {
-            console.log(err);
-            this.setState({
-                loading: false,
-                error: err
-            });
-        });
+        // getPerson().then(json => {
+        //     console.log(json);
+        //     this.setState({
+        //         loading: false,
+        //         data: json.data
+        //     });
+        // }).catch(err => {
+        //     console.log(err);
+        //     this.setState({
+        //         loading: false,
+        //         error: err
+        //     });
+        // });
 
         this.logSearchText = this.logSearchText.bind(this);
         this.logLocations = this.logLocations.bind(this);

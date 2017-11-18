@@ -5,8 +5,8 @@ import {
     Redirect
 } from 'react-router-dom';
 
-import Home from './Home';
-import Search from './Search';
+import Home from "./Home";
+import Search from "./Search";
 import Infopage from "./Infopage";
 import Profile from "./Profile";
 import Dashboard from "./Dashboard";
