@@ -619,59 +619,31 @@ class Jobs extends Component {
     }
 }
 class CaregiverHired extends Component{
+    constructor(props){
+        super(props);
+        this.state =  {
+            caregiverHired : props.caregiverHired === undefined ? [] : props.caregiverHired
+        }
+        getUser(this.props.caregiverHired.user).then(json => {
+            this.setState({
+                caregiverHired: json.data
+            });
+        }).catch(err => {
+            console.log("err"+err);
+        });
+    }
+    
     render(){
-        console.log("caregiver hired:");
+        console.log(this.props);
         return (
             <div>
-                <div className="job-right">
-                <img src="images/dashboard/confirmedjob.png" className="job-status" />
-                <a className="expand-job" data-toggle="collapse" data-target="#job2"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></a>
-                </div>
-
-                <div id="job2" className="collapse job-desc">
-                <div className="hired-caregiver">
-                    <h4>Hired Caregiver</h4>
-                    <img src="images/msg.png" className="hired-picture" />
-                    <h4>{this.props.caregiverHired.firstName}{this.props.lastName}</h4>
-                    <h5>{this.props.caregiverHired.hourlyRate}</h5>
-                    <button className="btn btn-primary">Message</button>
-                    <button type="button" className="btn btn-default" data-toggle="modal" data-target="#myModal">Review</button>
-                    
-                   
-                    <div id="myModal" className="modal fade review-modal" role="dialog">
-                      <div className="modal-dialog">
-                    
-                   
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h4 className="modal-title">Review Caregiver</h4>
-                          </div>
-                          <div className="modal-body">
-                            <form>
-                                <div className="form-group rating-stars">
-                                    <label>Star Rating</label>
-                                    <br />
-                                    <i className="fa fa-star-o" aria-hidden="true"></i>
-                                    <i className="fa fa-star-o" aria-hidden="true"></i>
-                                    <i className="fa fa-star-o" aria-hidden="true"></i>
-                                    <i className="fa fa-star-o" aria-hidden="true"></i>
-                                    <i className="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="comment">Comments</label>
-                                    <textarea className="form-control" rows="5" id="comment" placeholder="Describe your experience!"></textarea>
-                                </div>
-                                <div className="submit-buttons">
-                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" className="btn btn-primary" data-dismiss="modal">Submit</button>
-                                </div>
-                            </form>
-                          </div>
-                        </div>
-                    
-                      </div>
+                <div id="job2" className="job-desc">
+                    <div className="hired-caregiver ">
+                        <h4 className="text-center">Hired Caregiver</h4>
+                        <img src="images/msg.png" className="hired-picture" />
+                        <h4 className="text-center">{this.state.caregiverHired.firstName} {this.state.caregiverHired.lastName}</h4>
+                        <h5 className="text-center">$ {this.props.caregiverHired.hourlyRate} per hour</h5>
                     </div>
-                </div>
                 </div>
             </div>
         );
@@ -693,9 +665,10 @@ class CaregiverNotHired extends Component{
         });
     }    
 
-    hire(id){
-        console.log(id);
-        //hireCaregiver(id);
+    hire(body){
+        
+        // //console.log(id);
+        hireCaregiver(body);
     }
 
     render(){
@@ -712,7 +685,7 @@ class CaregiverNotHired extends Component{
                                     <p className="applicant-date">{jobApplication.createdAt}</p>
                                 </td>
                                 <td className="applicant-buttons">
-                                    <a onClick={()=>this.hire(jobApplication.id)} className="btn btn-default">Hire</a>
+                                    <a onClick={()=>this.hire({caregiverID : jobApplication.caregiver, jobID: jobApplication.job})} className="btn btn-default">Hire</a>
                                     <button href="#" className="btn btn-default">Message</button>
                                 </td>
                             </tr>
@@ -748,15 +721,18 @@ class CustomerJob extends Component{
             job: {}
         }
         this.fetchJob = this.fetchJob.bind(this);
+        
     }
     
     fetchJob(){
         this.setState({ isOpen:!this.state.isOpen});
         getJobData(this.props.id).then(json => {
             this.setState({ job: json.data});    
-        }).catch(err => {console.log(err)})
-    }
+        }).catch(err => {console.log(err)});
 
+       
+    }
+    
     render(){
         var jobBody ="jb";
         if(this.state.job.hiredCaregiver ){

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Card from '../../CaregiverCard';
-
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 // need this in the API
-// import { getPerson } from '../../../api/api';
+import { searchCaregivers } from '../../../api/api';
+import queryString from 'query-string';
 
 class Search extends Component {
     constructor(props) {
@@ -13,9 +15,10 @@ class Search extends Component {
             skills: [],
             languages: [],
             data: [],
-            loading: true
+            loading: true,
+            query:""
         }
-
+        this.array=[];
         // getPerson().then(json => {
         //     console.log(json);
         //     this.setState({
@@ -34,6 +37,64 @@ class Search extends Component {
         this.logLocations = this.logLocations.bind(this);
         this.logSkills = this.logSkills.bind(this);
         this.logLanguages = this.logLanguages.bind(this);
+        this.locations = [
+            { value: 'Wan Chai', label: 'Wan Chai'},
+            { value: 'Central', label: 'Central'},
+            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
+            {value: 'Aberdeen', label: 'Aberdeen'},
+            {value: 'Wan Chai', label: 'Wan Chai'},
+            {value: 'Kwun Tong', label: 'Kwun Tong'},
+            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
+            {value: 'San Ko Pong',label: 'San Ko Pong'},
+            {value: 'Mongkok', label: 'Mongkok'},
+            {value: 'Sha Tin', label: 'Sha Tin'},
+            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
+            {value: 'Yuen Long', label: 'Yuen Long'},
+            {value: 'Kowloon', label: 'Kowloon'}
+        ];
+        this.skills = [
+            { value:"Addiction Counselor", label:"Addiction Counselor"},
+            { value:"Beautician", label:"Beautician"},
+            { value:"Chinese Medicine Expert", label:"Chinese Medicine Expert"},
+            { value:"Chiropractor", label:"Chiropractor"},
+            { value:"Eldercare", label:"Eldercare"},
+            { value:"Hair Stylist", label:"Hair Stylist"},
+            { value:"Licensed Nurse", label:"Licensed Nurse"},
+            { value:"Occupational Therapist", label:"Occupational Therapist"},
+            { value:"Massage Therapist", label:"Massage Therapist"},
+            { value:"Personal Trainer", label:"Personal Trainer"},
+            { value:"Yoga Instructor", label:"Yoga Instructor"},
+            { value:"Physiotherapist", label:"Physiotherapist"},
+            { value:"Midwife", label:"Midwife"},
+            { value:"Reflexologist", label:"Reflexologist"},
+            { value:"Special Needs Therapist", label:"Special Needs Therapist"},
+            { value:"Speech Therapist", label:"Speech Therapist"},
+            { value:"Spiritual/Body/Mind Expert", label:"Spiritual/Body/Mind Expert"},
+            { value:"Sports Therapist", label:"Sports Therapist"}
+        ];
+        this.languages = [
+            {value: "Arabic", label:"Arabic" },
+            {value:"Armenian", label:"Armenian" },
+            {value:"ASL", label:"ASL" },
+            {value:"Cantonese", label:"Cantonese" },
+            {value:"English", label:"English" },
+            {value:"French", label:"French" },
+            {value:"German", label:"German" },
+            {value:"Greek", label:"Greek" },
+            {value:"Hebrew", label:"Hebrew" },
+            {value:"Hindi", label:"Hindi" },
+            {value:"Italian", label:"Italian" },
+            {value:"Korean", label:"Korean" },                              
+            {value:"Mandarin", label:"Mandarin" },
+            {value:"Persian", label:"Persian" },
+            {value:"Polish", label:"Polish" },
+            {value:"Portuguese", label:"Portuguese" },
+            {value:"Russian", label:"Russian" },
+            {value:"Shanghainese", label:"Shanghainese" },
+            {value:"Spanish", label:"Spanish" },
+            {value:"Tagalog", label:"Tagalog" },
+            {value:"Urdu", label:"Urdu" }
+        ];
     }
 
     logSearchText(val) { //searchtext
@@ -41,100 +102,107 @@ class Search extends Component {
     }
 
     logLocations(val){
-        this.setState({locations: val});
+        var data;
+        setTimeout(()=>{
+            this.setState({locations: val});
+            data = {
+                location: this.state.locations,
+                skill: this.state.skills,
+                language: this.state.languages
+            };
+            var query = this.state.query + "location=";
+            this.state.locations.map((location)=>{
+                query = query + location.value + "&";
+            });
+            this.setState({query: query});
+            searchCaregivers(this.state.query);
+        }, 300);  
     }
 
     logSkills(val){
-        this.setState({skills: val});
+        var data;
+        setTimeout(()=>{
+            this.setState({skills: val});
+            data = {
+                location: this.state.locations,
+                skill: this.state.skills,
+                language: this.state.languages
+            };
+            var query = this.state.query + "skill=";
+            this.state.skills.map((skill)=>{
+                query = query + skill.value + "&";
+            });
+            this.setState({query: query});
+            searchCaregivers(this.state.query);
+        }, 300);
+        
     }
 
     logLanguages(val){
-        this.setState({languages: val});
+        var data;
+        
+        setTimeout(()=>{
+            this.setState({languages: val});
+            data = {
+                location: this.state.locations,
+                skill: this.state.skills,
+                language: this.state.languages
+            };
+
+            //var query = "language=";
+            //this.array = [];
+            this.state.languages.map((language)=>{
+                //console.log(this.state.query);
+                //console.log(language.value);
+                this.array.push[language.value];
+                //query = query+language.value + "&";
+            });
+
+            var query = queryString.stringify(this.array);
+            console.log(this.array);
+            //this.setState({query: query});
+            //searchCaregivers(this.state.query);
+           // console.log(query);
+        }, 300);
+
+        
     }
 
     render(){
+
         return(
             <div className="container-fluid">
             <div className="row equal">
                 <div className="col-sm-3 search-filters">
-                    <div className="form-group search-bar">
-                        <span className="fa fa-search"></span>
-                        <input type="text" className="form-control" placeholder="Search" value = {this.state.searchtext} onChange={(e) => this.setState({searchtext: e.target.value})}/>
-                    </div>
+                   
                     <div className="location-filter">
-                      <h5 data-toggle="collapse" data-target="#location">Location <span className="caret"></span></h5>
-                      <div id="location" className="collapse in">
-                        <ul value={this.state.logLocations} onClick={this.logLocations}>
-                            <li value="Central">Central</li>
-                            <li value="Sai Wan Ho">Sai Wan Ho</li>
-                            <li value="Aberdeen">Aberdeen</li>
-                            <li value="Wan Chai">Wan Chai</li>
-                            <li value="Kwun Tong">Kwun Tong</li>
-                            <li value="Sham Shui Po">Sham Shui Po</li>
-                            <li value="San Ko Pong">San Ko Pong</li>
-                            <li value="Mongkok">Mongkok</li>
-                            <li value="Sha Tin">Sha Tin</li>
-                            <li value="Tseun Wan">Tsuen Wan</li>
-                            <li value="Yuen Long">Yuen Long</li>
-                            <li value="Kowloon">Kowloon</li>
-                        </ul>
-                      </div>
+                        <h5 data-toggle="collapse" data-target="#location">Location <span className="caret"></span></h5>
+                        <div id="location">
+                            <Select options={this.locations}
+                                multi
+                                onChange={(e)=> this.logLocations(e)}
+                                value={this.state.locations}/>
+                        </div>
                     </div>
                     <div className="technical-filter">
-                      <h5 data-toggle="collapse" data-target="#tech">Technical Skills <span className="caret"></span></h5>
-                      <div id="tech" className="collapse in">
-                        <ul value={this.state.logSkills} onClick={this.logSkills}>
-                            <li value="Addiction Counselor">Addiction Counselor</li>
-                            <li value="Beautician">Beautician</li>
-                            <li value="Chinese Medicine Expert">Chinese Medicine Expert</li>
-                            <li value="Chiropractor">Chiropractor</li>
-                            <li value="Eldercare">Eldercare</li>
-                            <li value="Hair Stylist">Hair Stylist</li>
-                            <li value="Licensed Nurse">Licensed Nurse</li>
-                            <li value="Occupational Therapist">Occupational Therapist</li>
-                            <li value="Massage Therapist">Massage Therapist</li>
-                            <li value="Personal Trainer">Personal Trainer</li>
-                            <li value="Yoga Instructor">Yoga Instructor</li>
-                            <li value="Physiotherapist">Physiotherapist</li>
-                            <li value="Midwife">Midwife</li>
-                            <li value="Reflexologist">Reflexologist</li>
-                            <li value="Special Needs Therapist">Special Needs Therapist</li>
-                            <li value="Speech Therapist">Speech Therapist</li>
-                            <li value="Spiritual/Body/Mind Expert">Spiritual/Body/Mind Expert</li>
-                            <li value="Sports Therapist">Sports Therapist</li>
-                        </ul>
-                      </div>
+                        <h5 data-toggle="collapse" data-target="#tech">Technical Skills <span className="caret"></span></h5>
+                        <div id="tech" className="collapse in">
+                            <Select options={this.skills}
+                                multi
+                                onChange={(e)=> this.logSkills(e)}
+                                value={this.state.skills}/>
+                        </div>
                     </div>
                     <div className="languages-filter">
-                      <h5 data-toggle="collapse" data-target="#language">Language <span className="caret"></span></h5>
-                      <div id="language" className="collapse in">
-                        <ul value={this.state.logLanguages} onClick={this.logLanguages}>
-                            <li value="Arabic">Arabic</li>
-                            <li value="Armenian">Armenian</li>
-                            <li value="ASL">ASL</li>
-							<li value="Cantonese">Cantonese</li>
-                            <li value="English">English</li>
-							<li value="French">French</li>
-							<li value="German">German</li>
-                            <li value="Greek">Greek</li>
-                            <li value="Hebrew">Hebrew</li>
-                            <li value="Hindi">Hindi</li>
-                            <li value="Italian">Italian</li>
-                            <li value="Korean">Korean</li>								
-							<li value="Mandarin">Mandarin</li>
-                            <li value="Persian">Persian</li>
-                            <li value="Polish">Polish</li>
-                            <li value="Portuguese">Portuguese</li>
-                            <li value="Russian">Russian</li>
-                            <li value="Shanghainese">Shanghainese</li>
-							<li value="Spanish">Spanish</li>
-                            <li value="Tagalog">Tagalog</li>
-                            <li value="Urdu">Urdu</li>
-                        </ul>
-                      </div>
+                        <h5 data-toggle="collapse" data-target="#language">Language <span className="caret"></span></h5>
+                        <div id="language" className="collapse in">
+                            <Select options={this.languages}
+                                multi
+                                onChange={(e)=> this.logLanguages(e)} 
+                                value={this.state.languages} />
+                        </div>
                     </div>
                 </div>
-
                 <div className="col-sm-9 search-body">
                     <div className="row">
                         <div className="col-md-4 col-sm-6">
