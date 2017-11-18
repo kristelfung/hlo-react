@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getUser, getListedJobs, saveJob, saveProfilePic, saveCoverPic, getJobData} from '../../../../api/api';
+import {getUser, getListedJobs, saveJob, saveProfilePic, saveCoverPic, getJobData, hireCaregiver} from '../../../../api/api';
 import update from 'react-addons-update';
 import Select from 'react-select';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
@@ -686,24 +686,38 @@ class CaregiverHired extends Component{
     }
 }
 class CaregiverNotHired extends Component{
+    constructor(props){
+        super(props);
+        this.state =  {
+            caregiversApplied : props.caregiversApplied === undefined ? [] : props.caregiversApplied
+        }
+        this.hire = this.hire.bind(this);
+        console.log(this.props.caregiversApplied[0].caregiverName);
+    }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            caregiversApplied: nextProps.caregiversApplied
+        });
+    }    
+    hire(id){
+        console.log(id);
+        //hireCaregiver(id);
+    }
     render(){
-        console.log(this.props);
         return (
             <div>
                 <div id="job1" className="collapse job-desc">
                     <h4>Caregiver Applicants</h4>
                     <table className="table table-hover applicants">
                         <tbody>
-                        {this.props.caregiversApplied.map(jobApplication=>(
+                        {this.state.caregiversApplied.map(jobApplication=>(
                             <tr>
                                 <td>
-                                    <a href="profile.html" className="applicant-link">
-                                        <h5 className="applicant-name">{jobApplication.caregiver.firstName}</h5>
-                                        <p className="applicant-date">jobApplication.createdAt</p>
-                                    </a>
+                                    <h5 className="applicant-name">{jobApplication.caregiverName}</h5>
+                                    <p className="applicant-date">{jobApplication.createdAt}</p>
                                 </td>
                                 <td className="applicant-buttons">
-                                    <a href="#" className="btn btn-default">Hire</a>
+                                    <a onClick={()=>this.hire(jobApplication.id)} className="btn btn-default">Hire</a>
                                     <button href="#" className="btn btn-default">Message</button>
                                 </td>
                             </tr>
@@ -751,7 +765,7 @@ class CustomerJob extends Component{
     }
 
     render(){
-        var jobBody;
+        var jobBody ="jb";
         if(this.state.isOpen){
             if(this.state.job.hiredCaregiver ){
                 jobBody = <CaregiverHired caregiverHired = {this.state.job.hiredCaregiver} />
@@ -768,8 +782,9 @@ class CustomerJob extends Component{
             }
         }
         else{
-            jobBody = <div> </div>
+            jobBody = <div> loading</div>
         }
+        console.log(jobBody);
         return (
             <div>
                 <div className="row job" onClick={this.fetchJob}>

@@ -11,7 +11,9 @@ export function login(creds){
         data.append(key, creds[key]);
     return axios.post(baseUrl + '/user/login', data);
 }
-
+export function getPerson(){
+    return axios.get(baseUrl + '/caregiver/featured');
+}
 export function logout(){
     return axios.post(baseUrl + '/user/logout');
 }
@@ -52,6 +54,7 @@ export function getUser(id){
 export function getInbox(id){
     return axios.get(baseUrl + '/message/inbox/');
 }
+
 
 export function sendMessage(message){
     console.log(message);
@@ -132,4 +135,7 @@ export function saveJob(information, coverPic, profilePic) {
     }).catch(err => {
         console.log("Job err!", err);   
     });
+}
+export function hireCaregiver(id){
+    return axios.post(baseUrl + '/job/hire/' + id);
 }
