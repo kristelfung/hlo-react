@@ -23,8 +23,8 @@ export default () => (
         <div>
             <Route exact path="/" component={Home} />
             <Route path="/home" render={() => (<Redirect to="/"/> )}/>    
-            <Route path="/searchcaregiver" component={Search} />
-            <Route path="/searchcustomer" component={Search} />        
+            <Route path="/search/caregiver"  render={() => <Search type="caregiver" /> } />
+            <Route path="/search/job"  render={() => <Search type="job" /> } />        
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route path="/about"  render={() => <Infopage header={{aboutHeader}}/>} />

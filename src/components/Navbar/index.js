@@ -28,8 +28,8 @@ class NavBar extends Component {
               <Nav pullRight>
                 <NavItem eventKey={1} href="/home">Home</NavItem>
                 <NavDropdown eventKey={2} title="Search" id="basic-nav-dropdown">
-                  <MenuItem eventKey={2.1} href="/searchcaregivers">Caregivers</MenuItem>
-                  <MenuItem eventKey={2.2} href="/searchcustomers">Customers</MenuItem>
+                  <MenuItem eventKey={2.1} href="/search/caregiver">Caregivers</MenuItem>
+                  <MenuItem eventKey={2.2} href="/search/job">Jobs</MenuItem>
                 </NavDropdown>
                 <NavItem eventKey={3} href="/forum">Forum</NavItem>
                 {

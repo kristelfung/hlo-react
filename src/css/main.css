@@ -747,9 +747,7 @@ h1, h2, h3, h4, h5, h6, p {
 /* search body CONTAINING ALL THE CARDS*/
 .search-body {
   background-color: #FCE4EC; }
-.white-background{
-  background-color: #ffffff;
-}
+
 .search-card {
   /* a search profile */
   background-color: #FEFEFE;
