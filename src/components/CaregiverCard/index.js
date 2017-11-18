@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import placeholder from '../../images/placeholders/dp.jpg'; 
+import placeholder from '../../images/profile-placeholder.png'
 import Stars from '../Stars/Stars';
 import {
     BrowserRouter,
     Route,
     Redirect
 } from 'react-router-dom';
+
 class CaregiverCard extends Component {
   render() {
     let stars = [];
@@ -27,7 +28,7 @@ class CaregiverCard extends Component {
             <a href={"/profile/"+id}>
                 <span className="link-spanner"></span>
             </a>
-            <img src={placeholder} className="card-dp"/>
+            <img src={this.props.profilePicUrl === undefined ? placeholder : this.props.profilePicUrl} className="card-dp"/>
             <div className="card-desc">
                 <h4>{this.props.firstName} {this.props.lastName}</h4>
                 {stars} 
@@ -44,9 +45,9 @@ class CaregiverCard extends Component {
     else if(this.props.type==="job"){
         return (
             <div className="caregiver-card">
-                <Route path="profile/:id">
+                <a href={"/profile/"+this.props.id}>
                     <span className="link-spanner"></span>
-                </Route>
+                </a>
                 <img src={placeholder} className="card-dp"/>
                 <div className="card-desc">
                     <h4>{this.props.name} </h4>

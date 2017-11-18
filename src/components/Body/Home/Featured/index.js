@@ -12,7 +12,8 @@ class Featured extends Component {
             user: {
                 firstName: "",
                 lastName: "",
-                location: []
+                location: [],
+                profilePicUrl: ""
             }
         };
         this.state = {
@@ -61,6 +62,7 @@ class Featured extends Component {
                             <div className="row feature-row">
                                 <div className="col-sm-6">
                                     <Card 
+                                        profilePicUrl={this.state.caregivers[0].user.profilePicUrl}
                                         id={this.state.caregivers[0].user.id}
                                         about={this.state.caregivers[0].about} 
                                         stars={this.state.caregivers[0].stars}
@@ -72,6 +74,7 @@ class Featured extends Component {
                                 </div>
                                 <div className="col-sm-6">
                                     <Card 
+                                        profilePicUrl={this.state.caregivers[1].user.profilePicUrl}
                                         id={this.state.caregivers[1].user.id}
                                         about={this.state.caregivers[1].about} 
                                         stars={this.state.caregivers[1].stars}
@@ -85,6 +88,7 @@ class Featured extends Component {
                             <div className="row feature-row">
                                 <div className="col-sm-6">
                                     <Card 
+                                        profilePicUrl={this.state.caregivers[2].user.profilePicUrl}
                                         id={this.state.caregivers[2].user.id}
                                         about={this.state.caregivers[2].about} 
                                         stars={this.state.caregivers[2].stars}
@@ -96,6 +100,7 @@ class Featured extends Component {
                                 </div>
                                 <div className="col-sm-6">
                                     <Card 
+                                        profilePicUrl={this.state.caregivers[3].user.profilePicUrl}
                                         id={this.state.caregivers[3].user.id}
                                         about={this.state.caregivers[3].about} 
                                         stars={this.state.caregivers[3].stars}
