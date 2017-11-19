@@ -78,7 +78,7 @@ class Profile extends Component {
                 <div className="container-fluid profile-cover" />
                 <div className="row profile-head">
                     <div className="col-sm-3">
-                        <div className="profile-pic">
+                        <div className="profile-pic" style="background-image: url('../images/profile/dp.png')">
                             <div className="favorite">
                                 <a href="#"><i className="fa fa-plus" aria-hidden="true"></i></a>
                             </div>

@@ -471,7 +471,6 @@ h1, h2, h3, h4, h5, h6, p {
     margin-top: 0px; } }
 
 .profile-pic {
-  background-image: url("../images/profile/dp.png");
   background-size: cover;
   background-position: center center;
   border-radius: 50%;
