@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Card from '../../CaregiverCard';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-// need this in the API
 import { searchCaregivers } from '../../../api/api';
 import queryString from 'query-string';
 
@@ -10,33 +9,15 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchtext: [],
+            searchtext: "",
             locations: [],
             skills: [],
             languages: [],
             data: [],
-            loading: true,
-            query:""
+            loading: true
         }
-        this.array=[];
-        // getPerson().then(json => {
-        //     console.log(json);
-        //     this.setState({
-        //         loading: false,
-        //         data: json.data
-        //     });
-        // }).catch(err => {
-        //     console.log(err);
-        //     this.setState({
-        //         loading: false,
-        //         error: err
-        //     });
-        // });
-
         this.logSearchText = this.logSearchText.bind(this);
-        this.logLocations = this.logLocations.bind(this);
-        this.logSkills = this.logSkills.bind(this);
-        this.logLanguages = this.logLanguages.bind(this);
+        this.performSearch = this.performSearch.bind(this);
         this.locations = [
             { value: 'Wan Chai', label: 'Wan Chai'},
             { value: 'Central', label: 'Central'},
@@ -95,110 +76,55 @@ class Search extends Component {
             {value:"Tagalog", label:"Tagalog" },
             {value:"Urdu", label:"Urdu" }
         ];
+
+        this.performSearch();
     }
 
     logSearchText(val) { //searchtext
         this.setState({searchtext: val});
     }
 
-    logLocations(val){
-        var data;
-        setTimeout(()=>{
-            this.setState({locations: val});
-            data = {
-                location: this.state.locations,
-                skill: this.state.skills,
-                language: this.state.languages
-            };
-            var query = this.state.query + "location=";
-            this.state.locations.map((location)=>{
-                query = query + location.value + "&";
-            });
-            this.setState({query: query});
-            searchCaregivers(this.state.query);
-        }, 300);  
-    }
-
-    logSkills(val){
-        var data;
-        setTimeout(()=>{
-            this.setState({skills: val});
-            data = {
-                location: this.state.locations,
-                skill: this.state.skills,
-                language: this.state.languages
-            };
-            var query = this.state.query + "skill=";
-            this.state.skills.map((skill)=>{
-                query = query + skill.value + "&";
-            });
-            this.setState({query: query});
-            searchCaregivers(this.state.query);
-        }, 300);
-        
-    }
-
-    logLanguages(val){
-        var data;
-        
-        setTimeout(()=>{
-            this.setState({languages: val});
-            data = {
-                location: this.state.locations,
-                skill: this.state.skills,
-                language: this.state.languages
-            };
-
-            //var query = "language=";
-            //this.array = [];
-            this.state.languages.map((language)=>{
-                //console.log(this.state.query);
-                //console.log(language.value);
-                this.array.push[language.value];
-                //query = query+language.value + "&";
-            });
-
-            var query = queryString.stringify(this.array);
-            console.log(this.array);
-            //this.setState({query: query});
-            //searchCaregivers(this.state.query);
-           // console.log(query);
-        }, 300);
-
-        
+    performSearch(){
+        searchCaregivers({
+            location: this.state.locations,
+            skill: this.state.skills,
+            language: this.state.languages
+        }).then(json => {
+            this.setState({data: json.data});
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     render(){
-
         return(
             <div className="container-fluid">
             <div className="row equal">
                 <div className="col-sm-3 search-filters">
-                   
                     <div className="location-filter">
-                        <h5 data-toggle="collapse" data-target="#location">Location <span className="caret"></span></h5>
+                        <h5 data-toggle="collapse" data-target="#location">Location </h5>
                         <div id="location">
                             <Select options={this.locations}
                                 multi
-                                onChange={(e)=> this.logLocations(e)}
+                                onChange={(e)=> this.setState({locations: e}, this.performSearch)}
                                 value={this.state.locations}/>
                         </div>
                     </div>
                     <div className="technical-filter">
-                        <h5 data-toggle="collapse" data-target="#tech">Technical Skills <span className="caret"></span></h5>
+                        <h5 data-toggle="collapse" data-target="#tech">Technical Skills </h5>
                         <div id="tech" className="collapse in">
                             <Select options={this.skills}
                                 multi
-                                onChange={(e)=> this.logSkills(e)}
+                                onChange={(e)=> this.setState({skills: e}, this.performSearch)}
                                 value={this.state.skills}/>
                         </div>
                     </div>
                     <div className="languages-filter">
-                        <h5 data-toggle="collapse" data-target="#language">Language <span className="caret"></span></h5>
+                        <h5 data-toggle="collapse" data-target="#language">Language </h5>
                         <div id="language" className="collapse in">
                             <Select options={this.languages}
                                 multi
-                                onChange={(e)=> this.logLanguages(e)} 
+                                onChange={(e)=> this.setState({languages: e}, this.performSearch)}
                                 value={this.state.languages} />
                         </div>
                     </div>
@@ -208,7 +134,8 @@ class Search extends Component {
                         <div className="col-md-4 col-sm-6">
                         {
                             this.state.data.length > 0 ?
-                            this.state.data.map(person => <Card {...this.state.person} />) : 
+                            this.state.data.map(person => <Card type={this.props.type} about={person.caregiver[0].about} stars={person.caregiver[0].stars}
+                                firstName={person.firstName} lastName={person.lastName} location={person.location}/>) : 
                             <div>No results. Try another search query.</div>
                         }
                         </div>

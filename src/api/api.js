@@ -145,30 +145,22 @@ export function saveJob(information, coverPic, profilePic) {
         console.log("Job err!", err);   
     });
 }
+
 export function hireCaregiver(information){
     const data = new FormData();
     for(var key in information)
         data.append(key, information[key]);
     return axios.post(baseUrl + '/caregiver/hire/', data);
 }
+
 export function getHiredCaregiver(id){
     return axios.get(baseUrl + '/caregiver/' + id);
 }
-function serialize(obj, prefix) {
-  var str = [], p;
-  for(p in obj) {
-    if (obj.hasOwnProperty(p)) {
-      var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
-      str.push((v !== null && typeof v === "object") ?
-        serialize(v, k) :
-        encodeURIComponent(k) + "=" + encodeURIComponent(v));
-    }
-  }
-  return str.join("&");
-}
+
 export function searchCaregivers(information){
-    //var data = serialize(information);
-    //var data = queryString.stringify(information);
-    console.log(information);
-    //return axios.get(baseUrl + '/user/searchCaregiver?'+ data);
+    var queryString = ""; 
+    for(var key in information)
+        information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
+    
+    return axios.get(baseUrl + '/user/searchCaregiver?'+ queryString)
 }   
