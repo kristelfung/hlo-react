@@ -101,6 +101,7 @@ class Search extends Component {
             <div className="container-fluid">
             <div className="row equal">
                 <div className="col-sm-3 search-filters">
+                    <h3>Filters</h3>
                     <div className="location-filter">
                         <h5 data-toggle="collapse" data-target="#location">Location </h5>
                         <div id="location">

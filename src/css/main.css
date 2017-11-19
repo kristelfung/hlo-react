@@ -708,6 +708,10 @@ h1, h2, h3, h4, h5, h6, p {
   opacity: 0;
   pointer-events: none; }
 
+.alert {
+  margin-top: 20px;
+  margin-bottom: 0px; }
+
 /* Search page */
 /* search filters */
 .search-filters {
@@ -715,33 +719,15 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: #E53935;
   position: relative;
   padding: 30px;
-  /* search box styling */ }
-  .search-filters .fa-search {
-    position: absolute;
-    color: #424242;
-    top: 40px;
-    left: 40px; }
-  .search-filters input {
-    text-indent: 18px; }
+  color: #FEFEFE; }
 
 .location-filter, .technical-filter, .languages-filter {
   /* filter categories */
   cursor: pointer;
   color: #ffffff;
-  margin-top: 30px; }
-  .location-filter ul, .technical-filter ul, .languages-filter ul {
-    /* list of specific filters */
-    list-style-type: none;
-    padding-left: 8px;
-    /* indent */ }
-    .location-filter ul li, .technical-filter ul li, .languages-filter ul li {
-      /* spacing for a filter */
-      padding: 10px 15px;
-      margin: 5px; }
-  .location-filter .filter-selected, .technical-filter .filter-selected, .languages-filter .filter-selected {
-    /* a filter */
-    background-color: #B71C1C;
-    border-radius: 5px; }
+  margin: 30px 0px; }
+  .location-filter .Select-placeholder, .technical-filter .Select-placeholder, .languages-filter .Select-placeholder {
+    margin-left: 5px; }
 
 /* search body CONTAINING ALL THE CARDS*/
 .search-body {
