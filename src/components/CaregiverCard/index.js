@@ -45,7 +45,7 @@ class CaregiverCard extends Component {
     else if(this.props.type==="job"){
         return (
             <div className="caregiver-card">
-                <a href={"/profile/"+this.props.id}>
+                <a href={"#"+this.props.id}>
                     <span className="link-spanner"></span>
                 </a>
                 <img src={placeholder} className="card-dp"/>

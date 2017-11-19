@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import placeholder from '../../../images/profile-placeholder.png'
 
 import {getUser} from '../../../api/api'
 
@@ -78,10 +79,9 @@ class Profile extends Component {
                 <div className="container-fluid profile-cover" />
                 <div className="row profile-head">
                     <div className="col-sm-3">
-                        <div className="profile-pic" style="background-image: url('../images/profile/dp.png')">
-                            <div className="favorite">
-                                <a href="#"><i className="fa fa-plus" aria-hidden="true"></i></a>
-                            </div>
+                        <div>
+                            <img src={(this.state.data.profilePicUrl === undefined || this.state.data.profilePicUrl === "") ? placeholder : this.state.data.profilePicUrl} className="profile-pic" />
+                            {/* TODO later, add favoriting feature <a href="#" className="favorite"><i className="fa fa-plus" aria-hidden="true"></i></a>*/}
                         </div>
                     </div>
                     <div className="col-sm-6 name">
