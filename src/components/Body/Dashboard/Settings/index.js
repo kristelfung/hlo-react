@@ -22,7 +22,7 @@ class Settings extends Component {
 
     }
 	save(e){
-	    e.preventDefault();
+	    //e.preventDefault();
 	    let information = {
     		id: this.props.id,
     		email :this.state.email,

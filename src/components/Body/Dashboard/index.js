@@ -173,7 +173,7 @@ class Dashboard extends Component {
 	         </div>
     	}
     	else if(this.state.tab == "profile"){
-			body = <Profile {...this.state.data}/>;
+			body = <Profile userID={this.state.userID}  {...this.state.data}/>;
     		title = 
     		<div>
     			<div className="col-xs-3 ">
@@ -203,7 +203,7 @@ class Dashboard extends Component {
 	         </div>
     	}
     	else if (this.state.tab == "settings") {
-    		body = <Settings {...this.state.data}/>;
+    		body = <Settings userID={this.state.userID}  {...this.state.data}/>;
     		title = 
     		<div>
     			<div className="col-xs-3 ">
