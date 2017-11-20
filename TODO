@@ -7,14 +7,7 @@ Dashboard
         Messages to Select loading
     Profile
         Profile add upload profile pic for both
-        Profile edit fields
-
-        Profile in caregiver populate state
-        Add review page to caregiver profile 
-        Add location to caregiver form
-    Settings
-        Settings update for both
-
+        Profile available times
 Backend
     Job model special medical type string 
     Job model required times 

@@ -11,6 +11,7 @@ import suitcase from '../../../images/dashboard/suitcase.png'
 import messages from '../../../images/dashboard/messages.png'
 import profile from '../../../images/dashboard/profile.png'
 import settings from '../../../images/dashboard/settings.png'
+import pluses from  '../../../images/infopage/pluses.png'
 
 class Dashboard extends Component {
 	constructor(props){
@@ -19,9 +20,9 @@ class Dashboard extends Component {
 			tab: "jobs",
 			userID: "",
 			data: {
-				"firstName": "",
-				"lastName": "",
-				"location": [],
+				firstName: "",
+				lastName: "",
+				location: [],
 				type: "",
 				caregiver: [{
 					"hourlyRate": 0,
@@ -29,12 +30,37 @@ class Dashboard extends Component {
 					"backgroundCheck": true,
 					"education": "",
 					"experience": "",
-					"languages": [],
+					languages: [],
 					"about": "",
 					"availability": {},
 					"otherNotes": "",
 					jobsApplied: [],
 					jobsReceived: [],
+					gender:"",
+					dateOfBirth:"",
+					extraCharges:"",
+					address:"",
+					district:"",
+					country:"",
+					hobbies:"",
+					profile:"",
+					cover:"",
+					religion:"",
+					day:"",
+					startTime:"",
+					endTime:"",
+					availability : [{
+						day:"",
+						startTime:"",
+						endTime:"",
+					}],
+					skills: [],
+					personalServices: [],
+					pricingPlan : "",
+					typeOfCaregiver: [],
+					license: "",
+					extraCharges: 0,
+					yearsOfExperience: 0,
 				}],
 				email: "",
 				hkidPassport: "",
@@ -44,7 +70,7 @@ class Dashboard extends Component {
 				bankName: "",
 				accountNumber: "",
 				paypal: "",
-				jobsCreated: []
+				jobsCreated: [],	
 			},
 			loadMessageBody: false,
 			messageBody: {}
@@ -243,8 +269,7 @@ class Dashboard extends Component {
 			                    <h5>Manage caregivers, job postings, and messages.</h5>
 			                </div>
 			                <div className="col-xs-6 header-image-col">
-			                    <img src="images/infopage/pluses.png" className="header-image" />
-			                    
+			                    <img src={pluses} className="header-image" />
 			                </div>
 			            </div>
 			        </div>
