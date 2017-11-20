@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import placeholder from '../../../images/profile-placeholder.png'
 
 import {getUser} from '../../../api/api'
 
@@ -53,15 +54,6 @@ class Profile extends Component {
     }
     render() {
         let caregiverInfo = this.state.data.caregiver;
-        let availArray = [];
-        for (var key in caregiverInfo.availability) {
-            var item = caregiverInfo.availability[key];
-            availArray.push({
-                day: key,
-                time: item
-            })
-        };
-
         let stars = [];
         for (var i=0; i < Math.floor(caregiverInfo.stars); i++) {
             stars.push(<i className="fa fa-star" aria-hidden="true" ></i>);
@@ -69,7 +61,7 @@ class Profile extends Component {
         if(caregiverInfo.stars - i > 0){
             stars.push(<i className="fa fa-star-half-o" aria-hidden="true" ></i>);
         }
-        for (var i=0; i < 5-Math.ceil(caregiverInfo.stars); i++) {
+        for (i=0; i < 5-Math.ceil(caregiverInfo.stars); i++) {
             stars.push(<i className="fa fa-star-o" aria-hidden="true" ></i>);
         }
 
@@ -78,10 +70,9 @@ class Profile extends Component {
                 <div className="container-fluid profile-cover" />
                 <div className="row profile-head">
                     <div className="col-sm-3">
-                        <div className="profile-pic">
-                            <div className="favorite">
-                                <a href="#"><i className="fa fa-plus" aria-hidden="true"></i></a>
-                            </div>
+                        <div>
+                            <img src={(this.state.data.profilePicUrl === undefined || this.state.data.profilePicUrl === "") ? placeholder : this.state.data.profilePicUrl} className="profile-pic" />
+                            {/* TODO later, add favoriting feature <a href="#" className="favorite"><i className="fa fa-plus" aria-hidden="true"></i></a>*/}
                         </div>
                     </div>
                     <div className="col-sm-6 name">
@@ -113,10 +104,10 @@ class Profile extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {availArray.map(item => 
+                                    {caregiverInfo.availability.map(item => 
                                         <tr>
                                             <td>{item.day}</td>
-                                            <td>{item.time}</td>
+                                            <td>{item.startTime} - {item.endTime}</td>
                                         </tr>
                                     )}
                                 </tbody>

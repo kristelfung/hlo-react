@@ -132,7 +132,7 @@ class Dashboard extends Component {
     render(){
     	var body; 
     	var title;
-    	if(this.state.tab == "jobs"){
+    	if(this.state.tab === "jobs"){
     		console.log(this.state.data);
     		body = <Jobs updateUser={this.updateUser} {...this.state.data} userID={this.state.userID}/>;
     		title = 
@@ -164,7 +164,7 @@ class Dashboard extends Component {
 	         </div>
     		
     	}
-    	else if(this.state.tab == "messages"){
+    	else if(this.state.tab === "messages"){
 			if(this.state.loadMessageBody){
 				body = <MessageBody reply={this.reply} userID={this.state.userID} {...this.state.messageBody} />;
 			}else{
@@ -198,7 +198,7 @@ class Dashboard extends Component {
 	            </div>
 	         </div>
     	}
-    	else if(this.state.tab == "profile"){
+    	else if(this.state.tab === "profile"){
 			body = <Profile userID={this.state.userID}  {...this.state.data}/>;
     		title = 
     		<div>
@@ -228,7 +228,7 @@ class Dashboard extends Component {
 	            </div>
 	         </div>
     	}
-    	else if (this.state.tab == "settings") {
+    	else if (this.state.tab === "settings") {
     		body = <Settings userID={this.state.userID}  {...this.state.data}/>;
     		title = 
     		<div>

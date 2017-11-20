@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {sendMessage, searchUser} from '../../../../../api/api'
+import {sendMessage, searchName} from '../../../../../api/api'
 
 import {Modal} from 'react-bootstrap';
 import debounce from 'debounce';
 
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 class MessageCompose extends Component{
     constructor(props){
@@ -54,7 +53,7 @@ class MessageCompose extends Component{
     }
 
     getOptions(e){
-        return searchUser(e).then(json => {
+        return searchName(e).then(json => {
             console.log(json);
             return { options: json };
         }).catch(err => {

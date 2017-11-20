@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import Card from '../../CaregiverCard';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
-import { searchCaregivers } from '../../../api/api';
-import queryString from 'query-string';
+import { searchCaregivers, searchJobs } from '../../../api/api';
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchtext: "",
             locations: [],
             skills: [],
             languages: [],
             data: [],
             loading: true
         }
-        this.logSearchText = this.logSearchText.bind(this);
         this.performSearch = this.performSearch.bind(this);
         this.locations = [
             { value: 'Wan Chai', label: 'Wan Chai'},
@@ -80,69 +76,90 @@ class Search extends Component {
         this.performSearch();
     }
 
-    logSearchText(val) { //searchtext
-        this.setState({searchtext: val});
-    }
-
     performSearch(){
-        searchCaregivers({
-            location: this.state.locations,
-            skill: this.state.skills,
-            language: this.state.languages
-        }).then(json => {
-            this.setState({data: json.data});
-        }).catch(err => {
-            console.log(err);
-        });
+        this.setState({loading: true});
+
+        if(this.props.type === "caregiver"){
+            searchCaregivers({
+                location: this.state.locations,
+                skill: this.state.skills,
+                language: this.state.languages
+            }).then(json => {
+                this.setState({data: json.data, loading: false});
+            }).catch(err => {
+                this.setState({data: [], loading: false});
+                console.log(err);
+            });
+        }else{
+            searchJobs({
+                location: this.state.locations,
+                skill: this.state.skills,
+                language: this.state.languages
+            }).then(json => {
+                this.setState({data: json.data, loading: false});
+            }).catch(err => {
+                this.setState({data: [], loading: false});
+                console.log(err);
+            });
+        }
     }
 
     render(){
         return(
             <div className="container-fluid">
-            <div className="row equal">
-                <div className="col-sm-3 search-filters">
-                    <div className="location-filter">
-                        <h5 data-toggle="collapse" data-target="#location">Location </h5>
-                        <div id="location">
-                            <Select options={this.locations}
-                                multi
-                                onChange={(e)=> this.setState({locations: e}, this.performSearch)}
-                                value={this.state.locations}/>
+                <div className="row equal">
+                    <div className="col-sm-3 search-filters">
+                        <h3>Filters</h3>
+                        <div className="location-filter">
+                            <h5 data-toggle="collapse" data-target="#location">Location </h5>
+                            <div id="location">
+                                <Select options={this.locations}
+                                    multi
+                                    onChange={(e)=> this.setState({locations: e}, this.performSearch)}
+                                    value={this.state.locations}/>
+                            </div>
+                        </div>
+                        <div className="technical-filter">
+                            <h5 data-toggle="collapse" data-target="#tech">Technical Skills </h5>
+                            <div id="tech" className="collapse in">
+                                <Select options={this.skills}
+                                    multi
+                                    onChange={(e)=> this.setState({skills: e}, this.performSearch)}
+                                    value={this.state.skills}/>
+                            </div>
+                        </div>
+                        <div className="languages-filter">
+                            <h5 data-toggle="collapse" data-target="#language">Language </h5>
+                            <div id="language" className="collapse in">
+                                <Select options={this.languages}
+                                    multi
+                                    onChange={(e)=> this.setState({languages: e}, this.performSearch)}
+                                    value={this.state.languages} />
+                            </div>
                         </div>
                     </div>
-                    <div className="technical-filter">
-                        <h5 data-toggle="collapse" data-target="#tech">Technical Skills </h5>
-                        <div id="tech" className="collapse in">
-                            <Select options={this.skills}
-                                multi
-                                onChange={(e)=> this.setState({skills: e}, this.performSearch)}
-                                value={this.state.skills}/>
-                        </div>
-                    </div>
-                    <div className="languages-filter">
-                        <h5 data-toggle="collapse" data-target="#language">Language </h5>
-                        <div id="language" className="collapse in">
-                            <Select options={this.languages}
-                                multi
-                                onChange={(e)=> this.setState({languages: e}, this.performSearch)}
-                                value={this.state.languages} />
-                        </div>
-                    </div>
-                </div>
-                <div className="col-sm-9 search-body">
-                    <div className="row">
-                        <div className="col-md-4 col-sm-6">
-                        {
-                            this.state.data.length > 0 ?
-                            this.state.data.map(person => <Card type={this.props.type} about={person.caregiver[0].about} stars={person.caregiver[0].stars}
-                                firstName={person.firstName} lastName={person.lastName} location={person.location}/>) : 
-                            <div>No results. Try another search query.</div>
-                        }
+                    <div className="col-sm-9 search-body">
+                        <div className="row">
+                            {
+                                this.state.loading ? 
+                                    <div class="loader">Loading...</div> : (
+                                        this.state.data.length > 0 ?
+                                        this.state.data.map(person => 
+                                            <div className="col-md-4 col-sm-6">
+                                                {
+                                                    this.props.type === "caregiver" ? 
+                                                        <Card id={person.id} type={this.props.type} about={person.caregiver[0].about} stars={person.caregiver[0].stars}
+                                                            firstName={person.firstName} lastName={person.lastName} location={person.location}/> :
+                                                            <Card id={person.id} type={this.props.type} {...person} />    
+                                                    }
+                                            </div>) : 
+                                        <div>No results. Try another search query.</div>
+                                    )
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         );
     }
 }

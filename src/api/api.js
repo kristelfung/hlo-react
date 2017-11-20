@@ -1,11 +1,10 @@
 import rp from 'request-promise'
 import axios from 'axios';
-import queryString from 'query-string';
 
 axios.defaults.withCredentials = true;
 
-//const baseUrl = "http://13.228.121.24:1337"
-const baseUrl = "http://localhost:1337"
+//export const baseUrl = "http://13.228.121.24:1337"
+export const baseUrl = "http://localhost:1337"
 
 export function login(creds){
     const data = new FormData();
@@ -83,7 +82,7 @@ export function markRead(threadID){
     return axios.post(baseUrl + '/message/markRead/'+threadID);
 }
 
-export function searchUser(search){
+export function searchName(search){
     var options = {
         uri: baseUrl + '/user/searchName?user='+search,
         body: {search: search},
@@ -165,4 +164,12 @@ export function searchCaregivers(information){
         information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
     
     return axios.get(baseUrl + '/user/searchCaregiver?'+ queryString)
+}   
+
+export function searchJobs(information){
+    var queryString = ""; 
+    for(var key in information)
+        information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
+    
+    return axios.get(baseUrl + '/job/search?'+ queryString)
 }   

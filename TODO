@@ -1,0 +1,28 @@
+Hire/apply/offer link 
+
+Dashboard
+    Job
+        Job collapsible according to design  
+        Job start and end date
+    Messages
+        Messages to Select loading
+    Profile
+        Profile add upload profile pic for both
+        Profile edit fields
+
+        Profile in caregiver populate state
+        Add review page to caregiver profile 
+        Add location to caregiver form
+    Settings
+        Settings update for both
+
+Backend
+    Job model special medical type string 
+    Job model required times 
+    Sync caregiver model with caregiver profile form, 
+
+Job Profile page
+    Apply for job in job profile page
+
+Job search page
+    What kind of search params do we need?
