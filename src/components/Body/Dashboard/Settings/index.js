@@ -22,7 +22,7 @@ class Settings extends Component {
 
     }
 	save(e){
-	    //e.preventDefault();
+	    e.preventDefault();
 	    let information = {
     		id: this.props.id,
     		email :this.state.email,
@@ -50,7 +50,7 @@ class Settings extends Component {
 		                        <h3 className="form-title">Account</h3>
 		                        <div className="form-group">
 		                          <label htmlFor="email">Email</label>
-		                          <input type="email" className="form-control" id="email" value={this.state.email}onChange={(e) => this.setState({email: e.target.value})}/>
+		                          <input type="email" className="form-control" id="email" placeholder="current-address@gmail.com" value={this.state.email}onChange={(e) => this.setState({email: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="pwd">Password</label>
@@ -62,11 +62,11 @@ class Settings extends Component {
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="phone">Phone</label>
-		                          <input type="text" className="form-control" id="phone"  value={this.state.phone}onChange={(e) => this.setState({phone: e.target.value})}/>
+		                          <input type="text" className="form-control" id="phone" placeholder="+852 0000 0000" value={this.state.phone}onChange={(e) => this.setState({phone: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="hkid">HKID</label>
-		                          <input type="text" className="form-control" id="hkid"  value={this.state.hkid}onChange={(e) => this.setState({hkid: e.target.value})}/>
+		                          <input type="text" className="form-control" id="hkid" placeholder="XXXXXXX(X)" value={this.state.hkid}onChange={(e) => this.setState({hkid: e.target.value})}/>
 		                        </div>
 
 		                    </div>
@@ -74,23 +74,23 @@ class Settings extends Component {
 		                        <h3 className="form-title">Payment</h3>
 		                        <div className="form-group">
 		                          <label htmlFor="creditcard">Credit card</label>
-		                          <input type="text" className="form-control" id="creditcard"   value={this.state.cc}onChange={(e) => this.setState({cc: e.target.value})}/>
+		                          <input type="text" className="form-control" id="creditcard" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.state.cc}onChange={(e) => this.setState({cc: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="cif">CIF</label>
-		                          <input type="text" className="form-control" id="cif"  value={this.state.cif}onChange={(e) => this.setState({cif: e.target.value})}/>
+		                          <input type="text" className="form-control" id="cif" placeholder="xxx" value={this.state.cif}onChange={(e) => this.setState({cif: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="bankname">Bank name</label>
-		                          <input type="text" className="form-control" id="bankname"   value={this.state.bank}onChange={(e) => this.setState({bank: e.target.value})}/>
+		                          <input type="text" className="form-control" id="bankname" placeholder="HSBC"  value={this.state.bank}onChange={(e) => this.setState({bank: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="accnum">Account number</label>
-		                          <input type="text" className="form-control" id="accnum"   value={this.state.account}onChange={(e) => this.setState({account: e.target.value})}/>
+		                          <input type="text" className="form-control" id="accnum" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.state.account}onChange={(e) => this.setState({account: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="paypal">PayPal</label>
-		                          <input type="text" className="form-control" id="paypal"  value={this.state.paypal}onChange={(e) => this.setState({paypal: e.target.value})}/>
+		                          <input type="text" className="form-control" id="paypal" placeholder="PayPal account" value={this.state.paypal}onChange={(e) => this.setState({paypal: e.target.value})}/>
 		                        </div>
 		                    </div>
 		                </div>

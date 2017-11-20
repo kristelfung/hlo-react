@@ -56,10 +56,6 @@ class Profile extends Component {
             {value: 'Yuen Long', label: 'Yuen Long'},
             {value: 'Kowloon', label: 'Kowloon'}
         ];
-
-        // let languages = this.languages.filter(language => this.state.languages.indexOf(language.value) !== -1 )
-        // console.log('lan', languages);
-
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
         this.logChange = this.logChange.bind(this);
