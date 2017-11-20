@@ -9,7 +9,6 @@ class Profile extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-<<<<<<< HEAD
 			firstName :this.props.firstName,
 			lastName:this.props.lastName,
 			hourlyRate:this.props.caregiver.hourlyRate,
@@ -28,29 +27,6 @@ class Profile extends Component {
 			profile:this.props.caregiver.profilePic,
             cover:this.props.caregiver.coverPic,
             religion:this.props.caregiver.religion,
-=======
-			firstName :"",
-			lastName:"",
-			hourlyRate:"",
-			location:[],
-			gender:"Male",
-			dateOfBirth:"",
-			extraCharges:"",
-			edu:"",
-			experience:"",
-			yearexp:"",
-			languages:[],
-			otherNotes:"",
-			address:"",
-            district:"Central",
-            country:"Hong Kong",
-            hobbies:"",
-            description:"",
-			about:"",
-			profile:"",
-            cover:"",
-            religion:"",
->>>>>>> a7a9d5bea28fac54ff3c1d2f450adb25d015b4ff
 			tab:"detail",
 			day:"",
             startTime:"",
@@ -66,7 +42,10 @@ class Profile extends Component {
             typeOfCaregiver: this.props.caregiver.typeOfCaregiver,
             license: this.props.caregiver.license,
             yearsOfExperience: this.props.caregiver.yearsOfExperience,
-		}
+            location:this.props.location
+        }
+        console.log(this.props.caregiver.languages);
+        console.log(this.props.location);
 		this.save = this.save.bind(this);
 		this.languages = [
             {value: "Arabic", label:"Arabic" },
@@ -90,6 +69,21 @@ class Profile extends Component {
             {value:"Spanish", label:"Spanish" },
             {value:"Tagalog", label:"Tagalog" },
             {value:"Urdu", label:"Urdu" }
+        ];
+        this.options = [
+            { value: 'Wan Chai', label: 'Wan Chai'},
+            { value: 'Central', label: 'Central'},
+            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
+            {value: 'Aberdeen', label: 'Aberdeen'},
+            {value: 'Wan Chai', label: 'Wan Chai'},
+            {value: 'Kwun Tong', label: 'Kwun Tong'},
+            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
+            {value: 'San Ko Pong',label: 'San Ko Pong'},
+            {value: 'Mongkok', label: 'Mongkok'},
+            {value: 'Sha Tin', label: 'Sha Tin'},
+            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
+            {value: 'Yuen Long', label: 'Yuen Long'},
+            {value: 'Kowloon', label: 'Kowloon'}
         ];
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
@@ -140,7 +134,8 @@ class Profile extends Component {
 				dateOfBirth:this.state.dateOfBirth,
 				extraCharges:this.state.extraCharges,
                 religion:this.state.religion,
-                pricingPlan:this.state.pricingPlan
+                pricingPlan:this.state.pricingPlan,
+                
             }
 			let coverPic = this.state.cover;
 	        let profilePic = this.state.profile;
@@ -266,7 +261,13 @@ class Profile extends Component {
 				                                value={this.state.languages} />
 				                        </div>
 				                    </div>
-
+                                    <div className="form-group">
+                                        <label htmlFor="location">Location</label>
+                                        <Select options={this.options}
+                                            multi
+                                            onChange={(e)=> this.setState({location: e})}
+                                            value={this.state.location}/>
+                                    </div>
 					                <div className="form-group">
 					                    <label for="hobbies">Hobbies</label>
 					                    <textarea className="form-control" rows="3" id="hobbies" placeholder="Biking, painting..." value = {this.state.hobbies} onChange={(e) => this.setState({hobbies: e.target.value})}></textarea>
@@ -602,8 +603,7 @@ class Profile extends Component {
                                         <h5>Date of Birth</h5>
                                         <p>{this.state.dateOfBirth}</p>
                                         <br />
-                                        <h5>Languages</h5>
-                                        <p>{this.state.languages}</p>
+                                        
                                     </div>
                                     <div className="col-sm-6">
                                         <h5>Address</h5>

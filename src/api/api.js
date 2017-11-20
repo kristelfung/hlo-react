@@ -93,6 +93,10 @@ export function searchName(search){
 
 export function updateCustomerProfile(information){
     const data = new FormData();
+    var loc = [];
+    information.location.forEach(l => loc.push(l.value));
+    information.location = JSON.stringify(loc);
+    console.log(information.location);
     for(var key in information)
         data.append(key, information[key]);
     return axios.post(baseUrl + '/user/updateCustomer', data);
@@ -106,6 +110,7 @@ export function updateCaregiverProfile(information){
     var languages = [];
     information.languages.forEach(language => languages.push(language.value));
     information.languages = JSON.stringify(languages);
+    
    // information.location = JSON.stringify(information.location); 
     for(var key in information)
         data.append(key, information[key]);
