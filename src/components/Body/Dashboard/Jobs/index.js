@@ -5,6 +5,8 @@ import update from 'react-addons-update';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 
 import {getUser, saveJob, getJobData, hireCaregiver} from '../../../../api/api';
+import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
+import pendingJob from '../../../../images/dashboard/pendingjob.png'
 
 class Jobs extends Component {
 	constructor(props){
@@ -140,7 +142,7 @@ class Jobs extends Component {
             district: this.state.district,
             country: this.state.country,
             languages: JSON.stringify(this.state.languages.map(language => language.value)),
-            hobbies: this.state.hobbies,
+            hobbies: JSON.stringify(this.state.hobbies.split(',').map(hobby => hobby.trim())),
             description: this.state.description,
             lovedOnesDescription: this.state.lovedOnesDescription,
             duration: this.state.duration,
@@ -154,7 +156,7 @@ class Jobs extends Component {
         let coverPic = this.state.cover;
         let profilePic = this.state.profile;
         saveJob(info, coverPic, profilePic);
-        this.setState({data: { jobsApplied: [], jobsReceived: [], jobsCreated: [] },loading: true, isJobAdd:false, ...this.emptyJob, tab:"detail"});
+        this.setState({data: { jobsApplied: [], jobsReceived: [], jobsCreated: [] }, loading: true, isJobAdd:false, ...this.emptyJob, tab:"detail"});
         setTimeout(() => this.props.updateUser(), 1000);
     }
 
@@ -730,8 +732,6 @@ class CaregiverNotHired extends Component{
     }    
 
     hire(body){
-        
-        // //console.log(id);
         hireCaregiver(body);
     }
 
@@ -789,12 +789,13 @@ class CustomerJob extends Component{
     }
     
     fetchJob(){
-        this.setState({ isOpen:!this.state.isOpen});
-        getJobData(this.props.id).then(json => {
-            this.setState({ job: json.data});    
-        }).catch(err => {console.log(err)});
-
-       
+        if(this.state.job.id === undefined){
+            getJobData(this.props.id).then(json => {
+                this.setState({ job: json.data, isOpen:!this.state.isOpen});    
+            }).catch(err => {console.log(err)});
+        }else{
+            this.setState({isOpen:!this.state.isOpen});    
+        }
     }
     
     render(){
@@ -816,13 +817,13 @@ class CustomerJob extends Component{
         return (
             <div>
                 <div className="row job">
-                    <div onClick={this.fetchJob}>
+                    <div >
                         <div className="col-xs-6">
                             <h4>{this.props.name}</h4> 
                         </div>
                         <div className="col-xs-6 job-left">
-                            <img src="images/dashboard/confirmedjob.png" className="job-status" />
-                            <span className="expand-job"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+                            <img src={this.state.job.hiredCaregiver ? confirmedJob : pendingJob } className="job-status" />
+                            <span className="expand-job" onClick={this.fetchJob}><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
                         </div>
                     </div>
                     <Collapse in={this.state.isOpen}>

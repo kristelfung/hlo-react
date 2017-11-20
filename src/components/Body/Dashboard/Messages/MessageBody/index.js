@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+import {baseUrl} from '../../../../../api/api'
+import placeholder from '../../../../../images/profile-placeholder.png'
+
 class MessageBody extends Component {
     constructor(props){
         super(props);
@@ -30,11 +33,13 @@ class MessageBody extends Component {
 
     render(){
         this.props.replies.forEach(function(reply) {
-            
-            if(reply.from !== this.props.from.id)
+            if(reply.from !== this.props.from.id){
+                reply.profilePicUrl = this.props.to.profilePicUrl === undefined ? placeholder : baseUrl + this.props.to.profilePicUrl;
                 reply.fullName =  this.props.to.firstName + " " +this.props.to.lastName;
-            else
+            }else{
+                reply.profilePicUrl = this.props.from.profilePicUrl === undefined ? placeholder : baseUrl + this.props.from.profilePicUrl;
                 reply.fullName =  this.props.from.firstName + " " +this.props.from.lastName; 
+            }
         }, this);
 
         return(
@@ -42,13 +47,11 @@ class MessageBody extends Component {
                 <div className="container">
                     <h3>{this.props.threadSubject}</h3>
                     <h5>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h5>
-        
                     <div className="all-messages">
                         {
                             this.props.replies.map((reply, idx) => <Reply key={idx} {...reply} />)
                         }
                     </div>
-        
                     <form>
                         <div className="form-group">
                             <textarea className="form-control" rows="5" id="reply" placeholder="Enter your reply here..." value={this.state.message} onChange={e=>this.setState({message: e.target.value})}></textarea>
@@ -63,10 +66,9 @@ class MessageBody extends Component {
 
 class Reply extends Component{
     render(){
-        //TODO image stuff
         return(
             <div className="message-body">
-                <img src="images/msg.png"/>
+                <img src={this.props.profilePicUrl}/>
                 <h4>{this.props.fullName}</h4>
                 <h6>{moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
                 <p>{this.props.messageBody}</p>
