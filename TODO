@@ -1,0 +1,37 @@
+Hire/apply/offer link 
+
+Home page
+    Home page delayed load
+    Home page undefined user in caregiver object
+
+Dashboard
+    Job
+        Job add photo for pending/completed/hired
+        Job collapsible according to design  
+        Add new job
+            remove other on services
+            time start/end dropdown
+            in review page, Work times first row needs to be removed
+            submit json stringify and parse on back end 
+    Messages
+        Messages to Select loading
+    Profile
+        Profile add upload profile pic for both
+        Profile edit fields
+
+        Profile in caregiver populate state
+        Add review page to caregiver profile 
+        Add location to caregiver form
+    Settings
+        Settings update for both
+
+Backend
+    Job model special medical type string 
+    Job model required times 
+    Sync caregiver model with caregiver profile form, 
+
+Job Profile page
+    Apply for job in job profile page
+
+Job search page
+    What kind of search params do we need?

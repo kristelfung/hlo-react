@@ -70,7 +70,7 @@ class Profile extends Component {
         if(caregiverInfo.stars - i > 0){
             stars.push(<i className="fa fa-star-half-o" aria-hidden="true" ></i>);
         }
-        for (var i=0; i < 5-Math.ceil(caregiverInfo.stars); i++) {
+        for (i=0; i < 5-Math.ceil(caregiverInfo.stars); i++) {
             stars.push(<i className="fa fa-star-o" aria-hidden="true" ></i>);
         }
 

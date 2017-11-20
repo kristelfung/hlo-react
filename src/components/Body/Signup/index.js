@@ -35,17 +35,16 @@ class Signup extends Component{
             {value: 'Kowloon', label: 'Kowloon'}
         ];
         this.formSubmit = this.formSubmit.bind(this);
-
     }
 
     formSubmit(e){
         e.preventDefault();
-        
         if(this.state.password !== this.state.rptPassword){
             this.setState({
                 alert: true,
                 alertText: "Passwords don't match!"
             });
+            setInterval(() => this.setState({alert: false}), 2000);
             return;
         }
 
@@ -58,7 +57,6 @@ class Signup extends Component{
             lastName: this.state.lastName,
             location: locations
         }).then(json => {
-            console.log(json);
             window.location.href = "login";
 	    }).catch(err => {
             console.log(err);
@@ -70,7 +68,6 @@ class Signup extends Component{
                 alertText: "Email already registered!"                
             });
             setInterval(() => this.setState({alert: false}), 2000);
-            //onChange={(e)=>this.setState({location: e})} />
 		});
     }
     render(){
@@ -89,14 +86,15 @@ class Signup extends Component{
                             <label htmlFor="lastName">Last Name</label>
                             <input type="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={e => this.setState({lastName: e.target.value})}/>
                         </div>
+                        {/* 
                         <div className="form-group">
                             <label htmlFor="location">Location</label>
                             <Select options={this.options}
                                 multi
                                 onChange={(e)=> this.setState({location: e})}
                                 value={this.state.location}/>
-                                
                         </div>
+                        */}
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input type="email" className="form-control" id="email" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-
-import {getProfile} from '../../../../api/api'
-import {getUser} from '../../../../api/api'
-import Dashboard from '../../Dashboard';
-import {updateCustomerProfile} from '../../../../api/api'
-import {updateCaregiverProfile} from '../../../../api/api'
 import Select from 'react-select';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
+import {updateCustomerProfile, updateCaregiverProfile} from '../../../../api/api'
+import Dashboard from '../../Dashboard';
 
 class Profile extends Component {
 	constructor(props){
@@ -26,7 +23,7 @@ class Profile extends Component {
 			otherNotes:"",
 			address:"",
             district:"Central",
-            country:"Hong Kong",languages:[],
+            country:"Hong Kong",
             hobbies:"",
             description:"",
 			about:"",
@@ -91,12 +88,11 @@ class Profile extends Component {
     		id:this.props.userID
 	    }
     	updateCustomerProfile(information);
-	    if(this.props.type=="caregiver"){
+	    if(this.props.type==="caregiver"){
 	    	let caregiverInfo = {
 	    		id:this.props.userID,
 	    		education:this.state.edu,
 	    		experience:this.state.experience,
-	    		languages:this.state.languages,
 	    		otherNotes:this.state.otherNotes,
 	    		about:this.state.otherNotes,
 	    		hourlyRate:this.state.hourlyRate,
@@ -168,7 +164,7 @@ class Profile extends Component {
     	}
     	else{
 
-			if(this.state.tab=="detail"){
+			if(this.state.tab==="detail"){
             	body =  <div id="details" className="tab-pane">
 		                    <div className="row">
 		                    	<div className="col-md-6 form-column">
@@ -272,7 +268,7 @@ class Profile extends Component {
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
 	                    </ul>
             }
-            else if (this.state.tab=="experience"){
+            else if (this.state.tab==="experience"){
             	body =	
             	<div id="experience" class="tab-pane ">
                     <div class="row">
@@ -308,7 +304,7 @@ class Profile extends Component {
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
 	                    </ul>
             }
-            else if (this.state.tab=="services"){
+            else if (this.state.tab==="services"){
             	body =  <div id="requirements" className="tab-pane">
                         
                         <h4>Type of Caregiver</h4>
@@ -519,7 +515,7 @@ class Profile extends Component {
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
 	                    </ul>
             }
-            else if (this.state.tab=="photos"){
+            else if (this.state.tab==="photos"){
             	body = <div id="photos" className="tab-pane fade in active">
                         <h4>Profile Picture</h4>
 
@@ -546,7 +542,7 @@ class Profile extends Component {
 	                    </ul>
 
             }
-            else if (this.state.tab=="pricing"){
+            else if (this.state.tab==="pricing"){
             	body=<div id="pricing" class="tab-pane">
                     <div class="radio">
                         <label><input type="radio" name="optradio"/>Free Plan - 0$/mo</label>

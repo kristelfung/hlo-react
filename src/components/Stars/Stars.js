@@ -4,7 +4,7 @@ class Stars extends Component {
     render() {
         var num;
         //console.log(this.props.star);
-        if (this.props.stars == 0){
+        if (this.props.stars === 0){
             num=        
             <p>
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
@@ -14,7 +14,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if (this.props.stars == 0.5){
+        else if (this.props.stars === 0.5){
             num=        
             <p>
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
@@ -24,7 +24,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 1){
+        else if(this.props.stars === 1){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -33,7 +33,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>            }
-        else if(this.props.stars == 1.5){
+        else if(this.props.stars === 1.5){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -43,7 +43,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 2){
+        else if(this.props.stars === 2){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -53,7 +53,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 2.5){
+        else if(this.props.stars === 2.5){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -63,7 +63,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 3){
+        else if(this.props.stars === 3){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -73,7 +73,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 3.5){
+        else if(this.props.stars === 3.5){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -83,7 +83,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 4){
+        else if(this.props.stars === 4){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -93,7 +93,7 @@ class Stars extends Component {
                 <i className="fa fa-star-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 4.5){
+        else if(this.props.stars === 4.5){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>
@@ -103,7 +103,7 @@ class Stars extends Component {
                 <i className="fa fa-star-half-o" aria-hidden="true" ></i>
             </p>
         }
-        else if(this.props.stars == 5){
+        else if(this.props.stars === 5){
             num=
             <p>
                 <i className="fa fa-star" aria-hidden="true" ></i>

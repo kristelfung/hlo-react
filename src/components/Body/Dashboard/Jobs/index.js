@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Collapse} from 'react-bootstrap';
-import {getUser, getListedJobs, saveJob, saveProfilePic, saveCoverPic, getJobData, hireCaregiver} from '../../../../api/api';
+import {getUser, saveJob, getJobData, hireCaregiver} from '../../../../api/api';
 import update from 'react-addons-update';
-import Select from 'react-select';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
 class Jobs extends Component {
 	constructor(props){
         super(props);
@@ -123,7 +123,7 @@ class Jobs extends Component {
 
     handleChange(id){
         var index = this.state.typeOfCaregiver.indexOf(id);
-        if(index==-1){
+        if(index===-1){
             this.setState({ typeOfCaregiver: this.state.typeOfCaregiver.concat(["vc"])});
         }
         else{
@@ -146,7 +146,7 @@ class Jobs extends Component {
     render(){
         var body;
         var title;
-        if(this.state.tab=="detail"){
+        if(this.state.tab==="detail"){
             body = <div id="details" className="tab-pane fade in active">
                         <div className="row">
                             <div className="col-sm-6">
@@ -249,7 +249,7 @@ class Jobs extends Component {
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
-        else if (this.state.tab=="requirements"){
+        else if (this.state.tab==="requirements"){
             body =  <div id="requirements" className="tab-pane fade in active">
                         
                         <h4>Type of Caregiver</h4>
@@ -465,7 +465,7 @@ class Jobs extends Component {
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
-        else if (this.state.tab=="photos"){
+        else if (this.state.tab==="photos"){
             body = <div id="photos" className="tab-pane fade in active">
                         <h4>Profile Picture</h4>
 
@@ -490,7 +490,7 @@ class Jobs extends Component {
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
-        else if (this.state.tab=="review"){
+        else if (this.state.tab==="review"){
             body = 
             <div id="review" className="tab-pane fade in active">
                 <div className="row">

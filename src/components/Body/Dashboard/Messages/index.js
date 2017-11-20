@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import MessageCompose from './MessageCompose';
 import moment from 'moment';
 
-import {getInbox, sendMessage, searchUser} from '../../../../api/api';
+import {getInbox, baseUrl} from '../../../../api/api';
+import placeholder from '../../../../images/profile-placeholder.png'
 
 class Messages extends Component {
     constructor(props){
@@ -48,7 +49,7 @@ class Messages extends Component {
                         <tbody>
                             {
                                 this.state.data.length > 0 ? 
-                                this.state.data.map(message => <Message me={this.state.from} picURL={"localhost:1337"+message.from.profilePicUrl} loadMessage={this.props.loadMessage} key={message.id} message={message} />) :
+                                this.state.data.map(message => <Message me={this.state.from} loadMessage={this.props.loadMessage} key={message.id} message={message} />) :
                                 <tr>
                                     <td> No messages! Click on the button above to start a conversation.. </td>
                                 </tr>
@@ -66,12 +67,15 @@ class Message extends Component{
         let fullName = "";
         let myLastReadTime = "";
         let lastUpdateTime = moment(this.props.message.updatedAt);
+        let profilePicURL = "";
         if(this.props.message.from.id === this.props.me){
             fullName = this.props.message.to.firstName + " " + this.props.message.to.lastName;
+            profilePicURL = this.props.message.to.profilePicUrl === undefined ? placeholder :  baseUrl + this.props.message.to.profilePicUrl;
             myLastReadTime = moment(this.props.message.lastReadFrom);
         }else{
             fullName = this.props.message.from.firstName + " " + this.props.message.from.lastName;
             myLastReadTime = moment(this.props.message.lastReadTo);
+            profilePicURL = this.props.message.from.profilePicUrl === undefined ? placeholder :  baseUrl + this.props.message.from.profilePicUrl;
         }
 
         let messageBody = this.props.message.replies[this.props.message.replies.length - 1].messageBody;
@@ -80,7 +84,7 @@ class Message extends Component{
         return(
             <tr className={myLastReadTime.isBefore(lastUpdateTime) ? "inbox-message" : "inbox-message read"}  onClick={() => this.props.loadMessage(this.props.message)}>
                 <td className="image-td">
-                    <img src={this.props.picURL} className="message-pic"/>
+                    <img src={profilePicURL} className="message-pic"/>
                 </td>
                 <td>
                     <p className="message-author">{fullName}</p>
