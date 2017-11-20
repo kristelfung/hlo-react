@@ -7,16 +7,16 @@ class Settings extends Component {
         super(props);
 
     	this.state = {
-    		email :"",
-    		password:"",
-    		cPassword:"",
-    		phone:"",
-    		hkid:"",
-    		cc:"",
-    		cif:"",
-    		bank:"",
-    		account:"",
-    		paypal:""
+    		email :this.props.email,
+    		password:this.props.password,
+    		cPassword:this.props.password,
+    		phone:this.props.phoneNumber,
+    		hkid:this.props.hkidPassport,
+    		cc:this.props.creditCard,
+    		cif:this.props.cif,
+    		bank:this.props.bankName,
+    		account:this.props.accountNumber,
+    		paypal:this.props.paypal
     	}
     	this.save = this.save.bind(this);
 
@@ -28,17 +28,19 @@ class Settings extends Component {
     		email :this.state.email,
     		password:this.state.password,
     		cPassword:this.state.cPassword,
-    		phone:this.state.phone,
-    		hkid:this.state.hkid,
-    		cc:this.state.cc,
+    		phoneNumber:this.state.phone,
+    		hkidPassport:this.state.hkid,
+    		creditCard:this.state.cc,
     		cif:this.state.cif,
-    		bank:this.state.bank,
-    		account:this.state.account,
+    		bankName:this.state.bank,
+    		accountNumber:this.state.account,
     		paypal:this.state.paypal
 	    }
 	    updateSettings(information);
 	}
     render(){
+			console.log(this.props);
+			console.log(this.state);
         return (
         	<div className="dashbody">
 		        <div className="container-small">
@@ -48,7 +50,7 @@ class Settings extends Component {
 		                        <h3 className="form-title">Account</h3>
 		                        <div className="form-group">
 		                          <label htmlFor="email">Email</label>
-		                          <input type="email" className="form-control" id="email" placeholder="current-address@gmail.com" value={this.props.email}onChange={(e) => this.setState({email: e.target.value})}/>
+		                          <input type="email" className="form-control" id="email" value={this.state.email}onChange={(e) => this.setState({email: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="pwd">Password</label>
@@ -60,11 +62,11 @@ class Settings extends Component {
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="phone">Phone</label>
-		                          <input type="text" className="form-control" id="phone" placeholder="+852 0000 0000" value={this.props.phoneNumber}onChange={(e) => this.setState({phone: e.target.value})}/>
+		                          <input type="text" className="form-control" id="phone"  value={this.state.phone}onChange={(e) => this.setState({phone: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="hkid">HKID</label>
-		                          <input type="text" className="form-control" id="hkid" placeholder="XXXXXXX(X)" value={this.props.hkidPassport}onChange={(e) => this.setState({hkid: e.target.value})}/>
+		                          <input type="text" className="form-control" id="hkid"  value={this.state.hkid}onChange={(e) => this.setState({hkid: e.target.value})}/>
 		                        </div>
 
 		                    </div>
@@ -72,23 +74,23 @@ class Settings extends Component {
 		                        <h3 className="form-title">Payment</h3>
 		                        <div className="form-group">
 		                          <label htmlFor="creditcard">Credit card</label>
-		                          <input type="text" className="form-control" id="creditcard" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.props.creditCard}onChange={(e) => this.setState({cc: e.target.value})}/>
+		                          <input type="text" className="form-control" id="creditcard"   value={this.state.cc}onChange={(e) => this.setState({cc: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="cif">CIF</label>
-		                          <input type="text" className="form-control" id="cif" placeholder="xxx" value={this.props.cif}onChange={(e) => this.setState({cif: e.target.value})}/>
+		                          <input type="text" className="form-control" id="cif"  value={this.state.cif}onChange={(e) => this.setState({cif: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="bankname">Bank name</label>
-		                          <input type="text" className="form-control" id="bankname" placeholder="HSBC"  value={this.props.bankName}onChange={(e) => this.setState({bank: e.target.value})}/>
+		                          <input type="text" className="form-control" id="bankname"   value={this.state.bank}onChange={(e) => this.setState({bank: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="accnum">Account number</label>
-		                          <input type="text" className="form-control" id="accnum" placeholder="xxxx-xxxx-xxxx-xxxx"  value={this.props.accountNumber}onChange={(e) => this.setState({account: e.target.value})}/>
+		                          <input type="text" className="form-control" id="accnum"   value={this.state.account}onChange={(e) => this.setState({account: e.target.value})}/>
 		                        </div>
 		                        <div className="form-group">
 		                          <label htmlFor="paypal">PayPal</label>
-		                          <input type="text" className="form-control" id="paypal" placeholder="PayPal account" value={this.props.paypal}onChange={(e) => this.setState({paypal: e.target.value})}/>
+		                          <input type="text" className="form-control" id="paypal"  value={this.state.paypal}onChange={(e) => this.setState({paypal: e.target.value})}/>
 		                        </div>
 		                    </div>
 		                </div>

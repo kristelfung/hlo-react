@@ -101,7 +101,9 @@ export function updateCustomerProfile(information){
 
 export function updateCaregiverProfile(information){
     const data = new FormData();
+    information.typeOfCaregiver = JSON.stringify(information.typeOfCaregiver);
     information.skills = JSON.stringify(information.skills);
+    information.personalServices = JSON.stringify(information.personalServices);
     var languages = [];
     information.languages.forEach(language => languages.push(language.value));
     information.languages = JSON.stringify(languages);

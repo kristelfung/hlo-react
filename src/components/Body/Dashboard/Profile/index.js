@@ -12,37 +12,39 @@ class Profile extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			firstName :"",
-			lastName:"",
-			hourlyRate:"",
-			location:[],
-			gender:"Male",
-			dateOfBirth:"",
-			extraCharges:"",
-			edu:"",
-			experience:"",
-			yearexp:"",
-			languages:[],
-			otherNotes:"",
-			address:"",
-            district:"Central",
-            country:"Hong Kong",languages:[],
-            hobbies:"",
-            description:"",
-			about:"",
-			profile:"",
-            cover:"",
-            religion:"",
+			firstName :this.props.firstName,
+			lastName:this.props.lastName,
+			hourlyRate:this.props.caregiver.hourlyRate,
+			location:this.props.location,
+			gender:this.props.caregiver.gender,
+			dateOfBirth:this.props.caregiver.dateOfBirth,
+			extraCharges:this.props.caregiver.extraCharges,
+			education:this.props.caregiver.education,
+			experience:this.props.caregiver.experience,
+			languages:this.props.caregiver.languages,
+			address:this.props.caregiver.address,
+            district:this.props.caregiver.district,
+            country:this.props.caregiver.country,
+            hobbies:this.props.caregiver.hobbies,
+            about:this.props.caregiver.about,
+			profile:this.props.caregiver.profilePic,
+            cover:this.props.caregiver.coverPic,
+            religion:this.props.caregiver.religion,
 			tab:"detail",
 			day:"",
             startTime:"",
             endTime:"",
-            requiredTimes : [{
+            availability : [{
                 day:"",
                 startTime:"",
                 endTime:"",
-            }],professionalServices: [],
-            personalServices: []
+            }],
+            skills: this.props.caregiver.skills,
+            personalServices: this.props.caregiver.personalServices,
+            pricingPlan : this.props.caregiver.pricingPlan,
+            typeOfCaregiver: this.props.caregiver.typeOfCaregiver,
+            license: this.props.caregiver.license,
+            yearsOfExperience: this.props.caregiver.yearsOfExperience,
 		}
 		this.save = this.save.bind(this);
 		this.languages = [
@@ -71,7 +73,7 @@ class Profile extends Component {
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
         this.logChange = this.logChange.bind(this);
-        this.logProfessionalServices = this.logProfessionalServices.bind(this);
+        this.logskills = this.logskills.bind(this);
         this.logPersonalServices = this.logPersonalServices.bind(this);
 	}
 	add(){
@@ -80,7 +82,7 @@ class Profile extends Component {
             startTime:this.state.startTime,
             endTime:this.state.endTime
         }
-        this.setState({requiredTimes: this.state.requiredTimes.concat([reqTime]), day:"",startTime:"",endTime:""});
+        this.setState({availability: this.state.availability.concat([reqTime]), day:"",startTime:"",endTime:""});
     } 
 	save(e){
 	    
@@ -94,7 +96,7 @@ class Profile extends Component {
 	    if(this.props.type=="caregiver"){
 	    	let caregiverInfo = {
 	    		id:this.props.userID,
-	    		education:this.state.edu,
+	    		education:this.state.education,
 	    		experience:this.state.experience,
 	    		languages:this.state.languages,
 	    		otherNotes:this.state.otherNotes,
@@ -105,22 +107,21 @@ class Profile extends Component {
 	            country:this.state.country,
 	            languages:this.state.languages,
 	            hobbies:this.state.hobbies,
-	            description:this.state.description,
+	            about:this.state.about,
 	            day:this.state.day,
 	            startTime:this.state.startTime,
 	            endTime:this.state.endTime,
 	            duration: this.state.duration ,
-	            specialMedical:this.state.specialMedical,
 	            typeOfCaregiver: this.state.typeOfCaregiver,
-	            professionalServices:this.state.professionalServices,
+	            skills:this.state.skills,
 	            personalServices: this.state.personalServices,
 	            createdBy: this.props.userID,
 				gender:this.state.gender,
 				dateOfBirth:this.state.dateOfBirth,
 				extraCharges:this.state.extraCharges,
-            	religion:this.state.religion,
-            	skills: this.state.professionalServices
-			}
+                religion:this.state.religion,
+                pricingPlan:this.state.pricingPlan
+            }
 			let coverPic = this.state.cover;
 	        let profilePic = this.state.profile;
 	        
@@ -133,8 +134,8 @@ class Profile extends Component {
         this.setState({ typeOfCaregiver: val});
     }
 
-    logProfessionalServices(val){
-        this.setState({ professionalServices: val});
+    logskills(val){
+        this.setState({ skills: val});
     }
 
     logPersonalServices(val){
@@ -152,17 +153,14 @@ class Profile extends Component {
             <div className="col-md-6 form-column">
                 <div className="form-group">
                   <label htmlFor="firstname">First name</label>
-                  <input type="text" className="form-control" id="firstname" value = {this.props.firstName} onChange={(e) => this.setState({firstName: e.target.value})}/>
+                  <input type="text" className="form-control" id="firstname" value = {this.state.firstName} onChange={(e) => this.setState({firstName: e.target.value})}/>
                 </div>
                 <div className="form-group">
                   <label htmlFor="lastName">Last name</label>
-                  <input type="text" className="form-control" id="lastName" value = {this.props.lastName} onChange={(e) => this.setState({lastName: e.target.value})}/>
+                  <input type="text" className="form-control" id="lastName" value = {this.state.lastName} onChange={(e) => this.setState({lastName: e.target.value})}/>
                 </div>
                
-            	<div className="form-group">
-                  <label htmlFor="hourlyRate">Hourly rate</label>
-                  <input type="text" className="form-control" id="hourlyRate" value = {this.props.caregiver.hourlyRate}onChange={(e) => this.setState({hourlyRate: e.target.value})}/>
-                </div>
+            	
             </div>
 	       title = <div></div>         
     	}
@@ -237,7 +235,7 @@ class Profile extends Component {
 	                                </div>
 			                        <div className="form-group">
 			                          <label for="religion">Religion</label>
-			                          <input type="text" className="form-control" id="religion"value = {this.state.religion} onChange={(e) => this.setState({distreligionrict: e.target.value})}/>
+			                          <input type="text" className="form-control" id="religion"value = {this.state.religion} onChange={(e) => this.setState({religion: e.target.value})}/>
 			                        </div>
 			                        <div className="form-group">
 				                        <label htmlFor="address">Language</label>
@@ -251,11 +249,11 @@ class Profile extends Component {
 
 					                <div className="form-group">
 					                    <label for="hobbies">Hobbies</label>
-					                    <textarea className="form-control" rows="3" id="hobbies" placeholder="Biking, painting..."></textarea>
+					                    <textarea className="form-control" rows="3" id="hobbies" placeholder="Biking, painting..." value = {this.state.hobbies} onChange={(e) => this.setState({hobbies: e.target.value})}></textarea>
 					                </div>
 					                <div className="form-group">
 					                  <label for="about">About</label>
-					                  <textarea className="form-control" rows="5" id="about" placeholder="I am a 30 year old nursing student..."></textarea>
+					                  <textarea className="form-control" rows="5" id="about" placeholder="I am a 30 year old nursing student..." value = {this.state.about} onChange={(e) => this.setState({about: e.target.value})}></textarea>
 					                </div>
 					                <div className="submit-buttons">
 					                    <a onClick={(e) => this.setState({tab: "experience"})} className="btn btn-primary">Next</a>
@@ -270,6 +268,7 @@ class Profile extends Component {
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "services"})}>Services</a></li>
 	                        <li ><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
 	                    </ul>
             }
             else if (this.state.tab=="experience"){
@@ -278,12 +277,12 @@ class Profile extends Component {
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="yearexp">Years of experience</label>
-                                <input type="number" class="form-control" id="yearexp" value = {this.state.yearexp} onChange={(e) => this.setState({yearexp: e.target.value})}/>
+                                <label for="yearsOfExperience">Years of experience</label>
+                                <input type="number" class="form-control" id="yearsOfExperience" value = {this.state.yearsOfExperience} onChange={(e) => this.setState({yearsOfExperience: e.target.value})}/>
                             </div>
                             <div class="form-group">
                                 <label for="workexp">Work experience</label>
-                                <input type="text" class="form-control" id="workexp" value = {this.state.workexp} onChange={(e) => this.setState({workexp: e.target.value})}/>
+                                <input type="text" class="form-control" id="workexp" value = {this.state.experience} onChange={(e) => this.setState({experience: e.target.value})}/>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -292,8 +291,8 @@ class Profile extends Component {
                                 <input type="text" class="form-control" id="license" value = {this.state.license} onChange={(e) => this.setState({license: e.target.value})}/>
                             </div>
                             <div class="form-group">
-                                <label for="edu">Education History</label>
-                                <input type="text" class="form-control" id="edu" value = {this.state.edu} onChange={(e) => this.setState({edu: e.target.value})}/>
+                                <label for="education">Education History</label>
+                                <input type="text" class="form-control" id="education" value = {this.state.education} onChange={(e) => this.setState({education: e.target.value})}/>
                             </div>
                         </div>
                     </div>
@@ -353,7 +352,7 @@ class Profile extends Component {
                         
 
                         <h4>Professional Services</h4>
-                        <CheckboxGroup name="typeCaregivers" value = {this.state.professionalServices} onChange={this.logProfessionalServices} >
+                        <CheckboxGroup name="typeCaregivers" value = {this.state.skills} onChange={this.logskills} >
                             <div className="row checkbox-collection">
                                 <div className="col-sm-6">
                                     <div className="checkbox">
@@ -473,16 +472,16 @@ class Profile extends Component {
                                 <label className="col-xs-3 control-label">Time Start</label>
                                 <label className="col-xs-3 control-label">Time End</label>
                                 <label className="col-xs-1 control-label"></label>
-                                {this.state.requiredTimes.map((time, idx) => 
+                                {this.state.availability.map((time, idx) => 
                                     <div>
                                         <div className="col-xs-5">
-                                            {this.state.requiredTimes[idx].day}
+                                            {this.state.availability[idx].day}
                                         </div>
                                         <div className="col-xs-3">
-                                            {this.state.requiredTimes[idx].startTime}
+                                            {this.state.availability[idx].startTime}
                                         </div>
                                         <div className="col-xs-3">
-                                            {this.state.requiredTimes[idx].endTime}
+                                            {this.state.availability[idx].endTime}
                                         </div>
                                     </div>
                                 )}
@@ -503,10 +502,7 @@ class Profile extends Component {
                             </div>
                         </div>
                        
-                        <div className="form-group">
-                            <label htmlFor="lovedones">Describe yourself</label>
-                            <textarea className="form-control" rows="4" id="lovedones" placeholder="My mother is 88 years old..." value = {this.state.description} onChange={(e) => this.setState({description: e.target.value})}></textarea>
-                        </div>
+                       
 
                         <span className="btn btn-default back" onClick={(e) => this.setState({tab: "experience"})}>Back</span>
                         <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "photos"})}>Next</span>
@@ -517,6 +513,7 @@ class Profile extends Component {
 	                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "services"})}>Services</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
 	                    </ul>
             }
             else if (this.state.tab=="photos"){
@@ -543,11 +540,12 @@ class Profile extends Component {
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "services"})}>Services</a></li>
 	                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
 	                    </ul>
 
             }
             else if (this.state.tab=="pricing"){
-            	body=<div id="pricing" class="tab-pane">
+            	body=<div id="pricing" class="tab-pane" value = {this.state.pricingPlan} onChange={(e) => this.setState({pricingPlan: e.target.value})}>
                     <div class="radio">
                         <label><input type="radio" name="optradio"/>Free Plan - 0$/mo</label>
                     </div>
@@ -558,15 +556,79 @@ class Profile extends Component {
                         <label><input type="radio" name="optradio"/>Partner Plan - 888$/mo</label>
                     </div>
                     <a onClick={(e) => this.setState({tab: "photos"})} class="btn btn-default back">Back</a>
-                    <a className="btn btn-primary next" onClick={this.save}>Submit</a>
+                    <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "pricing"})}>Next</span>
+                    
                 </div>
+            
                 title = <ul className="nav nav-pills nav-justified postjob-steps"> 
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "experience"})}>Experience</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "services"})}>Services</a></li>
 	                        <li ><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
 	                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
 	                    </ul>
+            }
+            else if (this.state.tab =="review"){
+                body = <div id="review" className="tab-pane">
+                            <div className="row">
+                                    <div className="col-sm-6">
+                                        <h5>Name</h5>
+                                        <p>{this.state.firstName} {this.state.lastName}</p>
+                                        <br/>
+                                        <h5>Gender</h5>
+                                        <p>{this.state.gender}</p>
+                                        <br/>
+                                        <h5>Date of Birth</h5>
+                                        <p>{this.state.dateOfBirth}</p>
+                                        <br />
+                                        <h5>Languages</h5>
+                                        <p>{this.state.languages}</p>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <h5>Address</h5>
+                                        <p>{this.state.address}</p>
+                                        <br />
+                                        <h5>District</h5>
+                                        <p>{this.state.district}</p>
+                                        <br />
+                                        <h5>Country</h5>
+                                        <p>{this.state.country}</p>
+                                    </div>
+                                </div>
+                                <br/>
+                                <h5>About</h5>
+                                <p>{this.state.about}</p>
+                                <br/>
+                                
+                                <h5>Work Times</h5>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Day of Week</th>
+                                            <th>Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.availability.map((time, idx)=> 
+                                            <tr>
+                                                <td>{this.state.availability[idx].day}</td>
+                                                <td>{this.state.availability[idx].startTime} - {this.state.availability[idx].endTime}</td>
+                                                </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            <a onClick={(e) => this.setState({tab: "pricing"})} className="btn btn-default back">Back</a>
+                            <a className="btn btn-primary next" onClick={this.save}>Submit</a>
+                        </div>
+                title = <ul className="nav nav-pills nav-justified postjob-steps"> 
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "experience"})}>Experience</a></li>
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "services"})}>Services</a></li>
+                            <li ><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
+                            <li ><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
+                            <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
+                        </ul>
             }
 
         
