@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {Collapse} from 'react-bootstrap';
+import {Collapse, Modal} from 'react-bootstrap';
 import Select from 'react-select';
 import update from 'react-addons-update';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import moment from 'moment'
 
-import {getUser, saveJob, getJobData, hireCaregiver} from '../../../../api/api';
+import {getUser, saveJob, getJobData, hireCaregiver, baseUrl} from '../../../../api/api';
+import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
 
@@ -24,9 +26,8 @@ class Jobs extends Component {
             languages:[],
             hobbies:"",
             description:"",
-            day:"",
-            startTime:"",
-            endTime:"",
+            startDate:"",
+            endDate:"",
             requiredTimes : [],
             profile:"",
             cover:"",
@@ -146,6 +147,8 @@ class Jobs extends Component {
             description: this.state.description,
             lovedOnesDescription: this.state.lovedOnesDescription,
             duration: this.state.duration,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
             requiredTimes: JSON.stringify(this.state.requiredTimes),
             specialMedical: JSON.stringify(this.state.specialMedical.split(',').map(special => special.trim())),
             typeOfCaregiver: JSON.stringify(this.state.typeOfCaregiver),
@@ -343,7 +346,6 @@ class Jobs extends Component {
                                 </div>
                             </div>
                         </CheckboxGroup>
-                        
 
                         <h4>Professional Services</h4>
                         <CheckboxGroup name="typeCaregivers" value = {this.state.professionalServices} onChange={this.logProfessionalServices} >
@@ -408,6 +410,7 @@ class Jobs extends Component {
                                 </div>
                             </div>
                         </CheckboxGroup>
+
                         <h4>Personal Services</h4>
                         <CheckboxGroup name="personalServices" value = {this.state.personalServices} onChange={this.logPersonalServices} >
                             <div className="row checkbox-collection">
@@ -459,6 +462,17 @@ class Jobs extends Component {
                             <textarea className="form-control" rows="4" id="address" placeholder="ALS, diabetes, stroke..." value = {this.state.specialMedical} onChange={(e) => this.setState({specialMedical: e.target.value})}></textarea>
                         </div>
                         
+                        <div className="row">
+                            <div className="form-group col-xs-5">
+                                <label htmlFor="startDate">Start Date</label>
+                                <input type="date" className="form-control" id="startDate" placeholder="DD/MM/YYY" value = {this.state.startDate} onChange={(e) => this.setState({startDate: e.target.value})}/>
+                            </div>
+                            <div className="form-group col-xs-5">
+                                <label htmlFor="endDate">End Date</label>
+                                <input type="date" className="form-control" id="endDate" placeholder="DD/MM/YYY" value = {this.state.endDate} onChange={(e) => this.setState({endDate: e.target.value})}/>
+                            </div>
+                        </div>
+
                         <div className="form-group">
                             <div className="row">
                                 <label className="col-xs-5 control-label">Day of Week</label>
@@ -624,13 +638,6 @@ class Jobs extends Component {
                         <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                     </ul>
         }
-        if(this.props.jobsCreated.hiredCaregiver){
-            console.log(' caregiver hired');
-            this.setState({isCaregiverHired:true});
-        }
-        else{
-            console.log(" no caregiver hired");
-        }
 
         if(!this.state.isJobAdd ){
             return (
@@ -647,9 +654,9 @@ class Jobs extends Component {
                                 :
                                 <div></div>
                             }
-                            
                         </div>
-                        {(this.state.type === "caregiver") ?
+                        {
+                            this.state.type === "caregiver" ?
                             <div className="container-fluid">
                                 {
                                     this.state.data.jobsApplied.map(job => <Job key={job.id} {...job}/>)
@@ -684,77 +691,100 @@ class Jobs extends Component {
         
     }
 }
+
 class CaregiverHired extends Component{
     constructor(props){
         super(props);
         this.state =  {
-            caregiverHired : props.caregiverHired === undefined ? [] : props.caregiverHired
+            caregiverHired : {},
+            loading: true,
+            error: false,
+            reviewText: "",
+            stars: 0
         }
+
         getUser(this.props.caregiverHired.user).then(json => {
             this.setState({
-                caregiverHired: json.data
+                caregiverHired: json.data,
+                loading: false,
+                error: false
             });
         }).catch(err => {
-            console.log("err"+err);
+            console.log(err);
+            this.setState({
+                loading: false,
+                error: true
+            });
         });
+
+        this.submitReview = this.submitReview.bind(this);
+    }
+
+    submitReview(e){
+        e.preventDefault();
+        let review = {
+            reviewText: this.state.reviewText,
+            stars: this.state.stars
+        };
+        console.log("Subvmit review", review)
     }
     
     render(){
-        console.log(this.props);
+        let imageSrc = this.state.caregiverHired.profilePicUrl === undefined ? placeholder : baseUrl + this.state.caregiverHired.profilePicUrl;
         return (
-            <div>
-                <div id="job2" className="job-desc">
-                    <div className="hired-caregiver ">
-                        <h4 className="text-center">Hired Caregiver</h4>
-                        <img src="images/msg.png" className="hired-picture" />
-                        <h4 className="text-center">{this.state.caregiverHired.firstName} {this.state.caregiverHired.lastName}</h4>
-                        <h5 className="text-center">$ {this.props.caregiverHired.hourlyRate} per hour</h5>
+            <div className="">
+                <div className="job-desc">
+                    <div className="hired-caregiver">
+                        <h4>Hired Caregiver</h4>
+                        <img src={imageSrc} className="hired-picture" />
+                        <h4>{this.state.caregiverHired.firstName + " " + this.state.caregiverHired.lastName}</h4>
+                        <h5>${this.state.caregiverHired.caregiver.hourlyRate} HKD per hour</h5>
+                        <button className="btn btn-primary">Message</button>
+                        <button type="button" className="btn btn-default" onClick={()=> this.setState({reviewModal: true})}>Review</button>
+                        
+                        <Modal className="fade review-modal" show={this.state.reviewModal} onHide={() => this.setState({reviewModal: false})}>
+                            <Modal.Header >
+                                <Modal.Title><h4 className="modal-title">Review Caregiver</h4></Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <form>
+                                    <div className="form-group rating-stars">
+                                        <label>Star Rating</label>
+                                        <br />
+                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                    </div>
+                                    <div className="form-group">
+                                        <label for="comment">Comments</label>
+                                        <textarea className="form-control" rows="5" id="comment" placeholder="Describe your experience!" value={this.state.reviewText} onChange={(e) => this.setState({reviewText: e.target.value})} />
+                                    </div>
+                                    <div className="submit-buttons">
+                                        <button type="button" className="btn btn-default" onClick={() => this.setState({reviewModal: false})} data-dismiss="modal">Close</button>
+                                        <button type="submit" className="btn btn-primary" onClick={this.submitReview} data-dismiss="modal">Submit</button>
+                                    </div>
+                                </form>
+                            </Modal.Body>
+                        </Modal>
                     </div>
-                </div>
-            </div>
-        );
-    }
-}
-class CaregiverNotHired extends Component{
-    constructor(props){
-        super(props);
-        this.state =  {
-            caregiversApplied : props.caregiversApplied === undefined ? [] : props.caregiversApplied
-        }
-        this.hire = this.hire.bind(this);
-        console.log(this.props.caregiversApplied[0].caregiverName);
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            caregiversApplied: nextProps.caregiversApplied
-        });
-    }    
-
-    hire(body){
-        hireCaregiver(body);
-    }
-
-    render(){
-        return (
-            <div>
-                <div id="job1" className="job-desc">
-                    <h4>Caregiver Applicants</h4>
-                    <table className="table table-hover applicants">
-                        <tbody>
-                        {this.state.caregiversApplied.map(jobApplication=>(
+                    <h4>Work Times</h4>
+                    <h6>From {moment(this.props.startDate).format('MMMM Do YYYY')} - {moment(this.props.endDate).format('MMMM Do YYYY')}</h6>
+                    <table className="table">
+                        <thead>
                             <tr>
-                                <td>
-                                    <h5 className="applicant-name">{jobApplication.caregiverName}</h5>
-                                    <p className="applicant-date">{jobApplication.createdAt}</p>
-                                </td>
-                                <td className="applicant-buttons">
-                                    <a onClick={()=>this.hire({caregiverID : jobApplication.caregiver, jobID: jobApplication.job})} className="btn btn-default">Hire</a>
-                                    <button href="#" className="btn btn-default">Message</button>
-                                </td>
+                                <th>Day of Week</th>
+                                <th>Time</th>
                             </tr>
-                            ))
-                        }
+                        </thead>
+                        <tbody>
+                            {this.props.requiredTimes.map(item => 
+                                            <tr>
+                                                <td>{item.day}</td>
+                                                <td>{item.startTime} - {item.endTime}</td>
+                                            </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -762,6 +792,148 @@ class CaregiverNotHired extends Component{
         );
     }
 }
+
+class CaregiverNotHired extends Component{
+    constructor(props){
+        super(props);
+        this.state =  {
+        }
+        this.hire = this.hire.bind(this);
+    }
+
+    hire(body){
+        hireCaregiver(body);
+    }
+
+    render(){
+        return (
+            <div className="">            
+                <div className="job-desc">
+                    <h4>Job Description</h4>
+                    <p>{this.props.description}</p>
+                    <br/>
+                    <h4>Work Times</h4>
+                    <h6>From {moment(this.props.startDate).format('MMMM Do YYYY')} to {moment(this.props.endDate).format('MMMM Do YYYY')}</h6>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Day of Week</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.requiredTimes.map((item, idx) => 
+                                <tr key={idx}>
+                                    <td>{item.day}</td>
+                                    <td>{item.startTime} - {item.endTime}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                    <br/>
+                    <h4>Caregiver Applicants</h4>
+                    <table className="table table-hover applicants">
+                        <tbody>
+                            {
+                                this.props.caregiversApplied.length === 0 ? <tr><td><h6>No one has applied for this job.</h6></td></tr> :
+                                this.props.caregiversApplied.map((jobApplication, idx) => 
+                                <tr key={idx}>
+                                    <td>
+                                        <a href={"/profile/"+jobApplication.caregiver} className="applicant-link">
+                                        <h5 className="applicant-name">{jobApplication.caregiverName}</h5>
+                                        <p className="applicant-date">{jobApplication.createdAt}</p>
+                                        </a>
+                                    </td>
+                                    <td className="applicant-buttons">
+                                        <a onClick={()=>this.hire({caregiverID : jobApplication.caregiver, jobID: jobApplication.job})} className="btn btn-default">Hire</a>
+                                        <button href="#" className="btn btn-default">Message</button>
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                    <br/>
+                    <h4>Caregiver Applicants</h4>
+                    <table className="table table-hover applicants">
+                        <tbody>
+                            {
+                            this.props.caregiversOffered.length === 0 ? <tr><td><h6>No one has been offered this job.</h6></td></tr> :
+                            this.props.caregiversOffered.map((jobOffer, idx) => 
+                                <tr key={idx}>
+                                    <td>
+                                        <a href={"/profile/"+jobOffer.caregiver} className="applicant-link">
+                                        <h5 className="applicant-name">{jobOffer.caregiverName}</h5>
+                                        <p className="applicant-date">{jobOffer.createdAt}</p>
+                                        </a>
+                                    </td>
+                                    <td className="applicant-buttons">
+                                        <button href="#" className="btn btn-default">Message</button>
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+}
+
+class CustomerJob extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            isOpen: false,
+            loading: true,
+            job: {},
+        }
+        this.fetchJob = this.fetchJob.bind(this);
+    }
+    
+    fetchJob(){
+        if(this.state.job.id === undefined){
+            getJobData(this.props.id).then(json => {
+                this.setState({ error: false, job: json.data, isOpen:!this.state.isOpen, loading: false});    
+            }).catch(err => this.setState({error: true, loading: false}));
+        }else{
+            this.setState({isOpen:!this.state.isOpen});    
+        }
+    }
+    
+    render(){
+        return (
+            <div>
+                <div className="row job">
+                    <div >
+                        <div className="col-xs-6">
+                            <h4>{this.props.name}</h4> 
+                        </div>
+                        <div className="col-xs-6 job-left">
+                            <img src={this.state.job.hiredCaregiver ? confirmedJob : pendingJob } className="job-status" />
+                            <span className="expand-job" onClick={this.fetchJob}><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    <Collapse in={this.state.isOpen}>
+                        <div>
+                            {
+                                this.state.loading ? <div className="loader">Loading...</div> :
+                                (
+                                    this.state.error ? <div><h5> Could not load job details!</h5></div> :
+                                    (
+                                        this.state.job.hiredCaregiver !== undefined ? 
+                                            <CaregiverHired {...this.state.job} /> :
+                                            <CaregiverNotHired {...this.state.job} />    
+                                    )
+                                )
+                            }                    
+                        </div>
+                    </Collapse>
+                </div>
+            </div>
+        );
+    }
+}
+
 class Job extends Component{
 	render(){
 		return (
@@ -777,63 +949,5 @@ class Job extends Component{
 		);
 	}
 }
-class CustomerJob extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            isOpen: false,
-            job: {}
-        }
-        this.fetchJob = this.fetchJob.bind(this);
-        
-    }
-    
-    fetchJob(){
-        if(this.state.job.id === undefined){
-            getJobData(this.props.id).then(json => {
-                this.setState({ job: json.data, isOpen:!this.state.isOpen});    
-            }).catch(err => {console.log(err)});
-        }else{
-            this.setState({isOpen:!this.state.isOpen});    
-        }
-    }
-    
-    render(){
-        var jobBody ="jb";
-        if(this.state.job.hiredCaregiver ){
-            jobBody = <CaregiverHired caregiverHired = {this.state.job.hiredCaregiver} />
-        }
-        else{
-            if((this.state.job.caregiversApplied && this.state.job.caregiversApplied.length > 0) ||  
-                (this.state.job.caregiversOffered && this.state.job.caregiversOffered.length > 0)
-                ){
-                jobBody = <CaregiverNotHired caregiversApplied = {this.state.job.caregiversApplied} caregiversOffered = {this.state.job.caregiversOffered} />    
-            }
-            else{
-                jobBody = <div> No One applied for this job. </div>
-            }
-        }
-        
-        return (
-            <div>
-                <div className="row job">
-                    <div >
-                        <div className="col-xs-6">
-                            <h4>{this.props.name}</h4> 
-                        </div>
-                        <div className="col-xs-6 job-left">
-                            <img src={this.state.job.hiredCaregiver ? confirmedJob : pendingJob } className="job-status" />
-                            <span className="expand-job" onClick={this.fetchJob}><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
-                        </div>
-                    </div>
-                    <Collapse in={this.state.isOpen}>
-                        <div>
-                            {jobBody}                    
-                        </div>
-                    </Collapse>
-                </div>
-            </div>
-        );
-    }
-}
+
 export default Jobs;

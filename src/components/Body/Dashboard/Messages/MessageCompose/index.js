@@ -64,36 +64,36 @@ class MessageCompose extends Component{
     render(){
         return(
             <Modal show={this.props.open} onHide={this.props.onHide}>
-            <Modal.Header >
-                <Modal.Title>Compose Message</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="recipient">Recipient</label>
-                        <Select.Async
-                            id="recipient" 
-                            placeholder="Recipient"
-                            name="form-field-recipient"
-                            value={this.state.to} onChange={(e) => this.setState({to: e.value})}
-                            loadOptions={debounce(this.getOptions, 800)}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="subject">Subject</label>
-                        <input type="text" className="form-control" id="subject" placeholder="Subject" value={this.state.subject} onChange={(e) => this.setState({subject: e.target.value})}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="message">Message</label>
-                        <textarea type="text" className="form-control" rows="5" id="message" placeholder="Write your message here..." value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}></textarea>
-                    </div>    
-                    <div className="submit-buttons">       
-                        <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.props.onHide}>Close</button>                                
-                        <button type="submit" className="btn btn-primary" onClick={this.sendMessage}>Send</button>
-                    </div> 
-                </form>
-            </Modal.Body>
-        </Modal>
+                <Modal.Header >
+                    <Modal.Title>Compose Message</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form>
+                        <div className="form-group">
+                            <label htmlFor="recipient">Recipient</label>
+                            <Select.Async
+                                id="recipient" 
+                                placeholder="Recipient"
+                                name="form-field-recipient"
+                                value={this.state.to} onChange={(e) => this.setState({to: e.value})}
+                                loadOptions={debounce(this.getOptions, 800)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="subject">Subject</label>
+                            <input type="text" className="form-control" id="subject" placeholder="Subject" value={this.state.subject} onChange={(e) => this.setState({subject: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="message">Message</label>
+                            <textarea type="text" className="form-control" rows="5" id="message" placeholder="Write your message here..." value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}></textarea>
+                        </div>    
+                        <div className="submit-buttons">       
+                            <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.props.onHide}>Close</button>                                
+                            <button type="submit" className="btn btn-primary" onClick={this.sendMessage}>Send</button>
+                        </div> 
+                    </form>
+                </Modal.Body>
+            </Modal>
         )
     }
 }
