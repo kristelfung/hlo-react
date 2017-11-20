@@ -54,15 +54,6 @@ class Profile extends Component {
     }
     render() {
         let caregiverInfo = this.state.data.caregiver;
-        let availArray = [];
-        for (var key in caregiverInfo.availability) {
-            var item = caregiverInfo.availability[key];
-            availArray.push({
-                day: key,
-                time: item
-            })
-        };
-
         let stars = [];
         for (var i=0; i < Math.floor(caregiverInfo.stars); i++) {
             stars.push(<i className="fa fa-star" aria-hidden="true" ></i>);
@@ -113,10 +104,10 @@ class Profile extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {availArray.map(item => 
+                                    {caregiverInfo.availability.map(item => 
                                         <tr>
                                             <td>{item.day}</td>
-                                            <td>{item.time}</td>
+                                            <td>{item.startTime} - {item.endTime}</td>
                                         </tr>
                                     )}
                                 </tbody>

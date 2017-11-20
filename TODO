@@ -4,11 +4,6 @@ Dashboard
     Job
         Job add photo for pending/completed/hired
         Job collapsible according to design  
-        Add new job
-            remove other on services
-            time start/end dropdown
-            in review page, Work times first row needs to be removed
-            submit json stringify and parse on back end 
     Messages
         Messages to Select loading
     Profile

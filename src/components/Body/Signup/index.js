@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {signup} from '../../../api/api'
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 import logo2 from '../../../images/logo2.png';
 

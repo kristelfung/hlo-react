@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Collapse} from 'react-bootstrap';
-import {getUser, saveJob, getJobData, hireCaregiver} from '../../../../api/api';
+import Select from 'react-select';
 import update from 'react-addons-update';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
+import {getUser, saveJob, getJobData, hireCaregiver} from '../../../../api/api';
 
 class Jobs extends Component {
 	constructor(props){
@@ -23,11 +25,7 @@ class Jobs extends Component {
             day:"",
             startTime:"",
             endTime:"",
-            requiredTimes : [{
-                day:"",
-                startTime:"",
-                endTime:"",
-            }],
+            requiredTimes : [],
             profile:"",
             cover:"",
             lovedOnesDescription: "",
@@ -51,6 +49,47 @@ class Jobs extends Component {
             isJobAdd:false,
             ...this.emptyJob
         }
+
+        this.times = [];
+        for(var i = 0; i < 24; i++){
+            this.times.push({ value: i.toString().padStart(2, "0") + ":00", label:  i.toString().padStart(2, "0") + ":00"});
+            this.times.push({ value: i.toString().padStart(2, "0") + ":30", label:  i.toString().padStart(2, "0") + ":30"});
+        }
+
+        this.days = [
+            {value: 'Monday', label: 'Monday'},
+            {value: 'Tuesday', label: 'Tuesday'},
+            {value: 'Wednesday', label: 'Wednesday'},
+            {value: 'Thursday', label: 'Thursday'},
+            {value: 'Friday', label: 'Friday'},
+            {value: 'Saturday', label: 'Saturday'},
+            {value: 'Sunday', label: 'Sunday'}
+        ];
+
+        this.languages = [
+            {value: "Arabic", label:"Arabic" },
+            {value:"Armenian", label:"Armenian" },
+            {value:"ASL", label:"ASL" },
+            {value:"Cantonese", label:"Cantonese" },
+            {value:"English", label:"English" },
+            {value:"French", label:"French" },
+            {value:"German", label:"German" },
+            {value:"Greek", label:"Greek" },
+            {value:"Hebrew", label:"Hebrew" },
+            {value:"Hindi", label:"Hindi" },
+            {value:"Italian", label:"Italian" },
+            {value:"Korean", label:"Korean" },                              
+            {value:"Mandarin", label:"Mandarin" },
+            {value:"Persian", label:"Persian" },
+            {value:"Polish", label:"Polish" },
+            {value:"Portuguese", label:"Portuguese" },
+            {value:"Russian", label:"Russian" },
+            {value:"Shanghainese", label:"Shanghainese" },
+            {value:"Spanish", label:"Spanish" },
+            {value:"Tagalog", label:"Tagalog" },
+            {value:"Urdu", label:"Urdu" }
+        ];
+
 		this.save = this.save.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.logChange = this.logChange.bind(this);
@@ -93,25 +132,26 @@ class Jobs extends Component {
         let info = {
             name: this.state.name,
             gender: this.state.gender,
-            dateOfBirth:this.state.dateOfBirth,
-            hkidPassport:this.state.hkidPassport,
-            phoneNumber:this.state.phoneNumber,
-            email:this.state.email,
-            address:this.state.address,
-            district:this.state.district,
-            country:this.state.country,
-            languages:this.state.languages,
-            hobbies:this.state.hobbies,
-            description:this.state.description,
-            day:this.state.day,
-            startTime:this.state.startTime,
-            endTime:this.state.endTime,
+            dateOfBirth: this.state.dateOfBirth,
+            hkidPassport: this.state.hkidPassport,
+            phoneNumber: this.state.phoneNumber,
+            email: this.state.email,
+            address: this.state.address,
+            district: this.state.district,
+            country: this.state.country,
+            languages: JSON.stringify(this.state.languages.map(language => language.value)),
+            hobbies: this.state.hobbies,
+            description: this.state.description,
+            day: this.state.day,
+            startTime: this.state.startTime,
+            endTime: this.state.endTime,
             lovedOnesDescription: this.state.lovedOnesDescription,
-            duration: this.state.duration ,
-            specialMedical:this.state.specialMedical,
-            typeOfCaregiver: this.state.typeOfCaregiver,
-            professionalServices:this.state.professionalServices,
-            personalServices: this.state.personalServices,
+            duration: this.state.duration,
+            requiredTimes: JSON.stringify(this.state.requiredTimes),
+            specialMedical: JSON.stringify(this.state.specialMedical.split(',').map(special => special.trim())),
+            typeOfCaregiver: JSON.stringify(this.state.typeOfCaregiver),
+            professionalServices: JSON.stringify(this.state.professionalServices),
+            personalServices: JSON.stringify(this.state.personalServices),
             createdBy: this.props.userID
         }
         let coverPic = this.state.cover;
@@ -164,10 +204,12 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="gender">Gender</label>
-                                    <select className="form-control" id="gender"  value = {this.state.gender}onChange={(e) => this.setState({gender: e.target.value})}>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </select>
+                                    <Select
+                                        options={[{value: "Male", label: "Male"}, {value: "Female", label: "Female"}]}
+                                        id="gender" 
+                                        placeholder="Gender"
+                                        value = {this.state.gender} onChange={(e) => this.setState({gender: e ? e.value : ""})}
+                                    />
                                 </div>
                             
                                 <div className="form-group">
@@ -198,40 +240,52 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="district">District</label>
-                                    <select className="form-control" id="district"  value = {this.state.district} onChange={(e) => this.setState({district: e.target.value})}>
-                                        <option>Central</option>
-                                        <option>Sai Wan Ho</option>
-                                        <option>Aberdeen</option>
-                                        <option>Wan Chai</option>
-                                        <option>Kwun Tong</option>
-                                        <option>Sham Shui Po</option>
-                                        <option>San Ko Pong</option>
-                                        <option>Mongkok</option>
-                                        <option>Sha Tin</option>
-                                        <option>Tsuen Wan</option>
-                                        <option>Yuen Long</option>
-                                        <option>Kowloon</option>
-                                        <option>Other</option>
-                                    </select>
+                                    <Select options={[
+                                            { value: 'Wan Chai', label: 'Wan Chai'},
+                                            { value: 'Central', label: 'Central'},
+                                            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
+                                            {value: 'Aberdeen', label: 'Aberdeen'},
+                                            {value: 'Wan Chai', label: 'Wan Chai'},
+                                            {value: 'Kwun Tong', label: 'Kwun Tong'},
+                                            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
+                                            {value: 'San Ko Pong',label: 'San Ko Pong'},
+                                            {value: 'Mongkok', label: 'Mongkok'},
+                                            {value: 'Sha Tin', label: 'Sha Tin'},
+                                            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
+                                            {value: 'Yuen Long', label: 'Yuen Long'},
+                                            {value: 'Kowloon', label: 'Kowloon'},
+                                            {value: 'Other', label: 'Other'}
+                                        ]}
+                                        id="district" 
+                                        placeholder="District"
+                                        value = {this.state.district} onChange={(e) => this.setState({district: e ? e.value : ""})}
+                                    />
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="country">Country</label>
-                                    <select className="form-control" id="country"  value = {this.state.country} onChange={(e) => this.setState({country: e.target.value})}>
-                                        <option>Hong Kong</option>
-                                        <option>China</option>
-                                        <option>Singapore</option>
-                                        <option>Singapore</option>
-                                        <option>Malaysia</option>
-                                        <option>India</option>
-                                    </select>
+                                    <Select options={[
+                                            { value: 'Hong Kong', label: 'Hong Kong'},
+                                            { value: 'Singapore', label: 'Singapore'},
+                                            {value: 'China', label: 'China'},
+                                            {value: 'Malaysia', label: 'Malaysia'},
+                                            {value: 'India', label: 'India'},
+                                            {value: 'Other', label: 'Other'}
+                                        ]}
+                                        id="country" 
+                                        placeholder="Country"
+                                        value = {this.state.country} onChange={(e) => this.setState({country: e ? e.value : ""})}
+                                    />
                                 </div>
-
                                 <div className="form-group">
                                     <label htmlFor="languages">Languages</label>
-                                    <input type="text" className="form-control" id="languages" placeholder="Comma seperated" value = {this.state.languages.join(',')} onChange={(e) => this.setState({languages: e.target.value.split(',')})}/>
+                                    <Select options={this.languages}
+                                        multi
+                                        id="languages" 
+                                        placeholder="Languages" 
+                                        onChange={(e)=> this.setState({languages: e})}
+                                        value={this.state.languages} />
                                 </div>
-
                                 <div className="form-group">
                                     <label htmlFor="address">Hobbies</label>
                                     <textarea className="form-control" rows="2" id="hobbies" placeholder="Biking, running..." value = {this.state.hobbies} onChange={(e) => this.setState({hobbies: e.target.value})}></textarea>
@@ -251,7 +305,6 @@ class Jobs extends Component {
         }
         else if (this.state.tab==="requirements"){
             body =  <div id="requirements" className="tab-pane fade in active">
-                        
                         <h4>Type of Caregiver</h4>
                         <CheckboxGroup name="typeCaregivers" value = {this.state.typeOfCaregiver} onChange={this.logChange} >
                             <div className="row checkbox-collection">
@@ -323,10 +376,6 @@ class Jobs extends Component {
                                     </div>
                                     <div className="checkbox">
                                         <label><Checkbox value="Massage Therapist"/>Massage Therapist</label>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="other">Other</label>
-                                        <input type="text" className="form-control" id="other"/>
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
@@ -432,13 +481,31 @@ class Jobs extends Component {
                                 )}
                                 <div>
                                     <div className="col-xs-5">
-                                        <input type="text" className="form-control" value = {this.state.day} onChange={(e) => this.setState({day: e.target.value})}/>
+                                        <Select
+                                            options={this.days}
+                                            id="recipient" 
+                                            placeholder="Day"
+                                            name="form-field-recipient"
+                                            value = {this.state.day} onChange={(e) => this.setState({day: e ? e.value : ""})}
+                                        />
                                     </div>
                                     <div className="col-xs-3">
-                                        <input type="time" className="form-control"  value = {this.state.startTime}onChange={(e) => this.setState({startTime: e.target.value})}/>
+                                        <Select
+                                            options={this.times}
+                                            id="recipient" 
+                                            placeholder="Start Time"
+                                            name="form-field-recipient"
+                                            value = {this.state.startTime} onChange={(e) => this.setState({startTime: e ? e.value : ""})}
+                                        />
                                     </div>
                                     <div className="col-xs-3">
-                                        <input type="time" className="form-control" value = {this.state.endTime}onChange={(e) => this.setState({endTime: e.target.value})}/>
+                                        <Select
+                                            options={this.times}
+                                            id="recipient" 
+                                            placeholder="End Time"
+                                            name="form-field-recipient"
+                                            value = {this.state.endTime} onChange={(e) => this.setState({endTime: e ? e.value : ""})}
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-xs-1">
@@ -505,7 +572,7 @@ class Jobs extends Component {
                         <p>{this.state.dateOfBirth}</p>
                         <br />
                         <h5>Languages</h5>
-                        <p>{this.state.languages.join(', ')}</p>
+                        <p>{this.state.languages.map(language => language.value).join(', ')}</p>
                     </div>
                     <div className="col-sm-6">
                         <h5>Address</h5>

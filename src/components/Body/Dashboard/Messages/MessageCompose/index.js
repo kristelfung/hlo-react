@@ -5,7 +5,6 @@ import {Modal} from 'react-bootstrap';
 import debounce from 'debounce';
 
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 class MessageCompose extends Component{
     constructor(props){
