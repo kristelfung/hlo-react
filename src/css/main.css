@@ -202,18 +202,20 @@ h1, h2, h3, h4, h5, h6, p {
   min-height: 70px;
   margin-bottom: 0px; }
   .navbar .navbar-nav {
-    /* style the dropdown menu, detach from navbar */
     /* carrot arrow */ }
-    .navbar .navbar-nav a {
-      line-height: 70px;
-      padding-top: 0px;
-      padding-bottom: 0px; }
-    .navbar .navbar-nav .dropdown-menu {
-      margin-top: 15px;
-      border-radius: 4px;
-      /* round menu */ }
+    @media (min-width: 768px) {
+      .navbar .navbar-nav a {
+        line-height: 70px;
+        padding-top: 0px;
+        padding-bottom: 0px; } }
+    @media (min-width: 768px) {
       .navbar .navbar-nav .dropdown-menu > li > a {
         line-height: 45px; }
+      .navbar .navbar-nav .dropdown-menu {
+        /* detach from navbar */
+        margin-top: 15px;
+        border-radius: 4px;
+        /* round menu */ } }
     .navbar .navbar-nav .dropdown-menu:after {
       content: "";
       position: absolute;
