@@ -93,10 +93,6 @@ export function searchName(search){
 
 export function updateCustomerProfile(information){
     const data = new FormData();
-    var loc = [];
-    information.location.forEach(l => loc.push(l.value));
-    information.location = JSON.stringify(loc);
-    console.log(information.location);
     for(var key in information)
         data.append(key, information[key]);
     return axios.post(baseUrl + '/user/updateCustomer', data);
@@ -104,18 +100,8 @@ export function updateCustomerProfile(information){
 
 export function updateCaregiverProfile(information){
     const data = new FormData();
-    information.typeOfCaregiver = JSON.stringify(information.typeOfCaregiver);
-    information.skills = JSON.stringify(information.skills);
-    information.personalServices = JSON.stringify(information.personalServices);
-    var languages = [];
-    information.languages.forEach(language => languages.push(language.value));
-    information.languages = JSON.stringify(languages);
-    
-   // information.location = JSON.stringify(information.location); 
     for(var key in information)
         data.append(key, information[key]);
-
-
     return axios.post(baseUrl + '/user/updateCaregiver', data);
 }
 
@@ -152,6 +138,24 @@ export function saveJob(information, coverPic, profilePic) {
     });
 }
 
+export function uploadUserPics(profilePic, coverPic){
+    const data2 = new FormData();
+    data2.append('profilePic', profilePic);
+    axios.post(baseUrl + '/user/uploadProfilePic/', data2).then(json => {
+        console.log("Profile pic posted!");
+    }).catch (err => {
+        console.log("Profile pic err!", err);
+    });
+
+    const data3 = new FormData();    
+    data3.append('coverPic', coverPic);
+    axios.post(baseUrl + '/user/uploadCoverPic/', data3).then(json => {
+        console.log("coverPic posted!");            
+    }).catch(err => {
+        console.log("coverPic err!", err);            
+    });
+}
+
 export function hireCaregiver(information){
     const data = new FormData();
     for(var key in information)
@@ -177,4 +181,8 @@ export function searchJobs(information){
         information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
     
     return axios.get(baseUrl + '/job/search?'+ queryString)
-}   
+} 
+
+export function submitReview(review){
+    return axios.post(baseUrl + '/caregiver/review/', review);
+}

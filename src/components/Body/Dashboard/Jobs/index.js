@@ -5,10 +5,11 @@ import update from 'react-addons-update';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import moment from 'moment'
 
-import {getUser, saveJob, getJobData, hireCaregiver, baseUrl} from '../../../../api/api';
+import {getUser, saveJob, getJobData, hireCaregiver, baseUrl, submitReview} from '../../../../api/api';
 import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
+import Stars from '../../../Stars'
 
 class Jobs extends Component {
 	constructor(props){
@@ -722,17 +723,22 @@ class CaregiverHired extends Component{
 
     submitReview(e){
         e.preventDefault();
-        let review = {
-            reviewText: this.state.reviewText,
-            stars: this.state.stars
-        };
-        console.log("Subvmit review", review)
+        submitReview({
+            review: this.state.reviewText,
+            stars: this.state.stars,
+            reviewFor: this.state.caregiverHired.id
+        }).then(json => {
+            this.setState({reviewModal: false});
+        }).catch(err => {
+            console.log(err);
+            this.setState({reviewModal: false});
+        });
     }
     
     render(){
         let imageSrc = this.state.caregiverHired.profilePicUrl === undefined ? placeholder : baseUrl + this.state.caregiverHired.profilePicUrl;
         return (
-            <div className="">
+            <div>
                 <div className="job-desc">
                     <div className="hired-caregiver">
                         <h4>Hired Caregiver</h4>
@@ -750,12 +756,8 @@ class CaregiverHired extends Component{
                                 <form>
                                     <div className="form-group rating-stars">
                                         <label>Star Rating</label>
+                                        <Stars setter stars={this.state.stars} onChange={(stars) => this.setState({stars: stars})} />
                                         <br />
-                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                        <i className="fa fa-star-o" aria-hidden="true"></i>
                                     </div>
                                     <div className="form-group">
                                         <label for="comment">Comments</label>
@@ -796,8 +798,6 @@ class CaregiverHired extends Component{
 class CaregiverNotHired extends Component{
     constructor(props){
         super(props);
-        this.state =  {
-        }
         this.hire = this.hire.bind(this);
     }
 
@@ -906,7 +906,8 @@ class CustomerJob extends Component{
                 <div className="row job">
                     <div >
                         <div className="col-xs-6">
-                            <h4>{this.props.name}</h4> 
+                            <h4>{this.props.name}</h4>
+                             <h6>{moment(this.state.job.createdAt).format('MMMM Do, YYYY')}</h6>
                         </div>
                         <div className="col-xs-6 job-left">
                             <img src={this.state.job.hiredCaregiver ? confirmedJob : pendingJob } className="job-status" />

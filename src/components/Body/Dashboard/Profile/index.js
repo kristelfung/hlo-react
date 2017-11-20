@@ -1,51 +1,22 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import moment from 'moment'
 
-import {updateCustomerProfile, updateCaregiverProfile} from '../../../../api/api'
+import {updateCustomerProfile, updateCaregiverProfile, uploadUserPics} from '../../../../api/api'
 import Dashboard from '../../Dashboard';
 
 class Profile extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			firstName :this.props.firstName,
-			lastName:this.props.lastName,
-			hourlyRate:this.props.caregiver.hourlyRate,
-			location:this.props.location,
-			gender:this.props.caregiver.gender,
-			dateOfBirth:this.props.caregiver.dateOfBirth,
-			extraCharges:this.props.caregiver.extraCharges,
-			education:this.props.caregiver.education,
-			experience:this.props.caregiver.experience,
-			languages:this.props.caregiver.languages,
-			address:this.props.caregiver.address,
-            district:this.props.caregiver.district,
-            country:this.props.caregiver.country,
-            hobbies:this.props.caregiver.hobbies,
-            about:this.props.caregiver.about,
-			profile:this.props.caregiver.profilePic,
-            cover:this.props.caregiver.coverPic,
-            religion:this.props.caregiver.religion,
+			...this.props,
+            ...this.props.caregiver,
 			tab:"detail",
 			day:"",
             startTime:"",
             endTime:"",
-            availability : [{
-                day:"",
-                startTime:"",
-                endTime:"",
-            }],
-            skills: this.props.caregiver.skills,
-            personalServices: this.props.caregiver.personalServices,
-            pricingPlan : this.props.caregiver.pricingPlan,
-            typeOfCaregiver: this.props.caregiver.typeOfCaregiver,
-            license: this.props.caregiver.license,
-            yearsOfExperience: this.props.caregiver.yearsOfExperience,
-            location:this.props.location
         }
-        console.log(this.props.caregiver.languages);
-        console.log(this.props.location);
 		this.save = this.save.bind(this);
 		this.languages = [
             {value: "Arabic", label:"Arabic" },
@@ -85,6 +56,10 @@ class Profile extends Component {
             {value: 'Yuen Long', label: 'Yuen Long'},
             {value: 'Kowloon', label: 'Kowloon'}
         ];
+
+        // let languages = this.languages.filter(language => this.state.languages.indexOf(language.value) !== -1 )
+        // console.log('lan', languages);
+
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
         this.logChange = this.logChange.bind(this);
@@ -100,11 +75,10 @@ class Profile extends Component {
         this.setState({availability: this.state.availability.concat([reqTime]), day:"",startTime:"",endTime:""});
     } 
 	save(e){
-	    
 	    let information = {
     		firstName : this.state.firstName,
-    		lastName: this.state.lastName,
-    		location : this.state.location,
+            lastName: this.state.lastName,
+            location: JSON.stringify(this.state.location.map(location => location.value === undefined ? location : location.value)),
     		id:this.props.userID
 	    }
     	updateCustomerProfile(information);
@@ -118,30 +92,29 @@ class Profile extends Component {
 	    		hourlyRate:this.state.hourlyRate,
 	    		address:this.state.address,
 	            district:this.state.district,
-	            country:this.state.country,
-	            languages:this.state.languages,
+                country:this.state.country,
+                availability: JSON.stringify(this.state.availability),                
+                languages: JSON.stringify(this.state.languages.map(language => language.value === undefined ? language : language.value)),
 	            hobbies:this.state.hobbies,
 	            about:this.state.about,
 	            day:this.state.day,
 	            startTime:this.state.startTime,
 	            endTime:this.state.endTime,
-	            duration: this.state.duration ,
-	            typeOfCaregiver: this.state.typeOfCaregiver,
-	            skills:this.state.skills,
-	            personalServices: this.state.personalServices,
-	            createdBy: this.props.userID,
+	            typeOfCaregiver: JSON.stringify(this.state.typeOfCaregiver),
+	            skills: JSON.stringify(this.state.skills),
+	            personalServices: JSON.stringify(this.state.personalServices),
 				gender:this.state.gender,
 				dateOfBirth:this.state.dateOfBirth,
 				extraCharges:this.state.extraCharges,
                 religion:this.state.religion,
                 pricingPlan:this.state.pricingPlan,
-                
+                yearsOfExperience: this.state.yearsOfExperience,
+                license: this.state.license
             }
 			let coverPic = this.state.cover;
 	        let profilePic = this.state.profile;
-	        
+	        uploadUserPics(profilePic, coverPic);
 	        this.setState({tab:"detail"});
-	        
 	    	updateCaregiverProfile(caregiverInfo);
 	    }   
 	}
@@ -164,7 +137,6 @@ class Profile extends Component {
     	var title;
     	if(this.props.type==="customer"){
     		body = 
-    		
             <div className="col-md-6 form-column">
                 <div className="form-group">
                   <label htmlFor="firstname">First name</label>
@@ -174,13 +146,10 @@ class Profile extends Component {
                   <label htmlFor="lastName">Last name</label>
                   <input type="text" className="form-control" id="lastName" value = {this.state.lastName} onChange={(e) => this.setState({lastName: e.target.value})}/>
                 </div>
-               
-            	
             </div>
 	       title = <div></div>         
     	}
     	else{
-
 			if(this.state.tab==="detail"){
             	body =  <div id="details" className="tab-pane">
 		                    <div className="row">
@@ -202,7 +171,7 @@ class Profile extends Component {
 			                        </div>
 			                        <div className="form-group">
 	                                    <label htmlFor="bday">Date of Birth</label>
-	                                    <input type="date" className="form-control" id="bday" placeholder="DD/MM/YYY" value = {this.state.dateOfBirth} onChange={(e) => this.setState({dateOfBirth: e.target.value})}/>
+	                                    <input type="date" className="form-control" id="bday" placeholder="DD/MM/YYY" value = {moment(this.state.dateOfBirth).format('YYYY-MM-DD')} onChange={(e) => this.setState({dateOfBirth: e.target.value})}/>
 	                                </div>
 			                        <div className="form-group">
 			                          <label for="hrrate">Hourly rate</label>
@@ -326,6 +295,7 @@ class Profile extends Component {
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "services"})}>Services</a></li>
 	                        <li ><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "pricing"})}>Pricing</a></li>
+                            <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
 	                    </ul>
             }
             else if (this.state.tab==="services"){
@@ -508,8 +478,20 @@ class Profile extends Component {
                                 )}
                                 <div>
                                     <div className="col-xs-5">
-                                        <input type="text" className="form-control" value = {this.state.day} onChange={(e) => this.setState({day: e.target.value})}/>
-                                    </div>
+                                        <Select
+                                        options={[
+                                            {value: 'Monday', label: 'Monday'},
+                                            {value: 'Tuesday', label: 'Tuesday'},
+                                            {value: 'Wednesday', label: 'Wednesday'},
+                                            {value: 'Thursday', label: 'Thursday'},
+                                            {value: 'Friday', label: 'Friday'},
+                                            {value: 'Saturday', label: 'Saturday'},
+                                            {value: 'Sunday', label: 'Sunday'}
+                                        ]}
+                                        id="recipient" 
+                                        placeholder="Day"
+                                        name="form-field-recipient"
+                                        value = {this.state.day} onChange={(e) => this.setState({day: e ? e.value : ""})}/>                                    </div>
                                     <div className="col-xs-3">
                                         <input type="time" className="form-control"  value = {this.state.startTime}onChange={(e) => this.setState({startTime: e.target.value})}/>
                                     </div>
@@ -568,13 +550,13 @@ class Profile extends Component {
             else if (this.state.tab==="pricing"){
             	body=<div id="pricing" class="tab-pane">
                     <div class="radio">
-                        <label><input type="radio" name="optradio"/>Free Plan - 0$/mo</label>
+                        <label><input type="radio" name="optradio" value="Free" checked={this.state.pricingPlan === "Free"} onClick={(e) => this.setState({pricingPlan: "Free"})}/>Free Plan - 0$/mo</label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="optradio"/>Entrepreneur Plan - 88$/mo</label>
+                        <label><input type="radio" name="optradio" value="Entrepreneur" checked={this.state.pricingPlan === "Entrepreneur"} onClick={(e) => this.setState({pricingPlan: "Entrepreneur"})}/>Entrepreneur Plan - 88$/mo</label>
                     </div>
                     <div class="radio">
-                        <label><input type="radio" name="optradio"/>Partner Plan - 888$/mo</label>
+                        <label><input type="radio" name="optradio" value="Partner" checked={this.state.pricingPlan === "Partner"} onClick={(e) => this.setState({pricingPlan: "Partner"})}/>Partner Plan - 888$/mo</label>
                     </div>
                     <a onClick={(e) => this.setState({tab: "photos"})} class="btn btn-default back">Back</a>
                     <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "pricing"})}>Next</span>
@@ -601,7 +583,7 @@ class Profile extends Component {
                                         <p>{this.state.gender}</p>
                                         <br/>
                                         <h5>Date of Birth</h5>
-                                        <p>{this.state.dateOfBirth}</p>
+                                        <p>{moment(this.state.dateOfBirth).format('DD MMM YYYY')}</p>
                                         <br />
                                         
                                     </div>
@@ -634,7 +616,7 @@ class Profile extends Component {
                                             <tr>
                                                 <td>{this.state.availability[idx].day}</td>
                                                 <td>{this.state.availability[idx].startTime} - {this.state.availability[idx].endTime}</td>
-                                                </tr>
+                                            </tr>
                                         )}
                                     </tbody>
                                 </table>

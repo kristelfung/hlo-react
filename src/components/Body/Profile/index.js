@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import placeholder from '../../../images/profile-placeholder.png'
 
+import placeholder from '../../../images/profile-placeholder.png'
 import {getUser} from '../../../api/api'
+import Stars from '../../Stars'
 
 class Profile extends Component {
     constructor(props){
@@ -17,12 +18,12 @@ class Profile extends Component {
 					"car": false,
 					"backgroundCheck": false,
 					"education": "",
-					"experience": "",
+					"yearsOfExperience": "",
 					"languages": [],
 					"about": "",
                     "otherNotes": "",
                     reviews: [],
-                    availability: {}
+                    availability: []
 				},
 				email: "",
 				hkidPassport: "",
@@ -54,17 +55,6 @@ class Profile extends Component {
     }
     render() {
         let caregiverInfo = this.state.data.caregiver;
-        let stars = [];
-        for (var i=0; i < Math.floor(caregiverInfo.stars); i++) {
-            stars.push(<i className="fa fa-star" aria-hidden="true" ></i>);
-        }
-        if(caregiverInfo.stars - i > 0){
-            stars.push(<i className="fa fa-star-half-o" aria-hidden="true" ></i>);
-        }
-        for (i=0; i < 5-Math.ceil(caregiverInfo.stars); i++) {
-            stars.push(<i className="fa fa-star-o" aria-hidden="true" ></i>);
-        }
-
         return (
             <div>
                 <div className="container-fluid profile-cover" />
@@ -78,7 +68,7 @@ class Profile extends Component {
                     <div className="col-sm-6 name">
                         <h1>{this.state.data.firstName} {this.state.data.lastName}</h1>
                         <div className="rating">
-                            {stars} <a href="#reviews">({caregiverInfo.reviews.length})</a>
+                            <Stars stars={caregiverInfo.stars}/> <a href="#reviews">({caregiverInfo.reviews.length})</a>
                         </div>
                         <h4><span className="label label-success">${caregiverInfo.hourlyRate} HKD per hour</span></h4>
                     </div>
@@ -117,7 +107,7 @@ class Profile extends Component {
                         <div className="profile-section" id="reviews">
                             <h2>Reviews</h2>
                             <h5 className="average-rating">
-                                {stars} ({caregiverInfo.reviews.length} total)
+                                <Stars stars={caregiverInfo.stars}/> ({caregiverInfo.reviews.length} total)
                             </h5>
                             {
                                 caregiverInfo.reviews.map(review => <Review key={review.id} {...review}/>)
@@ -136,7 +126,7 @@ class Profile extends Component {
                             <h5>Education</h5>
                             <p>{caregiverInfo.education}</p>
                             <h5>Experience</h5>
-                            <p>{caregiverInfo.experience}</p>
+                            <p>{caregiverInfo.yearsOfExperience} Years</p>
                             <h5>Languages</h5>
                             <p>{caregiverInfo.languages.join(', ')}</p>
                             <h5>Other Notes</h5>
@@ -151,14 +141,6 @@ class Profile extends Component {
 
 class Review extends Component{
     render(){
-        let stars = [];
-        for (var i=0; i < this.props.stars; i++) {
-            stars.push(<i className="fa fa-star" aria-hidden="true" ></i>);
-        }
-        for (var i=0; i < 5-this.props.stars; i++) {
-            stars.push(<i className="fa fa-star-o" aria-hidden="true" ></i>);
-        }
-
         return(
             //TODO get reviewer pic
             <div>
@@ -166,7 +148,7 @@ class Review extends Component{
                     <div className="col-xs-6">
                         <img src="images/profile/review.png" className="review-pic" />
                         <h4 className="review-name">{this.props.reviewBy}</h4>
-                        {stars}
+                        <Stars stars={this.props.stars}/>
                     </div>
                     <div className="col-xs-6 review-date">
                         <p>{moment(this.props.createdAt).format("Do MMM YYYY")}</p>
