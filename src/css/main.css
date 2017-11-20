@@ -267,9 +267,9 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* HOME PAGE */
 .jumbotron {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/home/home-background.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/home/home-background.jpg");
   background-size: cover;
-  background-position: center center;
+  background-position: center top;
   min-height: 500px;
   color: #ffffff;
   margin-bottom: 0px; }
