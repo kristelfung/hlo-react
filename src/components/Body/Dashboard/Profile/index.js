@@ -577,7 +577,7 @@ class Profile extends Component {
                         <label><input type="radio" name="optradio" value="Partner" checked={this.state.pricingPlan === "Partner"} onClick={(e) => this.setState({pricingPlan: "Partner"})}/>Partner Plan - 888$/mo</label>
                     </div>
                     <a onClick={(e) => this.setState({tab: "photos"})} class="btn btn-default back">Back</a>
-                    <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "pricing"})}>Next</span>
+                    <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
                     
                 </div>
             
@@ -658,7 +658,7 @@ class Profile extends Component {
 		        <div className="container-small">
 		            <form>
 		                <div className="row">
-		                    <h3 className="form-title">Basic Information</h3>
+		                    <h3 className="form-title">Become a Caregiver</h3>
 		                    	{title}
         						{body}
         				</div>
