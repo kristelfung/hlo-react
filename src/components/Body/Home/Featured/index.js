@@ -59,7 +59,6 @@ class Featured extends Component {
     }
     
     render() {
-        console.log(this.state.caregivers)
         return(
             <div className="featured">
                 <div className="container">

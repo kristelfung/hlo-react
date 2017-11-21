@@ -1,14 +1,17 @@
-Hire/apply/offer link 
+Hire/apply link 
 
 Dashboard
     Messages
         Messages to Select loading
     Profile
         Profile add upload profile/cover pic for customer (just need to update form, api functions are done, copy them from CG profile
-        Add car and background check to profile form
 
 Job Profile page
     Apply for job in job profile page
+
+CG search
+    Add remaining filters on filters
+    update search function on BE
 
 Job search page
     What kind of search params do we need?

@@ -726,7 +726,7 @@ class CaregiverHired extends Component{
                 error: true
             });
         });
-
+        console.log(this.props.caregiverHired);
         this.submitReview = this.submitReview.bind(this);
     }
 
@@ -745,62 +745,73 @@ class CaregiverHired extends Component{
     }
     
     render(){
-        let imageSrc = this.state.caregiverHired.profilePicUrl === undefined ? placeholder : baseUrl + this.state.caregiverHired.profilePicUrl;
-        return (
-            <div>
-                <div className="job-desc">
-                    <div className="hired-caregiver">
-                        <h4>Hired Caregiver</h4>
-                        <img src={imageSrc} className="hired-picture" />
-                        <h4>{this.state.caregiverHired.firstName + " " + this.state.caregiverHired.lastName}</h4>
-                        <h5>${this.state.caregiverHired.caregiver.hourlyRate} HKD per hour</h5>
-                        <button className="btn btn-primary">Message</button>
-                        <button type="button" className="btn btn-default" onClick={()=> this.setState({reviewModal: true})}>Review</button>
-                        
-                        <Modal className="fade review-modal" show={this.state.reviewModal} onHide={() => this.setState({reviewModal: false})}>
-                            <Modal.Header >
-                                <Modal.Title><h4 className="modal-title">Review Caregiver</h4></Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <form>
-                                    <div className="form-group rating-stars">
-                                        <label>Star Rating</label>
-                                        <Stars setter stars={this.state.stars} onChange={(stars) => this.setState({stars: stars})} />
-                                        <br />
-                                    </div>
-                                    <div className="form-group">
-                                        <label for="comment">Comments</label>
-                                        <textarea className="form-control" rows="5" id="comment" placeholder="Describe your experience!" value={this.state.reviewText} onChange={(e) => this.setState({reviewText: e.target.value})} />
-                                    </div>
-                                    <div className="submit-buttons">
-                                        <button type="button" className="btn btn-default" onClick={() => this.setState({reviewModal: false})} data-dismiss="modal">Close</button>
-                                        <button type="submit" className="btn btn-primary" onClick={this.submitReview} data-dismiss="modal">Submit</button>
-                                    </div>
-                                </form>
-                            </Modal.Body>
-                        </Modal>
-                    </div>
-                    <h4>Work Times</h4>
-                    <h6>From {moment(this.props.startDate).format('MMMM Do YYYY')} - {moment(this.props.endDate).format('MMMM Do YYYY')}</h6>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Day of Week</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.props.requiredTimes.map(item => 
+        if(this.state.loading==true){
+            console.log("loading");
+            return (
+                <div>Loading</div>
+            )
+            
+        }
+        else{
+            
+            let imageSrc = this.state.caregiverHired.profilePicUrl === undefined ? placeholder : baseUrl + this.state.caregiverHired.profilePicUrl;
+            return (
+                <div>
+                    <div className="job-desc">
+                        <div className="hired-caregiver">
+                            <h4>Hired Caregiver</h4>
+                            <img src={imageSrc} className="hired-picture" />
+                            <h4>{this.state.caregiverHired.firstName + " " + this.state.caregiverHired.lastName}</h4>
+                            <h5>${this.state.caregiverHired.caregiver.hourlyRate} HKD per hour</h5>
+                            <button className="btn btn-primary">Message</button>
+                            <button type="button" className="btn btn-default" onClick={()=> this.setState({reviewModal: true})}>Review</button>
+                            
+                            <Modal className="fade review-modal" show={this.state.reviewModal} onHide={() => this.setState({reviewModal: false})}>
+                                <Modal.Header >
+                                    <Modal.Title><h4 className="modal-title">Review Caregiver</h4></Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <form>
+                                        <div className="form-group rating-stars">
+                                            <label>Star Rating</label>
+                                            <Stars setter stars={this.state.stars} onChange={(stars) => this.setState({stars: stars})} />
+                                            <br />
+                                        </div>
+                                        <div className="form-group">
+                                            <label for="comment">Comments</label>
+                                            <textarea className="form-control" rows="5" id="comment" placeholder="Describe your experience!" value={this.state.reviewText} onChange={(e) => this.setState({reviewText: e.target.value})} />
+                                        </div>
+                                        <div className="submit-buttons">
+                                            <button type="button" className="btn btn-default" onClick={() => this.setState({reviewModal: false})} data-dismiss="modal">Close</button>
+                                            <button type="submit" className="btn btn-primary" onClick={this.submitReview} data-dismiss="modal">Submit</button>
+                                        </div>
+                                    </form>
+                                </Modal.Body>
+                            </Modal>
+                        </div>
+                        <h4>Work Times</h4>
+                        <h6>From {moment(this.props.startDate).format('MMMM Do YYYY')} - {moment(this.props.endDate).format('MMMM Do YYYY')}</h6>
+                        <table className="table">
+                            <thead>
                                 <tr>
-                                    <td>{item.day}</td>
-                                    <td>{item.startTime} - {item.endTime}</td>
+                                    <th>Day of Week</th>
+                                    <th>Time</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {this.props.requiredTimes.map(item => 
+                                                <tr>
+                                                    <td>{item.day}</td>
+                                                    <td>{item.startTime} - {item.endTime}</td>
+                                                </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        
     }
 }
 
@@ -938,7 +949,7 @@ class CustomerJob extends Component{
                                     this.state.error ? <div><h5> Could not load job details!</h5></div> :
                                     (
                                         this.state.job.hiredCaregiver !== undefined ? 
-                                            <CaregiverHired {...this.state.job} /> :
+                                            <CaregiverHired caregiverHired = {this.state.job} /> :
                                             <CaregiverNotHired {...this.state.job} />    
                                     )
                                 )
