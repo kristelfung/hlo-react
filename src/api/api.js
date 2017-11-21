@@ -194,3 +194,9 @@ export function getJobList(id){
 export function offerJob(info){
     return axios.post(baseUrl + '/caregiver/offer', info);
 }
+export function acceptJob(info){
+    const data = new FormData();
+    for(var key in info)
+        data.append(key, info[key]);
+    return axios.post(baseUrl + '/caregiver/accept', data); 
+}

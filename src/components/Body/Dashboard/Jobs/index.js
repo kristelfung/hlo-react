@@ -5,7 +5,7 @@ import update from 'react-addons-update';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import moment from 'moment'
 
-import {getUser, saveJob, getJobData, hireCaregiver, baseUrl, submitReview} from '../../../../api/api';
+import {getUser, saveJob, getJobData, hireCaregiver, baseUrl, submitReview, acceptJob} from '../../../../api/api';
 import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
@@ -643,7 +643,6 @@ class Jobs extends Component {
         }
 
         if(!this.state.isJobAdd ){
-            console.log("this.state.data", this.state.data)
             return (
                 <div className="dashbody">
                     <div className="container">
@@ -662,15 +661,15 @@ class Jobs extends Component {
                             <div className="container-fluid">
                                 <h2>Current Jobs</h2>
                                 {
-                                    this.state.data.currentJobs.length > 0 ? this.state.data.currentJobs.map(job => <Job key={job.id} {...job}/>) : <p> No Current Jobs </p>
+                                    this.state.data.currentJobs.length > 0 ? this.state.data.currentJobs.map(job => <Job key={job.id} type="current"{...job}/>) : <p> No Current Jobs </p>
                                 }
                                 <h2>Jobs Applied</h2>
                                 {
-                                    this.state.data.jobsApplied.length > 0 ? this.state.data.jobsApplied.map(job => <Job key={job.id} {...job}/>) : <p> No Jobs Applied </p>
+                                    this.state.data.jobsApplied.length > 0 ? this.state.data.jobsApplied.map(job => <Job key={job.id} type = "applied" {...job}/>) : <p> No Jobs Applied </p>
                                 }
                                 <h2>Jobs Offered</h2>
                                 {
-                                    this.state.data.jobsReceived.length > 0 ? this.state.data.jobsReceived.map(job => <Job key={job.id} {...job}/>) : <p> No Jobs Offered </p>
+                                    this.state.data.jobsReceived.length > 0 ? this.state.data.jobsReceived.map(job => <Job key={job.id} userId={this.props.userID} type= "offered" {...job}/>) : <p> No Jobs Offered </p>
                                 }
                             </div>
                             :
@@ -726,7 +725,6 @@ class CaregiverHired extends Component{
                 error: true
             });
         });
-        console.log(this.props.caregiverHired);
         this.submitReview = this.submitReview.bind(this);
     }
 
@@ -963,18 +961,69 @@ class CustomerJob extends Component{
 }
 
 class Job extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            isOpen: false,
+            loading: true,
+            job: {},
+        }
+        this.fetchJob = this.fetchJob.bind(this);
+        this.accept = this.accept.bind(this);
+    }
+    accept(){
+        let info = {
+            jobID:this.props.job,
+            caregiverID:this.props.userId,
+            jobOfferID:this.props.id
+        }
+        acceptJob(info);
+    }
+    fetchJob(){
+        if(this.state.job.id === undefined){
+            getJobData(this.props.id).then(json => {
+                this.setState({ error: false, job: json.data, isOpen:!this.state.isOpen, loading: false});    
+            }).catch(err => this.setState({error: true, loading: false}));
+        }else{
+            this.setState({isOpen:!this.state.isOpen});    
+        }
+    }
 	render(){
-		return (
-			<div className="row job">
-                <div className="col-xs-6">
-                    <h4>{this.props.jobName}</h4> 
+        if(this.props.type=="offered"){
+            return (
+                <div className="row job">
+                    <div className="col-xs-6">
+                        <h4>{this.props.jobName}</h4> 
+                    </div>
+                    <div className="col-xs-6 job-left" >
+                        
+                        <span className="expand-job" onClick={()=>{this.setState({isOpen:!this.state.isOpen})}}><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+                    </div>
+                    <Collapse in={this.state.isOpen}>
+                        <div>
+                            {   <div>
+                                    <div> Know more about this <a href={"profile/job/" + this.props.job}>job</a></div>
+                                    <a className="btn btn-primary" href="#" role="button" onClick={this.accept}>Accept</a>
+                                </div> 
+                            }                   
+                        </div>
+                    </Collapse>
                 </div>
-                <div className="col-xs-6 job-left">
-                    <img src="images/dashboard/confirmedjob.png" className="job-status" />
-                    <span className="expand-job"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+            )
+        }else{
+            return (
+                <div className="row job">
+                    <div className="col-xs-6">
+                        <h4>{this.props.jobName}</h4> 
+                    </div>
+                    <div className="col-xs-6 job-left">
+                        <img src="images/dashboard/confirmedjob.png" className="job-status" />
+                        <span className="expand-job"><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
+                    </div>
                 </div>
-            </div>
-		);
+            );
+        }
+		
 	}
 }
 

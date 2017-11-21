@@ -36,6 +36,7 @@ class Dashboard extends Component {
 					"otherNotes": "",
 					jobsApplied: [],
 					jobsReceived: [],
+					currentJobs:[],
 					gender:"",
 					dateOfBirth:"",
 					extraCharges:"",
@@ -90,7 +91,8 @@ class Dashboard extends Component {
 	            loading: false,
 				data: json.data,
 				userID: json.data.id
-	        });
+			});
+			console.log(json.data);
 	    }).catch(err => {
 	        console.log(err);
 	        this.setState({
