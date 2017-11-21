@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import placeholder from '../../../images/profile-placeholder.png'
-import {getUser} from '../../../api/api'
+import coverPlaceholder from '../../../images/profile/cov.jpg'
+
+import {getUser, baseUrl} from '../../../api/api'
 import Stars from '../../Stars'
 
 class Profile extends Component {
@@ -57,11 +59,11 @@ class Profile extends Component {
         let caregiverInfo = this.state.data.caregiver;
         return (
             <div>
-                <div className="container-fluid profile-cover" />
+                <div className="container-fluid profile-cover" style={{background: (this.state.data.coverPicUrl === undefined || this.state.data.coverPicUrl === "") ? coverPlaceholder : baseUrl + this.state.data.coverPicUrl}}/>
                 <div className="row profile-head">
                     <div className="col-sm-3">
                         <div>
-                            <img src={(this.state.data.profilePicUrl === undefined || this.state.data.profilePicUrl === "") ? placeholder : this.state.data.profilePicUrl} className="profile-pic" />
+                            <img src={(this.state.data.profilePicUrl === undefined || this.state.data.profilePicUrl === "") ? placeholder : baseUrl + this.state.data.profilePicUrl} className="profile-pic" />
                             {/* TODO later, add favoriting feature <a href="#" className="favorite"><i className="fa fa-plus" aria-hidden="true"></i></a>*/}
                         </div>
                     </div>
@@ -72,10 +74,13 @@ class Profile extends Component {
                         </div>
                         <h4><span className="label label-success">${caregiverInfo.hourlyRate} HKD per hour</span></h4>
                     </div>
-                    <div className="col-sm-3 profile-buttons">
-                        <a className="btn btn-primary" href="#" role="button">Hire</a>
-                        <a className="btn btn-default-clear" href="#" role="button">Message</a>
-                    </div>
+                    {
+                        sessionStorage.getItem("userType") === "customer" &&
+                        <div className="col-sm-3 profile-buttons">
+                            <a className="btn btn-primary" role="button">Hire</a>
+                            <a className="btn btn-default-clear" role="button" >Message</a>
+                        </div>
+                    }
                 </div>
 
                 <div className="row profile-main">
