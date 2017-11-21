@@ -16,7 +16,9 @@ class Profile extends Component {
 			day:"",
             startTime:"",
             endTime:"",
+            
         }
+       
 		this.save = this.save.bind(this);
 		this.languages = [
             {value: "Arabic", label:"Arabic" },
@@ -61,6 +63,12 @@ class Profile extends Component {
         this.logChange = this.logChange.bind(this);
         this.logskills = this.logskills.bind(this);
         this.logPersonalServices = this.logPersonalServices.bind(this);
+        if(this.state.car==true){
+            this.state.car="Yes"
+        }
+        else{
+            this.state.car="No"
+        }
 	}
 	add(){
         let reqTime = {
@@ -79,6 +87,12 @@ class Profile extends Component {
 	    }
     	updateCustomerProfile(information);
 	    if(this.props.type==="caregiver"){
+            if(this.state.car=="Yes"){
+                this.state.car=true
+            }
+            else{
+                this.state.car=false
+            }
 	    	let caregiverInfo = {
 	    		id:this.props.userID,
 	    		education:this.state.education,
@@ -105,7 +119,8 @@ class Profile extends Component {
                 religion:this.state.religion,
                 pricingPlan:this.state.pricingPlan,
                 yearsOfExperience: this.state.yearsOfExperience,
-                license: this.state.license
+                license: this.state.license,
+                car:this.state.car
             }
 			let coverPic = this.state.cover;
 	        let profilePic = this.state.profile;
@@ -233,6 +248,13 @@ class Profile extends Component {
                                             onChange={(e)=> this.setState({location: e})}
                                             value={this.state.location}/>
                                     </div>
+                                    <div className="form-group">
+	                                    <label htmlFor="car">Do you own a car?</label>
+	                                    <select className="form-control" id="car"  value = {this.state.car} onChange={(e) => this.setState({car: e.target.value})}>
+	                                        <option>Yes</option>
+	                                        <option>No</option>
+	                                    </select>
+	                                </div>
 					                <div className="form-group">
 					                    <label for="hobbies">Hobbies</label>
 					                    <textarea className="form-control" rows="3" id="hobbies" placeholder="Biking, painting..." value = {this.state.hobbies} onChange={(e) => this.setState({hobbies: e.target.value})}></textarea>
