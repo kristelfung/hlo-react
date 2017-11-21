@@ -59,77 +59,68 @@ class Featured extends Component {
     }
     
     render() {
-        
-        if(this.state.loadingC==false && this.state.loadingJ==false){
-            return(
-                <div className="featured">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h3 className="text-center">Professional Caregivers</h3>
-                                <div className="row feature-row">
-                                    <div className="col-sm-6">
-                                        <Card 
-                                            {...this.state.caregivers[0].user}  
-                                            {...this.state.caregivers[0]} 
-                                            type = "caregiver"
-                                            loading={this.state.loadingC} />
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <Card 
-                                            {...this.state.caregivers[1].user}  
-                                            {...this.state.caregivers[1]} 
-                                            type = "caregiver"
-                                            loading={this.state.loadingC} />
-                                    </div>
+        return(
+            <div className="featured">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <h3 className="text-center">Professional Caregivers</h3>
+                            <div className="row feature-row">
+                                <div className="col-sm-6">
+                                    <Card 
+                                        {...this.state.caregivers[0].user}  
+                                        {...this.state.caregivers[0]} 
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
                                 </div>
-                                <div className="row feature-row">
-                                    <div className="col-sm-6">
-                                        <Card 
-                                            {...this.state.caregivers[2].user}                                                                            
-                                            {...this.state.caregivers[2]} 
-                                            type = "caregiver"
-                                            loading={this.state.loadingC} />
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <Card 
-                                            {...this.state.caregivers[3].user}
-                                            {...this.state.caregivers[3]} 
-                                            type = "caregiver"
-                                            loading={this.state.loadingC} />
-                                    </div>
+                                <div className="col-sm-6">
+                                    <Card 
+                                        {...this.state.caregivers[1].user}  
+                                        {...this.state.caregivers[1]} 
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <h3 className="text-center">Featured Jobs</h3>
-                                <div className="row feature-row">
-                                    <div className="col-md-6">
-                                        <Card {...this.state.jobs[0]} type = "job" loading={this.state.loadingJ} />
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <Card {...this.state.jobs[1]} type = "job" loading={this.state.loadingJ} />
-                                    </div>
+                            <div className="row feature-row">
+                                <div className="col-sm-6">
+                                    <Card 
+                                        {...this.state.caregivers[2].user}                                                                            
+                                        {...this.state.caregivers[2]} 
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
                                 </div>
-                                <div className="row feature-row">
-                                    <div className="col-md-6">
-                                        <Card {...this.state.jobs[2]} type = "job" loading={this.state.loadingJ} />
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <Card {...this.state.jobs[3]} type = "job" loading={this.state.loadingJ} />
-                                    </div>
+                                <div className="col-sm-6">
+                                    <Card 
+                                        {...this.state.caregivers[3].user}
+                                        {...this.state.caregivers[3]} 
+                                        type = "caregiver"
+                                        loading={this.state.loadingC} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <h3 className="text-center">Featured Jobs</h3>
+                            <div className="row feature-row">
+                                <div className="col-md-6">
+                                    <Card {...this.state.jobs[0]} type = "job" loading={this.state.loadingJ} />
+                                </div>
+                                <div className="col-sm-6">
+                                    <Card {...this.state.jobs[1]} type = "job" loading={this.state.loadingJ} />
+                                </div>
+                            </div>
+                            <div className="row feature-row">
+                                <div className="col-md-6">
+                                    <Card {...this.state.jobs[2]} type = "job" loading={this.state.loadingJ} />
+                                </div>
+                                <div className="col-sm-6">
+                                    <Card {...this.state.jobs[3]} type = "job" loading={this.state.loadingJ} />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            );
-        }
-        else{
-            return (
-                <div> Loading </div>
-            )
-        }
-        
+            </div>
+        );
     }
 }
 

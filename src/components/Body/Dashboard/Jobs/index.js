@@ -30,7 +30,7 @@ class Jobs extends Component {
             description:"",
             startDate:"",
             endDate:"",
-            availability : [],
+            requiredTimes : [],
             profile:"",
             cover:"",
             lovedOnesDescription: "",
@@ -130,7 +130,7 @@ class Jobs extends Component {
             startTime:this.state.startTime,
             endTime:this.state.endTime
         }
-        this.setState({availability: this.state.availability.concat([reqTime]), day:"",startTime:"",endTime:""});
+        this.setState({requiredTimes: this.state.requiredTimes.concat([reqTime]), day:"",startTime:"",endTime:""});
     }        
 
     save(){
@@ -151,7 +151,7 @@ class Jobs extends Component {
             duration: this.state.duration,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
-            availability: JSON.stringify(this.state.availability),
+            requiredTimes: JSON.stringify(this.state.requiredTimes),
             specialMedical: JSON.stringify(this.state.specialMedical.split(',').map(special => special.trim())),
             typeOfCaregiver: JSON.stringify(this.state.typeOfCaregiver),
             professionalServices: JSON.stringify(this.state.professionalServices),
@@ -481,16 +481,16 @@ class Jobs extends Component {
                                 <label className="col-xs-3 control-label">Time Start</label>
                                 <label className="col-xs-3 control-label">Time End</label>
                                 <label className="col-xs-1 control-label"></label>
-                                {this.state.availability.map((time, idx) => 
+                                {this.state.requiredTimes.map((time, idx) => 
                                     <div>
                                         <div className="col-xs-5">
-                                            {this.state.availability[idx].day}
+                                            {this.state.requiredTimes[idx].day}
                                         </div>
                                         <div className="col-xs-3">
-                                            {this.state.availability[idx].startTime}
+                                            {this.state.requiredTimes[idx].startTime}
                                         </div>
                                         <div className="col-xs-3">
-                                            {this.state.availability[idx].endTime}
+                                            {this.state.requiredTimes[idx].endTime}
                                         </div>
                                     </div>
                                 )}
@@ -620,10 +620,10 @@ class Jobs extends Component {
                     </thead>
                     <tbody>
                         
-                            {this.state.availability.map((time, idx)=> 
+                            {this.state.requiredTimes.map((time, idx)=> 
                                 <tr>
-                                    <td>{this.state.availability[idx].day}</td>
-                                    <td>{this.state.availability[idx].startTime} - {this.state.availability[idx].endTime}</td>
+                                    <td>{this.state.requiredTimes[idx].day}</td>
+                                    <td>{this.state.requiredTimes[idx].startTime} - {this.state.requiredTimes[idx].endTime}</td>
                                  </tr>
                             )}
                        
@@ -791,7 +791,7 @@ class CaregiverHired extends Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.availability.map(item => 
+                                {this.props.requiredTimes.map(item => 
                                                 <tr>
                                                     <td>{item.day}</td>
                                                     <td>{item.startTime} - {item.endTime}</td>
@@ -837,7 +837,7 @@ class CaregiverNotHired extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.availability.map((item, idx) => 
+                            {this.props.requiredTimes.map((item, idx) => 
                                 <tr key={idx}>
                                     <td>{item.day}</td>
                                     <td>{item.startTime} - {item.endTime}</td>
