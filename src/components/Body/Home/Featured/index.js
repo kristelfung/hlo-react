@@ -102,7 +102,7 @@ class Featured extends Component {
                         <div className="col-md-6">
                             <h3 className="text-center">Featured Jobs</h3>
                             <div className="row feature-row">
-                                <div className="col-md-6">
+                                <div className="col-sm-6">
                                     <Card {...this.state.jobs[0]} type = "job" loading={this.state.loadingJ} />
                                 </div>
                                 <div className="col-sm-6">
@@ -110,7 +110,7 @@ class Featured extends Component {
                                 </div>
                             </div>
                             <div className="row feature-row">
-                                <div className="col-md-6">
+                                <div className="col-sm-6">
                                     <Card {...this.state.jobs[2]} type = "job" loading={this.state.loadingJ} />
                                 </div>
                                 <div className="col-sm-6">

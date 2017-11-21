@@ -48,7 +48,8 @@ class Jobs extends Component {
             data: {
                 jobsApplied: props.jobsApplied === undefined ? [] : props.jobsApplied,
                 jobsReceived: props.jobsReceived === undefined ? [] : props.jobsReceived,
-                jobsCreated: props.jobsCreated === undefined ? [] : props.jobsCreated
+                jobsCreated: props.jobsCreated === undefined ? [] : props.jobsCreated,
+                currentJobs:  props.currentJobs === undefined ? [] : props.currentJobs,
             },
             loading: true,
             isJobAdd:false,
@@ -95,7 +96,8 @@ class Jobs extends Component {
             {value:"Urdu", label:"Urdu" }
         ];
 
-		this.save = this.save.bind(this);
+        this.save = this.save.bind(this);
+        this.add = this.add.bind(this);        
         this.handleChange = this.handleChange.bind(this);
         this.logChange = this.logChange.bind(this);
         this.logProfessionalServices = this.logProfessionalServices.bind(this);
@@ -107,8 +109,9 @@ class Jobs extends Component {
             this.setState({
                 type: nextProps.type,
                 data: {
-                    jobsApplied: nextProps.caregiver.jobsApplied,
-                    jobsReceived: nextProps.caregiver.jobsReceived
+                    jobsApplied: nextProps.caregiver.jobsApplied === undefined ? [] : nextProps.caregiver.jobsApplied ,
+                    jobsReceived: nextProps.caregiver.jobsReceived === undefined ? [] : nextProps.caregiver.jobsReceived ,
+                    currentJobs: nextProps.caregiver.currentJobs === undefined ? [] : nextProps.caregiver.currentJobs ,
                 }
             });
         }
@@ -120,8 +123,6 @@ class Jobs extends Component {
                 }
             });
         }
-        this.save = this.save.bind(this);
-        this.add = this.add.bind(this);
     }
 
     add(){
@@ -642,26 +643,34 @@ class Jobs extends Component {
         }
 
         if(!this.state.isJobAdd ){
+            console.log("this.state.data", this.state.data)
             return (
                 <div className="dashbody">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-xs-6">
-                                <h2>Listed Jobs</h2>
-                            </div>
-                            {(this.state.type === "customer") ?
+                        {this.state.type === "customer" &&  
+                            <div className="row">
+                                <div className="col-xs-6">
+                                    <h2>Listed Jobs</h2>
+                                </div>
                                 <div className="col-xs-6 button-col">
                                     <a className="btn btn-primary" href="#" role="button" onClick={() => {this.setState({ isJobAdd: true })}}>Add Job</a>
                                 </div>
-                                :
-                                <div></div>
-                            }
-                        </div>
+                            </div>
+                        }
                         {
                             this.state.type === "caregiver" ?
                             <div className="container-fluid">
+                                <h2>Current Jobs</h2>
                                 {
-                                    this.state.data.jobsApplied.map(job => <Job key={job.id} {...job}/>)
+                                    this.state.data.currentJobs.length > 0 ? this.state.data.currentJobs.map(job => <Job key={job.id} {...job}/>) : <p> No Current Jobs </p>
+                                }
+                                <h2>Jobs Applied</h2>
+                                {
+                                    this.state.data.jobsApplied.length > 0 ? this.state.data.jobsApplied.map(job => <Job key={job.id} {...job}/>) : <p> No Jobs Applied </p>
+                                }
+                                <h2>Jobs Offered</h2>
+                                {
+                                    this.state.data.jobsReceived.length > 0 ? this.state.data.jobsReceived.map(job => <Job key={job.id} {...job}/>) : <p> No Jobs Offered </p>
                                 }
                             </div>
                             :
@@ -690,7 +699,6 @@ class Jobs extends Component {
                 </div>
             );
         }
-        
     }
 }
 
@@ -783,10 +791,10 @@ class CaregiverHired extends Component{
                         </thead>
                         <tbody>
                             {this.props.requiredTimes.map(item => 
-                                            <tr>
-                                                <td>{item.day}</td>
-                                                <td>{item.startTime} - {item.endTime}</td>
-                                            </tr>
+                                <tr>
+                                    <td>{item.day}</td>
+                                    <td>{item.startTime} - {item.endTime}</td>
+                                </tr>
                             )}
                         </tbody>
                     </table>
@@ -839,7 +847,12 @@ class CaregiverNotHired extends Component{
                     <table className="table table-hover applicants">
                         <tbody>
                             {
-                                this.props.caregiversApplied.length === 0 ? <tr><td><h6>No one has applied for this job.</h6></td></tr> :
+                                this.props.caregiversApplied.length === 0 ? 
+                                <tr>
+                                    <td>
+                                        <h6>No one has applied for this job.</h6>
+                                    </td>
+                                </tr> :
                                 this.props.caregiversApplied.map((jobApplication, idx) => 
                                 <tr key={idx}>
                                     <td>
@@ -852,8 +865,7 @@ class CaregiverNotHired extends Component{
                                         <a onClick={()=>this.hire({caregiverID : jobApplication.caregiver, jobID: jobApplication.job})} className="btn btn-default">Hire</a>
                                         <button href="#" className="btn btn-default">Message</button>
                                     </td>
-                                </tr>
-                            )}
+                                </tr>)}
                         </tbody>
                     </table>
                     <br/>

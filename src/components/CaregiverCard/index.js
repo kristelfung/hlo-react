@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import placeholder from '../../images/profile-placeholder.png'
 
+import {baseUrl} from '../../api/api'
+
 class CaregiverCard extends Component {
   render() {
     if(this.props.loading){
@@ -8,8 +10,7 @@ class CaregiverCard extends Component {
             <div className="loader">Loading...</div>
         ) 
     }
-
-    var id = this.props.id;
+    var id = this.props.user === undefined ? (this.props.id === undefined ? "" : this.props.id) : this.props.user.id;
     let stars = [];
     for (var i=0; i < Math.floor(this.props.stars); i++) {
         stars.push(<i className="fa fa-star" aria-hidden="true" ></i>);
@@ -27,7 +28,7 @@ class CaregiverCard extends Component {
             <a href={"/profile/"+id}>
                 <span className="link-spanner"></span>
             </a>
-            <img src={this.props.profilePicUrl === undefined || this.props.profilePicUrl === ""  ? placeholder : this.props.profilePicUrl} className="card-dp"/>
+            <img src={this.props.profilePicUrl === undefined || this.props.profilePicUrl === ""  ? placeholder : baseUrl + this.props.profilePicUrl} className="card-dp"/>
             <div className="card-desc">
                 <h4>{this.props.firstName} {this.props.lastName}</h4>
                 {stars} 
@@ -42,7 +43,6 @@ class CaregiverCard extends Component {
         );
     }
     else if(this.props.type==="job"){
-        console.log("JOB", this.props)
         return (
             <div className="caregiver-card">
                 <a href={"/profile/job/"+this.props.id}>
