@@ -10,6 +10,7 @@ import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
 import Stars from '../../../Stars'
+import MessageCompose from '../Messages/MessageCompose'
 
 class Jobs extends Component {
 	constructor(props){
@@ -809,6 +810,9 @@ class CaregiverHired extends Component{
 class CaregiverNotHired extends Component{
     constructor(props){
         super(props);
+        this.state = {
+            messageCompose: false
+        }
         this.hire = this.hire.bind(this);
     }
 
@@ -864,7 +868,7 @@ class CaregiverNotHired extends Component{
                         </tbody>
                     </table>
                     <br/>
-                    <h4>Caregiver Applicants</h4>
+                    <h4>Caregiver Offered</h4>
                     <table className="table table-hover applicants">
                         <tbody>
                             {
@@ -872,18 +876,18 @@ class CaregiverNotHired extends Component{
                             this.props.caregiversOffered.map((jobOffer, idx) => 
                                 <tr key={idx}>
                                     <td>
-                                        <a href={"/profile/"+jobOffer.caregiver} className="applicant-link">
                                         <h5 className="applicant-name">{jobOffer.caregiverName}</h5>
-                                        <p className="applicant-date">{jobOffer.createdAt}</p>
-                                        </a>
+                                        <p className="applicant-date">{moment(jobOffer.createdAt).format('DD MMM, YYYY')}</p>
                                     </td>
                                     <td className="applicant-buttons">
-                                        <button href="#" className="btn btn-default">Message</button>
+                                        <a href={"/profile/"+jobOffer.user} className="btn btn-default">View Profile</a>
+                                        <button href="#" className="btn btn-default" onClick={() => this.setState({messageCompose: true, toUserID: jobOffer.user})}>Message</button>
                                     </td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
+                    <MessageCompose open={this.state.messageCompose} onHide={() => this.setState({messageCompose: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={this.state.toUserID}/>
                 </div>
             </div>
         );

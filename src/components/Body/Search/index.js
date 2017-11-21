@@ -145,7 +145,7 @@ class Search extends Component {
                                     <div class="loader">Loading...</div> : (
                                         this.state.data.length > 0 ?
                                         this.state.data.map(person => 
-                                            <div className="col-md-4 col-sm-6">
+                                            <div className="col-xs-6 col-md-4 col-sm-6">
                                                 {
                                                     this.props.type === "caregiver" ? 
                                                         <Card id={person.id} type={this.props.type} about={person.caregiver[0].about} stars={person.caregiver[0].stars}

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {sendMessage, searchName} from '../../../../../api/api'
-
 import {Modal} from 'react-bootstrap';
 import debounce from 'debounce';
-
 import Select from 'react-select';
+
+import {sendMessage, searchName} from '../../../../../api/api'
 
 class MessageCompose extends Component{
     constructor(props){
@@ -37,10 +36,7 @@ class MessageCompose extends Component{
                 messageBody: this.state.message
             }]
         }
-        sendMessage(message).then(json => {
-            this.fetchInbox();
-        }).catch(err => {
-        });
+        sendMessage(message);
 
         this.setState({
             to: "",
@@ -49,7 +45,8 @@ class MessageCompose extends Component{
         });
 
         this.props.onHide();
-        setTimeout(this.props.fetchInbox, 500);
+        if(this.props.fetchInbox !== undefined)
+            setTimeout(this.props.fetchInbox, 500);
     }
 
     getOptions(e){
@@ -69,16 +66,19 @@ class MessageCompose extends Component{
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                        <div className="form-group">
-                            <label htmlFor="recipient">Recipient</label>
-                            <Select.Async
-                                id="recipient" 
-                                placeholder="Recipient"
-                                name="form-field-recipient"
-                                value={this.state.to} onChange={(e) => this.setState({to: e.value})}
-                                loadOptions={debounce(this.getOptions, 800)}
-                            />
-                        </div>
+                        {
+                            this.props.toUserID === undefined && 
+                            <div className="form-group">
+                                <label htmlFor="recipient">Recipient</label>
+                                <Select.Async
+                                    id="recipient" 
+                                    placeholder="Recipient"
+                                    name="form-field-recipient"
+                                    value={this.state.to} onChange={(e) => this.setState({to: e.value})}
+                                    loadOptions={debounce(this.getOptions, 800)}
+                                />
+                            </div>
+                        }
                         <div className="form-group">
                             <label htmlFor="subject">Subject</label>
                             <input type="text" className="form-control" id="subject" placeholder="Subject" value={this.state.subject} onChange={(e) => this.setState({subject: e.target.value})}/>

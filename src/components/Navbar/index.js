@@ -10,6 +10,8 @@ class NavBar extends Component {
         logout().then(json => {
             console.log(json);
             sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('userType');    
+            sessionStorage.removeItem('userID');                        
             window.location.href = "home";            
 	    }).catch(err => {
             console.log(err);
@@ -36,7 +38,6 @@ class NavBar extends Component {
                     sessionStorage.getItem("loggedIn") && <NavItem eventKey={5} href="/dashboard">Dashboard</NavItem>
                 }
                 <NavItem eventKey={4} href={sessionStorage.getItem("loggedIn") ? "/" : "/login"} onClick={e => sessionStorage.getItem("loggedIn") && this.logout(e)}>{sessionStorage.getItem("loggedIn") ? "Log Out" : "Sign Up/Login"}</NavItem>
-                <li><span className="navbar-divider">|</span></li>     
                 <NavDropdown eventKey={4} title={<span><i className="fa fa-globe" aria-hidden="true"></i> English</span>} id="basic-nav-dropdown">
                   <MenuItem eventKey={4.1}>English</MenuItem>
                   <MenuItem eventKey={4.2}>中文</MenuItem>
