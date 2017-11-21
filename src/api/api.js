@@ -186,3 +186,11 @@ export function searchJobs(information){
 export function submitReview(review){
     return axios.post(baseUrl + '/caregiver/review/', review);
 }
+
+export function getJobList(id){
+    return axios.get(baseUrl + '/job/search?createdBy='+id)
+}
+
+export function offerJob(info){
+    return axios.post(baseUrl + '/caregiver/offer', info);
+}

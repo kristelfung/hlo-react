@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import {Modal} from 'react-bootstrap';
+import Select from 'react-select';
 
 import placeholder from '../../../images/profile-placeholder.png'
 import coverPlaceholder from '../../../images/profile/cov.jpg'
 
-import {getUser, baseUrl} from '../../../api/api'
+import {getUser, baseUrl, getJobList, offerJob} from '../../../api/api'
 import Stars from '../../Stars'
+import MessageCompose from '../Dashboard/Messages/MessageCompose'
 
 class Profile extends Component {
     constructor(props){
@@ -35,12 +38,12 @@ class Profile extends Component {
 				bankName: "",
 				accountNumber: "",
 				paypal: ""
-			},
+            },
+            messageCompose: false,
             loading: true
         }
 
         getUser(props.match.params.id).then(json => {
-            console.log(json.data)
             if(json.data.caregiver.reviews === undefined)
                 json.data.caregiver.reviews = [];
             this.setState({
@@ -55,6 +58,7 @@ class Profile extends Component {
             });
         });
     }
+
     render() {
         let caregiverInfo = this.state.data.caregiver;
         return (
@@ -74,15 +78,18 @@ class Profile extends Component {
                         </div>
                         <h4><span className="label label-success">${caregiverInfo.hourlyRate} HKD per hour</span></h4>
                     </div>
-                    {
-                        sessionStorage.getItem("userType") === "customer" &&
+                    { sessionStorage.getItem("loggedIn") && 
                         <div className="col-sm-3 profile-buttons">
-                            <a className="btn btn-primary" role="button">Hire</a>
-                            <a className="btn btn-default-clear" role="button" >Message</a>
+                            {
+                                sessionStorage.getItem("userType") === "customer" && 
+                                <a className="btn btn-primary" role="button" onClick={() => this.setState({jobOffer: true})}>Offer</a>
+                            }
+                            <a className="btn btn-default-clear" role="button" onClick={() => this.setState({messageCompose: true})} >Message</a>
+                            <MessageCompose open={this.state.messageCompose} onHide={() => this.setState({messageCompose: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={this.props.match.params.id}/>
+                            <JobOffer open={this.state.jobOffer} onHide={() => this.setState({jobOffer: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={this.props.match.params.id}/>
                         </div>
-                    }
+                     }
                 </div>
-
                 <div className="row profile-main">
                     <div className="col-sm-9 profile-body">
                         <div className="profile-section">
@@ -99,8 +106,8 @@ class Profile extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {caregiverInfo.availability.map(item => 
-                                        <tr>
+                                    {caregiverInfo.availability.map((item, idx) => 
+                                        <tr key={idx}>
                                             <td>{item.day}</td>
                                             <td>{item.startTime} - {item.endTime}</td>
                                         </tr>
@@ -164,6 +171,62 @@ class Review extends Component{
                 </div>
             </div>
         );
+    }
+}
+
+class JobOffer extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            caregiverID: props.toUserID,
+            customerID: props.fromUserID,
+            job: '',
+            options: []
+        }
+
+        getJobList(props.fromUserID)
+        .then(json => {console.log(json); this.setState({loading: false, options: json.data})})
+        .catch(err => {console.log(err); this.setState({loading: false})});
+    }
+
+    offerJob(e){
+        e.preventDefault();
+        let info = {
+            jobID: this.state.job.id,
+            caregiverID: this.state.caregiverID
+        }
+        offerJob(info).then(json => this.props.onHide())
+        .catch(err => {console.log(err); this.props.onHide();});
+    }
+
+    render(){
+        return(
+            <Modal show={this.props.open} onHide={this.props.onHide}>
+                <Modal.Header >
+                    <Modal.Title>Offer Job</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form>
+                            <div className="form-group">
+                                <label htmlFor="job">Job</label>
+                                <Select
+                                    id="job" 
+                                    placeholder="Job"
+                                    name="form-field-job"
+                                    valueKey="id" labelKey="name"
+                                    value={this.state.job} onChange={(e) => this.setState({job: e})}
+                                    isLoading={this.state.loading}
+                                    options={this.state.options}
+                                />
+                            </div>
+                        <div className="submit-buttons">       
+                            <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.props.onHide}>Cancel</button>                                
+                            <button type="submit" className="btn btn-primary" onClick={this.offerJob.bind(this)}>Offer</button>
+                        </div> 
+                    </form>
+                </Modal.Body>
+            </Modal>
+        )
     }
 }
   
