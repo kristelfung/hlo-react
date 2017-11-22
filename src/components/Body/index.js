@@ -22,13 +22,23 @@ export default () => (
     <BrowserRouter>
         <div>
             <Route exact path="/" component={Home} />
-            <Route path="/home" render={() => (<Redirect to="/"/> )}/>    
+            <Route path="/home" render={() => (<Redirect to="/"/> )}/>
             <Route path="/search/caregiver"  render={() => <Search type="caregiver" /> } />
-            <Route path="/search/job"  render={() => <Search type="job" /> } />        
+            <Route path="/search/job"  render={() => <Search type="job" /> } />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route path="/about"  render={() => <Infopage header={{aboutHeader}}/>} />
             <Route path="/profile/:id" component={Profile} />
+            <Route path="/contact_us" />
+            <Route path="Q&A" />
+            <Route path="careers" />
+            <Route path="press" />
+            <Route path="blog" />
+            <Route path="newsletter" />
+            <Route path="terms" />
+            <Route path="privacy" />
+            <Route path="insurance" />
+            <Route path="guidelines" />
             <Route exact path="/dashboard" render={() => (
                 sessionStorage.getItem('loggedIn') === null ? (
                     <Redirect to="/login"/>

@@ -15,9 +15,9 @@ class Footer extends Component {
                     <div className="col-sm-3">
                         <h3>Quick Links</h3>
                         <ul className="list-unstyled">
-                            <li>Terms of Use</li>
-                            <li>Privacy Policy</li>
-                            <li>Insurance Policy</li>
+                            <li><a href="terms">Terms of Use</a></li>
+                            <li><a href="privacy">Privacy Policy</a></li>
+                            <li><a href="insurance">Insurance Policy</a></li>
                             <li><a href="guidelines">Community Guidelines</a></li>
                         </ul>
                     </div>
@@ -25,19 +25,19 @@ class Footer extends Component {
                         <h3>Company</h3>
                         <ul className="list-unstyled">
                             <li><a href="about">About Us/Dream Team</a></li>
-                            <li>Contact Us</li>
-                            <li>Q&amp;A with CEO</li>
-                            <li>Careers/Be a True Believer</li>
-                            <li>Press</li>
-                            <li>Blog</li>
-                            <li>Newsletter</li>
+                            <li><a href="contact_us">Contact Us</a></li>
+                            <li><a href="Q&A">Q&amp;A with CEO</a></li>
+                            <li><a href="careers">Careers/Be a True Believer</a></li>
+                            <li><a href="press">Press</a></li>
+                            <li><a href="blog">Blog</a></li>
+                            <li><a href="newsletter">Newsletter</a></li>
                         </ul>
                     </div>
                     <div className="col-sm-6 logo-container">
-                        <img src={twitter} className="footer-logo"/>
-                        <img src={facebook} className="footer-logo"/>
-                        <img src={googleplus} className="footer-logo"/>
-                        <img src={linkedin} className="footer-logo"/>
+                        <a href="https://twitter.com/HLO_Caregivers" target="_blank"><img src={twitter} className="footer-logo"/></a>
+                        <a href="https://www.facebook.com/HealthyLovedOnes/" target="_blank"><img src={facebook} className="footer-logo"/></a>
+                        <a href="https://plus.google.com/100191372468559259757?hl=zh-TW" target="_blank"><img src={googleplus} className="footer-logo"/></a>
+                        <a href="https://www.linkedin.com/company/10427051/" target="_blank"><img src={linkedin} className="footer-logo"/></a>
                     </div>
                 </div>
                 </div>
