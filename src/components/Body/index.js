@@ -9,6 +9,7 @@ import Home from "./Home";
 import Search from "./Search";
 import Infopage from "./Infopage";
 import Profile from "./Profile";
+import Job from './Profile/Job';
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -28,17 +29,18 @@ export default () => (
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route path="/about"  render={() => <Infopage header={{aboutHeader}}/>} />
-            <Route path="/profile/:id" component={Profile} />
+            <Route exact path="/profile/job/:id" component={Job} />
+            <Route exact path="/profile/:id" component={Profile} />
             <Route path="/contact_us" />
-            <Route path="Q&A" />
-            <Route path="careers" />
-            <Route path="press" />
-            <Route path="blog" />
-            <Route path="newsletter" />
-            <Route path="terms" />
-            <Route path="privacy" />
-            <Route path="insurance" />
-            <Route path="guidelines" />
+            <Route path="/Q&A" />
+            <Route path="/careers" />
+            <Route path="/press" />
+            <Route path="/blog" />
+            <Route path="/newsletter" />
+            <Route path="/terms" />
+            <Route path="/privacy" />
+            <Route path="/insurance" />
+            <Route path="/guidelines" />
             <Route exact path="/dashboard" render={() => (
                 sessionStorage.getItem('loggedIn') === null ? (
                     <Redirect to="/login"/>
