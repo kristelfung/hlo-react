@@ -140,7 +140,7 @@ class Search extends Component {
             searchJobs({
                 language: this.state.languages,
                 sex: [this.state.sex === null ? {value: ""} : this.state.sex],                  
-                location: this.state.locations,
+                location: [(this.state.locations === [] || this.state.locations === undefined) ? {value: ""} : this.state.locations],
                 skill: this.state.professionalServices,
                 personalServices: this.state.personalServices,
                 typeOfCaregiver: this.state.typeOfCaregiver,
@@ -163,7 +163,7 @@ class Search extends Component {
                             <h5>Location </h5>
                             <div id="location">
                                 <Select options={this.locations}
-                                    multi
+                                    multi={this.props.type === "caregiver"}
                                     onChange={(e)=> this.setState({locations: e})}
                                     value={this.state.locations}/>
                             </div>

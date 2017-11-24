@@ -162,11 +162,15 @@ export function getHiredCaregiver(id){
 
 export function searchCaregivers(information){
     var queryString = ""
-    if(information.min !== undefined) queryString = queryString + "minHourlyRate="+information.min+"&"
-    if(information.max !== undefined) queryString = queryString + "maxHourlyRate="+information.max+"&"
+    if(information.min !== undefined){
+        queryString = queryString + "minHourlyRate="+information.min+"&";
+        delete information.min;
+    }
 
-    delete information.min;
-    delete information.max;
+    if(information.max !== undefined){
+        queryString = queryString + "maxHourlyRate="+information.max+"&";
+        delete information.max;
+    }
 
     for(var key in information){
         information[key].forEach(query => {
@@ -180,9 +184,13 @@ export function searchCaregivers(information){
 
 export function searchJobs(information){
     var queryString = ""; 
-    for(var key in information)
-        information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
-    
+    console.log(information.location)
+    for(var key in information){
+        information[key].forEach(query => {
+            if(query.value !== null)
+                queryString=queryString+key+"="+query.value+"&" 
+        });        
+    }
     return axios.get(baseUrl + '/job/search?'+ queryString)
 } 
 
