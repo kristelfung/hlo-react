@@ -1,4 +1,3 @@
-import rp from 'request-promise'
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -83,12 +82,7 @@ export function markRead(threadID){
 }
 
 export function searchName(search){
-    var options = {
-        uri: baseUrl + '/user/searchName?user='+search,
-        body: {search: search},
-        json: true
-    };
-    return rp(options);
+    return axios.get(baseUrl + '/user/searchName?user='+search, {search: search});
 }
 
 export function updateCustomerProfile(information){

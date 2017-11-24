@@ -32,7 +32,7 @@ export default () => (
             <Route exact path="/profile/job/:id" component={Job} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route path="/contact_us" />
-            <Route path="/Q&A" />
+            <Route path="/QandA" />
             <Route path="/careers" />
             <Route path="/press" />
             <Route path="/blog" />

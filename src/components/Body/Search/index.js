@@ -149,7 +149,7 @@ class Search extends Component {
                                                 {
                                                     this.props.type === "caregiver" ? 
                                                         <Card id={person.id} type={this.props.type} about={person.caregiver[0].about} stars={person.caregiver[0].stars}
-                                                            firstName={person.firstName} lastName={person.lastName} location={person.location}/> :
+                                                            firstName={person.firstName} lastName={person.lastName} location={person.location} profilePicUrl={person.profilePicUrl} /> :
                                                             <Card id={person.id} type={this.props.type} {...person} />    
                                                     }
                                             </div>) : 
