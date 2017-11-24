@@ -373,6 +373,10 @@ h1, h2, h3, h4, h5, h6, p {
   text-align: center;
   padding: 60px 10px; }
 
+video {
+  width: 100%;
+  height: auto; }
+
 .pricings {
   background: linear-gradient(#388E3C, #174c1b);
   /* Standard syntax */
