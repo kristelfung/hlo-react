@@ -22,10 +22,10 @@ class Hero extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-4">
-                                <h5>HLO is Homecare.</h5>
+                                <h5>TLC: Tender Loving Care.</h5>
                             </div>
                             <div className="col-sm-8">
-                                <h5><a href="#">Care News: All jobs now come with $18 million...</a></h5>
+                                <h5> In sports, adversity produces Champions. In business, adversity produces Disruptors.</h5>
                             </div>
                         </div>
                     </div>
