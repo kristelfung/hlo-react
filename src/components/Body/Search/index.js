@@ -8,9 +8,14 @@ class Search extends Component {
         super(props);
         this.state = {
             locations: [],
-            skills: [],
             languages: [],
-            data: [],
+            typeOfCaregiver: [],
+            professionalServices: [],
+            personalServices: [],
+            medicalConditions: [],
+            sex: {value: null},
+            price: [0, 1000],
+            data: [],            
             loading: true
         }
         this.performSearch = this.performSearch.bind(this);
@@ -29,7 +34,7 @@ class Search extends Component {
             {value: 'Yuen Long', label: 'Yuen Long'},
             {value: 'Kowloon', label: 'Kowloon'}
         ];
-        this.skills = [
+        this.professionalServices = [
             { value:"Addiction Counselor", label:"Addiction Counselor"},
             { value:"Beautician", label:"Beautician"},
             { value:"Chinese Medicine Expert", label:"Chinese Medicine Expert"},
@@ -73,7 +78,43 @@ class Search extends Component {
             {value:"Urdu", label:"Urdu" }
         ];
 
-        this.performSearch();
+        // this.medicalConditions = [
+        // ];
+
+        this.typeOfCaregiver = [
+            { value:"Volunteer Caregivers", label:"Volunteer Caregivers"},
+            { value:"Nursing Students", label:"Nursing Students"},
+            { value:"Home Nurse", label:"Home Nurse"},
+            { value:"Eldercare", label:"Eldercare"},
+            { value:"Weekend Caregivers", label:"Weekend Caregivers"},
+            { value:"Special Needs", label:"Special Needs"},
+            { value:"Specialist Caregivers", label:"Specialist Caregivers"},
+            { value:"Expert Caregivers", label:"Expert Caregivers"},
+            { value:"TLC Caregivers", label:"TLC Caregivers"},
+            { value:"Licensed Nurse", label:"Licensed Nurse"},
+        ];
+        this.personalServices = [
+            { value:"Bathing", label:"Bathing"},
+            { value:"Companionship", label:"Companionship"},
+            { value:"Exercise", label:"Exercise"},
+            { value:"Groceries and Shopping", label:"Groceries and Shopping"},
+            { value:"Grooming", label:"Grooming"},
+            { value:"Housekeeping", label:"Housekeeping"},
+            { value:"Managing Medications", label:"Managing Medications"},
+            { value:"Meal Prep", label:"Meal Prep"},
+            { value:"Transferring and Mobility", label:"Transferring and Mobility"},
+            { value:"Toileting", label:"Toileting"},
+            { value:"Transportation", label:"Transportation"},
+            { value:"Travel Companion", label:"Travel Companion"},
+        ];
+        this.sex = [
+            { value: 'Male', label: 'Male'},
+            { value: 'Female', label: 'Female'},
+        ];
+    }
+
+    componentDidMount(){
+        this.performSearch();        
     }
 
     performSearch(){
@@ -81,9 +122,14 @@ class Search extends Component {
 
         if(this.props.type === "caregiver"){
             searchCaregivers({
+                language: this.state.languages,
+                sex: [this.state.sex === null ? {value: ""} : this.state.sex],  
                 location: this.state.locations,
-                skill: this.state.skills,
-                language: this.state.languages
+                skill: this.state.professionalServices,
+                personalServices: this.state.personalServices,
+                typeOfCaregiver: this.state.typeOfCaregiver,
+                min: this.state.min,
+                max: this.state.max
             }).then(json => {
                 this.setState({data: json.data, loading: false});
             }).catch(err => {
@@ -92,9 +138,12 @@ class Search extends Component {
             });
         }else{
             searchJobs({
+                language: this.state.languages,
+                sex: [this.state.sex === null ? {value: ""} : this.state.sex],                  
                 location: this.state.locations,
-                skill: this.state.skills,
-                language: this.state.languages
+                skill: this.state.professionalServices,
+                personalServices: this.state.personalServices,
+                typeOfCaregiver: this.state.typeOfCaregiver,
             }).then(json => {
                 this.setState({data: json.data, loading: false});
             }).catch(err => {
@@ -111,41 +160,86 @@ class Search extends Component {
                     <div className="col-sm-3 search-filters">
                         <h3>Filters</h3>
                         <div className="location-filter">
-                            <h5 data-toggle="collapse" data-target="#location">Location </h5>
+                            <h5>Location </h5>
                             <div id="location">
                                 <Select options={this.locations}
                                     multi
-                                    onChange={(e)=> this.setState({locations: e}, this.performSearch)}
+                                    onChange={(e)=> this.setState({locations: e})}
                                     value={this.state.locations}/>
                             </div>
                         </div>
                         <div className="technical-filter">
-                            <h5 data-toggle="collapse" data-target="#tech">Technical Skills </h5>
-                            <div id="tech" className="collapse in">
-                                <Select options={this.skills}
+                            <h5>Professional Services</h5>
+                            <div id="tech">
+                                <Select options={this.professionalServices}
                                     multi
-                                    onChange={(e)=> this.setState({skills: e}, this.performSearch)}
-                                    value={this.state.skills}/>
+                                    onChange={(e)=> this.setState({professionalServices: e})}
+                                    value={this.state.professionalServices}/>
                             </div>
                         </div>
                         <div className="languages-filter">
-                            <h5 data-toggle="collapse" data-target="#language">Language </h5>
-                            <div id="language" className="collapse in">
+                            <h5>Personal Services</h5>
+                            <div id="pskill">
+                                <Select options={this.personalServices}
+                                    multi
+                                    onChange={(e)=> this.setState({personalServices: e})}
+                                    value={this.state.personalServices} />
+                            </div>
+                        </div>
+                        <div className="languages-filter">
+                            <h5>Type of Caregiver</h5>
+                            <div id="pskill">
+                                <Select options={this.typeOfCaregiver}
+                                    multi
+                                    onChange={(e)=> this.setState({typeOfCaregiver: e})}
+                                    value={this.state.typeOfCaregiver} />
+                            </div>
+                        </div>
+
+                        {
+                            this.props.type === "caregiver" &&
+                            <div className="languages-filter">
+                                <h5>Hourly Rate</h5>
+                                <div id="rate" className="row">
+                                    <div className="col-xs-6">
+                                        <input class="form-control" placeholder="Minimum" type="number" value = {this.state.min} onChange={(e) => this.setState({min: e.target.value < 0 ? 0 : e.target.value})}/>
+                                    </div>
+                                    <div className="col-xs-6">
+                                        <input class="form-control" placeholder="Maximum" type="number" value = {this.state.max} onChange={(e) => this.setState({max: e.target.value < 0 ? 0 : e.target.value})}/>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+                        <div className="languages-filter">
+                            <h5>Languages</h5>
+                            <div id="medical">
                                 <Select options={this.languages}
                                     multi
-                                    onChange={(e)=> this.setState({languages: e}, this.performSearch)}
+                                    onChange={(e)=> this.setState({languages: e})}
                                     value={this.state.languages} />
                             </div>
                         </div>
+
+                        <div className="languages-filter">
+                            <h5>Sex</h5>
+                            <div id="sex">
+                                <Select options={this.sex}
+                                    onChange={(e)=> this.setState({sex: e})}
+                                    value={this.state.sex} />
+                            </div>
+                        </div>
+
+                            <button className="btn btn-success" onClick={this.performSearch}>Search</button>
                     </div>
                     <div className="col-sm-9 search-body">
                         <div className="row">
                             {
                                 this.state.loading ? 
-                                    <div class="loader">Loading...</div> : (
+                                    <div className="loader">Loading...</div> : (
                                         this.state.data.length > 0 ?
                                         this.state.data.map(person => 
-                                            <div className="col-xs-6 col-md-4 col-sm-6">
+                                            <div key={person.id} className="col-xs-6 col-md-4 col-sm-6">
                                                 {
                                                     this.props.type === "caregiver" ? 
                                                         <Card id={person.id} type={this.props.type} about={person.caregiver[0].about} stars={person.caregiver[0].stars}

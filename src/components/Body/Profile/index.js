@@ -207,18 +207,18 @@ class JobOffer extends Component{
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                            <div className="form-group">
-                                <label htmlFor="job">Job</label>
-                                <Select
-                                    id="job" 
-                                    placeholder="Job"
-                                    name="form-field-job"
-                                    valueKey="id" labelKey="name"
-                                    value={this.state.job} onChange={(e) => this.setState({job: e})}
-                                    isLoading={this.state.loading}
-                                    options={this.state.options}
-                                />
-                            </div>
+                        <div className="form-group">
+                            <label htmlFor="job">Job</label>
+                            <Select
+                                id="job" 
+                                placeholder="Job"
+                                name="form-field-job"
+                                valueKey="id" labelKey="name"
+                                value={this.state.job} onChange={(e) => this.setState({job: e})}
+                                isLoading={this.state.loading}
+                                options={this.state.options}
+                            />
+                        </div>
                         <div className="submit-buttons">       
                             <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.props.onHide}>Cancel</button>                                
                             <button type="submit" className="btn btn-primary" onClick={this.offerJob.bind(this)}>Offer</button>

@@ -5,7 +5,7 @@ import {Modal} from 'react-bootstrap';
 import placeholder from '../../../../images/profile-placeholder.png'
 import coverPlaceholder from '../../../../images/profile/cov.jpg'
 
-import API, {baseUrl, getJobData} from '../../../../api/api'
+import {baseUrl, getJobData, applyForJob} from '../../../../api/api'
 import MessageCompose from '../../Dashboard/Messages/MessageCompose'
 
 class Job extends Component {
@@ -28,6 +28,10 @@ class Job extends Component {
               "lovedOnesDescription": "",
               "availability": [],
               "district": "",
+              requiredTimes: [],
+              createdBy: {
+                  id: ""
+              }
               },
             messageCompose: false,
             loading: true,
@@ -39,7 +43,7 @@ class Job extends Component {
           this.setState({
               loading: false,
               data: json.data,
-              hasApplied: json.data.caregiversApplied.includes(sessionStorage.getItem('caregiverID')),
+              hasApplied: json.data.caregiversApplied.filter(cg => cg.user === sessionStorage.getItem('userID')).length > 0
           });
         }).catch(err => {
             console.log(err);
@@ -53,11 +57,14 @@ class Job extends Component {
     }
 
     handleApply() {
-      this.setState({ hasApplied: true });
+        applyForJob(this.props.match.params.id).then(json => {
+            this.setState({ hasApplied: true });
+        }).catch(err => {
+            
+        })
     }
 
     render() {
-
         let jobInfo = this.state.data;
         return (
             <div>
@@ -86,7 +93,7 @@ class Job extends Component {
                                 <button type="button" className="btn btn-default" data-dismiss="modal" disabled={true}> Submitted </button>
                             }
                             <a className="btn btn-default-clear" role="button" onClick={() => this.setState({messageCompose: true})}>Message</a>
-                            <MessageCompose open={this.state.messageCompose} onHide={() => this.setState({messageCompose: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={this.props.match.params.id}/>
+                            <MessageCompose open={this.state.messageCompose} onHide={() => this.setState({messageCompose: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={jobInfo.createdBy.id}/>
                             <Apply open={this.state.apply} onHide={() => this.setState({apply: false})} handleApply={this.handleApply} name={this.state.data.name} fromUserID={sessionStorage.getItem('userID')}/>
                         </div>
                      }
@@ -99,7 +106,7 @@ class Job extends Component {
                             <p>{jobInfo.description}</p>
                         </div>
                         <div className="profile-section">
-                            <h2>Availibility</h2>
+                            <h2>Required Times</h2>
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -108,17 +115,19 @@ class Job extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>{this.props.day}</th>
-                                        <th>{this.props.startTime} - {this.props.endTime} </th>
-                                    </tr>
+                                    {jobInfo.requiredTimes.map((item, idx) => 
+                                        <tr key={idx}>
+                                            <td>{item.day}</td>
+                                            <td>{item.startTime} - {item.endTime}</td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             </table>
                         </div>
 
                         <div className="profile-section">
                           <h2>Describe your Loved Ones</h2>
-                          <p> {this.state.lovedOnesDescription} </p>
+                          <p> {jobInfo.lovedOnesDescription} </p>
                         </div>
                     </div>
                     <div className="col-sm-3 profile-sidebar">
@@ -156,7 +165,6 @@ class Apply extends Component {
   applyJob() {
     this.props.handleApply();
     this.props.onHide();
-    alert("Update Job Object");
   }
 
   render() {
@@ -167,10 +175,10 @@ class Apply extends Component {
             <h4><br/>You are applying for the job : {this.props.name}. <br/><br/>Would you like to proceed with this application?</h4>
         </Modal.Header>
         <Modal.Body>
-                <div className="submit-buttons">
-                    <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.props.onHide}>Cancel</button>
-                    <button type="button" className="btn btn-primary" onClick={this.applyJob.bind(this)}>Apply</button>
-                </div>
+            <div className="submit-buttons">
+                <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.props.onHide}>Cancel</button>
+                <button type="button" className="btn btn-primary" onClick={this.applyJob.bind(this)}>Apply</button>
+            </div>
         </Modal.Body>
     </Modal>
     );

@@ -1,17 +1,7 @@
-Accept job application link in Dashboard
-
 Dashboard
+    Jobs
+        Picture on job only updates when you open collapsible
     Messages
         Messages to Select loading
     Profile
         Profile add upload profile/cover pic for customer (just need to update form, api functions are done, copy them from CG profile
-
-Job Profile page
-    Apply for job in job profile page
-
-CG search
-    Add remaining filters on filters
-    update search function on BE
-
-Job search page
-    What kind of search params do we need?

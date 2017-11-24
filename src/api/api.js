@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 axios.defaults.withCredentials = true;
 
 //export const baseUrl = "http://13.228.121.24:1337"
@@ -162,11 +161,21 @@ export function getHiredCaregiver(id){
 }
 
 export function searchCaregivers(information){
-    var queryString = ""; 
-    for(var key in information)
-        information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
+    var queryString = ""
+    if(information.min !== undefined) queryString = queryString + "minHourlyRate="+information.min+"&"
+    if(information.max !== undefined) queryString = queryString + "maxHourlyRate="+information.max+"&"
+
+    delete information.min;
+    delete information.max;
+
+    for(var key in information){
+        information[key].forEach(query => {
+            if(query.value !== null)
+                queryString=queryString+key+"="+query.value+"&" 
+        });        
+    }
     
-    return axios.get(baseUrl + '/user/searchCaregiver?'+ queryString)
+    return axios.get(baseUrl + '/caregiver/search?'+ queryString)
 }   
 
 export function searchJobs(information){
@@ -188,9 +197,14 @@ export function getJobList(id){
 export function offerJob(info){
     return axios.post(baseUrl + '/caregiver/offer', info);
 }
+
 export function acceptJob(info){
     const data = new FormData();
     for(var key in info)
         data.append(key, info[key]);
     return axios.post(baseUrl + '/caregiver/accept', data); 
+}
+
+export function applyForJob(jobID){
+    return axios.post(baseUrl + '/caregiver/apply', {jobID: jobID});     
 }

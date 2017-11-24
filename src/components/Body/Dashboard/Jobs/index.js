@@ -709,10 +709,11 @@ class CaregiverHired extends Component{
             loading: true,
             error: false,
             reviewText: "",
-            stars: 0
+            stars: 0,
+            messageCompose: false
         }
-
-        getUser(this.props.caregiverHired.user).then(json => {
+        
+        getUser(this.props.hiredCaregiver.user).then(json => {
             this.setState({
                 caregiverHired: json.data,
                 loading: false,
@@ -751,7 +752,6 @@ class CaregiverHired extends Component{
             
         }
         else{
-            
             let imageSrc = this.state.caregiverHired.profilePicUrl === undefined ? placeholder : baseUrl + this.state.caregiverHired.profilePicUrl;
             return (
                 <div>
@@ -761,9 +761,9 @@ class CaregiverHired extends Component{
                             <img src={imageSrc} className="hired-picture" />
                             <h4>{this.state.caregiverHired.firstName + " " + this.state.caregiverHired.lastName}</h4>
                             <h5>${this.state.caregiverHired.caregiver.hourlyRate} HKD per hour</h5>
-                            <button className="btn btn-primary">Message</button>
+                            <button className="btn btn-primary" onClick={()=> this.setState({messageCompose: true})} >Message</button>
                             <button type="button" className="btn btn-default" onClick={()=> this.setState({reviewModal: true})}>Review</button>
-                            
+                            <MessageCompose open={this.state.messageCompose} onHide={() => this.setState({messageCompose: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={this.state.caregiverHired.id}/>
                             <Modal className="fade review-modal" show={this.state.reviewModal} onHide={() => this.setState({reviewModal: false})}>
                                 <Modal.Header >
                                     <Modal.Title><h4 className="modal-title">Review Caregiver</h4></Modal.Title>
@@ -776,7 +776,7 @@ class CaregiverHired extends Component{
                                             <br />
                                         </div>
                                         <div className="form-group">
-                                            <label for="comment">Comments</label>
+                                            <label htmlFor="comment">Comments</label>
                                             <textarea className="form-control" rows="5" id="comment" placeholder="Describe your experience!" value={this.state.reviewText} onChange={(e) => this.setState({reviewText: e.target.value})} />
                                         </div>
                                         <div className="submit-buttons">
@@ -797,8 +797,8 @@ class CaregiverHired extends Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.requiredTimes.map(item => 
-                                                <tr>
+                                {this.props.requiredTimes.map((item, idx) => 
+                                                <tr key={idx}>
                                                     <td>{item.day}</td>
                                                     <td>{item.startTime} - {item.endTime}</td>
                                                 </tr>
@@ -947,7 +947,7 @@ class CustomerJob extends Component{
                                     this.state.error ? <div><h5> Could not load job details!</h5></div> :
                                     (
                                         this.state.job.hiredCaregiver !== undefined ? 
-                                            <CaregiverHired caregiverHired = {this.state.job} /> :
+                                            <CaregiverHired {...this.state.job} /> :
                                             <CaregiverNotHired {...this.state.job} />    
                                     )
                                 )

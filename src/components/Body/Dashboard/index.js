@@ -76,7 +76,6 @@ class Dashboard extends Component {
 			loadMessageBody: false,
 			messageBody: {}
 		}
-
 	    
 		this.updateUser = this.updateUser.bind(this);
 		this.reply = this.reply.bind(this);		
@@ -84,7 +83,8 @@ class Dashboard extends Component {
 		this.resetMessageTab = this.resetMessageTab.bind(this);
 
 		this.updateUser();
-    }
+	}
+	
     updateUser(){
 		getUser().then(json => {
 	        this.setState({
@@ -101,6 +101,7 @@ class Dashboard extends Component {
 	        });
 		});		
 	}  
+
 	loadMessage(message){
 		markRead(message.id).then(json => {}).catch(err=>{});
 		this.setState({
@@ -133,38 +134,9 @@ class Dashboard extends Component {
 
     render(){
     	var body; 
-    	var title;
     	if(this.state.tab === "jobs"){
     		console.log(this.state.data);
     		body = <Jobs updateUser={this.updateUser} {...this.state.data} userID={this.state.userID}/>;
-    		title = 
-    		<div>
-    			<div className="col-xs-3 active">
-		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src={suitcase} className="dashboard-logo" />
-		                <p>Jobs</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3">
-		            <span onClick={() => {this.setState({ tab: "messages" })}}>
-		                <img src={messages} className="dashboard-logo" />
-		                <p>Messages</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3">
-	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src={profile} className="dashboard-logo" />
-	                	<p>Profile</p>
-	                </span>
-	            </div>
-	            <div className="col-xs-3">
-	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src={settings} className="dashboard-logo" />
-		                <p>Settings</p>
-	               	</span>
-	            </div>
-	         </div>
-    		
     	}
     	else if(this.state.tab === "messages"){
 			if(this.state.loadMessageBody){
@@ -172,93 +144,12 @@ class Dashboard extends Component {
 			}else{
 				body = <Messages userID={this.state.userID} loadMessage={this.loadMessage}/>;
 			}
-    		title = 
-    		<div>
-    			<div className="col-xs-3 ">
-		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src={suitcase} className="dashboard-logo" />
-		                <p>Jobs</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3 active">
-		            <span onClick={this.resetMessageTab}>
-		                <img src={messages} className="dashboard-logo" />
-		                <p>Messages</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3">
-	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src={profile} className="dashboard-logo" />
-	                	<p>Profile</p>
-	                </span>
-	            </div>
-	            <div className="col-xs-3">
-	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src={settings} className="dashboard-logo" />
-		                <p>Settings</p>
-	               	</span>
-	            </div>
-	         </div>
     	}
     	else if(this.state.tab === "profile"){
 			body = <Profile userID={this.state.userID}  {...this.state.data}/>;
-    		title = 
-    		<div>
-    			<div className="col-xs-3 ">
-		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src={suitcase} className="dashboard-logo" />
-		                <p>Jobs</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3">
-		            <span onClick={() => {this.setState({ tab: "messages" })}}>
-		                <img src={messages} className="dashboard-logo" />
-		                <p>Messages</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3 active">
-	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src={profile} className="dashboard-logo" />
-	                	<p>Profile</p>
-	                </span>
-	            </div>
-	            <div className="col-xs-3">
-	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src={settings} className="dashboard-logo" />
-		                <p>Settings</p>
-	               	</span>
-	            </div>
-	         </div>
     	}
     	else if (this.state.tab === "settings") {
     		body = <Settings userID={this.state.userID}  {...this.state.data}/>;
-    		title = 
-    		<div>
-    			<div className="col-xs-3 ">
-		            <span onClick={() => {this.setState({ tab: "jobs" })}}>
-		                <img src={suitcase} className="dashboard-logo" />
-		                <p>Jobs</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3">
-		            <span onClick={() => {this.setState({ tab: "messages" })}}>
-		                <img src={messages} className="dashboard-logo" />
-		                <p>Messages</p>
-		            </span>
-	            </div>
-	            <div className="col-xs-3">
-	            	<span onClick={() => {this.setState({ tab: "profile" })}}>
-	                	<img src={profile} className="dashboard-logo" />
-	                	<p>Profile</p>
-	                </span>
-	            </div>
-	            <div className="col-xs-3 active">
-	            	<span onClick={() => {this.setState({ tab: "settings" })}}>
-		                <img src={settings} className="dashboard-logo" />
-		                <p>Settings</p>
-	               	</span>
-	            </div>
-	         </div>
     	}
     	
         return (
@@ -278,7 +169,32 @@ class Dashboard extends Component {
 			    </div>
 			    <div className="container-small dashbar">
 			        <div className="row text-center">
-			            {title}
+						<div>
+							<div className={this.state.tab === "jobs" ? "col-xs-3 active" : "col-xs-3"}>
+								<span onClick={() => {this.setState({ tab: "jobs" })}}>
+									<img src={suitcase} className="dashboard-logo" />
+									<p>Jobs</p>
+								</span>
+							</div>
+							<div className={this.state.tab === "messages" ? "col-xs-3 active" : "col-xs-3"}>
+								<span onClick={() => {this.setState({ tab: "messages" })}}>
+									<img src={messages} className="dashboard-logo" />
+									<p>Messages</p>
+								</span>
+							</div>
+							<div className={this.state.tab === "profile" ? "col-xs-3 active" : "col-xs-3"}>
+								<span onClick={() => {this.setState({ tab: "profile" })}}>
+									<img src={profile} className="dashboard-logo" />
+									<p>Profile</p>
+								</span>
+							</div>
+							<div className={this.state.tab === "settings" ? "col-xs-3 active" : "col-xs-3"}>
+								<span onClick={() => {this.setState({ tab: "settings" })}}>
+									<img src={settings} className="dashboard-logo" />
+									<p>Settings</p>
+								</span>
+							</div>
+						</div>
 			        </div>
 			    </div> 
 			    {body}
