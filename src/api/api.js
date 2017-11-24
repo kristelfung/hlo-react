@@ -162,17 +162,19 @@ export function getHiredCaregiver(id){
 
 export function searchCaregivers(information){
     var queryString = ""
+    console.log(JSON.stringify(information), 'info')
     if(information.min !== undefined){
         queryString = queryString + "minHourlyRate="+information.min+"&";
-        delete information.min;
-    }
-
+    }   
     if(information.max !== undefined){
         queryString = queryString + "maxHourlyRate="+information.max+"&";
-        delete information.max;
     }
+    delete information.min;
+    delete information.max;
 
     for(var key in information){
+    console.log(key, 'info')
+    
         information[key].forEach(query => {
             if(query.value !== null)
                 queryString=queryString+key+"="+query.value+"&" 
