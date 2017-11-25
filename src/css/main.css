@@ -447,7 +447,28 @@ video {
   background-color: #efefef;
   padding: 40px 0px; }
 
-/* INFO PAGE */
+/* ABOUT PAGE */
+.infopage {
+  padding-top: 30px;
+  padding-bottom: 40px; }
+  .infopage p, .infopage li {
+    font-size: 16px;
+    line-height: 1.5; }
+
+/* =========== dream team ============== */
+.dreamteam {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  .dreamteam img {
+    border-radius: 50%;
+    width: 100%; }
+
+@media (max-width: 768px) {
+  .dreamteam {
+    text-align: center; }
+    .dreamteam img {
+      width: 50%; } }
+
 /* PROFILE PAGE */
 .profile-body {
   padding: 70px 60px 30px 60px;

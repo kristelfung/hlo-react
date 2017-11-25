@@ -7,7 +7,7 @@ import {
 
 import Home from "./Home";
 import Search from "./Search";
-import Infopage from "./Infopage";
+import About from "./About";
 import Profile from "./Profile";
 import Job from './Profile/Job';
 import Dashboard from "./Dashboard";
@@ -28,7 +28,7 @@ export default () => (
             <Route path="/search/job"  render={() => <Search type="job" /> } />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route path="/about"  render={() => <Infopage header={{aboutHeader}}/>} />
+            <Route path="/about" component={About} />
             <Route exact path="/profile/job/:id" component={Job} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route path="/contact_us" />
