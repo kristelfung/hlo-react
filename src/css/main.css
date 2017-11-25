@@ -684,6 +684,92 @@ video {
   margin-left: 10px;
   color: #1B1B1B; }
 
+.job {
+  background-color: #FCE4EC;
+  border-radius: 10px;
+  border: 1px solid #F48FB1;
+  margin-top: 20px; }
+  .job .job-right {
+    /* status, expand button */
+    float: right;
+    margin: 20px 40px; }
+  .job .job-name {
+    display: inline-block;
+    margin: 20px 40px; }
+  .job .job-desc {
+    /* expanded content of job */
+    background-color: #FEFEFE;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 40px; }
+  @media (max-width: 767px) {
+    .job .job-right, .job .job-name {
+      /* for mobile */
+      margin: 10px 20px; }
+    .job .job-desc {
+      padding: 10px 20px; } }
+
+.job-status {
+  /* img */
+  height: 60px;
+  margin-top: -15px; }
+
+.expand-job {
+  font-size: 40px;
+  margin-left: 10px;
+  color: #1B1B1B;
+  cursor: pointer; }
+
+/* table of caregiver applicants */
+.applicants {
+  cursor: pointer; }
+  .applicants .applicant-name {
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 0px; }
+  .applicants .applicant-date {
+    margin: 0px; }
+  .applicants .applicant-buttons {
+    /* hire, message container */
+    text-align: right; }
+  .applicants .applicant-link, .applicants .applicant-link:hover {
+    /* the <a> wrapper */
+    display: block;
+    text-decoration: none;
+    color: inherit; }
+  .applicants td .btn {
+    /* a hire/message button */
+    margin-top: 8px; }
+  .applicants tbody > tr > td {
+    padding: 15px 30px; }
+  @media (max-width: 767px) {
+    .applicants tbody > tr > td {
+      padding: 5px; } }
+
+/* hired caregiver */
+.hired-caregiver {
+  margin-bottom: 30px;
+  text-align: center; }
+  .hired-caregiver .hired-picture {
+    border-radius: 50%;
+    max-width: 200px;
+    padding: 10px 0px; }
+  @media (min-width: 768px) {
+    .hired-caregiver .col-sm-9 {
+      /* column with message, review */
+      margin-top: 100px; } }
+
+@media (max-width: 767px) {
+  .hired-caregiver {
+    text-align: center; } }
+
+/* review caregiver */
+.review-modal {
+  text-align: left; }
+  .review-modal .rating-stars i {
+    color: #FFC107;
+    font-size: 24px; }
+
 .dashbody {
   border-top: 1px solid #efefef;
   /* border between dashboard tabs */

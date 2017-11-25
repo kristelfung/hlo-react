@@ -828,8 +828,8 @@ class CaregiverNotHired extends Component{
 
     render(){
         return (
-            <div className="">            
-                <div className="job-desc">
+            <div className="job-desc">            
+                <div className="hired-caregiver">
                     <h4>Job Description</h4>
                     <p>{this.props.description}</p>
                     <br/>
