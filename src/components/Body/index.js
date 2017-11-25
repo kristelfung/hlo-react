@@ -13,6 +13,7 @@ import Job from './Profile/Job';
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import Signup from "./Signup";
+import QandA from "./QandA";
 
 const aboutHeader = {
     title: "About",
@@ -32,7 +33,7 @@ export default () => (
             <Route exact path="/profile/job/:id" component={Job} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route path="/contact_us" />
-            <Route path="/QandA" />
+            <Route path="/QandA" component={QandA} />
             <Route path="/careers" />
             <Route path="/press" />
             <Route path="/blog" />
