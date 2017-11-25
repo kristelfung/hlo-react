@@ -24,10 +24,9 @@ class Footer extends Component {
                     <div className="col-sm-3">
                         <h3>Company</h3>
                         <ul className="list-unstyled">
-                            <li><a href="/about">About Us/Dream Team</a></li>
-                            <li><a href="/contact_us">Contact Us</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
                             <li><a href="/QandA">Q&amp;A with CEO</a></li>
-                            <li><a href="/careers">Careers/Be a True Believer</a></li>
                             <li><a href="/press">Press</a></li>
                             <li><a href="/blog">Blog</a></li>
                             <li><a href="/newsletter">Newsletter</a></li>

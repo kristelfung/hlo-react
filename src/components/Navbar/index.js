@@ -33,14 +33,15 @@ class NavBar extends Component {
                   <MenuItem eventKey={2.1} href="/search/caregiver">Caregivers</MenuItem>
                   <MenuItem eventKey={2.2} href="/search/job">Jobs</MenuItem>
                 </NavDropdown>
-                <NavItem eventKey={3} href="/forum">Forum</NavItem>
+                <NavItem eventKey={3} href="/medicalexperts">Medical Experts</NavItem>
+                <NavItem eventKey={4} href="/forum">Forum</NavItem>
                 {
                     sessionStorage.getItem("loggedIn") && <NavItem eventKey={5} href="/dashboard">Dashboard</NavItem>
                 }
-                <NavItem eventKey={4} href={sessionStorage.getItem("loggedIn") ? "/" : "/login"} onClick={e => sessionStorage.getItem("loggedIn") && this.logout(e)}>{sessionStorage.getItem("loggedIn") ? "Log Out" : "Sign Up/Login"}</NavItem>
-                <NavDropdown eventKey={4} title={<span><i className="fa fa-globe" aria-hidden="true"></i> English</span>} id="basic-nav-dropdown">
-                  <MenuItem eventKey={4.1}>English</MenuItem>
-                  <MenuItem eventKey={4.2}>中文</MenuItem>
+                <NavItem eventKey={5} href={sessionStorage.getItem("loggedIn") ? "/" : "/login"} onClick={e => sessionStorage.getItem("loggedIn") && this.logout(e)}>{sessionStorage.getItem("loggedIn") ? "Log Out" : "Sign Up/Login"}</NavItem>
+                <NavDropdown eventKey={5} title={<span><i className="fa fa-globe" aria-hidden="true"></i> English</span>} id="basic-nav-dropdown">
+                  <MenuItem eventKey={5.1}>English</MenuItem>
+                  <MenuItem eventKey={5.2}>中文</MenuItem>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>

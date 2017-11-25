@@ -469,6 +469,25 @@ video {
     .dreamteam img {
       width: 50%; } }
 
+/* CONTACT PAGE */
+.contact-info {
+  padding: 40px;
+  /* makes the icons look centered */ }
+  .contact-info span {
+    position: absolute;
+    left: 18px; }
+  .contact-info .fa-map-marker {
+    font-size: 24px; }
+  .contact-info .fa-phone {
+    font-size: 20px; }
+
+/* at desktop width */
+@media (min-width: 992px) {
+  .contact-info {
+    padding: 70px 120px; }
+    .contact-info span {
+      left: 95px; } }
+
 /* PROFILE PAGE */
 .profile-body {
   padding: 70px 60px 30px 60px;
@@ -664,6 +683,25 @@ video {
   font-size: 40px;
   margin-left: 10px;
   color: #1B1B1B; }
+
+.dashbody {
+  border-top: 1px solid #efefef;
+  /* border between dashboard tabs */
+  padding-top: 20px;
+  padding-bottom: 40px; }
+
+.button-col {
+  text-align: right;
+  /* new job button */ }
+  .button-col a {
+    margin-top: 20px; }
+
+/* form styles */
+.next {
+  float: right; }
+
+.back {
+  float: left; }
 
 /* messages */
 /* get rid of grey borders */

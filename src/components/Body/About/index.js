@@ -25,7 +25,7 @@ class About extends Component {
     render() {
 
         const about = {
-            title: "About",
+            title: "About Us",
             subtitle: "Learn more about HLO and the dream team behind it."
         }
 
