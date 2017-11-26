@@ -15,11 +15,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import QandA from "./QandA";
 import Contact from "./Contact";
-
-const aboutHeader = {
-    title: "About",
-    subtitle: "Learn about HealthyLovedOnes and the dream team behind it."
-}
+import Terms from "./Terms";
 
 export default () => (
     <BrowserRouter>
@@ -39,7 +35,7 @@ export default () => (
             <Route path="/press" />
             <Route path="/blog" />
             <Route path="/newsletter" />
-            <Route path="/terms" />
+            <Route path="/terms" component={Terms}/>
             <Route path="/privacy" />
             <Route path="/insurance" />
             <Route path="/guidelines" />
