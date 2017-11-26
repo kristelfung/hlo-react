@@ -599,32 +599,33 @@ class Jobs extends Component {
                             </div>
                         }
                         {
-                            this.state.type === "caregiver" ?
-                            <div className="container-fluid">
-														<div className="row">
-																<div className="col-xs-6">
-																		<h2>Listed Jobs</h2>
-																</div>
-																<div className="col-xs-6 button-col">
-																		<a className="btn btn-primary" href="#" role="button" onClick={() => {this.setState({ isJobAdd: true })}}>Add Job</a>
-																</div>
-														</div>
+													this.state.type === "caregiver" ?
+														<div className="container-fluid">
+																<h2>Listed Jobs</h2>
 															{
-																this.state.data.jobsApplied.map(job => <JobItem name="Job Applied" isEmpty={!this.state.jobsApplied.length} key={job.id} data={job}/>)
+																	(this.state.data.jobsApplied.length) ?
+																	    this.state.data.jobsApplied.map(job => <JobItem name="Job Applied" key={job.id} data={job} />) :
+																			<h4> No Applied Jobs </h4>
 															}
 															{
-																this.state.data.jobsReceived.map(job => <JobItem name="Job Offered" isEmpty={!this.state.jobsApplied.length} key={job.id} isOfferList={true} data={job}/>)
+																	(this.state.data.jobsReceived.length) ?
+																		this.state.data.jobsReceived.map(job => <JobItem name="Job Offered" key={job.id} isOfferList={true} data={job} />) :
+																		<h4> No Offered Jobs </h4>
 															}
 															{
-																this.state.data.currentJobs.map(job => <JobItem name="Current Job" isEmpty={!this.state.jobsApplied.length} key={job.id} data={job}/>)
+																	(this.state.data.currentJobs.length) ?
+																			this.state.data.currentJobs.map(job => <JobItem name="Current Job"  key={job.id} data={job} />) :
+																			<h4> No Current Jobs </h4>
 															}
-															<h2>Completed Jobs</h2>
+																	<h2>Completed Jobs</h2>
 															{
-																/*
-																	this.state.data.completedJobs.map(job => <JobItem name="Completed Job" key={job.id} data={job}/>)
-																*/
+																	/*
+																		(this.state.data.completedJobs.length) ?
+																				this.state.data.completedJobs.map(job => <JobItem name="Completed Job"  key={job.id} data={job}/>) :
+																				<h4> No Completed Jobs </h4>
+																		*/
 															}
-                            </div>
+													     </div>
                             :
                             <div className="container-fluid">
                                 {
