@@ -75,6 +75,17 @@ class Guidelines extends Component {
                         <li>If a Client cancels a HH Service within 12 hours of the scheduled time, you may be eligible for 1 hour of payment. Please email cancel@healthylovedones.com for more information regarding this policy.</li>
                     </ul>
                     <br/>
+                    <h4>Available HH Services</h4>
+                    <ul>
+                        <li>Available HH Services are a great way to pick up HH Services quickly, fill openings in your schedule and build Client relationships.</li>
+                        <li>Hourly rates on an Available HH Service are non-negotiable, so only accept an Available HH Service if you are prepared to perform the HH Service for the stated rate and if you have enough information about the HH Service from the HH Service description. Attempts to renegotiate the hourly rate on an Available HH Service is grounds for reduced access to HH Service opportunities or removal from the HLO Community.</li>
+                        <li>Acceptance is a commitment to perform the HH Service:</li>
+                        <li>Only accept Available HH Services if you feel confident that you will complete the HH Service.</li>
+                        <li>If the HH Service details do not include enough information to provide you this confidence, do not accept the HH Service.</li>
+                        <li>Do not accept an Available HH Service that you are unsure of the time, date and/or location. If you pick up an Available HH Service that you cannot complete due to these reasons, it may be grounds for immediate removal from the community.</li>
+                        <li>Do not impose hourly minimums, travel time or travel expenses on the Client when you accept an Available HH Service.</li>
+                    </ul>
+                    <h4>Will complete this at school tomorrow</h4>
                 </div>
             </div>
         );
