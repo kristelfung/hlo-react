@@ -16,6 +16,8 @@ import Signup from "./Signup";
 import QandA from "./QandA";
 import Contact from "./Contact";
 import Terms from "./Terms";
+import Privacy from "./Privacy";
+import Guidelines from "./Guidelines";
 
 export default () => (
     <BrowserRouter>
@@ -36,9 +38,9 @@ export default () => (
             <Route path="/blog" />
             <Route path="/newsletter" />
             <Route path="/terms" component={Terms}/>
-            <Route path="/privacy" />
+            <Route path="/privacy" component={Privacy}/>
             <Route path="/insurance" />
-            <Route path="/guidelines" />
+            <Route path="/guidelines" component={Guidelines} />
             <Route exact path="/dashboard" render={() => (
                 sessionStorage.getItem('loggedIn') === null ? (
                     <Redirect to="/login"/>

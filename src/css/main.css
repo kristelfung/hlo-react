@@ -448,9 +448,12 @@ video {
   padding: 40px 0px; }
 
 /* ABOUT PAGE */
+/* ===== general styles for this format === */
 .infopage {
   padding-top: 30px;
   padding-bottom: 40px; }
+  .infopage h4 {
+    font-weight: 700; }
   .infopage p, .infopage li {
     font-size: 16px;
     line-height: 1.5; }
@@ -491,8 +494,6 @@ video {
 /* TERMS PAGE */
 .terms-content {
   /* entire container for terms */ }
-  .terms-content h4 {
-    font-weight: 700; }
   .terms-content span {
     position: absolute;
     font-size: 16px;
@@ -500,7 +501,7 @@ video {
     /* align with paragraph */ }
   .terms-content .indented {
     margin-left: 50px; }
-  .terms-content ol li {
+  .terms-content ol li, .terms-content ul li {
     list-style-position: inside;
     text-indent: -1.1em;
     /* make li elements line up */
