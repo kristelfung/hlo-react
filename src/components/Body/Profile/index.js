@@ -154,11 +154,10 @@ class Profile extends Component {
 class Review extends Component{
     render(){
         return(
-            //TODO get reviewer pic
             <div>
                 <div className="row reviewer-info">
                     <div className="col-xs-6">
-                        <img src="images/profile/review.png" className="review-pic" />
+                        <img src={(this.props.reviewByProfilePic === undefined || this.props.reviewByProfilePic === "") ? placeholder : baseUrl + this.props.reviewByProfilePic} className="review-pic" />
                         <h4 className="review-name">{this.props.reviewBy}</h4>
                         <Stars stars={this.props.stars}/>
                     </div>

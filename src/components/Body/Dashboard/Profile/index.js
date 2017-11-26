@@ -5,6 +5,7 @@ import moment from 'moment'
 
 import {updateCustomerProfile, updateCaregiverProfile, uploadUserPics} from '../../../../api/api'
 import Dashboard from '../../Dashboard';
+import {languages, locations, days} from '../../../../utils'
 
 class Profile extends Component {
 	constructor(props){
@@ -16,60 +17,18 @@ class Profile extends Component {
 			day:"",
             startTime:"",
             endTime:"",
-            
         }
        
-		this.save = this.save.bind(this);
-		this.languages = [
-            {value: "Arabic", label:"Arabic" },
-            {value:"Armenian", label:"Armenian" },
-            {value:"ASL", label:"ASL" },
-            {value:"Cantonese", label:"Cantonese" },
-            {value:"English", label:"English" },
-            {value:"French", label:"French" },
-            {value:"German", label:"German" },
-            {value:"Greek", label:"Greek" },
-            {value:"Hebrew", label:"Hebrew" },
-            {value:"Hindi", label:"Hindi" },
-            {value:"Italian", label:"Italian" },
-            {value:"Korean", label:"Korean" },                              
-            {value:"Mandarin", label:"Mandarin" },
-            {value:"Persian", label:"Persian" },
-            {value:"Polish", label:"Polish" },
-            {value:"Portuguese", label:"Portuguese" },
-            {value:"Russian", label:"Russian" },
-            {value:"Shanghainese", label:"Shanghainese" },
-            {value:"Spanish", label:"Spanish" },
-            {value:"Tagalog", label:"Tagalog" },
-            {value:"Urdu", label:"Urdu" }
-        ];
-        this.options = [
-            { value: 'Wan Chai', label: 'Wan Chai'},
-            { value: 'Central', label: 'Central'},
-            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
-            {value: 'Aberdeen', label: 'Aberdeen'},
-            {value: 'Wan Chai', label: 'Wan Chai'},
-            {value: 'Kwun Tong', label: 'Kwun Tong'},
-            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
-            {value: 'San Ko Pong',label: 'San Ko Pong'},
-            {value: 'Mongkok', label: 'Mongkok'},
-            {value: 'Sha Tin', label: 'Sha Tin'},
-            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
-            {value: 'Yuen Long', label: 'Yuen Long'},
-            {value: 'Kowloon', label: 'Kowloon'}
-        ];
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
-        this.logChange = this.logChange.bind(this);
-        this.logskills = this.logskills.bind(this);
-        this.logPersonalServices = this.logPersonalServices.bind(this);
         if(this.state.car==true){
             this.state.car="Yes"
         }
         else{
             this.state.car="No"
         }
-	}
+    }
+    
 	add(){
         let reqTime = {
             day:this.state.day,
@@ -78,6 +37,7 @@ class Profile extends Component {
         }
         this.setState({availability: this.state.availability.concat([reqTime]), day:"",startTime:"",endTime:""});
     } 
+
 	save(e){
 	    let information = {
     		firstName : this.state.firstName,
@@ -87,12 +47,6 @@ class Profile extends Component {
 	    }
     	updateCustomerProfile(information);
 	    if(this.props.type==="caregiver"){
-            if(this.state.car=="Yes"){
-                this.state.car=true
-            }
-            else{
-                this.state.car=false
-            }
 	    	let caregiverInfo = {
 	    		id:this.props.userID,
 	    		education:this.state.education,
@@ -120,7 +74,7 @@ class Profile extends Component {
                 pricingPlan:this.state.pricingPlan,
                 yearsOfExperience: this.state.yearsOfExperience,
                 license: this.state.license,
-                car:this.state.car
+                car: this.state.car==="Yes"
             }
 			let coverPic = this.state.cover;
 	        let profilePic = this.state.profile;
@@ -128,21 +82,8 @@ class Profile extends Component {
 	        this.setState({tab:"detail"});
 	    	updateCaregiverProfile(caregiverInfo);
 	    }   
-	}
-	logChange(val) { //type of caregivers
-        this.setState({ typeOfCaregiver: val});
     }
 
-    logskills(val){
-        this.setState({ skills: val});
-    }
-
-    logPersonalServices(val){
-        this.setState({ personalServices: val});
-    }
-    logLanguages(val){
-        this.setState({ languages: val});
-    }
     render(){
     	var body;
     	var title;
@@ -235,15 +176,15 @@ class Profile extends Component {
 			                        <div className="form-group">
 				                        <label htmlFor="address">Language</label>
 				                        <div id="language" >
-				                            <Select options={this.languages}
+				                            <Select options={languages}
 				                                multi
-				                                onChange={(e)=> this.logLanguages(e)} 
+				                                onChange={(e) => this.setState({ languages: e})} 
 				                                value={this.state.languages} />
 				                        </div>
 				                    </div>
                                     <div className="form-group">
                                         <label htmlFor="location">Location</label>
-                                        <Select options={this.options}
+                                        <Select options={locations}
                                             multi
                                             onChange={(e)=> this.setState({location: e})}
                                             value={this.state.location}/>
@@ -318,9 +259,8 @@ class Profile extends Component {
             }
             else if (this.state.tab==="services"){
             	body =  <div id="requirements" className="tab-pane">
-                        
                         <h4>Type of Caregiver</h4>
-                        <CheckboxGroup name="typeCaregivers" value = {this.state.typeOfCaregiver} onChange={this.logChange} >
+                        <CheckboxGroup name="typeCaregivers" value = {this.state.typeOfCaregiver} onChange={val => this.setState({ typeOfCaregiver: val})} >
                             <div className="row checkbox-collection">
                                 <div className="col-sm-6">
                                     <div className="checkbox">
@@ -361,7 +301,7 @@ class Profile extends Component {
                         
 
                         <h4>Professional Services</h4>
-                        <CheckboxGroup name="typeCaregivers" value = {this.state.skills} onChange={this.logskills} >
+                        <CheckboxGroup name="typeCaregivers" value = {this.state.skills} onChange={val => this.setState({ skills: val})} >
                             <div className="row checkbox-collection">
                                 <div className="col-sm-6">
                                     <div className="checkbox">
@@ -428,53 +368,50 @@ class Profile extends Component {
                             </div>
                         </CheckboxGroup>
                         <h4>Personal Services</h4>
-                        <CheckboxGroup name="personalServices" value = {this.state.personalServices} onChange={this.logPersonalServices} >
+                        <CheckboxGroup name="personalServices" value = {this.state.personalServices} onChange={val => this.setState({ personalServices: val})} >
                             <div className="row checkbox-collection">
-                            <div className="col-sm-6">
-                                <div className="checkbox">
-                                    <label><Checkbox value="Bathing"/>Bathing</label>
+                                <div className="col-sm-6">
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Bathing"/>Bathing</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Companionship"/>Companionship</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Exercise"/>Exercise</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Groceries and Shopping"/>Groceries and Shopping</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Grooming"/>Grooming</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Housekeeping"/>Housekeeping</label>
+                                    </div>
                                 </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Companionship"/>Companionship</label>
+                                <div className="col-sm-6">
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Managing Medications"/>Managing Medications</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Meal Prep"/>Meal Prep</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Transferring and Mobility"/>Transferring and Mobility</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Toileting"/>Toileting</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Transportation"/>Transportation</label>
+                                    </div>
+                                    <div className="checkbox">
+                                        <label><Checkbox value="Travel Companion"/>Travel Companion</label>
+                                    </div>
                                 </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Exercise"/>Exercise</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Groceries and Shopping"/>Groceries and Shopping</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Grooming"/>Grooming</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Housekeeping"/>Housekeeping</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-6">
-                                <div className="checkbox">
-                                    <label><Checkbox value="Managing Medications"/>Managing Medications</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Meal Prep"/>Meal Prep</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Transferring and Mobility"/>Transferring and Mobility</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Toileting"/>Toileting</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Transportation"/>Transportation</label>
-                                </div>
-                                <div className="checkbox">
-                                    <label><Checkbox value="Travel Companion"/>Travel Companion</label>
-                                </div>
-                            </div>
                             </div>
                         </CheckboxGroup>
-                        
-                      
-                        
                         <div className="form-group">
                             <div className="row">
                                 <label className="col-xs-5 control-label">Day of Week</label>
@@ -496,20 +433,12 @@ class Profile extends Component {
                                 )}
                                 <div>
                                     <div className="col-xs-5">
-                                        <Select
-                                        options={[
-                                            {value: 'Monday', label: 'Monday'},
-                                            {value: 'Tuesday', label: 'Tuesday'},
-                                            {value: 'Wednesday', label: 'Wednesday'},
-                                            {value: 'Thursday', label: 'Thursday'},
-                                            {value: 'Friday', label: 'Friday'},
-                                            {value: 'Saturday', label: 'Saturday'},
-                                            {value: 'Sunday', label: 'Sunday'}
-                                        ]}
+                                        <Select options={days}
                                         id="recipient" 
                                         placeholder="Day"
                                         name="form-field-recipient"
-                                        value = {this.state.day} onChange={(e) => this.setState({day: e ? e.value : ""})}/>                                    </div>
+                                        value = {this.state.day} onChange={(e) => this.setState({day: e ? e.value : ""})}/>                                    
+                                    </div>
                                     <div className="col-xs-3">
                                         <input type="time" className="form-control"  value = {this.state.startTime}onChange={(e) => this.setState({startTime: e.target.value})}/>
                                     </div>
@@ -522,13 +451,10 @@ class Profile extends Component {
                                 </div>
                             </div>
                         </div>
-                       
-                       
-
                         <span className="btn btn-default back" onClick={(e) => this.setState({tab: "experience"})}>Back</span>
                         <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "photos"})}>Next</span>
                     	</div>
-                title=  <ul className="nav nav-pills nav-justified postjob-steps"> 
+                title = <ul className="nav nav-pills nav-justified postjob-steps"> 
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
 	                        <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "experience"})}>Experience</a></li>
 	                        <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "services"})}>Services</a></li>
@@ -578,7 +504,6 @@ class Profile extends Component {
                     </div>
                     <a onClick={(e) => this.setState({tab: "photos"})} class="btn btn-default back">Back</a>
                     <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
-                    
                 </div>
             
                 title = <ul className="nav nav-pills nav-justified postjob-steps"> 
@@ -650,8 +575,6 @@ class Profile extends Component {
                             <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "review"})}>Review</a></li>
                         </ul>
             }
-
-        
     	}
         return (
         	<div className="dashbody">
@@ -659,11 +582,9 @@ class Profile extends Component {
 		            <form>
 		                <div className="row">
 		                    <h3 className="form-title">Become a Caregiver</h3>
-		                    	{title}
-        						{body}
+                            {title}
+                            {body}
         				</div>
-		                <h3></h3>
-		                
 		            </form>
 		        </div>
 			</div>

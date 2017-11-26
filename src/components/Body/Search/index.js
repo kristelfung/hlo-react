@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '../../CaregiverCard';
 import Select from 'react-select';
 import { searchCaregivers, searchJobs } from '../../../api/api';
+import {locations, professionalServices, personalServices, languages, typeOfCaregiver, sex} from '../../../utils'
 
 class Search extends Component {
     constructor(props) {
@@ -19,98 +20,6 @@ class Search extends Component {
             loading: true
         }
         this.performSearch = this.performSearch.bind(this);
-        this.locations = [
-            { value: 'Wan Chai', label: 'Wan Chai'},
-            { value: 'Central', label: 'Central'},
-            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
-            {value: 'Aberdeen', label: 'Aberdeen'},
-            {value: 'Wan Chai', label: 'Wan Chai'},
-            {value: 'Kwun Tong', label: 'Kwun Tong'},
-            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
-            {value: 'San Ko Pong',label: 'San Ko Pong'},
-            {value: 'Mongkok', label: 'Mongkok'},
-            {value: 'Sha Tin', label: 'Sha Tin'},
-            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
-            {value: 'Yuen Long', label: 'Yuen Long'},
-            {value: 'Kowloon', label: 'Kowloon'}
-        ];
-        this.professionalServices = [
-            { value:"Addiction Counselor", label:"Addiction Counselor"},
-            { value:"Beautician", label:"Beautician"},
-            { value:"Chinese Medicine Expert", label:"Chinese Medicine Expert"},
-            { value:"Chiropractor", label:"Chiropractor"},
-            { value:"Eldercare", label:"Eldercare"},
-            { value:"Hair Stylist", label:"Hair Stylist"},
-            { value:"Licensed Nurse", label:"Licensed Nurse"},
-            { value:"Occupational Therapist", label:"Occupational Therapist"},
-            { value:"Massage Therapist", label:"Massage Therapist"},
-            { value:"Personal Trainer", label:"Personal Trainer"},
-            { value:"Yoga Instructor", label:"Yoga Instructor"},
-            { value:"Physiotherapist", label:"Physiotherapist"},
-            { value:"Midwife", label:"Midwife"},
-            { value:"Reflexologist", label:"Reflexologist"},
-            { value:"Special Needs Therapist", label:"Special Needs Therapist"},
-            { value:"Speech Therapist", label:"Speech Therapist"},
-            { value:"Spiritual/Body/Mind Expert", label:"Spiritual/Body/Mind Expert"},
-            { value:"Sports Therapist", label:"Sports Therapist"}
-        ];
-        this.languages = [
-            {value: "Arabic", label:"Arabic" },
-            {value:"Armenian", label:"Armenian" },
-            {value:"ASL", label:"ASL" },
-            {value:"Cantonese", label:"Cantonese" },
-            {value:"English", label:"English" },
-            {value:"French", label:"French" },
-            {value:"German", label:"German" },
-            {value:"Greek", label:"Greek" },
-            {value:"Hebrew", label:"Hebrew" },
-            {value:"Hindi", label:"Hindi" },
-            {value:"Italian", label:"Italian" },
-            {value:"Korean", label:"Korean" },                              
-            {value:"Mandarin", label:"Mandarin" },
-            {value:"Persian", label:"Persian" },
-            {value:"Polish", label:"Polish" },
-            {value:"Portuguese", label:"Portuguese" },
-            {value:"Russian", label:"Russian" },
-            {value:"Shanghainese", label:"Shanghainese" },
-            {value:"Spanish", label:"Spanish" },
-            {value:"Tagalog", label:"Tagalog" },
-            {value:"Urdu", label:"Urdu" }
-        ];
-
-        // this.medicalConditions = [
-        // ];
-
-        this.typeOfCaregiver = [
-            { value:"Volunteer Caregivers", label:"Volunteer Caregivers"},
-            { value:"Nursing Students", label:"Nursing Students"},
-            { value:"Home Nurse", label:"Home Nurse"},
-            { value:"Eldercare", label:"Eldercare"},
-            { value:"Weekend Caregivers", label:"Weekend Caregivers"},
-            { value:"Special Needs", label:"Special Needs"},
-            { value:"Specialist Caregivers", label:"Specialist Caregivers"},
-            { value:"Expert Caregivers", label:"Expert Caregivers"},
-            { value:"TLC Caregivers", label:"TLC Caregivers"},
-            { value:"Licensed Nurse", label:"Licensed Nurse"},
-        ];
-        this.personalServices = [
-            { value:"Bathing", label:"Bathing"},
-            { value:"Companionship", label:"Companionship"},
-            { value:"Exercise", label:"Exercise"},
-            { value:"Groceries and Shopping", label:"Groceries and Shopping"},
-            { value:"Grooming", label:"Grooming"},
-            { value:"Housekeeping", label:"Housekeeping"},
-            { value:"Managing Medications", label:"Managing Medications"},
-            { value:"Meal Prep", label:"Meal Prep"},
-            { value:"Transferring and Mobility", label:"Transferring and Mobility"},
-            { value:"Toileting", label:"Toileting"},
-            { value:"Transportation", label:"Transportation"},
-            { value:"Travel Companion", label:"Travel Companion"},
-        ];
-        this.sex = [
-            { value: 'Male', label: 'Male'},
-            { value: 'Female', label: 'Female'},
-        ];
     }
 
     componentDidMount(){
@@ -119,7 +28,6 @@ class Search extends Component {
 
     performSearch(){
         this.setState({loading: true});
-
         if(this.props.type === "caregiver"){
             searchCaregivers({
                 language: this.state.languages,
@@ -162,7 +70,7 @@ class Search extends Component {
                         <div className="location-filter">
                             <h5>Location </h5>
                             <div id="location">
-                                <Select options={this.locations}
+                                <Select options={locations}
                                     multi={this.props.type === "caregiver"}
                                     onChange={(e)=> this.setState({locations: e})}
                                     value={this.state.locations}/>
@@ -171,7 +79,7 @@ class Search extends Component {
                         <div className="technical-filter">
                             <h5>Professional Services</h5>
                             <div id="tech">
-                                <Select options={this.professionalServices}
+                                <Select options={professionalServices}
                                     multi
                                     onChange={(e)=> this.setState({professionalServices: e})}
                                     value={this.state.professionalServices}/>
@@ -180,7 +88,7 @@ class Search extends Component {
                         <div className="languages-filter">
                             <h5>Personal Services</h5>
                             <div id="pskill">
-                                <Select options={this.personalServices}
+                                <Select options={personalServices}
                                     multi
                                     onChange={(e)=> this.setState({personalServices: e})}
                                     value={this.state.personalServices} />
@@ -189,7 +97,7 @@ class Search extends Component {
                         <div className="languages-filter">
                             <h5>Type of Caregiver</h5>
                             <div id="pskill">
-                                <Select options={this.typeOfCaregiver}
+                                <Select options={typeOfCaregiver}
                                     multi
                                     onChange={(e)=> this.setState({typeOfCaregiver: e})}
                                     value={this.state.typeOfCaregiver} />
@@ -214,7 +122,7 @@ class Search extends Component {
                         <div className="languages-filter">
                             <h5>Languages</h5>
                             <div id="medical">
-                                <Select options={this.languages}
+                                <Select options={languages}
                                     multi
                                     onChange={(e)=> this.setState({languages: e})}
                                     value={this.state.languages} />
@@ -224,7 +132,7 @@ class Search extends Component {
                         <div className="languages-filter">
                             <h5>Sex</h5>
                             <div id="sex">
-                                <Select options={this.sex}
+                                <Select options={sex}
                                     onChange={(e)=> this.setState({sex: e})}
                                     value={this.state.sex} />
                             </div>

@@ -6,6 +6,7 @@ import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import moment from 'moment'
 
 import {getUser, saveJob, getJobData, hireCaregiver, baseUrl, submitReview, acceptJob} from '../../../../api/api';
+import {languages, sex, locations, countries, days} from '../../../../utils'
 import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
@@ -62,40 +63,6 @@ class Jobs extends Component {
             this.times.push({ value: i.toString().padStart(2, "0") + ":00", label:  i.toString().padStart(2, "0") + ":00"});
             this.times.push({ value: i.toString().padStart(2, "0") + ":30", label:  i.toString().padStart(2, "0") + ":30"});
         }
-
-        this.days = [
-            {value: 'Monday', label: 'Monday'},
-            {value: 'Tuesday', label: 'Tuesday'},
-            {value: 'Wednesday', label: 'Wednesday'},
-            {value: 'Thursday', label: 'Thursday'},
-            {value: 'Friday', label: 'Friday'},
-            {value: 'Saturday', label: 'Saturday'},
-            {value: 'Sunday', label: 'Sunday'}
-        ];
-
-        this.languages = [
-            {value: "Arabic", label:"Arabic" },
-            {value:"Armenian", label:"Armenian" },
-            {value:"ASL", label:"ASL" },
-            {value:"Cantonese", label:"Cantonese" },
-            {value:"English", label:"English" },
-            {value:"French", label:"French" },
-            {value:"German", label:"German" },
-            {value:"Greek", label:"Greek" },
-            {value:"Hebrew", label:"Hebrew" },
-            {value:"Hindi", label:"Hindi" },
-            {value:"Italian", label:"Italian" },
-            {value:"Korean", label:"Korean" },
-            {value:"Mandarin", label:"Mandarin" },
-            {value:"Persian", label:"Persian" },
-            {value:"Polish", label:"Polish" },
-            {value:"Portuguese", label:"Portuguese" },
-            {value:"Russian", label:"Russian" },
-            {value:"Shanghainese", label:"Shanghainese" },
-            {value:"Spanish", label:"Spanish" },
-            {value:"Tagalog", label:"Tagalog" },
-            {value:"Urdu", label:"Urdu" }
-        ];
 
         this.save = this.save.bind(this);
         this.add = this.add.bind(this);
@@ -210,8 +177,7 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="gender">Gender</label>
-                                    <Select
-                                        options={[{value: "Male", label: "Male"}, {value: "Female", label: "Female"}]}
+                                    <Select options={sex}
                                         id="gender"
                                         placeholder="Gender"
                                         value = {this.state.gender} onChange={(e) => this.setState({gender: e ? e.value : ""})}
@@ -246,22 +212,7 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="district">District</label>
-                                    <Select options={[
-                                            { value: 'Wan Chai', label: 'Wan Chai'},
-                                            { value: 'Central', label: 'Central'},
-                                            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
-                                            {value: 'Aberdeen', label: 'Aberdeen'},
-                                            {value: 'Wan Chai', label: 'Wan Chai'},
-                                            {value: 'Kwun Tong', label: 'Kwun Tong'},
-                                            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
-                                            {value: 'San Ko Pong',label: 'San Ko Pong'},
-                                            {value: 'Mongkok', label: 'Mongkok'},
-                                            {value: 'Sha Tin', label: 'Sha Tin'},
-                                            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
-                                            {value: 'Yuen Long', label: 'Yuen Long'},
-                                            {value: 'Kowloon', label: 'Kowloon'},
-                                            {value: 'Other', label: 'Other'}
-                                        ]}
+                                    <Select options={locations}
                                         id="district"
                                         placeholder="District"
                                         value = {this.state.district} onChange={(e) => this.setState({district: e ? e.value : ""})}
@@ -270,14 +221,7 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="country">Country</label>
-                                    <Select options={[
-                                            { value: 'Hong Kong', label: 'Hong Kong'},
-                                            { value: 'Singapore', label: 'Singapore'},
-                                            {value: 'China', label: 'China'},
-                                            {value: 'Malaysia', label: 'Malaysia'},
-                                            {value: 'India', label: 'India'},
-                                            {value: 'Other', label: 'Other'}
-                                        ]}
+                                    <Select options={countries}
                                         id="country"
                                         placeholder="Country"
                                         value = {this.state.country} onChange={(e) => this.setState({country: e ? e.value : ""})}
@@ -285,7 +229,7 @@ class Jobs extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="languages">Languages</label>
-                                    <Select options={this.languages}
+                                    <Select options={languages}
                                         multi
                                         id="languages"
                                         placeholder="Languages"
@@ -498,8 +442,7 @@ class Jobs extends Component {
                                 )}
                                 <div>
                                     <div className="col-xs-5">
-                                        <Select
-                                            options={this.days}
+                                        <Select options={days}
                                             id="recipient"
                                             placeholder="Day"
                                             name="form-field-recipient"
@@ -507,8 +450,7 @@ class Jobs extends Component {
                                         />
                                     </div>
                                     <div className="col-xs-3">
-                                        <Select
-                                            options={this.times}
+                                        <Select options={this.times}
                                             id="recipient"
                                             placeholder="Start Time"
                                             name="form-field-recipient"
@@ -516,8 +458,7 @@ class Jobs extends Component {
                                         />
                                     </div>
                                     <div className="col-xs-3">
-                                        <Select
-                                            options={this.times}
+                                        <Select options={this.times}
                                             id="recipient"
                                             placeholder="End Time"
                                             name="form-field-recipient"
