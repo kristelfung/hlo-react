@@ -499,10 +499,13 @@ video {
     margin-top: 1px;
     /* align with paragraph */ }
   .terms-content .indented {
-    margin-left: 30px; }
+    margin-left: 50px; }
   .terms-content ol li {
     list-style-position: inside;
-    margin-left: -10px; }
+    text-indent: -1.1em;
+    /* make li elements line up */
+    padding-left: 1em;
+    margin-left: 12px; }
   .terms-content .roman-lower {
     list-style-type: lower-roman; }
 
