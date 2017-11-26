@@ -782,12 +782,86 @@ video {
   .button-col a {
     margin-top: 20px; }
 
+.expander {
+  display: inline-block;
+  position: relative;
+  left: 400px; }
+
+.status-logo {
+  width: 50px;
+  height: 50px; }
+
+.title {
+  text-align: center;
+  margin-bottom: 250px; }
+  .title img {
+    margin-left: 550%; }
+
+.date {
+  position: relative;
+  bottom: 10px; }
+
+.profile-pic {
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
+  width: 220px;
+  height: 220px;
+  border: 8px solid #efefef;
+  display: inline-block;
+  position: relative; }
+
+.jobs-buttons {
+  text-align: center; }
+  .jobs-buttons .btn {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 30px; }
+
+@media (max-width: 767px) {
+  .jobs-buttons .btn {
+    margin-top: 0px; } }
+
+.postjob-steps {
+  /* pill color change */ }
+  .postjob-steps li.active a, .postjob-steps li.active a:hover, .postjob-steps li.active a:focus {
+    background-color: #388E3C; }
+  .postjob-steps li a {
+    color: #000000; }
+
+@media (min-width: 768px) {
+  .postjob-steps {
+    margin: 20px 0px; } }
+
 /* form styles */
 .next {
   float: right; }
 
 .back {
   float: left; }
+
+.add-time i {
+  margin-top: 8px; }
+
+/* UPLOAD BUTTON  */
+.inputfile {
+  /* hide upload button */
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.inputfile + label {
+  font-size: 16px;
+  display: inline-block;
+  cursor: pointer;
+  /* "hand" cursor */ }
+
+.inputfile + label * {
+  /* touch screen */
+  pointer-events: none; }
 
 /* messages */
 /* get rid of grey borders */
