@@ -1,8 +1,8 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-// export const baseUrl = "http://13.228.121.24:1337"
-export const baseUrl = "http://localhost:1337"
+export const baseUrl = "http://13.228.121.24:1337"
+// export const baseUrl = "http://localhost:1337"
 
 export function login(creds){
     const data = new FormData();

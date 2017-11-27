@@ -18,14 +18,16 @@ import Contact from "./Contact";
 import Terms from "./Terms";
 import Privacy from "./Privacy";
 import Guidelines from "./Guidelines";
+import Experts from "./Experts";
 
 export default () => (
     <BrowserRouter>
         <div>
             <Route exact path="/" component={Home} />
             <Route path="/home" render={() => (<Redirect to="/"/> )}/>
-            <Route path="/search/caregiver"  render={() => <Search type="caregiver" /> } />
-            <Route path="/search/job"  render={() => <Search type="job" /> } />
+            <Route path="/medicalexperts" component={Experts} />
+            <Route path="/searchcaregiver"  render={() => <Search type="caregiver" /> } />
+            <Route path="/searchjob"  render={() => <Search type="job" /> } />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route path="/about" component={About} />
