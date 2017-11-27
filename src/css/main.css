@@ -510,6 +510,13 @@ video {
   .terms-content .roman-lower {
     list-style-type: lower-roman; }
 
+/* GUIDELINES PAGE */
+.italics {
+  font-style: italic; }
+
+.infopage h5 {
+  font-weight: 700; }
+
 /* PROFILE PAGE */
 .profile-body {
   padding: 70px 60px 30px 60px;
@@ -807,37 +814,31 @@ video {
 .expander {
   display: inline-block;
   position: relative;
-  left: 400px; }
+  left: 420px; }
 
 .status-logo {
+  /* displaying confirmedJob & pendingJob imgae*/
   width: 50px;
   height: 50px; }
 
 .title {
-  text-align: center;
-  margin-bottom: 250px; }
+  /* Centralize the title & profile image*/
+  text-align: center; }
   .title img {
-    margin-left: 550%; }
-
-.date {
-  position: relative;
-  bottom: 10px; }
-
-.profile-pic {
-  background-size: cover;
-  background-position: center center;
-  border-radius: 50%;
-  width: 220px;
-  height: 220px;
-  border: 8px solid #efefef;
-  display: inline-block;
-  position: relative; }
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+    width: 220px;
+    height: 220px;
+    border: 8px solid #efefef;
+    display: inline-block;
+    position: relative; }
 
 .jobs-buttons {
   text-align: center; }
   .jobs-buttons .btn {
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
     margin-top: 30px; }
 
 @media (max-width: 767px) {

@@ -85,7 +85,87 @@ class Guidelines extends Component {
                         <li>Do not accept an Available HH Service that you are unsure of the time, date and/or location. If you pick up an Available HH Service that you cannot complete due to these reasons, it may be grounds for immediate removal from the community.</li>
                         <li>Do not impose hourly minimums, travel time or travel expenses on the Client when you accept an Available HH Service.</li>
                     </ul>
-                    <h4>Will complete this at school tomorrow</h4>
+                    <br/>
+                    <h4>Hourly Rates and Negotations</h4>
+                    <ul>
+                        <li>In your profile you have the ability to set your hourly rate for different HH Service types. These hourly rates are considered a commitment to the Community and Clients take them into consideration when inviting you to a HH Service. They are non-negotiable once a HH Service is assigned.</li>
+                        <li>We encourage you to regularly review your rates to ensure that they are commensurate with your skill level, experience and availability.</li>
+                        <li>If you believe a HH Service has been miss-categorized or the Client has been dishonest in dealings, you can forfeit the invitation and select the “Client’s needs are unrealistic” or “HH Service may be fraudulent / unsafe” forfeit reasons.</li>
+                        <li>Attempts to negotiate your hourly rate after receiving an invitation is considered a violation of Client trust and is grounds for reduced access to HH Service opportunities or outright removal from the HLO Community.</li>
+                        <li>Once the HH Service is complete, be sure to invoice your Client within 24 hours of the work being finished. If there is an issue that needs to be resolved before you submit the invoice, contact Member Services via help@healthylovedones.com or at (852) 9460-6840.</li>
+                    </ul>
+                    <br/>
+                    <h4>Expenses and reimbursements</h4>
+                    <ul>
+                        <li>Before performing a HH Service, set appropriate expectations with the Client about out-of- pocket expenses. If not managed appropriately, seeking payment for out-of-pocket expenses and reimbursements can result in a bad Client experience, negative Caregiver ratings or a policies violation.</li>
+                        <li>It is safe to assume you will be reimbursed for any purchases you make on behalf of a Client as part of a HH Service (e.g. groceries or a food delivery).</li>
+                        <li>Do not ask Clients to reimburse for transportation time or costs (tolls, gas, parking) associated with a HH Service unless the HH Service involves travel outside of your defined work area (you can change this at any time) or excessive transportation. If there are significant costs associated with serving a particular area (e.g. bridge tolls), please take that into consideration when setting your work area and hourly rates in your profile. You can update your preferred work area and rates at any time via your profile.</li>
+                        <li>If the HH Service involves travel outside of your work area or excessive transportation (10+ stops), set reimbursement expectations with the Client in advance of performing the HH Service. This gives the Client adequate time to cancel the HH Service and seek a replacement if they so choose.</li>
+                        <li>If you purchase a tool or supplies for a particular job, do not expect to be reimbursed for that purchase. If you do want to be reimbursed for that purchase, be upfront with the Client and consider the purchase to be the property of the Client.</li>
+                        <li>To protect yourself and the HLO Community, be careful about accepting HH Services that include the purchase of high-value items (over HKD2000). Always contact HLO Member Services via help@healthylovedones.com or at (852) 9460-6840 when presented with these HH Services even if you have worked for the Client before. Member Services can help you verify that the HH Service is legitimate, safe and ensure your reimbursement for the purchase.</li>
+                    </ul>
+                    <br/>
+                    <h4>Safety</h4>
+                    <ul>
+                        <li>Above all else, your safety and well-being are our top priority. If, for any reason, you feel unsafe or uncomfortable, please professionally and politely leave the HH Service and remove yourself from the situation. Call HLO Member Services as soon as possible. If necessary, call the local authorities first.</li>
+                        <li>Do not complete any HH Services that put you at risk financially or physically. This includes meeting a Client for a delivery under suspicious circumstances.</li>
+                        <li>Please follow all guidelines, laws and restrictions for any shops, restaurants, sites or venues you visit or utilize during your HH Services.</li>
+                        <li>If you require additional help on a HH Service, it is critical that the person also be an approved Caregiver. This is for the safety of you and your Client. If anything goes wrong on a HH Service as a result of the actions of someone who is not an approved Caregiver, they (and you) may not covered by the HLO $10M Insurance Guarantee.</li>
+                    </ul>
+                    <br/>
+                    <h4>Urgent Issues and HLO Member Services</h4>
+                    <ul>
+                        <li>HLO Member Services is here to help. If you are having any issues with a HH Service that is in- progress or soon to happen, please contact our Members Services Team at (852) 9460-6840 and select the option for “Emergency Issues”. Please respect that this is an emergency line. Any issues that are not extremely time sensitive or urgent should be referred to <a href="mailto:help@healthylovedones.com">help@healthylovedones.com</a>.</li>
+                    </ul>
+                    <br/>
+                    <h4>Performance Standards Compliance</h4>
+                    <ul>
+                        <li>To ensure a high-quality HH Servicing experience, we hold all of our Caregivers to the following standards:</li>
+                        <li>Accept 75% of the HH Service invitations sent to you;</li>
+                        <li>Complete 85% of the HH Services you agree to take on;</li>
+                        <li>Quickly respond to HH Service invitations within 30 minutes or less;</li>
+                        <li>High return rate of your Clients to HLO after completing a HH Service with you.</li>
+                        <li>If you fall in the bottom 10% of Caregivers on any of these metrics for a 30 day period, you may no longer be shown in search results or your account may be put into Performance Standards Probation. If your performance standards do not improve in the following 30 day period, you’ll have reduced access to HH Services for an extended period of time.</li>
+                        <li>What exactly is Performance Standards Probation?</li>
+                        <li>First Account Pause: If we notice a low HH Service acceptance or completion rate, we’ll pause your access to HH Service invitations. You’ll be required to participate in a Caregiver Performance Improvement module to regain access to HH Service invitations. Elite Caregivers will immediately lose their Elite status.</li>
+                        <li>Second Account Pause: If we continue to notice a low HH Service acceptance or completion rate, we’ll pause your access to HH Service invitations again. Reinstatement will require completion of a second Performance Improvement module to regain access to invitations.</li>
+                        <li>Third Account Pause: If after completing two education sessions, your acceptance and completion rates have not improved, you may lose all Caregiver privileges.</li>
+                    </ul>
+                    <br/>
+                    <h4 class="italics">Please note that direct violations of HLO policy and unprofessional behavior may result in immediate removal from the HLO Community.</h4>
+                    <br/>
+                    <h4>What not to do:</h4>
+                    <ul>
+                        <li>Don’t bail on a HH Service, without prior communication and approval from the Client or HLO.</li>
+                        <li>Don’t cancel last minute; this provides a poor experience for the Client.</li>
+                        <li>Don’t show up to a HH Service location for a HH Service you are not assigned to.</li>
+                        <li>Don’t show up late for HH Services or missing agreed-upon timelines for HH Services.</li>
+                        <li>Don’t attempt to renegotiate the hourly rate on a HH Service you’ve been invited to or an Available HH Service you’ve accepted.</li>
+                        <li>Don’t complete a HH Service with poor quality work.</li>
+                        <li>Don’t display unprofessional or unbecoming communication or behavior in any form.</li>
+                        <li>Don’t contact a Client regarding a negative review, accept a reduced payment or forfeit a payment in exchange for a positive review or to avoid a negative review.</li>
+                        <li>Don’t contact third parties related to or regarding a Client including, but not limited to, a Client’s friends, family, and place of employment or attempt to damage a Client’s reputation on social media platforms like Facebook, Twitter, LinkedIn and Yelp.</li>
+                        <li>Don’t attempt to damage the reputation of HLO on social media platforms including but not limited to Facebook, Twitter, LinkedIn and Yelp.</li>
+                        <li>Don’t attempt to bill a Client for a HH Service that should have been canceled, has not been finished or completed to their satisfaction.</li>
+                        <li>Don’t invoice a Client for travel time to or from the HH Service location. The time that you can invoice a Client for begins when you get the first location of a HH Service.</li>
+                        <li>Don’t ignore communications from HLO Support Teams (Member Services, Policies, and Resolutions). We expect all Caregivers to respond within 48 hours to email and phone call communications.</li>
+                        <li>Don’t violate the spirit of payments on the HLO platform in any way to facilitate an “off platform” payment, including but not limited to:</li>
+                        <li>Accepting a payment outside of the platform.</li>
+                        <li>Billing for fewer hours than actually worked.</li>
+                        <li>Billing for more hours than actually worked.</li>
+                        <li>Billing for hours worked in the reimbursement section.</li>
+                        <li>Giving a Client your contact information (phone number, email address or website).</li>
+                        <li>Canceling a HH Service that has been completed.</li>
+                        <li>Don’t provide poor quality work which is measured by:</li>
+                        <li>Poor ratings and/or reviews.</li>
+                        <li>Client communication to HLO Member Services.</li>
+                        <li>A high cancellation rate.</li>
+                        <li>A high forfeiture rate.</li>
+                        <li>Unresponsiveness to Clients on invitations.</li>
+                        <li>Any other criteria, which may lead to a poor experience for a Client.</li>
+                    </ul>
+                    <br/>
+                    <h5 class="italics">To preserve the integrity of the HLO Community, we have a zero tolerance policy for any of these behaviors. All of these behaviors are avoidable through active management of your schedule, profile and with open communication with HLO Member Services.</h5>
                 </div>
             </div>
         );
