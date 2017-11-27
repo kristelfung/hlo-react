@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Panel} from 'react-bootstrap';
 import moment from 'moment';
 
-import {getUser, baseUrl, acceptJob} from '../../../../api/api';
+import {acceptJob, getJobData} from '../../../../api/api';
 import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
@@ -13,11 +13,26 @@ class JobItem extends Component {
     super(props);
 
     this.state = {
-      data: this.props.data.data,
-      createdBy: this.props.data.createdBy,
       isOfferList: this.props.isOfferList,
       isOpen: false,
+      isloading: true,
+      error: false,
+      job: {},
     };
+
+    getJobData(this.props.job).then(json =>
+        this.setState({
+            job: json.data,
+            error: false,
+            loading: false,
+          }
+    )).catch(err => {
+        console.log(err);
+        this.setState({
+            loading: false,
+            error: true
+        });
+    });
 
     this.handleAccept = this.handleAccept.bind(this);
     this.handleDecline = this.handleDecline.bind(this);
@@ -27,13 +42,12 @@ class JobItem extends Component {
       alert("Accept Job. Please check this button function!");
       /*
         Can update the Job page for Customer after pressing,
-        But don't know whether there are anything missing inside info
+        But don't know whether there are anything missing inside info below
       */
 
       let info = {
-          jobID: this.state.data.id,
+          jobID: this.state.job.job,
           caregiverID: sessionStorage.getItem('userID'),
-          currentJobs: this.state.data.currentJobs
       };
 
       acceptJob(info);
@@ -45,9 +59,10 @@ class JobItem extends Component {
     }
 
     render() {
-      const jobInfo = this.state.data;
-      const creator = this.state.data.createdBy;
+      const jobInfo = this.state.job;
+      const creator = this.state.job.createdBy;
 
+      if(this.state.loading === false) {
       return (
         <div >
           <Panel collapsible  bsStyle="danger" header = {
@@ -76,7 +91,10 @@ class JobItem extends Component {
                   <div className="job-content">
                     <div className="title">
                         <h3>{this.props.name}</h3>
-                            <img src={(this.state.data.profilePicUrl === undefined || this.state.data.profilePicUrl === "") ? placeholder : baseUrl + this.state.data.profilePicUrl} />
+                            <img src={ placeholder } />
+                              { /*Todo setting the profile? pic
+                                <img src={(this.state.data.profilePicUrl === undefined || this.state.data.profilePicUrl === "") ? placeholder : baseUrl + this.state.data.profilePicUrl} />
+                                */}
                                 </div>
                                   {
                                     this.state.isOfferList &&
@@ -123,12 +141,13 @@ class JobItem extends Component {
                 <MessageCompose open={this.state.messageCompose} onHide={() => this.setState({messageCompose: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={creator.id}/>
               </div>
         );
+      } else {
+        return <p> Loading...</p>;
       }
     }
+}
 
 JobItem.defaultProps = {
-    data: [],
-    createBy: [],
     isOfferList: false,
 }
 

@@ -12,7 +12,7 @@ import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
 import Stars from '../../../Stars'
 import MessageCompose from '../Messages/MessageCompose'
-import  JobItem  from './JobItem'
+import JobItem from './JobItem'
 
 class Jobs extends Component {
 	constructor(props){
@@ -604,24 +604,24 @@ class Jobs extends Component {
 																<h2>Listed Jobs</h2>
 															{
 																	(this.state.data.jobsApplied.length) ?
-																	    this.state.data.jobsApplied.map(job => <JobItem name="Job Applied" key={job.id} data={job} />) :
+																	    this.state.data.jobsApplied.map(job => <JobItem name="Job Applied" key={job.id} {...job} />) :
 																			<h4> No Applied Jobs </h4>
 															}
 															{
 																	(this.state.data.jobsReceived.length) ?
-																		this.state.data.jobsReceived.map(job => <JobItem name="Job Offered" key={job.id} isOfferList={true} data={job} />) :
+																		this.state.data.jobsReceived.map(job => <JobItem name="Job Offered" isOfferList={true} key={job.id} {...job} />) :
 																		<h4> No Offered Jobs </h4>
 															}
 															{
 																	(this.state.data.currentJobs.length) ?
-																			this.state.data.currentJobs.map(job => <JobItem name="Current Job"  key={job.id} data={job} />) :
+																			this.state.data.currentJobs.map(job => <JobItem name="Current Job" key={job.id} {...job} />) :
 																			<h4> No Current Jobs </h4>
 															}
 																	<h2>Completed Jobs</h2>
 															{
 																	/*
 																		(this.state.data.completedJobs.length) ?
-																				this.state.data.completedJobs.map(job => <JobItem name="Completed Job"  key={job.id} data={job}/>) :
+																				this.state.data.completedJobs.map(job => <JobItem name="Completed Job"  key={job.id} {...job}/>) :
 																				<h4> No Completed Jobs </h4>
 																		*/
 															}
