@@ -48,7 +48,7 @@ class Search extends Component {
             searchJobs({
                 language: this.state.languages,
                 sex: [this.state.sex === null ? {value: ""} : this.state.sex],                  
-                location: [(this.state.locations === [] || this.state.locations === undefined) ? {value: ""} : this.state.locations],
+                location: [(this.state.locations === [] || this.state.locations === null) ? {value: ""} : this.state.locations],
                 skill: this.state.professionalServices,
                 personalServices: this.state.personalServices,
                 typeOfCaregiver: this.state.typeOfCaregiver,

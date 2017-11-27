@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Panel} from 'react-bootstrap';
 import moment from 'moment';
 
-import {acceptJob, getJobData} from '../../../../api/api';
+import {acceptJob, declineJob, getJobData} from '../../../../api/api';
 import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
@@ -20,7 +20,7 @@ class JobItem extends Component {
       job: {},
     };
 
-    getJobData(this.props.job).then(json =>
+    getJobData(this.props.job === undefined ? this.props.id : this.props.job).then(json =>
         this.setState({
             job: json.data,
             error: false,
@@ -34,28 +34,29 @@ class JobItem extends Component {
         });
     });
 
+    console.log(this.props);
     this.handleAccept = this.handleAccept.bind(this);
     this.handleDecline = this.handleDecline.bind(this);
   }
 
     handleAccept() {
-      alert("Accept Job. Please check this button function!");
-      /*
-        Can update the Job page for Customer after pressing,
-        But don't know whether there are anything missing inside info below
-      */
-
       let info = {
-          jobID: this.state.job.job,
-          caregiverID: sessionStorage.getItem('userID'),
+        jobID: this.state.job.id,        
+        jobOfferID: this.props.jobOfferID
       };
 
-      acceptJob(info);
+      acceptJob(info).then(json => {console.log(json.data)})
+      .catch(err => console.log(err));
     }
 
     handleDecline() {
-        alert("Decline Job. No existing API found.");
-        //declineJob();
+      let info = {
+        jobID: this.state.job.id,
+        jobOfferID: this.props.jobOfferID
+      };
+
+      declineJob(info).then(json => {console.log(json.data)})
+      .catch(err => console.log(err));
     }
 
     render() {

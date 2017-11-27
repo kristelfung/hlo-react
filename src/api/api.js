@@ -1,8 +1,8 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-export const baseUrl = "http://13.228.121.24:1337"
-// export const baseUrl = "http://localhost:1337"
+//export const baseUrl = "http://13.228.121.24:1337"
+ export const baseUrl = "http://localhost:1337"
 
 export function login(creds){
     const data = new FormData();
@@ -186,8 +186,8 @@ export function searchCaregivers(information){
 
 export function searchJobs(information){
     var queryString = ""; 
-    console.log(information.location)
     for(var key in information){
+        console.log(key, information[key]);
         information[key].forEach(query => {
             if(query.value !== null)
                 queryString=queryString+key+"="+query.value+"&" 
@@ -213,6 +213,13 @@ export function acceptJob(info){
     for(var key in info)
         data.append(key, info[key]);
     return axios.post(baseUrl + '/caregiver/accept', data); 
+}
+
+export function declineJob(info){
+    const data = new FormData();
+    for(var key in info)
+        data.append(key, info[key]);
+    return axios.post(baseUrl + '/caregiver/decline', data); 
 }
 
 export function applyForJob(jobID){
