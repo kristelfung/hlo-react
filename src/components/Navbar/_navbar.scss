@@ -86,3 +86,9 @@
 .navbar-divider {
     line-height: 70px;
 }
+
+@media (max-width: 767px) { /* mobile dropdown, no color on hover */
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: $pureblack;
+    }
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../../Header';
 import Jobs from './Jobs'
 import Messages from './Messages';
 import MessageBody from './Messages/MessageBody'
@@ -150,23 +151,16 @@ class Dashboard extends Component {
     	}
     	else if (this.state.tab === "settings") {
     		body = <Settings userID={this.state.userID}  {...this.state.data}/>;
-    	}
+		}
+
+		const dashboard = {
+			title: "Dashboard",
+			subtitle: "Manage caregivers, job postings, and messages."
+		}
     	
         return (
             <div>
-               <div className="header">
-			        <div className="container">
-			            <div className="row">
-			                <div className="col-xs-6">
-			                    <h1>Dashboard</h1>
-			                    <h5>Manage caregivers, job postings, and messages.</h5>
-			                </div>
-			                <div className="col-xs-6 header-image-col">
-			                    <img src={pluses} className="header-image" />
-			                </div>
-			            </div>
-			        </div>
-			    </div>
+               <Header header={dashboard}/>
 			    <div className="container-small dashbar">
 			        <div className="row text-center">
 						<div>
