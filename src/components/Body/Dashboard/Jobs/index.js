@@ -726,6 +726,7 @@ class CaregiverHired extends Component{
             });
         });
         this.submitReview = this.submitReview.bind(this);
+        console.log(this.props);
     }
 
     submitReview(e){
@@ -1014,7 +1015,7 @@ class Job extends Component{
             return (
                 <div className="row job">
                     <div className="col-xs-6">
-                        <h4>{this.props.jobName}</h4> 
+                        <h4>{this.props.name}</h4> 
                     </div>
                     <div className="col-xs-6 job-left">
                         <img src="images/dashboard/confirmedjob.png" className="job-status" />
