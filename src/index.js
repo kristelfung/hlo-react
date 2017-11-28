@@ -11,10 +11,16 @@ import Body from './components/Body'
 import Footer from './components/Footer';
 
 ReactDOM.render(
-    <div>
-        <Navbar />
+  <div>
+    {
+      (window.location.pathname === '/login') ?
         <Body />
-        <Footer />
-    </div>,
-    document.getElementById('root')
-);
+        :
+        <div>
+          <Navbar />
+          <Body />
+          <Footer />
+        </div>
+    }
+  </div>
+,document.getElementById('root'));

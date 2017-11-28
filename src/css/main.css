@@ -246,11 +246,25 @@ h1, h2, h3, h4, h5, h6, p {
 .header {
   background-color: #E53935;
   color: #ffffff;
-  padding: 20px 0px 30px 0px; }
-  .header .header-image-col {
-    text-align: right; }
-  .header .header-image {
-    width: 50%; }
+  padding: 20px 0px 30px 0px;
+  background-image: url("../images/infopage/pluses.png");
+  background-repeat: no-repeat;
+  background-size: 1170px;
+  /* make max-width 1170px */
+  background-position: center center; }
+
+@media (max-width: 767px) {
+  .header {
+    padding: 10px 0px 20px 0px; } }
+
+@media (max-width: 1200px) {
+  .header {
+    /* stays lined up with container */
+    background-size: 970px; } }
+
+@media (max-width: 992px) {
+  .header {
+    background-image: none; } }
 
 /* get the sizes of the navbar right */
 .navbar {
@@ -270,7 +284,8 @@ h1, h2, h3, h4, h5, h6, p {
         /* detach from navbar */
         margin-top: 15px;
         border-radius: 4px;
-        /* round menu */ } }
+        /* round menu */
+        border: none; } }
     .navbar .navbar-nav .dropdown-menu:after {
       content: "";
       position: absolute;
@@ -372,6 +387,10 @@ h1, h2, h3, h4, h5, h6, p {
   text-align: center;
   padding: 60px 10px; }
 
+video {
+  width: 100%;
+  height: auto; }
+
 .pricings {
   background: linear-gradient(#388E3C, #174c1b);
   /* Standard syntax */
@@ -442,7 +461,76 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: #efefef;
   padding: 40px 0px; }
 
-/* INFO PAGE */
+/* ABOUT PAGE */
+/* ===== general styles for this format === */
+.infopage {
+  padding-top: 30px;
+  padding-bottom: 40px; }
+  .infopage h4 {
+    font-weight: 700; }
+  .infopage p, .infopage li {
+    font-size: 16px;
+    line-height: 1.5; }
+
+/* =========== dream team ============== */
+.dreamteam {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  .dreamteam img {
+    border-radius: 50%;
+    width: 100%; }
+
+@media (max-width: 768px) {
+  .dreamteam {
+    text-align: center; }
+    .dreamteam img {
+      width: 50%; } }
+
+/* CONTACT PAGE */
+.contact-info {
+  padding: 40px;
+  /* makes the icons look centered */ }
+  .contact-info span {
+    position: absolute;
+    left: 18px; }
+  .contact-info .fa-map-marker {
+    font-size: 24px; }
+  .contact-info .fa-phone {
+    font-size: 20px; }
+
+/* at desktop width */
+@media (min-width: 992px) {
+  .contact-info {
+    padding: 70px 120px; }
+    .contact-info span {
+      left: 95px; } }
+
+/* TERMS PAGE */
+.terms-content {
+  /* entire container for terms */ }
+  .terms-content span {
+    position: absolute;
+    font-size: 16px;
+    margin-top: 1px;
+    /* align with paragraph */ }
+  .terms-content .indented {
+    margin-left: 50px; }
+  .terms-content ol li, .terms-content ul li {
+    list-style-position: inside;
+    text-indent: -1.1em;
+    /* make li elements line up */
+    padding-left: 1em;
+    margin-left: 12px; }
+  .terms-content .roman-lower {
+    list-style-type: lower-roman; }
+
+/* GUIDELINES PAGE */
+.italics {
+  font-style: italic; }
+
+.infopage h5 {
+  font-weight: 700; }
+
 /* PROFILE PAGE */
 .profile-body {
   padding: 70px 60px 30px 60px;
@@ -501,8 +589,10 @@ h1, h2, h3, h4, h5, h6, p {
     color: #ffffff;
     font-weight: bold; }
 
-.rating {
+.rating, .job-posted-date {
   font-size: 20px; }
+  .rating h4, .job-posted-date h4 {
+    color: #ffffff; }
 
 .rating a {
   color: #ffffff; }
@@ -636,6 +726,179 @@ h1, h2, h3, h4, h5, h6, p {
   font-size: 40px;
   margin-left: 10px;
   color: #1B1B1B; }
+
+.job {
+  background-color: #FCE4EC;
+  border-radius: 10px;
+  border: 1px solid #F48FB1;
+  margin-top: 20px; }
+  .job .job-right {
+    /* status, expand button */
+    float: right;
+    margin: 20px 40px; }
+  .job .job-name {
+    display: inline-block;
+    margin: 20px 40px; }
+  .job .job-desc {
+    /* expanded content of job */
+    background-color: #FEFEFE;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 40px; }
+  @media (max-width: 767px) {
+    .job .job-right, .job .job-name {
+      /* for mobile */
+      margin: 10px 20px; }
+    .job .job-desc {
+      padding: 10px 20px; } }
+
+.job-status {
+  /* img */
+  height: 60px;
+  margin-top: -15px; }
+
+.expand-job {
+  font-size: 40px;
+  margin-left: 10px;
+  color: #1B1B1B;
+  cursor: pointer; }
+
+/* table of caregiver applicants */
+.applicants {
+  cursor: pointer; }
+  .applicants .applicant-name {
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 0px; }
+  .applicants .applicant-date {
+    margin: 0px; }
+  .applicants .applicant-buttons {
+    /* hire, message container */
+    text-align: right; }
+  .applicants .applicant-link, .applicants .applicant-link:hover {
+    /* the <a> wrapper */
+    display: block;
+    text-decoration: none;
+    color: inherit; }
+  .applicants td .btn {
+    /* a hire/message button */
+    margin-top: 8px; }
+  .applicants tbody > tr > td {
+    padding: 15px 30px; }
+  @media (max-width: 767px) {
+    .applicants tbody > tr > td {
+      padding: 5px; } }
+
+/* hired caregiver */
+.hired-caregiver {
+  margin-bottom: 30px;
+  text-align: center; }
+  .hired-caregiver .hired-picture {
+    border-radius: 50%;
+    max-width: 200px;
+    padding: 10px 0px; }
+  @media (min-width: 768px) {
+    .hired-caregiver .col-sm-9 {
+      /* column with message, review */
+      margin-top: 100px; } }
+
+@media (max-width: 767px) {
+  .hired-caregiver {
+    text-align: center; } }
+
+/* review caregiver */
+.review-modal {
+  text-align: left; }
+  .review-modal .rating-stars i {
+    color: #FFC107;
+    font-size: 24px; }
+
+.dashbody {
+  border-top: 1px solid #efefef;
+  /* border between dashboard tabs */
+  padding-top: 20px;
+  padding-bottom: 40px; }
+
+.button-col {
+  text-align: right;
+  /* new job button */ }
+  .button-col a {
+    margin-top: 20px; }
+
+.expander {
+  display: inline-block;
+  position: relative;
+  left: 420px; }
+
+.status-logo {
+  /* displaying confirmedJob & pendingJob imgae*/
+  width: 50px;
+  height: 50px; }
+
+.title {
+  /* Centralize the title & profile image*/
+  text-align: center; }
+  .title img {
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+    width: 220px;
+    height: 220px;
+    border: 8px solid #efefef;
+    display: inline-block;
+    position: relative; }
+
+.jobs-buttons {
+  text-align: center; }
+  .jobs-buttons .btn {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 30px; }
+
+@media (max-width: 767px) {
+  .jobs-buttons .btn {
+    margin-top: 0px; } }
+
+.postjob-steps {
+  /* pill color change */ }
+  .postjob-steps li.active a, .postjob-steps li.active a:hover, .postjob-steps li.active a:focus {
+    background-color: #388E3C; }
+  .postjob-steps li a {
+    color: #000000; }
+
+@media (min-width: 768px) {
+  .postjob-steps {
+    margin: 20px 0px; } }
+
+/* form styles */
+.next {
+  float: right; }
+
+.back {
+  float: left; }
+
+.add-time i {
+  margin-top: 8px; }
+
+/* UPLOAD BUTTON  */
+.inputfile {
+  /* hide upload button */
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.inputfile + label {
+  font-size: 16px;
+  display: inline-block;
+  cursor: pointer;
+  /* "hand" cursor */ }
+
+.inputfile + label * {
+  /* touch screen */
+  pointer-events: none; }
 
 /* messages */
 /* get rid of grey borders */
@@ -783,8 +1046,6 @@ h1, h2, h3, h4, h5, h6, p {
   cursor: pointer;
   color: #ffffff;
   margin: 30px 0px; }
-  .location-filter .Select-placeholder, .technical-filter .Select-placeholder, .languages-filter .Select-placeholder {
-    margin-left: 5px; }
 
 /* search body CONTAINING ALL THE CARDS*/
 .search-body {

@@ -34,7 +34,7 @@ class CaregiverCard extends Component {
                 {stars} 
                 <p>
                     {
-                        this.props.location.map(l => <span className="label label-success">{l}</span>)
+                        this.props.location.map((l, idx) => <span key={idx} className="label label-success">{l}</span>)
                     }
                 </p>
                 <p className="card-about">{this.props.about}</p>

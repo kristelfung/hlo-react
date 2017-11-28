@@ -1,10 +1,8 @@
-import rp from 'request-promise'
 import axios from 'axios';
-
 axios.defaults.withCredentials = true;
 
 //export const baseUrl = "http://13.228.121.24:1337"
-export const baseUrl = "http://localhost:1337"
+ export const baseUrl = "http://localhost:1337"
 
 export function login(creds){
     const data = new FormData();
@@ -83,12 +81,7 @@ export function markRead(threadID){
 }
 
 export function searchName(search){
-    var options = {
-        uri: baseUrl + '/user/searchName?user='+search,
-        body: {search: search},
-        json: true
-    };
-    return rp(options);
+    return axios.get(baseUrl + '/user/searchName?user='+search, {search: search});
 }
 
 export function updateCustomerProfile(information){
@@ -168,18 +161,38 @@ export function getHiredCaregiver(id){
 }
 
 export function searchCaregivers(information){
-    var queryString = ""; 
-    for(var key in information)
-        information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
+    var queryString = ""
+    console.log(JSON.stringify(information), 'info')
+    if(information.min !== undefined){
+        queryString = queryString + "minHourlyRate="+information.min+"&";
+    }   
+    if(information.max !== undefined){
+        queryString = queryString + "maxHourlyRate="+information.max+"&";
+    }
+    delete information.min;
+    delete information.max;
+
+    for(var key in information){
+    console.log(key, 'info')
     
-    return axios.get(baseUrl + '/user/searchCaregiver?'+ queryString)
+        information[key].forEach(query => {
+            if(query.value !== null)
+                queryString=queryString+key+"="+query.value+"&" 
+        });        
+    }
+    
+    return axios.get(baseUrl + '/caregiver/search?'+ queryString)
 }   
 
 export function searchJobs(information){
     var queryString = ""; 
-    for(var key in information)
-        information[key].forEach(query => queryString=queryString+key+"="+query.value+"&")
-    
+    for(var key in information){
+        console.log(key, information[key]);
+        information[key].forEach(query => {
+            if(query.value !== null)
+                queryString=queryString+key+"="+query.value+"&" 
+        });        
+    }
     return axios.get(baseUrl + '/job/search?'+ queryString)
 } 
 
@@ -194,9 +207,21 @@ export function getJobList(id){
 export function offerJob(info){
     return axios.post(baseUrl + '/caregiver/offer', info);
 }
+
 export function acceptJob(info){
     const data = new FormData();
     for(var key in info)
         data.append(key, info[key]);
     return axios.post(baseUrl + '/caregiver/accept', data); 
+}
+
+export function declineJob(info){
+    const data = new FormData();
+    for(var key in info)
+        data.append(key, info[key]);
+    return axios.post(baseUrl + '/caregiver/decline', data); 
+}
+
+export function applyForJob(jobID){
+    return axios.post(baseUrl + '/caregiver/apply', {jobID: jobID});     
 }

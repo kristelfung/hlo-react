@@ -11,3 +11,98 @@
         margin-top: 20px;
     }
 }
+
+.expander {
+  display: inline-block;
+  position: relative;
+  left: 420px;
+}
+
+.status-logo { /* displaying confirmedJob & pendingJob imgae*/
+  width: 50px;
+  height: 50px;
+}
+
+.title {  /* Centralize the title & profile image*/
+    text-align: center;
+
+    img {
+      background-size: cover;
+      background-position: center center;
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      border: 8px solid $lightgrey;
+      display: inline-block;
+      position: relative;
+    }
+}
+
+.jobs-buttons {
+    text-align: center;
+
+    .btn {
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .jobs-buttons {
+        .btn {
+            margin-top: 0px;
+        }
+    }
+  }
+
+  .postjob-steps { /* pill color change */
+    li.active a, li.active a:hover, li.active a:focus {
+        background-color: $green;
+    }
+
+    li a {
+        color: $pureblack;
+    }
+}
+
+@media (min-width: 768px) {
+    .postjob-steps {
+        margin: 20px 0px;
+    }
+}
+
+/* form styles */
+.next {
+    float: right;
+}
+
+.back {
+    float: left;
+}
+
+.add-time {
+    i {
+        margin-top: 8px;
+    }
+}
+
+/* UPLOAD BUTTON  */
+.inputfile { /* hide upload button */
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 16px;
+    display: inline-block;
+    cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile + label * { /* touch screen */
+	pointer-events: none;
+}

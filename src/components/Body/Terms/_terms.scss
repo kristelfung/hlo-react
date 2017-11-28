@@ -1,0 +1,22 @@
+.terms-content { /* entire container for terms */
+    span {
+        position: absolute;
+        font-size: 16px;
+        margin-top: 1px; /* align with paragraph */
+    }
+
+    .indented {
+        margin-left: 50px;
+    }
+
+    ol li, ul li {
+        list-style-position: inside;
+        text-indent: -1.1em; /* make li elements line up */
+        padding-left: 1em;
+        margin-left: 12px;
+    }
+
+    .roman-lower {
+        list-style-type: lower-roman;
+    }
+}

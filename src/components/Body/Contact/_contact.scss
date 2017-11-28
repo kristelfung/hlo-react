@@ -1,0 +1,28 @@
+.contact-info {
+    padding: 40px;
+
+    span {
+        position: absolute;
+        left: 18px;
+    }
+
+    /* makes the icons look centered */
+    .fa-map-marker {
+        font-size: 24px;
+    }
+
+    .fa-phone {
+        font-size: 20px;
+    }
+}
+
+/* at desktop width */
+@media (min-width: 992px) {
+    .contact-info {
+        padding: 70px 120px;
+
+        span {
+            left: 95px;
+        }
+    }
+}

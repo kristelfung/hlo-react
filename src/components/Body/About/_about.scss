@@ -1,0 +1,35 @@
+/* ===== general styles for this format === */
+.infopage {
+    padding-top: 30px;
+    padding-bottom: 40px;
+
+    h4 {
+        font-weight: 700;
+    }
+
+    p, li {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}
+
+/* =========== dream team ============== */
+.dreamteam {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    img {
+        border-radius: 50%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .dreamteam {
+        text-align: center;
+
+        img {
+            width: 50%;
+        }
+    }
+}

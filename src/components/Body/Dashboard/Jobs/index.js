@@ -6,11 +6,13 @@ import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import moment from 'moment'
 
 import {getUser, saveJob, getJobData, hireCaregiver, baseUrl, submitReview, acceptJob} from '../../../../api/api';
+import {languages, sex, locations, countries, days} from '../../../../utils'
 import placeholder from '../../../../images/profile-placeholder.png'
 import confirmedJob from '../../../../images/dashboard/confirmedjob.png'
 import pendingJob from '../../../../images/dashboard/pendingjob.png'
 import Stars from '../../../Stars'
 import MessageCompose from '../Messages/MessageCompose'
+import JobItem from './JobItem'
 
 class Jobs extends Component {
 	constructor(props){
@@ -40,7 +42,7 @@ class Jobs extends Component {
             typeOfCaregiver: [],
             professionalServices: [],
             personalServices: [],
-            createdBy:"", 
+            createdBy:"",
             completed: ""
         }
         this.state = {
@@ -62,42 +64,8 @@ class Jobs extends Component {
             this.times.push({ value: i.toString().padStart(2, "0") + ":30", label:  i.toString().padStart(2, "0") + ":30"});
         }
 
-        this.days = [
-            {value: 'Monday', label: 'Monday'},
-            {value: 'Tuesday', label: 'Tuesday'},
-            {value: 'Wednesday', label: 'Wednesday'},
-            {value: 'Thursday', label: 'Thursday'},
-            {value: 'Friday', label: 'Friday'},
-            {value: 'Saturday', label: 'Saturday'},
-            {value: 'Sunday', label: 'Sunday'}
-        ];
-
-        this.languages = [
-            {value: "Arabic", label:"Arabic" },
-            {value:"Armenian", label:"Armenian" },
-            {value:"ASL", label:"ASL" },
-            {value:"Cantonese", label:"Cantonese" },
-            {value:"English", label:"English" },
-            {value:"French", label:"French" },
-            {value:"German", label:"German" },
-            {value:"Greek", label:"Greek" },
-            {value:"Hebrew", label:"Hebrew" },
-            {value:"Hindi", label:"Hindi" },
-            {value:"Italian", label:"Italian" },
-            {value:"Korean", label:"Korean" },                              
-            {value:"Mandarin", label:"Mandarin" },
-            {value:"Persian", label:"Persian" },
-            {value:"Polish", label:"Polish" },
-            {value:"Portuguese", label:"Portuguese" },
-            {value:"Russian", label:"Russian" },
-            {value:"Shanghainese", label:"Shanghainese" },
-            {value:"Spanish", label:"Spanish" },
-            {value:"Tagalog", label:"Tagalog" },
-            {value:"Urdu", label:"Urdu" }
-        ];
-
         this.save = this.save.bind(this);
-        this.add = this.add.bind(this);        
+        this.add = this.add.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.logChange = this.logChange.bind(this);
         this.logProfessionalServices = this.logProfessionalServices.bind(this);
@@ -132,7 +100,7 @@ class Jobs extends Component {
             endTime:this.state.endTime
         }
         this.setState({requiredTimes: this.state.requiredTimes.concat([reqTime]), day:"",startTime:"",endTime:""});
-    }        
+    }
 
     save(){
         let info = {
@@ -209,14 +177,13 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="gender">Gender</label>
-                                    <Select
-                                        options={[{value: "Male", label: "Male"}, {value: "Female", label: "Female"}]}
-                                        id="gender" 
+                                    <Select options={sex}
+                                        id="gender"
                                         placeholder="Gender"
                                         value = {this.state.gender} onChange={(e) => this.setState({gender: e ? e.value : ""})}
                                     />
                                 </div>
-                            
+
                                 <div className="form-group">
                                     <label htmlFor="bday">Date of Birth</label>
                                     <input type="date" className="form-control" id="bday" placeholder="DD/MM/YYY" value = {this.state.dateOfBirth} onChange={(e) => this.setState({dateOfBirth: e.target.value})}/>
@@ -245,23 +212,8 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="district">District</label>
-                                    <Select options={[
-                                            { value: 'Wan Chai', label: 'Wan Chai'},
-                                            { value: 'Central', label: 'Central'},
-                                            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
-                                            {value: 'Aberdeen', label: 'Aberdeen'},
-                                            {value: 'Wan Chai', label: 'Wan Chai'},
-                                            {value: 'Kwun Tong', label: 'Kwun Tong'},
-                                            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
-                                            {value: 'San Ko Pong',label: 'San Ko Pong'},
-                                            {value: 'Mongkok', label: 'Mongkok'},
-                                            {value: 'Sha Tin', label: 'Sha Tin'},
-                                            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
-                                            {value: 'Yuen Long', label: 'Yuen Long'},
-                                            {value: 'Kowloon', label: 'Kowloon'},
-                                            {value: 'Other', label: 'Other'}
-                                        ]}
-                                        id="district" 
+                                    <Select options={locations}
+                                        id="district"
                                         placeholder="District"
                                         value = {this.state.district} onChange={(e) => this.setState({district: e ? e.value : ""})}
                                     />
@@ -269,25 +221,18 @@ class Jobs extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="country">Country</label>
-                                    <Select options={[
-                                            { value: 'Hong Kong', label: 'Hong Kong'},
-                                            { value: 'Singapore', label: 'Singapore'},
-                                            {value: 'China', label: 'China'},
-                                            {value: 'Malaysia', label: 'Malaysia'},
-                                            {value: 'India', label: 'India'},
-                                            {value: 'Other', label: 'Other'}
-                                        ]}
-                                        id="country" 
+                                    <Select options={countries}
+                                        id="country"
                                         placeholder="Country"
                                         value = {this.state.country} onChange={(e) => this.setState({country: e ? e.value : ""})}
                                     />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="languages">Languages</label>
-                                    <Select options={this.languages}
+                                    <Select options={languages}
                                         multi
-                                        id="languages" 
-                                        placeholder="Languages" 
+                                        id="languages"
+                                        placeholder="Languages"
                                         onChange={(e)=> this.setState({languages: e})}
                                         value={this.state.languages} />
                                 </div>
@@ -301,7 +246,7 @@ class Jobs extends Component {
                         <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "requirements"})}>Next</span>
                     </div>
 
-            title = <ul className="nav nav-pills nav-justified postjob-steps"> 
+            title = <ul className="nav nav-pills nav-justified postjob-steps">
                         <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
@@ -459,12 +404,12 @@ class Jobs extends Component {
                             </div>
                             </div>
                         </CheckboxGroup>
-                        
+
                         <div className="form-group">
                             <label htmlFor="address">Special Medical Conditions</label>
                             <textarea className="form-control" rows="4" id="address" placeholder="ALS, diabetes, stroke..." value = {this.state.specialMedical} onChange={(e) => this.setState({specialMedical: e.target.value})}></textarea>
                         </div>
-                        
+
                         <div className="row">
                             <div className="form-group col-xs-5">
                                 <label htmlFor="startDate">Start Date</label>
@@ -482,7 +427,7 @@ class Jobs extends Component {
                                 <label className="col-xs-3 control-label">Time Start</label>
                                 <label className="col-xs-3 control-label">Time End</label>
                                 <label className="col-xs-1 control-label"></label>
-                                {this.state.requiredTimes.map((time, idx) => 
+                                {this.state.requiredTimes.map((time, idx) =>
                                     <div>
                                         <div className="col-xs-5">
                                             {this.state.requiredTimes[idx].day}
@@ -497,27 +442,24 @@ class Jobs extends Component {
                                 )}
                                 <div>
                                     <div className="col-xs-5">
-                                        <Select
-                                            options={this.days}
-                                            id="recipient" 
+                                        <Select options={days}
+                                            id="recipient"
                                             placeholder="Day"
                                             name="form-field-recipient"
                                             value = {this.state.day} onChange={(e) => this.setState({day: e ? e.value : ""})}
                                         />
                                     </div>
                                     <div className="col-xs-3">
-                                        <Select
-                                            options={this.times}
-                                            id="recipient" 
+                                        <Select options={this.times}
+                                            id="recipient"
                                             placeholder="Start Time"
                                             name="form-field-recipient"
                                             value = {this.state.startTime} onChange={(e) => this.setState({startTime: e ? e.value : ""})}
                                         />
                                     </div>
                                     <div className="col-xs-3">
-                                        <Select
-                                            options={this.times}
-                                            id="recipient" 
+                                        <Select options={this.times}
+                                            id="recipient"
                                             placeholder="End Time"
                                             name="form-field-recipient"
                                             value = {this.state.endTime} onChange={(e) => this.setState({endTime: e ? e.value : ""})}
@@ -541,7 +483,7 @@ class Jobs extends Component {
                         <span className="btn btn-default back" onClick={(e) => this.setState({tab: "detail"})}>Back</span>
                         <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "photos"})}>Next</span>
                     </div>
-            title=  <ul className="nav nav-pills nav-justified postjob-steps"> 
+            title=  <ul className="nav nav-pills nav-justified postjob-steps">
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
                         <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
@@ -566,7 +508,7 @@ class Jobs extends Component {
                         <span className="btn btn-primary next" onClick={(e) => this.setState({tab: "review"})}>Next</span>
                     </div>
 
-            title = <ul className="nav nav-pills nav-justified postjob-steps"> 
+            title = <ul className="nav nav-pills nav-justified postjob-steps">
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
                         <li className="active"><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
@@ -574,7 +516,7 @@ class Jobs extends Component {
                     </ul>
         }
         else if (this.state.tab==="review"){
-            body = 
+            body =
             <div id="review" className="tab-pane fade in active">
                 <div className="row">
                     <div className="col-sm-6">
@@ -620,21 +562,21 @@ class Jobs extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                            {this.state.requiredTimes.map((time, idx)=> 
+
+                            {this.state.requiredTimes.map((time, idx)=>
                                 <tr>
                                     <td>{this.state.requiredTimes[idx].day}</td>
                                     <td>{this.state.requiredTimes[idx].startTime} - {this.state.requiredTimes[idx].endTime}</td>
                                  </tr>
                             )}
-                       
+
                     </tbody>
                 </table>
 
                 <a className="btn btn-default back" onClick={(e) => {e.preventDefault();this.setState({tab: "photos"})}}>Back</a>
                 <a className="btn btn-primary next" onClick={this.save}>Submit</a>
             </div>
-            title = <ul className="nav nav-pills nav-justified postjob-steps"> 
+            title = <ul className="nav nav-pills nav-justified postjob-steps">
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "detail"})}>Details</a></li>
                         <li ><a data-toggle="pill" onClick={(e) => this.setState({tab: "requirements"})}>Requirements</a></li>
                         <li><a data-toggle="pill" onClick={(e) => this.setState({tab: "photos"})}>Photos</a></li>
@@ -646,7 +588,7 @@ class Jobs extends Component {
             return (
                 <div className="dashbody">
                     <div className="container">
-                        {this.state.type === "customer" &&  
+                        {this.state.type === "customer" &&
                             <div className="row">
                                 <div className="col-xs-6">
                                     <h2>Listed Jobs</h2>
@@ -657,21 +599,33 @@ class Jobs extends Component {
                             </div>
                         }
                         {
-                            this.state.type === "caregiver" ?
-                            <div className="container-fluid">
-                                <h2>Current Jobs</h2>
-                                {
-                                    this.state.data.currentJobs.length > 0 ? this.state.data.currentJobs.map(job => <Job key={job.id} type="current"{...job}/>) : <p> No Current Jobs </p>
-                                }
-                                <h2>Jobs Applied</h2>
-                                {
-                                    this.state.data.jobsApplied.length > 0 ? this.state.data.jobsApplied.map(job => <Job key={job.id} type = "applied" {...job}/>) : <p> No Jobs Applied </p>
-                                }
-                                <h2>Jobs Offered</h2>
-                                {
-                                    this.state.data.jobsReceived.length > 0 ? this.state.data.jobsReceived.map(job => <Job key={job.id} userId={this.props.userID} type= "offered" {...job}/>) : <p> No Jobs Offered </p>
-                                }
-                            </div>
+													this.state.type === "caregiver" ?
+														<div className="container-fluid">
+																<h2>Listed Jobs</h2>
+															{
+																	(this.state.data.jobsApplied.length) ?
+																	    this.state.data.jobsApplied.map(job => <JobItem name="Job Applied" jobApplicationKey={job.id} key={job.id} {...job} />) :
+																			<h4> No Applied Jobs </h4>
+															}
+															{
+																	(this.state.data.jobsReceived.length) ?
+																		this.state.data.jobsReceived.map(job => <JobItem name="Job Offered" isOfferList={true} jobOfferID={job.id} key={job.id} {...job} />) :
+																		<h4> No Offered Jobs </h4>
+															}
+															{
+																	(this.state.data.currentJobs.length) ?
+																			this.state.data.currentJobs.map(job => <JobItem name="Current Job" key={job.id} {...job} />) :
+																			<h4> No Current Jobs </h4>
+															}
+																	<h2>Completed Jobs</h2>
+															{
+																	/*
+																		(this.state.data.completedJobs.length) ?
+																				this.state.data.completedJobs.map(job => <JobItem name="Completed Job"  key={job.id} {...job}/>) :
+																				<h4> No Completed Jobs </h4>
+																		*/
+															}
+													     </div>
                             :
                             <div className="container-fluid">
                                 {
@@ -688,7 +642,7 @@ class Jobs extends Component {
                 <div className="dashbody">
                     <div className="container-small">
                         <h3>Post a Job</h3>
-                         {title}   
+                         {title}
                         <div className="tab-content">
                             <form>
                                 {body}
@@ -709,10 +663,11 @@ class CaregiverHired extends Component{
             loading: true,
             error: false,
             reviewText: "",
-            stars: 0
+            stars: 0,
+            messageCompose: false
         }
 
-        getUser(this.props.caregiverHired.user).then(json => {
+        getUser(this.props.hiredCaregiver.user).then(json => {
             this.setState({
                 caregiverHired: json.data,
                 loading: false,
@@ -742,17 +697,16 @@ class CaregiverHired extends Component{
             this.setState({reviewModal: false});
         });
     }
-    
+
     render(){
         if(this.state.loading==true){
             console.log("loading");
             return (
                 <div>Loading</div>
             )
-            
+
         }
         else{
-            
             let imageSrc = this.state.caregiverHired.profilePicUrl === undefined ? placeholder : baseUrl + this.state.caregiverHired.profilePicUrl;
             return (
                 <div>
@@ -762,9 +716,9 @@ class CaregiverHired extends Component{
                             <img src={imageSrc} className="hired-picture" />
                             <h4>{this.state.caregiverHired.firstName + " " + this.state.caregiverHired.lastName}</h4>
                             <h5>${this.state.caregiverHired.caregiver.hourlyRate} HKD per hour</h5>
-                            <button className="btn btn-primary">Message</button>
+                            <button className="btn btn-primary" onClick={()=> this.setState({messageCompose: true})} >Message</button>
                             <button type="button" className="btn btn-default" onClick={()=> this.setState({reviewModal: true})}>Review</button>
-                            
+                            <MessageCompose open={this.state.messageCompose} onHide={() => this.setState({messageCompose: false})} fromUserID={sessionStorage.getItem('userID')} toUserID={this.state.caregiverHired.id}/>
                             <Modal className="fade review-modal" show={this.state.reviewModal} onHide={() => this.setState({reviewModal: false})}>
                                 <Modal.Header >
                                     <Modal.Title><h4 className="modal-title">Review Caregiver</h4></Modal.Title>
@@ -777,7 +731,7 @@ class CaregiverHired extends Component{
                                             <br />
                                         </div>
                                         <div className="form-group">
-                                            <label for="comment">Comments</label>
+                                            <label htmlFor="comment">Comments</label>
                                             <textarea className="form-control" rows="5" id="comment" placeholder="Describe your experience!" value={this.state.reviewText} onChange={(e) => this.setState({reviewText: e.target.value})} />
                                         </div>
                                         <div className="submit-buttons">
@@ -798,8 +752,8 @@ class CaregiverHired extends Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.requiredTimes.map(item => 
-                                                <tr>
+                                {this.props.requiredTimes.map((item, idx) =>
+                                                <tr key={idx}>
                                                     <td>{item.day}</td>
                                                     <td>{item.startTime} - {item.endTime}</td>
                                                 </tr>
@@ -810,7 +764,7 @@ class CaregiverHired extends Component{
                 </div>
             );
         }
-        
+
     }
 }
 
@@ -829,8 +783,8 @@ class CaregiverNotHired extends Component{
 
     render(){
         return (
-            <div className="">            
-                <div className="job-desc">
+            <div className="job-desc">
+                <div className="hired-caregiver">
                     <h4>Job Description</h4>
                     <p>{this.props.description}</p>
                     <br/>
@@ -844,7 +798,7 @@ class CaregiverNotHired extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.requiredTimes.map((item, idx) => 
+                            {this.props.requiredTimes.map((item, idx) =>
                                 <tr key={idx}>
                                     <td>{item.day}</td>
                                     <td>{item.startTime} - {item.endTime}</td>
@@ -857,13 +811,13 @@ class CaregiverNotHired extends Component{
                     <table className="table table-hover applicants">
                         <tbody>
                             {
-                                this.props.caregiversApplied.length === 0 ? 
+                                this.props.caregiversApplied.length === 0 ?
                                 <tr>
                                     <td>
                                         <h6>No one has applied for this job.</h6>
                                     </td>
                                 </tr> :
-                                this.props.caregiversApplied.map((jobApplication, idx) => 
+                                this.props.caregiversApplied.map((jobApplication, idx) =>
                                 <tr key={idx}>
                                     <td>
                                         <a href={"/profile/"+jobApplication.caregiver} className="applicant-link">
@@ -884,7 +838,7 @@ class CaregiverNotHired extends Component{
                         <tbody>
                             {
                             this.props.caregiversOffered.length === 0 ? <tr><td><h6>No one has been offered this job.</h6></td></tr> :
-                            this.props.caregiversOffered.map((jobOffer, idx) => 
+                            this.props.caregiversOffered.map((jobOffer, idx) =>
                                 <tr key={idx}>
                                     <td>
                                         <h5 className="applicant-name">{jobOffer.caregiverName}</h5>
@@ -915,17 +869,17 @@ class CustomerJob extends Component{
         }
         this.fetchJob = this.fetchJob.bind(this);
     }
-    
+
     fetchJob(){
         if(this.state.job.id === undefined){
             getJobData(this.props.id).then(json => {
-                this.setState({ error: false, job: json.data, isOpen:!this.state.isOpen, loading: false});    
+                this.setState({ error: false, job: json.data, isOpen:!this.state.isOpen, loading: false});
             }).catch(err => this.setState({error: true, loading: false}));
         }else{
-            this.setState({isOpen:!this.state.isOpen});    
+            this.setState({isOpen:!this.state.isOpen});
         }
     }
-    
+
     render(){
         return (
             <div>
@@ -947,12 +901,12 @@ class CustomerJob extends Component{
                                 (
                                     this.state.error ? <div><h5> Could not load job details!</h5></div> :
                                     (
-                                        this.state.job.hiredCaregiver !== undefined ? 
-                                            <CaregiverHired caregiverHired = {this.state.job} /> :
-                                            <CaregiverNotHired {...this.state.job} />    
+                                        this.state.job.hiredCaregiver !== undefined ?
+                                            <CaregiverHired {...this.state.job} /> :
+                                            <CaregiverNotHired {...this.state.job} />
                                     )
                                 )
-                            }                    
+                            }
                         </div>
                     </Collapse>
                 </div>
@@ -983,21 +937,22 @@ class Job extends Component{
     fetchJob(){
         if(this.state.job.id === undefined){
             getJobData(this.props.id).then(json => {
-                this.setState({ error: false, job: json.data, isOpen:!this.state.isOpen, loading: false});    
+                this.setState({ error: false, job: json.data, isOpen:!this.state.isOpen, loading: false});
             }).catch(err => this.setState({error: true, loading: false}));
         }else{
-            this.setState({isOpen:!this.state.isOpen});    
+            this.setState({isOpen:!this.state.isOpen});
         }
     }
 	render(){
+
         if(this.props.type=="offered"){
             return (
                 <div className="row job">
                     <div className="col-xs-6">
-                        <h4>{this.props.jobName}</h4> 
+                        <h4>{this.props.jobName}</h4>
                     </div>
                     <div className="col-xs-6 job-left" >
-                        
+
                         <span className="expand-job" onClick={()=>{this.setState({isOpen:!this.state.isOpen})}}><i className="fa fa-angle-down expand-job" aria-hidden="true"></i></span>
                     </div>
                     <Collapse in={this.state.isOpen}>
@@ -1005,17 +960,18 @@ class Job extends Component{
                             {   <div>
                                     <div> Know more about this <a href={"profile/job/" + this.props.job}>job</a></div>
                                     <a className="btn btn-primary" href="#" role="button" onClick={this.accept}>Accept</a>
-                                </div> 
-                            }                   
+                                </div>
+                            }
                         </div>
                     </Collapse>
                 </div>
             )
         }else{
+            console.log(this.props);
             return (
                 <div className="row job">
                     <div className="col-xs-6">
-                        <h4>{this.props.name}</h4> 
+                        <h4>{this.props.jobName}</h4>
                     </div>
                     <div className="col-xs-6 job-left">
                         <img src="images/dashboard/confirmedjob.png" className="job-status" />
@@ -1024,7 +980,7 @@ class Job extends Component{
                 </div>
             );
         }
-		
+
 	}
 }
 

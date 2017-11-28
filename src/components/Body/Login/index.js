@@ -19,7 +19,7 @@ class Login extends Component{
         e.preventDefault();
         login({
             email: this.state.email,
-            password: this.state.password 
+            password: this.state.password
         }).then(json => {
             sessionStorage.setItem("loggedIn", true);
             sessionStorage.setItem("userType", json.data.userType);
@@ -34,13 +34,13 @@ class Login extends Component{
             setInterval(() => this.setState({alert: false}), 2000);
 		});
     }
-    
+
     render(){
         const classes = this.state.alert ? 'alert alert-danger show-alert' : 'alert alert-danger hide-alert'
         return(
         <div className="row">
             <div className="col-sm-7 login-column">
-                <img src={logo2} className="login-logo"/>
+                <a href="/home"><img src={logo2} className="login-logo"/></a>
                 <h4 className="text-center">Log into HLO</h4>
                 <form className="login">
                     <div className="form-group">

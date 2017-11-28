@@ -3,6 +3,7 @@ import {signup} from '../../../api/api'
 import Select from 'react-select';
 
 import logo2 from '../../../images/logo2.png';
+import { locations } from '../../../utils';
 
 class Signup extends Component{
     constructor(props){
@@ -18,21 +19,7 @@ class Signup extends Component{
             lastName:"",
             location:[]
         }
-        this.options = [
-            { value: 'Wan Chai', label: 'Wan Chai'},
-            { value: 'Central', label: 'Central'},
-            {value: 'Sai Wan Ho', label: 'Sai Wan Ho'},
-            {value: 'Aberdeen', label: 'Aberdeen'},
-            {value: 'Wan Chai', label: 'Wan Chai'},
-            {value: 'Kwun Tong', label: 'Kwun Tong'},
-            {value: 'Sham Shui Po', label: 'Sham Shui Po'},
-            {value: 'San Ko Pong',label: 'San Ko Pong'},
-            {value: 'Mongkok', label: 'Mongkok'},
-            {value: 'Sha Tin', label: 'Sha Tin'},
-            {value: 'Tsuen Wan', label: 'Tsuen Wan'},
-            {value: 'Yuen Long', label: 'Yuen Long'},
-            {value: 'Kowloon', label: 'Kowloon'}
-        ];
+        
         this.formSubmit = this.formSubmit.bind(this);
     }
 
@@ -85,10 +72,10 @@ class Signup extends Component{
                             <label htmlFor="lastName">Last Name</label>
                             <input type="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={e => this.setState({lastName: e.target.value})}/>
                         </div>
-                        {/* 
+                        {/*                         
                         <div className="form-group">
                             <label htmlFor="location">Location</label>
-                            <Select options={this.options}
+                            <Select options={locations}
                                 multi
                                 onChange={(e)=> this.setState({location: e})}
                                 value={this.state.location}/>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import aboutimage from '../../../../images/home/home-graphic.png'; 
+import video from '../../../../images/home/home-video.mp4';
 
 class Desc extends Component {
     render(){
@@ -7,8 +8,8 @@ class Desc extends Component {
             <div className="container home-about">
                 <h2>What is HealthyLovedOnes?</h2>
                 <img src={aboutimage} className="home-about-media" />
-                <video controls="" className="home-about-media" poster="http://healthylovedones.com/assets/images/video-poster.png">
-                    <source src="http://healthylovedones.com/assets/images/HLOComplete.mp4" type="video/mp4" />
+                <video controls className="home-about-media">
+                    <source src={video} type="video/mp4"/>
                 </video>
             </div>
         );

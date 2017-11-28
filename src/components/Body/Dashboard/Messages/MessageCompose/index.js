@@ -51,8 +51,8 @@ class MessageCompose extends Component{
 
     getOptions(e){
         return searchName(e).then(json => {
-            console.log(json);
-            return { options: json };
+            console.log(json.data);
+            return { options: json.data };
         }).catch(err => {
             return err;
         });
