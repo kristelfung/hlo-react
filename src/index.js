@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 ReactDOM.render(
   <div>
     {
-      (window.location.pathname === '/login') ?
+      (window.location.pathname === '/login' || window.location.pathname === '/signup') ?
         <Body />
         :
         <div>
