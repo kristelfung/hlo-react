@@ -59,6 +59,7 @@ class Signup extends Component{
     render(){
         const classes = this.state.alert ? 'alert alert-danger show-alert' : 'alert alert-danger hide-alert'
         return(
+            <div>
             <div className="row">
                 <div className="col-sm-7 login-column">
                     <a href="/Home"><img src={logo2} className="login-logo"/></a>
