@@ -18,7 +18,7 @@ class Plan extends Component {
                     <p>HK$10M Insurance</p>
                     <p>Guarenteed payment</p>
                 </div>
-                <a className="btn btn-primary" href="#" role="button">Sign up</a>
+                <a className="btn btn-primary" href="/signup" role="button">Sign up</a>
             </div>
         );
     }

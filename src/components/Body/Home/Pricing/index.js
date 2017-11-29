@@ -37,7 +37,7 @@ class Pricing extends Component {
                     <Plan features={entrepreneurPlan}/>
                     <Plan features={partnerPlan}/>
                 </div>
-                <p className="insurance">Insurance Policy: Provided by the QBE Hong Kong and Shanghai Insurance Limited. Total amount is $10 million HKD. Includes both Medical Malpractice for healthcare professional and Public Liability for private citizens. Insurance includes bodily injury, property damage, and theft. Insurance begins on January 01, 2018.</p>
+                <p className="insurance">Insurance Policy: Provided by the QBE Hong Kong and Shanghai Insurance Limited. Total amount is $10 million HKD. Includes both Medical Malpractice for healthcare professional and Public Liability for private citizens. Insurance includes bodily injury, property damage, and theft. Insurance begins on April 01, 2018.</p>
             </div>
         );
     }

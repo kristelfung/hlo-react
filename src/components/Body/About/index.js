@@ -26,7 +26,7 @@ class About extends Component {
 
         const about = {
             title: "About Us",
-            subtitle: "Learn more about HLO and the dream team behind it."
+            subtitle: "Learn more about HLO and the Dream Team behind it."
         }
 
         const team = [
@@ -148,7 +148,7 @@ class About extends Component {
                     <p>We break the rules, we're the disruptors, we create new useful and innovative products and services that can positively impact civil society and its community.  We hate bureaucracy, inefficiency, apathy and complacency.  We love user friendly, fast, efficient, flexible, and uncompromising quality service.</p>
                     <br/>
 
-                    <h2>Management Team</h2>
+                    <h2>Dream Team</h2>
                     {team.map(function(e){
                         return (
                         <div className="row dreamteam">

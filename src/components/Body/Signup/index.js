@@ -62,7 +62,9 @@ class Signup extends Component{
             <div className="row">
                 <div className="col-sm-7 login-column">
                 <div className="login-content">
-                    <img src={logo2} className="login-logo"/>
+                    <a href="/">
+                        <img src={logo2} className="login-logo"/>
+                    </a>
                     <h4 className="text-center">Sign up for HLO</h4>
                     <form className="login">
                         <div className="form-group">
