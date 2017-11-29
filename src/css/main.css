@@ -439,11 +439,10 @@ video {
   .pricing-table .plan-box, .pricing-table .entrepreneur-box {
     background-color: #FEFEFE;
     border: 1px solid #efefef;
-    padding: 40px;
-    /* padding of a plan */ }
+    padding: 40px; }
   .pricing-table .entrepreneur-box {
     /* shift entrepreneur plan up */
-    margin-top: -25px; }
+    margin-top: -15px; }
   @media (max-width: 768px) {
     .pricing-table {
       /* when the plans collaspe */ }

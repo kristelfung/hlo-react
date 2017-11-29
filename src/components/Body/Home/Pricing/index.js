@@ -14,7 +14,7 @@ const entrepreneurPlan = {
     price: "88",
     commission: "5",
     classes: "col-sm-4 entrepreneur-box",
-    featureOne: "Caregivers that work more than 10 hours a week",
+    featureOne: "Caregivers that work >10 hrs/week",
     featureTwo: "Professional Certified Training"
 }
 

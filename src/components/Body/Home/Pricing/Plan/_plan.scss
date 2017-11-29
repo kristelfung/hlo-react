@@ -27,11 +27,11 @@
     .plan-box, .entrepreneur-box {
         background-color: $white;
         border: 1px solid $lightgrey;
-        padding: 40px; /* padding of a plan */
+        padding: 40px;
     }
 
     .entrepreneur-box { /* shift entrepreneur plan up */
-        margin-top: -25px;
+        margin-top: -15px;
     }
 
     @media (max-width: 768px) { /* when the plans collaspe */
