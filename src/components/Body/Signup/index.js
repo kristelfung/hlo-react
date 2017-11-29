@@ -19,7 +19,7 @@ class Signup extends Component{
             lastName:"",
             location:[]
         }
-        
+
         this.formSubmit = this.formSubmit.bind(this);
     }
 
@@ -51,18 +51,17 @@ class Signup extends Component{
                 password: "",
                 rptPassword: "",
                 alert: true,
-                alertText: "Email already registered!"                
+                alertText: "Email already registered!"
             });
             setInterval(() => this.setState({alert: false}), 2000);
 		});
     }
     render(){
-        const classes = this.state.alert ? 'alert alert-danger show-alert' : 'alert alert-danger hide-alert'        
+        const classes = this.state.alert ? 'alert alert-danger show-alert' : 'alert alert-danger hide-alert'
         return(
             <div className="row">
                 <div className="col-sm-7 login-column">
-                <div className="login-content">
-                    <img src={logo2} className="login-logo"/>
+                    <a href="/Home"><img src={logo2} className="login-logo"/></a>
                     <h4 className="text-center">Sign up for HLO</h4>
                     <form className="login">
                         <div className="form-group">
@@ -73,11 +72,20 @@ class Signup extends Component{
                             <label htmlFor="lastName">Last Name</label>
                             <input type="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={e => this.setState({lastName: e.target.value})}/>
                         </div>
+                        {/*
+                        <div className="form-group">
+                            <label htmlFor="location">Location</label>
+                            <Select options={locations}
+                                multi
+                                onChange={(e)=> this.setState({location: e})}
+                                value={this.state.location}/>
+                        </div>
+                        */}
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input type="email" className="form-control" id="email" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="pwd">Password</label>
                             <input type="password" className="form-control" id="pwd" value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
@@ -109,7 +117,7 @@ class Signup extends Component{
                         <p><i className="fa fa-heart" aria-hidden="true"></i> Join a community of people with big hearts</p>
                     </div>
                 </div>
-            </div>    
+            </div>
         );
     }
 }
