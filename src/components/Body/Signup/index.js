@@ -61,6 +61,7 @@ class Signup extends Component{
         return(
             <div className="row">
                 <div className="col-sm-7 login-column">
+                <div className="login-content">
                     <img src={logo2} className="login-logo"/>
                     <h4 className="text-center">Sign up for HLO</h4>
                     <form className="login">
@@ -72,15 +73,6 @@ class Signup extends Component{
                             <label htmlFor="lastName">Last Name</label>
                             <input type="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={e => this.setState({lastName: e.target.value})}/>
                         </div>
-                        {/*                         
-                        <div className="form-group">
-                            <label htmlFor="location">Location</label>
-                            <Select options={locations}
-                                multi
-                                onChange={(e)=> this.setState({location: e})}
-                                value={this.state.location}/>
-                        </div>
-                        */}
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input type="email" className="form-control" id="email" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
@@ -106,6 +98,7 @@ class Signup extends Component{
                     <div className="login-links">
                         <a href="login">Already have an account? Sign in.</a>
                     </div>
+                </div>
                 </div>
                 <div className="col-sm-5 why-hlo">
                     <div className="why-hlo-desc">

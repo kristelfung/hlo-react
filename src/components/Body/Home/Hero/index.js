@@ -13,8 +13,8 @@ class Hero extends Component {
                     <div className="container-fluid home-buttons">
                         <h4>Everyone deserves care.</h4>
                         <p>Find the right Caregiver for your Loved Ones, or become a Caregiver yourself.</p>
-                        <Button text="Find a Caregiver" link="searchcaregivers" buttonType="btn btn-primary" />
-                        <Button text="Become a Caregiver" link="searchcaregivers" buttonType="btn btn-default-clear" />
+                        <Button text="Find a Caregiver" link="searchcaregiver" buttonType="btn btn-primary" />
+                        <Button text="Become a Caregiver" link="signup" buttonType="btn btn-default-clear" />
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@ import Header from '../../Header';
 
 // import photos for medical expert categories, link from CSS file
 import Acupuncture from '../../../images/medicalexperts/acupuncture.jpg';
+import Chiropractic from '../../../images/medicalexperts/chiropractic.jpg';
 
 class Experts extends Component {
     render() {
@@ -15,6 +16,10 @@ class Experts extends Component {
             {
                 image: Acupuncture,             
                 name: "Chinese Medicine/Acupuncture"
+            },
+            {
+                image: Chiropractic,
+                name: "Chiropractic/Osteopath"
             }
         ]
 
@@ -25,7 +30,8 @@ class Experts extends Component {
                     <div className="row">
                         {categories.map(function(e){
                             return (
-                                <div className="col-md-6" style={{backgroundImage: `url(${e.image})`}}>
+                                <div className="col-sm-6">
+                                    <img src={e.image} />
                                     <div className="caption">{e.name}</div>
                                 </div>
                             )
