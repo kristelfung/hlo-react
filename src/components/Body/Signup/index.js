@@ -59,10 +59,10 @@ class Signup extends Component{
     render(){
         const classes = this.state.alert ? 'alert alert-danger show-alert' : 'alert alert-danger hide-alert'
         return(
-            <div>
             <div className="row">
                 <div className="col-sm-7 login-column">
-                    <a href="/Home"><img src={logo2} className="login-logo"/></a>
+                <div className="login-content">
+                    <img src={logo2} className="login-logo"/>
                     <h4 className="text-center">Sign up for HLO</h4>
                     <form className="login">
                         <div className="form-group">
@@ -73,15 +73,6 @@ class Signup extends Component{
                             <label htmlFor="lastName">Last Name</label>
                             <input type="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={e => this.setState({lastName: e.target.value})}/>
                         </div>
-                        {/*
-                        <div className="form-group">
-                            <label htmlFor="location">Location</label>
-                            <Select options={locations}
-                                multi
-                                onChange={(e)=> this.setState({location: e})}
-                                value={this.state.location}/>
-                        </div>
-                        */}
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input type="email" className="form-control" id="email" value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
