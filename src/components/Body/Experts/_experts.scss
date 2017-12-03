@@ -3,18 +3,19 @@
         width: 100%;
     }
 
-    .col-md-6 {
-        position: relative;
-
-        .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            overflow: hidden;
-            width: 100%;
-            box-sizing: border-box;
-        }
+    .col-sm-6 {
+        margin-top: 30px;
     }
+}
+
+.caption {
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    color: $purewhite;
+    padding: 25px;
+    margin-top: -78px;
+    font-size: 20px;
+    position: relative;
 }
