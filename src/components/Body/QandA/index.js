@@ -12,7 +12,7 @@ class QandA extends Component {
             <div>
                 <Header header={qanda}/>
                 <div className="container infopage">
-                    <h3>Why did I start HLO? What’s my motivation?</h3>
+                    <h3>Why did you start HLO?  What’s your motivation?</h3>
                     <p>HLO is not about ego, fame, or even making a lot of money. For me personally, it was about creating a new and useful service that can actually help people and make a difference in their lives. That’s a huge statement and promise.</p>
                     <br/>
                     <h3>So what exactly does HLO provide?</h3>
