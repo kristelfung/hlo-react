@@ -25,7 +25,7 @@ export default () => (
         <div>
             <Route exact path="/" component={Home} />
             <Route path="/home" render={() => (<Redirect to="/"/> )}/>
-            <Route path="/medicalexperts" component={Experts} />
+            <Route exact path="/medicalexperts" component={Experts} />
             <Route path="/searchcaregiver"  render={() => <Search type="caregiver" /> } />
             <Route path="/searchjob"  render={() => <Search type="job" /> } />
             <Route exact path="/login" component={Login} />
