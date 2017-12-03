@@ -5,3 +5,39 @@ Dashboard
         Messages to Select loading
     Profile
         Profile add upload profile/cover pic for customer (just need to update form, api functions are done, copy them from CG profile
+
+header
+    need to know who is the User.
+
+Need Payment notification: PayPal or Stripe
+•	Email and Push/SMS
+•	First step is accept or decline payment
+•	Second step is customer review and service rating
+
+Dashboard: http://52.221.35.108:3000/dashboard
+•	Need mouse over for Jobs/Messages/Profile/Settings
+
+Become a Caregiver/Experience:
+•	Work Experience
+•	Needs Work Description
+•	Dates From/To
+
+Become a Caregiver/Services:
+•	Add – Medical Conditions Experiences
+•	Other field like Professional Services
+
+Become a Caregiver/Photos:
+•	Use Kristal’s design, need to see photos on this page
+•	Cover Photo upload not working
+
+Need to save pages when users hit next button, not wait until end to submit
+
+Search Caregivers: http://52.221.35.108:3000/searchcaregiver
+•	Add hourly price to the photo
+•	Add favorite’s button 
+•	Add Names Filter
+•	Add Medical Conditions Filter
+•	Should show latest Caregiver’s first (last in first show)
+
+Become a Customer/Post a Job:
+•	Profile – Become a Caregiver????  Should be Customer Profile and Job Ad details

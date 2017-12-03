@@ -110,3 +110,13 @@ export const days = [
     {value: 'Saturday', label: 'Saturday'},
     {value: 'Sunday', label: 'Sunday'}
 ];
+
+export const religions = [
+    {value: 'Buddhist', label: 'Buddhist'},
+    {value: 'Catholic', label: 'Catholic'},
+    {value: 'Hindu', label: 'Hindu'},
+    {value: 'Christian', label: 'Christian'},
+    {value: 'Muslim', label: 'Muslim'},
+    {value: 'Atheist', label: 'Atheist'},
+    {value: 'Other', label: 'Other'},
+];

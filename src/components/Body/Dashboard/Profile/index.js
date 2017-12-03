@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import {updateCustomerProfile, updateCaregiverProfile, uploadUserPics} from '../../../../api/api'
 import Dashboard from '../../Dashboard';
-import {languages, locations, days} from '../../../../utils'
+import {languages, locations, days, religions} from '../../../../utils'
 
 class Profile extends Component {
 	constructor(props){
@@ -70,7 +70,7 @@ class Profile extends Component {
 				gender:this.state.gender,
 				dateOfBirth:this.state.dateOfBirth,
 				extraCharges:this.state.extraCharges,
-                religion:this.state.religion,
+                religion: this.state.religion === null ? "" : this.state.religion.value,
                 pricingPlan:this.state.pricingPlan,
                 yearsOfExperience: this.state.yearsOfExperience,
                 license: this.state.license,
@@ -171,7 +171,9 @@ class Profile extends Component {
 	                                </div>
 			                        <div className="form-group">
 			                          <label for="religion">Religion</label>
-			                          <input type="text" className="form-control" id="religion"value = {this.state.religion} onChange={(e) => this.setState({religion: e.target.value})}/>
+			                          <Select options={religions}
+                                                onChange={(e) => this.setState({religion: e})} 
+				                                value={this.state.religion} />
 			                        </div>
 			                        <div className="form-group">
 				                        <label htmlFor="address">Language</label>
