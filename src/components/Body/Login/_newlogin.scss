@@ -1,5 +1,13 @@
+.row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+}
+
 .login-column {
-    padding-top: 100px;
+    display: flex;
+    flex-direction: column;;
+    justify-content: center;
 
     .login-logo {
         width: 70px;
@@ -36,7 +44,9 @@
     background-position: center center;
     color: $purewhite;
     text-align: center;
-    padding-top: 150px;
+    display: flex;
+    flex-direction: column;;
+    justify-content: center;
 
     .why-hlo-desc {
         max-width: 330px;
