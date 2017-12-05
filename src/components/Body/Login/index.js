@@ -38,7 +38,7 @@ class Login extends Component{
     render(){
         const classes = this.state.alert ? 'alert alert-danger show-alert' : 'alert alert-danger hide-alert'
         return(
-        <div className="row">
+        <div className="row login-row">
             <div className="col-sm-7 login-column">
                 <a href="/home"><img src={logo2} className="login-logo"/></a>
                 <h4 className="text-center">Log into HLO</h4>

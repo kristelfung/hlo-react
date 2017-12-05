@@ -980,8 +980,15 @@ video {
     margin-top: 30px; }
 
 /* login + sign up */
+.login-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+
 .login-column {
-  padding-top: 100px; }
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
   .login-column .login-logo {
     width: 70px;
     display: block;
@@ -1008,7 +1015,9 @@ video {
   background-position: center center;
   color: #ffffff;
   text-align: center;
-  padding-top: 150px; }
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
   .why-hlo .why-hlo-desc {
     max-width: 330px;
     margin: 0 auto;
