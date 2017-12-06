@@ -14,9 +14,6 @@ Need Payment notification: PayPal or Stripe
 •	First step is accept or decline payment
 •	Second step is customer review and service rating
 
-Dashboard: http://52.221.35.108:3000/dashboard
-•	Need mouse over for Jobs/Messages/Profile/Settings
-
 Become a Caregiver/Experience:
 •	Work Experience
 •	Needs Work Description
@@ -27,7 +24,7 @@ Become a Caregiver/Services:
 •	Other field like Professional Services
 
 Become a Caregiver/Photos:
-•	Use Kristal’s design, need to see photos on this page
+•	Use Kristel’s design, need to see photos on this page
 •	Cover Photo upload not working
 
 Need to save pages when users hit next button, not wait until end to submit

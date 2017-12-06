@@ -138,7 +138,7 @@ class Search extends Component {
                             </div>
                         </div>
 
-                            <button className="btn btn-success" onClick={this.performSearch}>Search</button>
+                            <button className="btn btn-default" onClick={this.performSearch}>Search</button>
                     </div>
                     <div className="col-sm-9 search-body">
                         <div className="row">

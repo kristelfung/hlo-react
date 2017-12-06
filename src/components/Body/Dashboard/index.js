@@ -167,25 +167,25 @@ class Dashboard extends Component {
 							<div className={this.state.tab === "jobs" ? "col-xs-3 active" : "col-xs-3"}>
 								<span onClick={() => {this.setState({ tab: "jobs" })}}>
 									<img src={suitcase} className="dashboard-logo" />
-									<p>Jobs</p>
+									<p class="dashbar-text">Jobs</p>
 								</span>
 							</div>
 							<div className={this.state.tab === "messages" ? "col-xs-3 active" : "col-xs-3"}>
 								<span onClick={() => {this.setState({ tab: "messages" })}}>
 									<img src={messages} className="dashboard-logo" />
-									<p>Messages</p>
+									<p class="dashbar-text">Messages</p>
 								</span>
 							</div>
 							<div className={this.state.tab === "profile" ? "col-xs-3 active" : "col-xs-3"}>
 								<span onClick={() => {this.setState({ tab: "profile" })}}>
 									<img src={profile} className="dashboard-logo" />
-									<p>Profile</p>
+									<p class="dashbar-text">Profile</p>
 								</span>
 							</div>
 							<div className={this.state.tab === "settings" ? "col-xs-3 active" : "col-xs-3"}>
 								<span onClick={() => {this.setState({ tab: "settings" })}}>
 									<img src={settings} className="dashboard-logo" />
-									<p>Settings</p>
+									<p class="dashbar-text">Settings</p>
 								</span>
 							</div>
 						</div>

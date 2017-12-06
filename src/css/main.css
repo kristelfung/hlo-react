@@ -696,7 +696,11 @@ video {
 
 .dashboard-logo {
   height: 40px;
-  padding: 5px; }
+  padding: 5px;
+  cursor: pointer; }
+
+.dashbar-text {
+  cursor: pointer; }
 
 .dashbody {
   border-top: 1px solid #efefef;
