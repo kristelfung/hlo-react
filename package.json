@@ -7,7 +7,7 @@
     "bootstrap": "^3.3.7",
     "debounce": "^1.1.0",
     "font-awesome": "^4.7.0",
-    "moment": "^2.19.1",
+    "moment": "^2.29.4",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
     "query-string": "^5.0.1",
